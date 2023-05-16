@@ -1,14 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+@RoutePage()
 class RankPage extends HookWidget {
-  RankPage({Key? key}) : super(key: key);
+ const RankPage({Key? key}) : super(key: key);
 
-  final List<String> manager = <String>['장세민', '장세훈', '정재민'];
-  final List<String> player = <String>['고영표', '소형준', '엄상백'];
 
   @override
   Widget build(BuildContext context) {
+    final List<String> manager = <String>['장세민', '장세훈', '정재민'];
+    final List<String> player = <String>['고영표', '소형준', '엄상백'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("랭킹 보기"),

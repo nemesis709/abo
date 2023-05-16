@@ -4,15 +4,21 @@ import 'package:abo/view/main.dart';
 import 'package:abo/view/player.dart';
 import 'package:abo/view/rank.dart';
 import 'package:abo/view/trade.dart';
+import 'package:flutter/material.dart';
 
-export 'app_router.gr.dart';
+part 'app_router.gr.dart';
 
-@MaterialAutoRouter(replaceInRouteName: 'Page,Route', routes: <AutoRoute>[
-  AutoRoute(page: HomePage, initial: true, children: [
-    AutoRoute(page: MainPage),
-    AutoRoute(page: RankPage),
-    AutoRoute(page: TradePage),
-    AutoRoute(page: PlayerPage),
-  ]),
-])
-class $AppRouter {}
+@AutoRouterConfig(replaceInRouteName: 'Page,Route')
+class AppRouter extends _$AppRouter {
+  @override
+  RouteType get defaultRouteType => RouteType.material();
+  @override
+  final List<AutoRoute> routes = [
+      AutoRoute(path: '/', page: HomeRoute.page, children:[
+        AutoRoute(page: MainRoute.page),
+        AutoRoute(page: RankRoute.page),
+        AutoRoute(page: TradeRoute.page),
+        AutoRoute(page: PlayerRoute.page),
+      ]),
+  ];
+}

@@ -1,17 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:abo/logger/logger.dart';
 
+@RoutePage()
 class TradePage extends HookWidget {
-  TradePage({Key? key}) : super(key: key);
-
-  final logger = CustomLogger();
-
-  final List<dynamic> myPlayer = ['고영표', '소형준', '엄상백'];
-  final List<String> tradePlayer = <String>['박찬호', '이의리', '홍창기'];
+  const TradePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final logger = CustomLogger();
+
+    final List<dynamic> myPlayer = ['고영표', '소형준', '엄상백'];
+    final List<String> tradePlayer = <String>['박찬호', '이의리', '홍창기'];
+
     logger.d(myPlayer[0]);
     return Scaffold(
       appBar: AppBar(

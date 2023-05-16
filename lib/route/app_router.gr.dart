@@ -1,151 +1,119 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/material.dart' as _i7;
+part of 'app_router.dart';
 
-import '../view/home.dart' as _i1;
-import '../view/main.dart' as _i2;
-import '../view/player.dart' as _i5;
-import '../view/rank.dart' as _i3;
-import '../view/trade.dart' as _i4;
-
-class AppRouter extends _i6.RootStackRouter {
-  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i6.PageFactory> pagesMap = {
+  final Map<String, PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.HomePage(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i2.MainPage(),
+        child: const HomePage(),
       );
     },
     RankRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.RankPage(),
+        child: const RankPage(),
       );
     },
-    TradeRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
+    MainRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.TradePage(),
+        child: const MainPage(),
       );
     },
     PlayerRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.PlayerPage(),
+        child: const PlayerPage(),
+      );
+    },
+    TradeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TradePage(),
       );
     },
   };
-
-  @override
-  List<_i6.RouteConfig> get routes => [
-        _i6.RouteConfig(
-          HomeRoute.name,
-          path: '/',
-          children: [
-            _i6.RouteConfig(
-              MainRoute.name,
-              path: 'main-page',
-              parent: HomeRoute.name,
-            ),
-            _i6.RouteConfig(
-              RankRoute.name,
-              path: 'rank-page',
-              parent: HomeRoute.name,
-            ),
-            _i6.RouteConfig(
-              TradeRoute.name,
-              path: 'trade-page',
-              parent: HomeRoute.name,
-            ),
-            _i6.RouteConfig(
-              PlayerRoute.name,
-              path: 'player-page',
-              parent: HomeRoute.name,
-            ),
-          ],
-        )
-      ];
 }
 
 /// generated route for
-/// [_i1.HomePage]
-class HomeRoute extends _i6.PageRouteInfo<void> {
-  const HomeRoute({List<_i6.PageRouteInfo>? children})
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
       : super(
           HomeRoute.name,
-          path: '/',
           initialChildren: children,
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.MainPage]
-class MainRoute extends _i6.PageRouteInfo<void> {
-  const MainRoute()
-      : super(
-          MainRoute.name,
-          path: 'main-page',
-        );
-
-  static const String name = 'MainRoute';
-}
-
-/// generated route for
-/// [_i3.RankPage]
-class RankRoute extends _i6.PageRouteInfo<void> {
-  const RankRoute()
+/// [RankPage]
+class RankRoute extends PageRouteInfo<void> {
+  const RankRoute({List<PageRouteInfo>? children})
       : super(
           RankRoute.name,
-          path: 'rank-page',
+          initialChildren: children,
         );
 
   static const String name = 'RankRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.TradePage]
-class TradeRoute extends _i6.PageRouteInfo<void> {
-  const TradeRoute()
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute({List<PageRouteInfo>? children})
       : super(
-          TradeRoute.name,
-          path: 'trade-page',
+          MainRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'TradeRoute';
+  static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.PlayerPage]
-class PlayerRoute extends _i6.PageRouteInfo<void> {
-  const PlayerRoute()
+/// [PlayerPage]
+class PlayerRoute extends PageRouteInfo<void> {
+  const PlayerRoute({List<PageRouteInfo>? children})
       : super(
           PlayerRoute.name,
-          path: 'player-page',
+          initialChildren: children,
         );
 
   static const String name = 'PlayerRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TradePage]
+class TradeRoute extends PageRouteInfo<void> {
+  const TradeRoute({List<PageRouteInfo>? children})
+      : super(
+          TradeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TradeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
