@@ -1,6 +1,7 @@
 
 import 'package:abo/app_common.dart';
 import 'package:abo/common/logger/logger.dart';
+import 'package:abo/common/toast/toast.dart';
 import 'package:abo/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,6 +20,7 @@ class MyApp extends HookConsumerWidget{
       theme: AppTheme.light().data,
       darkTheme: AppTheme.light().data,
       themeMode: themeMode,
+      builder: AboToastBuilder(),
       routerDelegate:
       appRouter.delegate(navigatorObservers: () => [CustomRouteObserver()]),
       supportedLocales: const [

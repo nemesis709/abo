@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 @RoutePage()
 class TradePage extends HookWidget {
-  const TradePage({Key? key}) : super(key: key);
+  const TradePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,11 @@ class TradePage extends HookWidget {
             height: 200,
             child: displayPlayer(tradePlayer),
           ),
-          const Text("내 선수"),
-          SizedBox(
-            height: 200,
-            child: displayPlayer(myPlayer),
-          ),
+          // const Text("내 선수"),
+          // SizedBox(
+          //   height: 200,
+          //   child: displayPlayer(myPlayer),
+          // ),
         ],
       )),
     );

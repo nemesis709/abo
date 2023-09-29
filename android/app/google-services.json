@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "70320968532",
+    "project_id": "adonis-kbo",
+    "storage_bucket": "adonis-kbo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70320968532:android:dc2e1eed0aa5c212016ec1",
+        "android_client_info": {
+          "package_name": "com.example.abo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp5Cv2lFeXy1SbLNmWWIVYWyP1flt3X3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,4 @@
 import 'package:abo/common/common_constants.dart';
-import 'package:abo/common/listenable_listener_hook.dart';
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -10,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class RankPage extends HookWidget {
-  const RankPage({Key? key}) : super(key: key);
+  const RankPage({super.key});
 
   @override
   Widget build(BuildContext context) {

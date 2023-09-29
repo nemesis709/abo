@@ -42,7 +42,7 @@ class AppTheme {
       unselectedWidgetColor: appColors.n60,
       colorScheme: ColorScheme(
         brightness: Brightness.light,
-        primary: appColors.p60,
+        primary: appColors.p10,
         onPrimary: appColors.n100,
         primaryContainer: appColors.p90,
         onPrimaryContainer: appColors.p10,
@@ -104,7 +104,7 @@ class AppTheme {
               if (states.contains(MaterialState.disabled)) {
                 return const BorderSide(width: 1.0, color: Colors.transparent);
               }
-              return BorderSide(width: 1.0, color: appColors.p60);
+              return BorderSide(width: 1.0, color: appColors.p10);
             }
             return BorderSide(width: 1.0, color: appColors.n90);
           },
@@ -115,9 +115,9 @@ class AppTheme {
         fillColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.disabled)) {
-              return appColors.p60.withOpacity(0.5);
+              return appColors.p10.withOpacity(0.5);
             }
-            return appColors.p60;
+            return appColors.p10;
           }
           return appColors.n90;
         }),
@@ -135,7 +135,7 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: appColors.p60,
+        selectedItemColor: appColors.p10,
         unselectedItemColor: appColors.n30,
       ),
       appBarTheme: AppBarTheme(
@@ -166,7 +166,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: appColors.p60, // background (button) color
+          backgroundColor: appColors.p10, // background (button) color
           foregroundColor: appColors.n100, // foreground (text) color
         ),
       ),
@@ -176,7 +176,7 @@ class AppTheme {
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: appColors.n95, width: 1), borderRadius: BorderRadius.circular(8)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: appColors.p60, width: 1), borderRadius: BorderRadius.circular(8)),
+            borderSide: BorderSide(color: appColors.p10, width: 1), borderRadius: BorderRadius.circular(8)),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: appColors.vermillion, width: 1), borderRadius: BorderRadius.circular(8)),
         focusedErrorBorder: OutlineInputBorder(
@@ -233,7 +233,7 @@ class AppTheme {
         fillColor: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
-              return appColors.p60;
+              return appColors.p10;
             }
             return appColors.n90;
           },
@@ -284,11 +284,11 @@ class _AppButtonStyle {
     backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return appColors.p60.withOpacity(0.4);
+          return appColors.p10.withOpacity(0.4);
         } else if (states.contains(MaterialState.pressed)) {
-          return appColors.p50;
+          return appColors.p20;
         }
-        return appColors.p60;
+        return appColors.p10;
       },
     ),
     foregroundColor: MaterialStateProperty.all(appColors.n100),
@@ -319,14 +319,14 @@ extension BuildContextButtonStyleExtension on BuildContext {
     },
   );
 
-  MaterialStateProperty<Color?> get _buttonN100P60ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
+  MaterialStateProperty<Color?> get _buttonN100P10ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
         return colorN80;
       } else if (states.contains(MaterialState.pressed)) {
-        return colorP50;
+        return colorP20;
       }
-      return colorP60;
+      return colorP10;
     },
   );
 
@@ -352,18 +352,18 @@ extension BuildContextButtonStyleExtension on BuildContext {
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP60StickyBackgroundColor => MaterialStateProperty.resolveWith<Color?>(
+  MaterialStateProperty<Color?> get buttonP10StickyBackgroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
         return colorN95;
       } else if (states.contains(MaterialState.pressed)) {
-        return colorP50;
+        return colorP20;
       }
-      return colorP60;
+      return colorP10;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP60StickyForegroundColor => MaterialStateProperty.resolveWith<Color?>(
+  MaterialStateProperty<Color?> get buttonP10StickyForegroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
         return colorN60;
@@ -388,22 +388,22 @@ extension BuildContextButtonStyleExtension on BuildContext {
   MaterialStateProperty<Color?> get buttonP99OpacityForegroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
-        return colorP50.withOpacity(0.4);
+        return colorP20.withOpacity(0.4);
       } else if (states.contains(MaterialState.pressed)) {
-        return colorP50;
+        return colorP20;
       }
-      return colorP50;
+      return colorP20;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonOutlinedP60ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
+  MaterialStateProperty<Color?> get buttonOutlinedP10ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
-        return colorP60.withOpacity(0.4);
+        return colorP10.withOpacity(0.4);
       } else if (states.contains(MaterialState.pressed)) {
-        return colorP60;
+        return colorP10;
       }
-      return colorP60;
+      return colorP10;
     },
   );
 
@@ -421,58 +421,58 @@ extension BuildContextButtonStyleExtension on BuildContext {
   MaterialStateProperty<Color?> get buttonP95Opacity60ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
-        return colorP50.withOpacity(0.4);
+        return colorP20.withOpacity(0.4);
       } else if (states.contains(MaterialState.pressed)) {
-        return colorP50;
+        return colorP20;
       }
-      return colorP50;
+      return colorP20;
     },
   );
 
-  MaterialStateProperty<BorderSide?> get buttonOutlinedP60BorderColor => MaterialStateProperty.resolveWith<BorderSide?>(
+  MaterialStateProperty<BorderSide?> get buttonOutlinedP10BorderColor => MaterialStateProperty.resolveWith<BorderSide?>(
         (Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
-        return BorderSide(color: colorP60.withOpacity(0.4), width: 1.0);
+        return BorderSide(color: colorP10.withOpacity(0.4), width: 1.0);
       } else if (states.contains(MaterialState.pressed)) {
-        return BorderSide(color: colorP60, width: 1.0);
+        return BorderSide(color: colorP10, width: 1.0);
       }
-      return BorderSide(color: colorP60, width: 1.0);
+      return BorderSide(color: colorP10, width: 1.0);
     },
   );
 
   ///32
-  ButtonStyle get buttonStyle32P60 => FilledButton.styleFrom(
+  ButtonStyle get buttonStyle32P10 => FilledButton.styleFrom(
     minimumSize: const Size(double.infinity, 32),
     padding: const EdgeInsets.fromLTRB(13, 4, 13, 4),
     // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
-  ButtonStyle get buttonStyle32P60Fitted =>
-      buttonStyle32P60.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 32)));
+  ButtonStyle get buttonStyle32P10Fitted =>
+      buttonStyle32P10.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 32)));
 
-  ButtonStyle get buttonStyle32P60Opacity60 => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle32P10Opacity60 => buttonStyle32P10.copyWith(
     backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return colorP60.withOpacity(0.24);
+          return colorP10.withOpacity(0.24);
         } else if (states.contains(MaterialState.pressed)) {
           return colorP95;
         }
-        return colorP60.withOpacity(0.6);
+        return colorP10.withOpacity(0.6);
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP50),
+    foregroundColor: MaterialStateProperty.all(colorP20),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(
-        appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP50)),
+        appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP20)),
   );
 
-  ButtonStyle get buttonStyle32TransparentFittedOutlined => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle32TransparentFittedOutlined => buttonStyle32P10.copyWith(
       backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
       padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(16, 4, 16, 4)),
-      side: MaterialStateProperty.all(BorderSide(color: colorP60, width: 1.0)),
+      side: MaterialStateProperty.all(BorderSide(color: colorP10, width: 1.0)),
       minimumSize: const MaterialStatePropertyAll(Size(0, 32)));
 
-  ButtonStyle get buttonStyle32IconP60 => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle32IconP10 => buttonStyle32P10.copyWith(
     backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
@@ -488,104 +488,106 @@ extension BuildContextButtonStyleExtension on BuildContext {
         if (states.contains(MaterialState.disabled)) {
           return colorN60.withOpacity(0.5);
         } else if (states.contains(MaterialState.pressed)) {
-          return colorP60;
+          return colorP10;
         }
-        return colorP60;
+        return colorP10;
       },
     ),
     minimumSize: const MaterialStatePropertyAll(Size(32, 32)),
     padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
   );
 
-  ButtonStyle get buttonStyle32N40 => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle32N40 => buttonStyle32P10.copyWith(
       minimumSize: const MaterialStatePropertyAll(Size(double.minPositive, 32)),
       backgroundColor: MaterialStatePropertyAll(colorN100),
       foregroundColor: MaterialStatePropertyAll(colorN40),
       side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN40)));
 
-  ButtonStyle get buttonStyle32N40Filled => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle32N40Filled => buttonStyle32P10.copyWith(
       minimumSize: const MaterialStatePropertyAll(Size(double.minPositive, 32)),
       backgroundColor: MaterialStatePropertyAll(colorN40),
       foregroundColor: MaterialStatePropertyAll(colorN40),
       side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN40)));
 
   ///36
-  ButtonStyle get buttonStyle36P60 =>
+  ButtonStyle get buttonStyle36P10 =>
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 36), padding: const EdgeInsets.fromLTRB(16, 6, 16, 6));
 
-  ButtonStyle get buttonStyle36P60FittedShrinkWrap => buttonStyle36P60.copyWith(
+  ButtonStyle get buttonStyle36P10FittedShrinkWrap => buttonStyle36P10.copyWith(
     minimumSize: const MaterialStatePropertyAll(Size(0, 36)),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
   ///40
-  ButtonStyle get buttonStyle40P60 =>
-      FilledButton.styleFrom(minimumSize: const Size(double.infinity, 40), padding: const EdgeInsets.fromLTRB(16, 8, 16, 8));
+  ButtonStyle get buttonStyle40P10 =>
+      FilledButton.styleFrom(minimumSize: const Size(double.infinity, 40), padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
 
-  ButtonStyle get buttonStyle40P50Toggle => buttonStyle40P60.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorP50), foregroundColor: MaterialStatePropertyAll(colorN100));
+      );
 
-  ButtonStyle get buttonStyle40N99Toggle => buttonStyle40P60.copyWith(
+  ButtonStyle get buttonStyle40P50Toggle => buttonStyle40P10.copyWith(
+      backgroundColor: MaterialStatePropertyAll(colorP20), foregroundColor: MaterialStatePropertyAll(colorN100));
+
+  ButtonStyle get buttonStyle40N99Toggle => buttonStyle40P10.copyWith(
       backgroundColor: MaterialStatePropertyAll(colorN99), foregroundColor: MaterialStatePropertyAll(colorN60));
 
-  ButtonStyle get buttonStyle40ToggleOn => buttonStyle40P60.copyWith(
+  ButtonStyle get buttonStyle40ToggleOn => buttonStyle40P10.copyWith(
       backgroundColor: MaterialStatePropertyAll(colorP99),
-      foregroundColor: MaterialStatePropertyAll(colorP50),
-      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorP50)));
+      foregroundColor: MaterialStatePropertyAll(colorP20),
+      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorP20)));
 
-  ButtonStyle get buttonStyle40ToggleOff => buttonStyle40P60.copyWith(
+  ButtonStyle get buttonStyle40ToggleOff => buttonStyle40P10.copyWith(
       backgroundColor: MaterialStatePropertyAll(colorN100),
       foregroundColor: MaterialStatePropertyAll(colorN60),
       side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN95)));
 
-  ButtonStyle get buttonStyle40ToggleDisabled => buttonStyle40P60.copyWith(
+  ButtonStyle get buttonStyle40ToggleDisabled => buttonStyle40P10.copyWith(
       backgroundColor: MaterialStatePropertyAll(colorN99.withOpacity(0.4)),
       foregroundColor: MaterialStatePropertyAll(colorN60.withOpacity(0.4)));
 
-  ButtonStyle get buttonStyle40P99Opacity => buttonStyle40P60.copyWith(
+  ButtonStyle get buttonStyle40P99Opacity => buttonStyle40P10.copyWith(
     backgroundColor: buttonP99OpacityBackgroundColor,
     foregroundColor: buttonP99OpacityForegroundColor,
   );
 
-  ButtonStyle get buttonStyle40P60FittedShrinkWrap => buttonStyle32P60.copyWith(
+  ButtonStyle get buttonStyle40P10FittedShrinkWrap => buttonStyle32P10.copyWith(
     minimumSize: const MaterialStatePropertyAll(Size(0, 40)),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
-  ButtonStyle get buttonStyle40P99OpacityFittedShrinkWrap => buttonStyle40P60FittedShrinkWrap.copyWith(
+  ButtonStyle get buttonStyle40P99OpacityFittedShrinkWrap => buttonStyle40P10FittedShrinkWrap.copyWith(
     backgroundColor: buttonP99OpacityBackgroundColor,
     foregroundColor: buttonP99OpacityForegroundColor,
   );
 
-  ButtonStyle get buttonStyle40P95Opacity60FittedShrinkWrap => buttonStyle40P60FittedShrinkWrap.copyWith(
+  ButtonStyle get buttonStyle40P95Opacity60FittedShrinkWrap => buttonStyle40P10FittedShrinkWrap.copyWith(
     backgroundColor: buttonP95Opacity60BackgroundColor,
     foregroundColor: buttonP95Opacity60ForegroundColor,
   );
 
-  ButtonStyle get buttonStyle40P60Outlined => buttonStyle40P60.copyWith(
-    side: buttonOutlinedP60BorderColor,
+  ButtonStyle get buttonStyle40P10Outlined => buttonStyle40P10.copyWith(
+    side: buttonOutlinedP10BorderColor,
     backgroundColor: MaterialStateProperty.all(Colors.transparent),
-    foregroundColor: buttonOutlinedP60ForegroundColor,
+    foregroundColor: buttonOutlinedP10ForegroundColor,
   );
 
-  ButtonStyle get buttonStyle40P60FittedOutlinedShrinkWrap => buttonStyle40P60Outlined.copyWith(
+  ButtonStyle get buttonStyle40P10FittedOutlinedShrinkWrap => buttonStyle40P10Outlined.copyWith(
     minimumSize: const MaterialStatePropertyAll(Size(0, 40)),
   );
 
   ///48
-  ButtonStyle get buttonStyle48P60 =>
+  ButtonStyle get buttonStyle48P10 =>
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 48), padding:const EdgeInsets.fromLTRB(16, 12, 16, 12));
 
-  ButtonStyle get buttonStyle48P60Fitted =>
-      buttonStyle48P60.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+  ButtonStyle get buttonStyle48P10Fitted =>
+      buttonStyle48P10.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
 
-  ButtonStyle get buttonStyle48P60FittedOutlined =>
-      buttonStyle40P60Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+  ButtonStyle get buttonStyle48P10FittedOutlined =>
+      buttonStyle40P10Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
 
-  ButtonStyle get buttonStyle48P60TransparentFittedOutlined =>
-      buttonStyle40P60Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+  ButtonStyle get buttonStyle48P10TransparentFittedOutlined =>
+      buttonStyle40P10Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
 
-  ButtonStyle get buttonStyle48P60Text => buttonStyle48P60.copyWith(
+  ButtonStyle get buttonStyle48P10Text => buttonStyle48P10.copyWith(
     backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
@@ -596,76 +598,76 @@ extension BuildContextButtonStyleExtension on BuildContext {
         return colorN100;
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP60),
+    foregroundColor: MaterialStateProperty.all(colorP10),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(appTextTheme.titleMedium!
-        .copyWith(fontWeight: FontWeight.w500, color: colorP60, decoration: TextDecoration.underline)),
+        .copyWith(fontWeight: FontWeight.w500, color: colorP10, decoration: TextDecoration.underline)),
   );
 
-  ButtonStyle get buttonStyle48BottomSheetText => buttonStyle48P60Text.copyWith(
+  ButtonStyle get buttonStyle48BottomSheetText => buttonStyle48P10Text.copyWith(
     foregroundColor: MaterialStateProperty.all(colorBottomSheetDefaultText),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(appTextTheme.titleMedium!.copyWith(
         fontWeight: FontWeight.w500, color: colorBottomSheetDefaultText, decoration: TextDecoration.underline)),
   );
 
-  ButtonStyle get buttonStyle48P60FittedOpacity60 => buttonStyle48P60Fitted.copyWith(
+  ButtonStyle get buttonStyle48P10FittedOpacity60 => buttonStyle48P10Fitted.copyWith(
     backgroundColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return colorP60.withOpacity(0.24);
+          return colorP10.withOpacity(0.24);
         } else if (states.contains(MaterialState.pressed)) {
           return colorP95;
         }
-        return colorP60.withOpacity(0.6);
+        return colorP10.withOpacity(0.6);
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP50),
+    foregroundColor: MaterialStateProperty.all(colorP20),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(
-        appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP50)),
+        appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP20)),
   );
 
-  ButtonStyle get buttonStyle48N100 => buttonStyle48P60.copyWith(
+  ButtonStyle get buttonStyle48N100 => buttonStyle48P10.copyWith(
     backgroundColor: _buttonN100BackgroundColor,
-    foregroundColor: _buttonN100P60ForegroundColor,
+    foregroundColor: _buttonN100P10ForegroundColor,
   );
 
-  ButtonStyle get buttonStyle48P60Outlined => buttonStyle48N100.copyWith(
-    side: buttonOutlinedP60BorderColor,
+  ButtonStyle get buttonStyle48P10Outlined => buttonStyle48N100.copyWith(
+    side: buttonOutlinedP10BorderColor,
     backgroundColor: MaterialStateProperty.all(colorN100),
-    foregroundColor: buttonOutlinedP60ForegroundColor,
+    foregroundColor: buttonOutlinedP10ForegroundColor,
   );
 
   ///56
-  ButtonStyle get buttonStyle56P60 =>
+  ButtonStyle get buttonStyle56P10 =>
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 56), padding: const EdgeInsets.fromLTRB(16, 12, 16, 12));
 
-  ButtonStyle get buttonStyle56P60Square => buttonStyle56P60.copyWith(
+  ButtonStyle get buttonStyle56P10Square => buttonStyle56P10.copyWith(
       padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
       shape: const MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))));
 
-  ButtonStyle get buttonStyle56P60SquareSafeArea => buttonStyle56P60Square.copyWith(
+  ButtonStyle get buttonStyle56P10SquareSafeArea => buttonStyle56P10Square.copyWith(
     minimumSize: const MaterialStatePropertyAll(Size(double.infinity, (56 + 16))),
     padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(0, 20, 0, 16 + 16)),
   );
 
   // 배경 N100, 글씨 N30 컬러 버튼
-  ButtonStyle get buttonStyle56N100 => buttonStyle56P60.copyWith(
+  ButtonStyle get buttonStyle56N100 => buttonStyle56P10.copyWith(
     backgroundColor: _buttonN100CardBackgroundColor,
     foregroundColor: _buttonN100CardForegroundColor,
   );
 
-  ButtonStyle get buttonStyle56N100N30Card => buttonStyle56P60Square.copyWith(
+  ButtonStyle get buttonStyle56N100N30Card => buttonStyle56P10Square.copyWith(
     backgroundColor: _buttonN100CardBackgroundColor,
     foregroundColor: _buttonN100CardForegroundColor,
   );
 
-  ButtonStyle get buttonStyle56N100Square => buttonStyle56P60Square.copyWith(
+  ButtonStyle get buttonStyle56N100Square => buttonStyle56P10Square.copyWith(
     backgroundColor: _buttonN100BackgroundColor,
-    foregroundColor: _buttonN100P60ForegroundColor,
+    foregroundColor: _buttonN100P10ForegroundColor,
   );
 
-  ButtonStyle get buttonStyle56N100TopSquare => buttonStyle56P60Square.copyWith(
+  ButtonStyle get buttonStyle56N100TopSquare => buttonStyle56P10Square.copyWith(
     backgroundColor: _buttonN100BackgroundColor,
-    foregroundColor: _buttonN100P60ForegroundColor,
+    foregroundColor: _buttonN100P10ForegroundColor,
     shape: const MaterialStatePropertyAll(RoundedRectangleBorder(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)))),
   );
@@ -678,28 +680,28 @@ extension BuildContextButtonStyleExtension on BuildContext {
   // );
 
   ///64
-  ButtonStyle get buttonStyle64P60 => FilledButton.styleFrom(
+  ButtonStyle get buttonStyle64P10 => FilledButton.styleFrom(
     minimumSize: const Size(double.infinity, 64),
   );
 
-  ButtonStyle get buttonStyle64P60Square => buttonStyle64P60.copyWith(
+  ButtonStyle get buttonStyle64P10Square => buttonStyle64P10.copyWith(
     padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 20)),
     shape: const MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))),
     textStyle: MaterialStatePropertyAll(textStyleH16m),
   );
   //
-  // ButtonStyle get buttonStyle64P60SquareSafeArea => buttonStyle64P60Square.copyWith(
+  // ButtonStyle get buttonStyle64P10SquareSafeArea => buttonStyle64P10Square.copyWith(
   //   minimumSize: MaterialStatePropertyAll(
   //       Size(double.infinity, ((paddingBottom > 0 && viewInsetBottom < 100) ? 64 + 16 : 64))),
   //   padding: MaterialStatePropertyAll(
   //       EdgeInsets.fromLTRB(0, 20, 0, (paddingBottom > 0 && viewInsetBottom < 100) ? 20 + 16 : 20)),
-  //   foregroundColor: buttonP60StickyForegroundColor,
-  //   backgroundColor: buttonP60StickyBackgroundColor,
+  //   foregroundColor: buttonP10StickyForegroundColor,
+  //   backgroundColor: buttonP10StickyBackgroundColor,
   // );
   //
-  // ButtonStyle get buttonStyle64N100Square => buttonStyle64P60Square.copyWith(
+  // ButtonStyle get buttonStyle64N100Square => buttonStyle64P10Square.copyWith(
   //   backgroundColor: _buttonN100BackgroundColor,
-  //   foregroundColor: _buttonN100P60ForegroundColor,
+  //   foregroundColor: _buttonN100P10ForegroundColor,
   //   textStyle: MaterialStatePropertyAll(textStyleH16m),
   // );
   //

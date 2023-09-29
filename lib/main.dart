@@ -3,7 +3,9 @@ import 'dart:async';
 // import 'package:device_preview/device_preview.dart' as dp;
 import 'package:abo/app.dart';
 import 'package:abo/common/logger/logger.dart';
+import 'package:abo/firebase_options.dart';
 import 'package:abo/riverpod_logger.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +17,8 @@ import 'package:intl/intl.dart';
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    var notificationAppLaunchDetails = await ApplicationInit().init();
+
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(
       ProviderScope(
@@ -52,15 +56,15 @@ class ApplicationInit {
     await initializeDateFormatting('ko');
 
     // 앱 처음 실행시 필요한 로직을 추가한다.
-    // await Firebase.initializeApp(
-    //   options: DefaultFirebaseOptions.currentPlatform,
-    // );
-  }
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );  }
 
   void registerErrorHandlers() {
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      logger.e('[FlutterError]', error: details.exception, stackTrace: details.stack);
+      logger.e('[FlutterError]',
+          error: details.exception, stackTrace: details.stack);
     };
 
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {

@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 @RoutePage()
 class HomePage extends HookWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,8 @@ class HomePage extends HookWidget {
       routes: const [
         MainRoute(),
         RankRoute(),
-        TradeRoute(),
-        PlayerRoute(),
+        PlayerListRoute(),
+        SettingsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
@@ -35,10 +35,8 @@ class HomePage extends HookWidget {
                   icon: Icon(Icons.home_filled), label: '홈'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.bar_chart_outlined), label: '랭크'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.published_with_changes_rounded),
-                  label: '트레이드'),
               BottomNavigationBarItem(icon: Icon(Icons.person), label: '선수'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정'),
             ]);
       },
     );

@@ -1,17 +1,14 @@
 import 'package:abo/common/common_constants.dart';
-import 'package:abo/source/view/page/rank.dart';
-import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hana/foundation/extension/extension_export.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class MainPage extends HookWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +26,8 @@ class MainPage extends HookWidget {
             _ScoreBoard(),
             Gap.h16,
             _RankBoard(),
-            Gap.h16,
-            _TradeBoard(),
+            // Gap.h16,
+            // _TradeBoard(),
             Gap.h40,
           ],
         ),
@@ -152,7 +149,7 @@ class _ScoreBoard extends HookWidget {
             duration: Durations.ms300,
             transitionBuilder: (Widget child, Animation<double> animation) {
               return SizeTransition(
-                sizeFactor:  CurvedAnimation(
+                sizeFactor: CurvedAnimation(
                   parent: controller,
                   curve: Curves.easeIn,
                 ),
@@ -162,78 +159,78 @@ class _ScoreBoard extends HookWidget {
             },
             child: tap.value == true
                 ? Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('실시간 스코어',
-                            style: context.textStyleT12b
-                                .copyWith(color: context.colorP10)),
-                        IconButton(
-                            onPressed: () => tap.value = !tap.value,
-                            icon: Icon(Icons.keyboard_arrow_down)),
-                      ],
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: 'SSG',
-                      homeScore: 3,
-                      away: 'NC',
-                      awayScore: 1,
-                    ),
-                  ],
-                )
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('실시간 스코어',
+                              style: context.textStyleT12b
+                                  .copyWith(color: context.colorP10)),
+                          IconButton(
+                              onPressed: () => tap.value = !tap.value,
+                              icon: Icon(Icons.keyboard_arrow_down)),
+                        ],
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: 'SSG',
+                        homeScore: 3,
+                        away: 'NC',
+                        awayScore: 1,
+                      ),
+                    ],
+                  )
                 : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('실시간 스코어',
-                            style: context.textStyleT12b
-                                .copyWith(color: context.colorP10)),
-                        IconButton(
-                            onPressed: () => tap.value = !tap.value,
-                            icon: Icon(Icons.keyboard_arrow_up)),
-                      ],
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: 'KT',
-                      homeScore: 3,
-                      away: 'LG',
-                      awayScore: 1,
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: 'SSG',
-                      homeScore: 3,
-                      away: 'NC',
-                      awayScore: 1,
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: '한화',
-                      homeScore: 3,
-                      away: '두산',
-                      awayScore: 1,
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: '삼성',
-                      homeScore: 3,
-                      away: '키움',
-                      awayScore: 1,
-                    ),
-                    Gap.h8,
-                    const _ScoreView(
-                      home: 'KIA',
-                      homeScore: 3,
-                      away: '롯데',
-                      awayScore: 1,
-                    ),
-                  ],
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('실시간 스코어',
+                              style: context.textStyleT12b
+                                  .copyWith(color: context.colorP10)),
+                          IconButton(
+                              onPressed: () => tap.value = !tap.value,
+                              icon: Icon(Icons.keyboard_arrow_up)),
+                        ],
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: 'KT',
+                        homeScore: 3,
+                        away: 'LG',
+                        awayScore: 1,
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: 'SSG',
+                        homeScore: 3,
+                        away: 'NC',
+                        awayScore: 1,
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: '한화',
+                        homeScore: 3,
+                        away: '두산',
+                        awayScore: 1,
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: '삼성',
+                        homeScore: 3,
+                        away: '키움',
+                        awayScore: 1,
+                      ),
+                      Gap.h8,
+                      const _ScoreView(
+                        home: 'KIA',
+                        homeScore: 3,
+                        away: '롯데',
+                        awayScore: 1,
+                      ),
+                    ],
+                  ),
           ),
         ),
       ),
