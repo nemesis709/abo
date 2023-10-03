@@ -27,7 +27,10 @@ class Settings extends _$Settings {
 
   Future<bool> signOut() async {
     final credential = await ref.runInProgress(() async {
-      return AuthService.instance.signOut();
+      final result = AuthService.instance.signOut();
+      ref.route.replace(const SignInRoute());
+
+      return result;
     });
 
     return credential.when(success: (data) {

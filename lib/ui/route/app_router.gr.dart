@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BatterStatRoute.name: (routeData) {
+      final args = routeData.argsAs<BatterStatRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: BatterStatPage(
+          key: args.key,
+          playerInfo: args.playerInfo,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -27,20 +37,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainPage(),
       );
     },
+    PitcherStatRoute.name: (routeData) {
+      final args = routeData.argsAs<PitcherStatRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PitcherStatPage(
+          key: args.key,
+          playerInfo: args.playerInfo,
+        ),
+      );
+    },
     PlayerListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const PlayerListPage(),
-      );
-    },
-    PlayerRoute.name: (routeData) {
-      final args = routeData.argsAs<PlayerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: PlayerPage(
-          key: args.key,
-          playerInfo: args.playerInfo,
-        ),
       );
     },
     RankRoute.name: (routeData) {
@@ -83,6 +93,44 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
+/// [BatterStatPage]
+class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
+  BatterStatRoute({
+    Key? key,
+    required PlayerModel playerInfo,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BatterStatRoute.name,
+          args: BatterStatRouteArgs(
+            key: key,
+            playerInfo: playerInfo,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BatterStatRoute';
+
+  static const PageInfo<BatterStatRouteArgs> page =
+      PageInfo<BatterStatRouteArgs>(name);
+}
+
+class BatterStatRouteArgs {
+  const BatterStatRouteArgs({
+    this.key,
+    required this.playerInfo,
+  });
+
+  final Key? key;
+
+  final PlayerModel playerInfo;
+
+  @override
+  String toString() {
+    return 'BatterStatRouteArgs{key: $key, playerInfo: $playerInfo}';
+  }
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -111,6 +159,44 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [PitcherStatPage]
+class PitcherStatRoute extends PageRouteInfo<PitcherStatRouteArgs> {
+  PitcherStatRoute({
+    Key? key,
+    required PlayerModel playerInfo,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PitcherStatRoute.name,
+          args: PitcherStatRouteArgs(
+            key: key,
+            playerInfo: playerInfo,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PitcherStatRoute';
+
+  static const PageInfo<PitcherStatRouteArgs> page =
+      PageInfo<PitcherStatRouteArgs>(name);
+}
+
+class PitcherStatRouteArgs {
+  const PitcherStatRouteArgs({
+    this.key,
+    required this.playerInfo,
+  });
+
+  final Key? key;
+
+  final PlayerModel playerInfo;
+
+  @override
+  String toString() {
+    return 'PitcherStatRouteArgs{key: $key, playerInfo: $playerInfo}';
+  }
+}
+
+/// generated route for
 /// [PlayerListPage]
 class PlayerListRoute extends PageRouteInfo<void> {
   const PlayerListRoute({List<PageRouteInfo>? children})
@@ -122,43 +208,6 @@ class PlayerListRoute extends PageRouteInfo<void> {
   static const String name = 'PlayerListRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [PlayerPage]
-class PlayerRoute extends PageRouteInfo<PlayerRouteArgs> {
-  PlayerRoute({
-    Key? key,
-    required PlayerInfo playerInfo,
-    List<PageRouteInfo>? children,
-  }) : super(
-          PlayerRoute.name,
-          args: PlayerRouteArgs(
-            key: key,
-            playerInfo: playerInfo,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'PlayerRoute';
-
-  static const PageInfo<PlayerRouteArgs> page = PageInfo<PlayerRouteArgs>(name);
-}
-
-class PlayerRouteArgs {
-  const PlayerRouteArgs({
-    this.key,
-    required this.playerInfo,
-  });
-
-  final Key? key;
-
-  final PlayerInfo playerInfo;
-
-  @override
-  String toString() {
-    return 'PlayerRouteArgs{key: $key, playerInfo: $playerInfo}';
-  }
 }
 
 /// generated route for

@@ -1,11 +1,10 @@
 import 'package:abo/common/loadable_content.dart';
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/source/view/controller/settings_controller.dart';
+import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -28,27 +27,42 @@ class SettingsPage extends HookConsumerWidget {
           asyncValue: asyncValue,
           content: (asyncValue) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InkWell(
-                    onTap: () async {
-                    },
-                    child: Row(
-                      children: [
-                        Text('정보 변경',style: context.textStyleT14r.copyWith(color: context.colorN20)),
-                      ],
-                    )),
-                InkWell(
-                    onTap: () async {
-                      final result = await notifier.signOut();
-                      if (result && context.mounted) {
-                        context.popRoute();
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Text('로그아웃',style: context.textStyleT14r.copyWith(color: context.colorN20)),
-                      ],
-                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    asyncValue?.displayName ?? '',
+                    style:
+                        context.textStyleH20b.copyWith(color: context.colorN20),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                      onTap: () async {},
+                      child: Row(
+                        children: [
+                          Text('정보 변경',
+                              style: context.textStyleT14r
+                                  .copyWith(color: context.colorN20)),
+                        ],
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                      onTap: () async {
+                        await notifier.signOut();
+                      },
+                      child: Row(
+                        children: [
+                          Text('로그아웃',
+                              style: context.textStyleT14r
+                                  .copyWith(color: context.colorN20)),
+                        ],
+                      )),
+                ),
               ],
             );
           }),

@@ -6,7 +6,7 @@ part of 'player_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playerControllerHash() => r'a5eeccc9c60042d3ac6797519bbe1bf94e6887f8';
+String _$playerControllerHash() => r'91f00f74aa9b281f0435cb057300421a6ae11e48';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,11 +30,11 @@ class _SystemHash {
 }
 
 abstract class _$PlayerController
-    extends BuildlessAutoDisposeAsyncNotifier<List<PlayerInfo>> {
-  late final bool isPitcher;
+    extends BuildlessAutoDisposeAsyncNotifier<List<PlayerModel>> {
+  late final bool? isPitcher;
 
-  FutureOr<List<PlayerInfo>> build(
-    bool isPitcher,
+  FutureOr<List<PlayerModel>> build(
+    bool? isPitcher,
   );
 }
 
@@ -43,13 +43,13 @@ abstract class _$PlayerController
 const playerControllerProvider = PlayerControllerFamily();
 
 /// See also [PlayerController].
-class PlayerControllerFamily extends Family<AsyncValue<List<PlayerInfo>>> {
+class PlayerControllerFamily extends Family<AsyncValue<List<PlayerModel>>> {
   /// See also [PlayerController].
   const PlayerControllerFamily();
 
   /// See also [PlayerController].
   PlayerControllerProvider call(
-    bool isPitcher,
+    bool? isPitcher,
   ) {
     return PlayerControllerProvider(
       isPitcher,
@@ -82,10 +82,10 @@ class PlayerControllerFamily extends Family<AsyncValue<List<PlayerInfo>>> {
 
 /// See also [PlayerController].
 class PlayerControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    PlayerController, List<PlayerInfo>> {
+    PlayerController, List<PlayerModel>> {
   /// See also [PlayerController].
   PlayerControllerProvider(
-    bool isPitcher,
+    bool? isPitcher,
   ) : this._internal(
           () => PlayerController()..isPitcher = isPitcher,
           from: playerControllerProvider,
@@ -110,10 +110,10 @@ class PlayerControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
     required this.isPitcher,
   }) : super.internal();
 
-  final bool isPitcher;
+  final bool? isPitcher;
 
   @override
-  FutureOr<List<PlayerInfo>> runNotifierBuild(
+  FutureOr<List<PlayerModel>> runNotifierBuild(
     covariant PlayerController notifier,
   ) {
     return notifier.build(
@@ -138,7 +138,7 @@ class PlayerControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<PlayerController, List<PlayerInfo>>
+  AutoDisposeAsyncNotifierProviderElement<PlayerController, List<PlayerModel>>
       createElement() {
     return _PlayerControllerProviderElement(this);
   }
@@ -158,18 +158,18 @@ class PlayerControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
 }
 
 mixin PlayerControllerRef
-    on AutoDisposeAsyncNotifierProviderRef<List<PlayerInfo>> {
+    on AutoDisposeAsyncNotifierProviderRef<List<PlayerModel>> {
   /// The parameter `isPitcher` of this provider.
-  bool get isPitcher;
+  bool? get isPitcher;
 }
 
 class _PlayerControllerProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<PlayerController,
-        List<PlayerInfo>> with PlayerControllerRef {
+        List<PlayerModel>> with PlayerControllerRef {
   _PlayerControllerProviderElement(super.provider);
 
   @override
-  bool get isPitcher => (origin as PlayerControllerProvider).isPitcher;
+  bool? get isPitcher => (origin as PlayerControllerProvider).isPitcher;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

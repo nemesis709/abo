@@ -91,7 +91,7 @@ class SignUpPage extends HookConsumerWidget {
                         child: TextFormField(
                           controller: passwordController,
                           focusNode: passwordFocusNode,
-                          obscureText: false,
+                          obscureText: true,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.done,
                           decoration: const InputDecoration(

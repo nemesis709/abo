@@ -23,7 +23,14 @@ class LoadableContent<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadingView = loading ?? const CircularProgressIndicator();
+    final loadingView = loading ??
+        const Center(
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator(),
+          ),
+        );
     return asyncValue.when(
       skipLoadingOnReload: skipLoadingOnReload,
       skipLoadingOnRefresh: skipLoadingOnRefresh,

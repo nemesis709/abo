@@ -2,20 +2,20 @@ import 'package:abo/common/data/result.dart';
 import 'package:abo/common/logger/logger.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService implements IService {
   AuthService._privateConstructor() {
-
     MainService.instance.registerService(this);
   }
 
-  static final AuthService _instance =
-      AuthService._privateConstructor();
+  static final AuthService _instance = AuthService._privateConstructor();
 
   static AuthService get instance => _instance;
 
   static FirebaseAuth auth = FirebaseAuth.instance;
+  static FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
   Stream<User?> userState() {
     return auth.authStateChanges();
@@ -59,6 +59,9 @@ class AuthService implements IService {
       );
 
       await auth.currentUser?.updateDisplayName(name);
+
+      await fireStore.collection('user').add(
+          {'email': email, 'name': name, 'uid': credential.user?.uid ?? ''});
 
       return credential;
     });

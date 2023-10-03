@@ -1,9 +1,10 @@
-import 'package:abo/source/domain/player_info.dart';
+import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/home.dart';
+import 'package:abo/source/view/page/batter_stat.dart';
+import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/source/view/page/settings.dart';
 import 'package:abo/source/view/page/signin.dart';
 import 'package:abo/source/view/page/main.dart';
-import 'package:abo/source/view/page/player.dart';
 import 'package:abo/source/view/page/player_list.dart';
 import 'package:abo/source/view/page/rank.dart';
 import 'package:abo/source/view/page/search.dart';
@@ -29,6 +30,7 @@ class AppRouter extends _$AppRouter {
     ]),
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: SearchRoute.page),
-    AutoRoute(page: PlayerRoute.page),
+    AutoRoute(page: BatterStatRoute.page),
+    AutoRoute(page: PitcherStatRoute.page),
   ];
 }

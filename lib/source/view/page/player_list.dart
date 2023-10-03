@@ -1,12 +1,15 @@
 import 'package:abo/common/common_constants.dart';
+import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/listenable_listener_hook.dart';
 import 'package:abo/common/loadable_content.dart';
-import 'package:abo/source/domain/player_info.dart';
+import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/controller/player_controller.dart';
-import 'package:abo/source/view/page/player.dart';
+import 'package:abo/source/view/page/batter_stat.dart';
+import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
+import 'package:abo/ui/widget/default_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,18 +26,10 @@ class PlayerListPage extends HookConsumerWidget {
     final pitcher = ref.watch(playerControllerProvider(true));
     final batter = ref.watch(playerControllerProvider(false));
 
-    useListenableListener(controller, () {
-      if (controller.index == 0) {
-        ref.invalidate(playerControllerProvider(false));
-      } else {
-        ref.invalidate(playerControllerProvider(true));
-      }
-    });
-
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            '랭킹 보기',
+            '선수 명단',
             style: context.textStyleH20b.copyWith(color: context.colorP10),
           ),
         ),
@@ -62,7 +57,10 @@ class PlayerListPage extends HookConsumerWidget {
                           return SingleChildScrollView(
                             child: Column(
                               children: content
-                                  .map((e) => _PlayerItem(playerInfo: e))
+                                  .map((e) => _PlayerItem(
+                                        playerInfo: e,
+                                        isPitcher: true,
+                                      ))
                                   .toList(),
                             ),
                           );
@@ -73,7 +71,10 @@ class PlayerListPage extends HookConsumerWidget {
                           return SingleChildScrollView(
                             child: Column(
                               children: content
-                                  .map((e) => _PlayerItem(playerInfo: e))
+                                  .map((e) => _PlayerItem(
+                                        playerInfo: e,
+                                        isPitcher: false,
+                                      ))
                                   .toList(),
                             ),
                           );
@@ -88,14 +89,38 @@ class PlayerListPage extends HookConsumerWidget {
 }
 
 class _PlayerItem extends HookWidget {
-  const _PlayerItem({required this.playerInfo});
+  const _PlayerItem({required this.playerInfo, required this.isPitcher});
 
-  final PlayerInfo playerInfo;
+  final PlayerModel playerInfo;
+  final bool isPitcher;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushRoute(PlayerRoute(playerInfo: playerInfo)),
+      onTap: () {
+        if (isPitcher) {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.5,
+                    child: PitcherStatPage(playerInfo: playerInfo));
+              });
+        } else {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context)
+          {
+            return DefaultBottomSheet(
+                maxHeight: context.sizeHeight * 0.8,
+                minHeight: context.sizeHeight * 0.5,
+                child: BatterStatPage(playerInfo: playerInfo));
+          });
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

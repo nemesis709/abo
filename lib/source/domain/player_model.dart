@@ -1,4 +1,4 @@
-class PlayerInfo {
+class PlayerModel {
   final String id;
   final String name;
   final String birthDate;
@@ -9,8 +9,9 @@ class PlayerInfo {
   final String position;
   final String team;
   final String owner;
+  final bool isPitcher;
 
-  PlayerInfo({
+  PlayerModel({
     required this.id,
     required this.name,
     required this.birthDate,
@@ -21,6 +22,7 @@ class PlayerInfo {
     required this.position,
     required this.team,
     required this.owner,
+    required this.isPitcher,
   });
 
   Map toJson() => {
@@ -36,8 +38,8 @@ class PlayerInfo {
         'owner': owner,
       };
 
-  static PlayerInfo fromJson(Map json) {
-    return PlayerInfo(
+  static PlayerModel fromJson(Map json, bool isPitcher) {
+    return PlayerModel(
       id: json['id'],
       name: json['name'],
       birthDate: json['birthDate'],
@@ -48,6 +50,7 @@ class PlayerInfo {
       position: json['position'],
       team: json['team'] == 'Hero' ? '키움' : json['team'],
       owner: json['owner'],
+      isPitcher: isPitcher,
     );
   }
 }
