@@ -11,13 +11,23 @@ part 'settings_controller.g.dart';
 @riverpod
 class Settings extends _$Settings {
   @override
-  FutureOr<FirebaseAuth> build() async {
-    return FirebaseAuth.instance;
+  FutureOr<User?> build() async {
+    return await getUser();
+  }
+
+  Future<User?> getUser() async {
+    final user = await AuthService.instance.currentUser();
+
+    if (user != null) {
+      ref.route.replace(const HomeRoute());
+    }
+
+    return user;
   }
 
   Future<bool> signOut() async {
     final credential = await ref.runInProgress(() async {
-      return RecordMeasurementService.instance.signOut();
+      return AuthService.instance.signOut();
     });
 
     return credential.when(success: (data) {
@@ -25,8 +35,6 @@ class Settings extends _$Settings {
 
       // data.user?.displayName
       ref.showToast('로그아웃이 완료되었습니다');
-
-      ref.route.replace(const SignInRoute());
       return true;
     }, failure: (e, __) {
       e as ApiError;

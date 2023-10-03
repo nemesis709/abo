@@ -25,15 +25,33 @@ class SettingsPage extends HookConsumerWidget {
         ),
       ),
       body: LoadableContent(
-        asyncValue: asyncValue,
-        content: (asyncValue) {
-          return Column(
-            children: [
-          FilledButton(onPressed: () => notifier.signOut(), child: Text('로그아웃')),
-            ],
-          );
-        }
-      ),
+          asyncValue: asyncValue,
+          content: (asyncValue) {
+            return Column(
+              children: [
+                InkWell(
+                    onTap: () async {
+                    },
+                    child: Row(
+                      children: [
+                        Text('정보 변경',style: context.textStyleT14r.copyWith(color: context.colorN20)),
+                      ],
+                    )),
+                InkWell(
+                    onTap: () async {
+                      final result = await notifier.signOut();
+                      if (result && context.mounted) {
+                        context.popRoute();
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Text('로그아웃',style: context.textStyleT14r.copyWith(color: context.colorN20)),
+                      ],
+                    )),
+              ],
+            );
+          }),
     );
   }
 }

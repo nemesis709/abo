@@ -28,7 +28,7 @@ class SignInPage extends HookConsumerWidget {
     final asyncValue = ref.watch(loginControllerProvider);
 
     useEffectAddPostFrameCallback(() {
-      if (asyncValue.valueOrNull?.currentUser != null) {
+      if (asyncValue.valueOrNull != null) {
         emailFocusNode.requestFocus();
       }
       return;

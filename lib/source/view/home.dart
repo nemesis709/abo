@@ -11,34 +11,37 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: const [
-        MainRoute(),
-        RankRoute(),
-        PlayerListRoute(),
-        SettingsRoute(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
-            // selectedItemColor: Colors.black,
-            // unselectedItemColor: Colors.black.withOpacity(0.5),
-            selectedItemColor: context.colorP10,
-            unselectedItemColor: context.colorN60,
-            selectedLabelStyle:
-                context.textStyleB12r.copyWith(color: context.colorN20),
-            unselectedLabelStyle:
-                context.textStyleB12r.copyWith(color: context.colorN60),
-            currentIndex: tabsRouter.activeIndex,
-            onTap: tabsRouter.setActiveIndex,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home_filled), label: '홈'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart_outlined), label: '랭크'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: '선수'),
-              BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정'),
-            ]);
-      },
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: AutoTabsScaffold(
+        routes: const [
+          MainRoute(),
+          RankRoute(),
+          PlayerListRoute(),
+          SettingsRoute(),
+        ],
+        bottomNavigationBuilder: (_, tabsRouter) {
+          return BottomNavigationBar(
+              // selectedItemColor: Colors.black,
+              // unselectedItemColor: Colors.black.withOpacity(0.5),
+              selectedItemColor: context.colorP10,
+              unselectedItemColor: context.colorN60,
+              selectedLabelStyle:
+                  context.textStyleB12r.copyWith(color: context.colorN20),
+              unselectedLabelStyle:
+                  context.textStyleB12r.copyWith(color: context.colorN60),
+              currentIndex: tabsRouter.activeIndex,
+              onTap: tabsRouter.setActiveIndex,
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home_filled), label: '홈'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.bar_chart_outlined), label: '랭크'),
+                BottomNavigationBarItem(icon: Icon(Icons.person), label: '선수'),
+                BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정'),
+              ]);
+        },
+      ),
     );
   }
 }

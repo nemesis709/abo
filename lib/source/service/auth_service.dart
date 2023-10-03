@@ -4,19 +4,24 @@ import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class RecordMeasurementService implements IService {
-  RecordMeasurementService._privateConstructor() {
+class AuthService implements IService {
+  AuthService._privateConstructor() {
+
     MainService.instance.registerService(this);
   }
 
-  static final RecordMeasurementService _instance =
-      RecordMeasurementService._privateConstructor();
+  static final AuthService _instance =
+      AuthService._privateConstructor();
 
-  static RecordMeasurementService get instance => _instance;
+  static AuthService get instance => _instance;
 
   static FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<User?> initUser() async {
+  Stream<User?> userState() {
+    return auth.authStateChanges();
+  }
+
+  Future<User?> currentUser() async {
     return auth.currentUser;
   }
 
@@ -35,8 +40,10 @@ class RecordMeasurementService implements IService {
         password: pw,
       );
 
-      if (persistence) {
+      if (persistence == true) {
         auth.setPersistence(Persistence.LOCAL);
+      } else {
+        auth.setPersistence(Persistence.NONE);
       }
 
       return result;

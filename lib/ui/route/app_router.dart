@@ -1,3 +1,4 @@
+import 'package:abo/source/domain/player_info.dart';
 import 'package:abo/source/view/home.dart';
 import 'package:abo/source/view/page/settings.dart';
 import 'package:abo/source/view/page/signin.dart';

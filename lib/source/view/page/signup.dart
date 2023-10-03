@@ -25,7 +25,7 @@ class SignUpPage extends HookConsumerWidget {
     final passwordFocusNode = useFocusNode();
 
     useEffect(() {
-      emailFocusNode.requestFocus();
+      nameFocusNode.requestFocus();
       return;
     }, []);
 
@@ -33,9 +33,12 @@ class SignUpPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.close,
-          color: context.colorP10,
+        leading: InkWell(
+          onTap: ()=> context.popRoute(),
+          child: Icon(
+            Icons.close,
+            color: context.colorP10,
+          ),
         ),
       ),
       body: Padding(

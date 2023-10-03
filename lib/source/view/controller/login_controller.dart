@@ -11,27 +11,29 @@ part 'login_controller.g.dart';
 @riverpod
 class LoginController extends _$LoginController {
   @override
-  FutureOr<FirebaseAuth> build() async {
-    await initAuth();
-    if(state.valueOrNull?.currentUser != null){
-      showKeyboard = true;
-    }
-    return FirebaseAuth.instance;
+  FutureOr<User?> build() async {
+    AuthService.instance.userState().listen((user) {
+      if (user != null) {
+        ref.route.replace(const HomeRoute());
+      }
+    });
+
+    return await initAuth();
   }
 
-  bool showKeyboard = false;
+  Future<User?> initAuth() async {
+    final user = await AuthService.instance.currentUser();
 
-  Future<void> initAuth() async {
-    final user = await RecordMeasurementService.instance.initUser();
+    // if (user != null) {
+    //   ref.route.replace(const HomeRoute());
+    // }
 
-    if (user != null) {
-      ref.route.replace(const HomeRoute());
-    }
+    return user;
   }
 
   Future<bool> signIn(String email, String pw, bool persistent) async {
     final credential = await ref.runInProgress(() async {
-      return RecordMeasurementService.instance.signIn(email, pw, persistent);
+      return AuthService.instance.signIn(email, pw, persistent);
     });
 
     return credential.when(success: (data) {
@@ -50,7 +52,7 @@ class LoginController extends _$LoginController {
 
   signUp(String email, String pw, String name) async {
     final credential = await ref.runInProgress(() async {
-      return RecordMeasurementService.instance.signUp(email, pw, name);
+      return AuthService.instance.signUp(email, pw, name);
     });
 
     return credential.when(success: (data) {

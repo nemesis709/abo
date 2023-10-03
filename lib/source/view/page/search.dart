@@ -22,36 +22,7 @@ class SearchPage extends HookWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: () => context.pushRoute(PlayerRoute(id: 71564)),
-            child: Card(
-              child: Text("이대호"),
-            ),
-          ),
-          InkWell(
-            onTap: () => context.pushRoute(PlayerRoute(id: 71564)),
-            child: Card(
-              child: Text("이대호"),
-            ),
-          ),
-          InkWell(
-            onTap: () => context.pushRoute(PlayerRoute(id: 71564)),
-            child: Card(
-              child: Text("이대호"),
-            ),
-          ),
-          InkWell(
-            onTap: () => context.pushRoute(PlayerRoute(id: 71564)),
-            child: Card(
-              child: Text("이대호"),
-            ),
-          ),
-          InkWell(
-            onTap: () => context.pushRoute(PlayerRoute(id: 71564)),
-            child: Card(
-              child: Text("이대호"),
-            ),
-          ),
+
         ],
       )),
     );
