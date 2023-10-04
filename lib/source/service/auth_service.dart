@@ -1,4 +1,6 @@
 import 'package:abo/common/data/result.dart';
+import 'package:abo/common/event/event_bus.dart';
+import 'package:abo/common/event/profile_event.dart';
 import 'package:abo/common/logger/logger.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
@@ -63,6 +65,7 @@ class AuthService implements IService {
       await fireStore.collection('user').add(
           {'email': email, 'name': name, 'uid': credential.user?.uid ?? ''});
 
+      eventBus.fire(ProfileEvent());
       return credential;
     });
   }
