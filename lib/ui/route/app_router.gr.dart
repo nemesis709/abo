@@ -9,89 +9,6 @@
 
 part of 'app_router.dart';
 
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    BatterStatRoute.name: (routeData) {
-      final args = routeData.argsAs<BatterStatRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: BatterStatPage(
-          key: args.key,
-          playerInfo: args.playerInfo,
-        ),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainPage(),
-      );
-    },
-    PitcherStatRoute.name: (routeData) {
-      final args = routeData.argsAs<PitcherStatRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: PitcherStatPage(
-          key: args.key,
-          playerInfo: args.playerInfo,
-        ),
-      );
-    },
-    PlayerListRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PlayerListPage(),
-      );
-    },
-    RankRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RankPage(),
-      );
-    },
-    SearchRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchPage(),
-      );
-    },
-    SettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingsPage(),
-      );
-    },
-    SignInRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SignInPage(),
-      );
-    },
-    SignUpRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SignUpPage(),
-      );
-    },
-    TradeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TradePage(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [BatterStatPage]
 class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
@@ -110,8 +27,16 @@ class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
 
   static const String name = 'BatterStatRoute';
 
-  static const PageInfo<BatterStatRouteArgs> page =
-      PageInfo<BatterStatRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BatterStatRouteArgs>();
+      return BatterStatPage(
+        key: args.key,
+        playerInfo: args.playerInfo,
+      );
+    },
+  );
 }
 
 class BatterStatRouteArgs {
@@ -141,7 +66,12 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomePage();
+    },
+  );
 }
 
 /// generated route for
@@ -155,7 +85,12 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainPage();
+    },
+  );
 }
 
 /// generated route for
@@ -176,8 +111,16 @@ class PitcherStatRoute extends PageRouteInfo<PitcherStatRouteArgs> {
 
   static const String name = 'PitcherStatRoute';
 
-  static const PageInfo<PitcherStatRouteArgs> page =
-      PageInfo<PitcherStatRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PitcherStatRouteArgs>();
+      return PitcherStatPage(
+        key: args.key,
+        playerInfo: args.playerInfo,
+      );
+    },
+  );
 }
 
 class PitcherStatRouteArgs {
@@ -207,7 +150,12 @@ class PlayerListRoute extends PageRouteInfo<void> {
 
   static const String name = 'PlayerListRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PlayerListPage();
+    },
+  );
 }
 
 /// generated route for
@@ -221,7 +169,12 @@ class RankRoute extends PageRouteInfo<void> {
 
   static const String name = 'RankRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RankPage();
+    },
+  );
 }
 
 /// generated route for
@@ -235,7 +188,12 @@ class SearchRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchPage();
+    },
+  );
 }
 
 /// generated route for
@@ -249,7 +207,12 @@ class SettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsPage();
+    },
+  );
 }
 
 /// generated route for
@@ -263,7 +226,12 @@ class SignInRoute extends PageRouteInfo<void> {
 
   static const String name = 'SignInRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignInPage();
+    },
+  );
 }
 
 /// generated route for
@@ -277,7 +245,12 @@ class SignUpRoute extends PageRouteInfo<void> {
 
   static const String name = 'SignUpRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SignUpPage();
+    },
+  );
 }
 
 /// generated route for
@@ -291,5 +264,10 @@ class TradeRoute extends PageRouteInfo<void> {
 
   static const String name = 'TradeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TradePage();
+    },
+  );
 }

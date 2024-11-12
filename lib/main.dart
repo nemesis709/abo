@@ -1,6 +1,5 @@
 import 'dart:async';
 
-// import 'package:device_preview/device_preview.dart' as dp;
 import 'package:abo/app.dart';
 import 'package:abo/common/logger/logger.dart';
 import 'package:abo/firebase_options.dart';
@@ -10,9 +9,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -58,7 +58,8 @@ class ApplicationInit {
     // 앱 처음 실행시 필요한 로직을 추가한다.
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
-    );  }
+    );
+    return null;  }
 
   void registerErrorHandlers() {
     FlutterError.onError = (FlutterErrorDetails details) {

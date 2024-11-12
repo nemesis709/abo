@@ -2,7 +2,7 @@ import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 final appThemeModeProvider = StateNotifierProvider<StateController<ThemeMode>, ThemeMode>(
   // (ref) => StateController(ThemeMode.system),
@@ -34,7 +34,6 @@ class AppTheme {
     const mode = ThemeMode.light;
     final appColors = AppColors.light();
     final themeData = ThemeData.light().copyWith(
-      useMaterial3: true,
       splashColor: appColors.p90,
       splashFactory: NoSplash.splashFactory,
       highlightColor: Colors.transparent,
@@ -58,11 +57,9 @@ class AppTheme {
         onError: appColors.n100,
         errorContainer: appColors.vermillion.withOpacity(0.5),
         onErrorContainer: appColors.n10,
-        background: appColors.n100,
-        onBackground: appColors.n10,
         surface: appColors.n95,
         onSurface: appColors.n10,
-        surfaceVariant: Colors.transparent,
+        surfaceContainerHighest: Colors.transparent,
         onSurfaceVariant: Colors.transparent,
         outline: appColors.n50,
         shadow: Colors.transparent,
@@ -84,11 +81,11 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           alignment: Alignment.centerLeft,
-          padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0.0)),
-          minimumSize: MaterialStateProperty.all<Size>(const Size.fromRadius(0.0)),
+          padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(0.0)),
+          minimumSize: WidgetStateProperty.all<Size>(const Size.fromRadius(0.0)),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          // backgroundColor: MaterialStatePropertyAll(Colors.black),
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          // backgroundColor: WidgetStatePropertyAll(Colors.black),
         ),
       ),
       textSelectionTheme: TextSelectionThemeData(
@@ -98,10 +95,10 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4.0),
         ),
-        side: MaterialStateBorderSide.resolveWith(
+        side: WidgetStateBorderSide.resolveWith(
               (states) {
-            if (states.contains(MaterialState.selected)) {
-              if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.disabled)) {
                 return const BorderSide(width: 1.0, color: Colors.transparent);
               }
               return BorderSide(width: 1.0, color: appColors.p10);
@@ -109,19 +106,19 @@ class AppTheme {
             return BorderSide(width: 1.0, color: appColors.n90);
           },
         ),
-        checkColor: MaterialStateProperty.resolveWith((states) {
+        checkColor: WidgetStateProperty.resolveWith((states) {
           return appColors.n100;
         }),
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.disabled)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.disabled)) {
               return appColors.p10.withOpacity(0.5);
             }
             return appColors.p10;
           }
           return appColors.n90;
         }),
-        overlayColor: MaterialStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           return Colors.transparent;
         }),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -131,7 +128,7 @@ class AppTheme {
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           overlayColor: ButtonStyleButton.allOrNull<Color?>(Colors.transparent),
-          iconSize: const MaterialStatePropertyAll(32),
+          iconSize: const WidgetStatePropertyAll(32),
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -195,7 +192,7 @@ class AppTheme {
         unselectedLabelColor: appColors.n70,
         dividerColor: Colors.transparent,
         labelPadding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-        overlayColor: MaterialStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           return Colors.transparent;
         }),
       ),
@@ -230,15 +227,15 @@ class AppTheme {
         style: _AppButtonStyle.defaultStyle,
       ),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith<Color?>(
+              (Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
               return appColors.p10;
             }
             return appColors.n90;
           },
         ),
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         visualDensity: VisualDensity.compact,
       ),
@@ -281,17 +278,17 @@ class _AppButtonStyle {
     ),
     padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(const EdgeInsets.fromLTRB(16, 12, 16, 12)),
     overlayColor: ButtonStyleButton.allOrNull<Color?>(Colors.transparent),
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return appColors.p10.withOpacity(0.4);
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return appColors.p20;
         }
         return appColors.p10;
       },
     ),
-    foregroundColor: MaterialStateProperty.all(appColors.n100),
+    foregroundColor: WidgetStateProperty.all(appColors.n100),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(
         appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: appColors.n100)),
   );
@@ -299,141 +296,141 @@ class _AppButtonStyle {
 
 /// 공통 버튼 스타일
 extension BuildContextButtonStyleExtension on BuildContext {
-  MaterialStateProperty<Color?> get materialStatePressedP95Opacity60Color => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.pressed)) {
+  WidgetStateProperty<Color?> get materialStatePressedP95Opacity60Color => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.pressed)) {
         return colorP95.withOpacity(0.6);
       }
       return null;
     },
   );
 
-  MaterialStateProperty<Color?> get _buttonN100BackgroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get _buttonN100BackgroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN100;
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorN99;
       }
       return colorN100;
     },
   );
 
-  MaterialStateProperty<Color?> get _buttonN100P10ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get _buttonN100P10ForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN80;
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP20;
       }
       return colorP10;
     },
   );
 
-  MaterialStateProperty<Color?> get _buttonN100CardBackgroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get _buttonN100CardBackgroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN100.withOpacity(0.5);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorN99;
       }
       return colorN100;
     },
   );
 
-  MaterialStateProperty<Color?> get _buttonN100CardForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get _buttonN100CardForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN20;
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorN30;
       }
       return colorN30;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP10StickyBackgroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP10StickyBackgroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN95;
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP20;
       }
       return colorP10;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP10StickyForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP10StickyForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorN60;
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorN100;
       }
       return colorN100;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP99OpacityBackgroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP99OpacityBackgroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorP99.withOpacity(0.24);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP95;
       }
       return colorP99.withOpacity(0.6);
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP99OpacityForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP99OpacityForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorP20.withOpacity(0.4);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP20;
       }
       return colorP20;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonOutlinedP10ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonOutlinedP10ForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorP10.withOpacity(0.4);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP10;
       }
       return colorP10;
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP95Opacity60BackgroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP95Opacity60BackgroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorP95.withOpacity(0.24);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP95;
       }
       return colorP95.withOpacity(0.6);
     },
   );
 
-  MaterialStateProperty<Color?> get buttonP95Opacity60ForegroundColor => MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<Color?> get buttonP95Opacity60ForegroundColor => WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return colorP20.withOpacity(0.4);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return colorP20;
       }
       return colorP20;
     },
   );
 
-  MaterialStateProperty<BorderSide?> get buttonOutlinedP10BorderColor => MaterialStateProperty.resolveWith<BorderSide?>(
-        (Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+  WidgetStateProperty<BorderSide?> get buttonOutlinedP10BorderColor => WidgetStateProperty.resolveWith<BorderSide?>(
+        (Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return BorderSide(color: colorP10.withOpacity(0.4), width: 1.0);
-      } else if (states.contains(MaterialState.pressed)) {
+      } else if (states.contains(WidgetState.pressed)) {
         return BorderSide(color: colorP10, width: 1.0);
       }
       return BorderSide(color: colorP10, width: 1.0);
@@ -448,73 +445,73 @@ extension BuildContextButtonStyleExtension on BuildContext {
   );
 
   ButtonStyle get buttonStyle32P10Fitted =>
-      buttonStyle32P10.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 32)));
+      buttonStyle32P10.copyWith(minimumSize: const WidgetStatePropertyAll(Size(0, 32)));
 
   ButtonStyle get buttonStyle32P10Opacity60 => buttonStyle32P10.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return colorP10.withOpacity(0.24);
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return colorP95;
         }
         return colorP10.withOpacity(0.6);
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP20),
+    foregroundColor: WidgetStateProperty.all(colorP20),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(
         appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP20)),
   );
 
   ButtonStyle get buttonStyle32TransparentFittedOutlined => buttonStyle32P10.copyWith(
-      backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
-      padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(16, 4, 16, 4)),
-      side: MaterialStateProperty.all(BorderSide(color: colorP10, width: 1.0)),
-      minimumSize: const MaterialStatePropertyAll(Size(0, 32)));
+      backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+      padding: const WidgetStatePropertyAll(EdgeInsets.fromLTRB(16, 4, 16, 4)),
+      side: WidgetStateProperty.all(BorderSide(color: colorP10, width: 1.0)),
+      minimumSize: const WidgetStatePropertyAll(Size(0, 32)));
 
   ButtonStyle get buttonStyle32IconP10 => buttonStyle32P10.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return colorN99.withOpacity(0.5);
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return colorP99;
         }
         return colorP99;
       },
     ),
-    foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return colorN60.withOpacity(0.5);
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return colorP10;
         }
         return colorP10;
       },
     ),
-    minimumSize: const MaterialStatePropertyAll(Size(32, 32)),
-    padding: const MaterialStatePropertyAll(EdgeInsets.all(8)),
+    minimumSize: const WidgetStatePropertyAll(Size(32, 32)),
+    padding: const WidgetStatePropertyAll(EdgeInsets.all(8)),
   );
 
   ButtonStyle get buttonStyle32N40 => buttonStyle32P10.copyWith(
-      minimumSize: const MaterialStatePropertyAll(Size(double.minPositive, 32)),
-      backgroundColor: MaterialStatePropertyAll(colorN100),
-      foregroundColor: MaterialStatePropertyAll(colorN40),
-      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN40)));
+      minimumSize: const WidgetStatePropertyAll(Size(double.minPositive, 32)),
+      backgroundColor: WidgetStatePropertyAll(colorN100),
+      foregroundColor: WidgetStatePropertyAll(colorN40),
+      side: WidgetStatePropertyAll(BorderSide(width: 1, color: colorN40)));
 
   ButtonStyle get buttonStyle32N40Filled => buttonStyle32P10.copyWith(
-      minimumSize: const MaterialStatePropertyAll(Size(double.minPositive, 32)),
-      backgroundColor: MaterialStatePropertyAll(colorN40),
-      foregroundColor: MaterialStatePropertyAll(colorN40),
-      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN40)));
+      minimumSize: const WidgetStatePropertyAll(Size(double.minPositive, 32)),
+      backgroundColor: WidgetStatePropertyAll(colorN40),
+      foregroundColor: WidgetStatePropertyAll(colorN40),
+      side: WidgetStatePropertyAll(BorderSide(width: 1, color: colorN40)));
 
   ///36
   ButtonStyle get buttonStyle36P10 =>
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 36), padding: const EdgeInsets.fromLTRB(16, 6, 16, 6));
 
   ButtonStyle get buttonStyle36P10FittedShrinkWrap => buttonStyle36P10.copyWith(
-    minimumSize: const MaterialStatePropertyAll(Size(0, 36)),
+    minimumSize: const WidgetStatePropertyAll(Size(0, 36)),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
@@ -525,24 +522,24 @@ extension BuildContextButtonStyleExtension on BuildContext {
       );
 
   ButtonStyle get buttonStyle40P50Toggle => buttonStyle40P10.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorP20), foregroundColor: MaterialStatePropertyAll(colorN100));
+      backgroundColor: WidgetStatePropertyAll(colorP20), foregroundColor: WidgetStatePropertyAll(colorN100));
 
   ButtonStyle get buttonStyle40N99Toggle => buttonStyle40P10.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorN99), foregroundColor: MaterialStatePropertyAll(colorN60));
+      backgroundColor: WidgetStatePropertyAll(colorN99), foregroundColor: WidgetStatePropertyAll(colorN60));
 
   ButtonStyle get buttonStyle40ToggleOn => buttonStyle40P10.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorP99),
-      foregroundColor: MaterialStatePropertyAll(colorP20),
-      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorP20)));
+      backgroundColor: WidgetStatePropertyAll(colorP99),
+      foregroundColor: WidgetStatePropertyAll(colorP20),
+      side: WidgetStatePropertyAll(BorderSide(width: 1, color: colorP20)));
 
   ButtonStyle get buttonStyle40ToggleOff => buttonStyle40P10.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorN100),
-      foregroundColor: MaterialStatePropertyAll(colorN60),
-      side: MaterialStatePropertyAll(BorderSide(width: 1, color: colorN95)));
+      backgroundColor: WidgetStatePropertyAll(colorN100),
+      foregroundColor: WidgetStatePropertyAll(colorN60),
+      side: WidgetStatePropertyAll(BorderSide(width: 1, color: colorN95)));
 
   ButtonStyle get buttonStyle40ToggleDisabled => buttonStyle40P10.copyWith(
-      backgroundColor: MaterialStatePropertyAll(colorN99.withOpacity(0.4)),
-      foregroundColor: MaterialStatePropertyAll(colorN60.withOpacity(0.4)));
+      backgroundColor: WidgetStatePropertyAll(colorN99.withOpacity(0.4)),
+      foregroundColor: WidgetStatePropertyAll(colorN60.withOpacity(0.4)));
 
   ButtonStyle get buttonStyle40P99Opacity => buttonStyle40P10.copyWith(
     backgroundColor: buttonP99OpacityBackgroundColor,
@@ -550,7 +547,7 @@ extension BuildContextButtonStyleExtension on BuildContext {
   );
 
   ButtonStyle get buttonStyle40P10FittedShrinkWrap => buttonStyle32P10.copyWith(
-    minimumSize: const MaterialStatePropertyAll(Size(0, 40)),
+    minimumSize: const WidgetStatePropertyAll(Size(0, 40)),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
@@ -566,12 +563,12 @@ extension BuildContextButtonStyleExtension on BuildContext {
 
   ButtonStyle get buttonStyle40P10Outlined => buttonStyle40P10.copyWith(
     side: buttonOutlinedP10BorderColor,
-    backgroundColor: MaterialStateProperty.all(Colors.transparent),
+    backgroundColor: WidgetStateProperty.all(Colors.transparent),
     foregroundColor: buttonOutlinedP10ForegroundColor,
   );
 
   ButtonStyle get buttonStyle40P10FittedOutlinedShrinkWrap => buttonStyle40P10Outlined.copyWith(
-    minimumSize: const MaterialStatePropertyAll(Size(0, 40)),
+    minimumSize: const WidgetStatePropertyAll(Size(0, 40)),
   );
 
   ///48
@@ -579,48 +576,48 @@ extension BuildContextButtonStyleExtension on BuildContext {
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 48), padding:const EdgeInsets.fromLTRB(16, 12, 16, 12));
 
   ButtonStyle get buttonStyle48P10Fitted =>
-      buttonStyle48P10.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+      buttonStyle48P10.copyWith(minimumSize: const WidgetStatePropertyAll(Size(0, 48)));
 
   ButtonStyle get buttonStyle48P10FittedOutlined =>
-      buttonStyle40P10Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+      buttonStyle40P10Outlined.copyWith(minimumSize: const WidgetStatePropertyAll(Size(0, 48)));
 
   ButtonStyle get buttonStyle48P10TransparentFittedOutlined =>
-      buttonStyle40P10Outlined.copyWith(minimumSize: const MaterialStatePropertyAll(Size(0, 48)));
+      buttonStyle40P10Outlined.copyWith(minimumSize: const WidgetStatePropertyAll(Size(0, 48)));
 
   ButtonStyle get buttonStyle48P10Text => buttonStyle48P10.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return colorN100;
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return colorN100;
         }
         return colorN100;
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP10),
+    foregroundColor: WidgetStateProperty.all(colorP10),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(appTextTheme.titleMedium!
         .copyWith(fontWeight: FontWeight.w500, color: colorP10, decoration: TextDecoration.underline)),
   );
 
   ButtonStyle get buttonStyle48BottomSheetText => buttonStyle48P10Text.copyWith(
-    foregroundColor: MaterialStateProperty.all(colorBottomSheetDefaultText),
+    foregroundColor: WidgetStateProperty.all(colorBottomSheetDefaultText),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(appTextTheme.titleMedium!.copyWith(
         fontWeight: FontWeight.w500, color: colorBottomSheetDefaultText, decoration: TextDecoration.underline)),
   );
 
   ButtonStyle get buttonStyle48P10FittedOpacity60 => buttonStyle48P10Fitted.copyWith(
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return colorP10.withOpacity(0.24);
-        } else if (states.contains(MaterialState.pressed)) {
+        } else if (states.contains(WidgetState.pressed)) {
           return colorP95;
         }
         return colorP10.withOpacity(0.6);
       },
     ),
-    foregroundColor: MaterialStateProperty.all(colorP20),
+    foregroundColor: WidgetStateProperty.all(colorP20),
     textStyle: ButtonStyleButton.allOrNull<TextStyle?>(
         appTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w500, color: colorP20)),
   );
@@ -632,7 +629,7 @@ extension BuildContextButtonStyleExtension on BuildContext {
 
   ButtonStyle get buttonStyle48P10Outlined => buttonStyle48N100.copyWith(
     side: buttonOutlinedP10BorderColor,
-    backgroundColor: MaterialStateProperty.all(colorN100),
+    backgroundColor: WidgetStateProperty.all(colorN100),
     foregroundColor: buttonOutlinedP10ForegroundColor,
   );
 
@@ -641,12 +638,12 @@ extension BuildContextButtonStyleExtension on BuildContext {
       FilledButton.styleFrom(minimumSize: const Size(double.infinity, 56), padding: const EdgeInsets.fromLTRB(16, 12, 16, 12));
 
   ButtonStyle get buttonStyle56P10Square => buttonStyle56P10.copyWith(
-      padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
-      shape: const MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))));
+      padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
+      shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))));
 
   ButtonStyle get buttonStyle56P10SquareSafeArea => buttonStyle56P10Square.copyWith(
-    minimumSize: const MaterialStatePropertyAll(Size(double.infinity, (56 + 16))),
-    padding: const MaterialStatePropertyAll(EdgeInsets.fromLTRB(0, 20, 0, 16 + 16)),
+    minimumSize: const WidgetStatePropertyAll(Size(double.infinity, (56 + 16))),
+    padding: const WidgetStatePropertyAll(EdgeInsets.fromLTRB(0, 20, 0, 16 + 16)),
   );
 
   // 배경 N100, 글씨 N30 컬러 버튼
@@ -668,14 +665,14 @@ extension BuildContextButtonStyleExtension on BuildContext {
   ButtonStyle get buttonStyle56N100TopSquare => buttonStyle56P10Square.copyWith(
     backgroundColor: _buttonN100BackgroundColor,
     foregroundColor: _buttonN100P10ForegroundColor,
-    shape: const MaterialStatePropertyAll(RoundedRectangleBorder(
+    shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)))),
   );
   //
   // ButtonStyle get buttonStyle56N100SquareSafeArea => buttonStyle56N100Square.copyWith(
-  //   minimumSize: MaterialStatePropertyAll(
+  //   minimumSize: WidgetStatePropertyAll(
   //       Size(double.infinity, ((paddingBottom > 0 && viewInsetBottom < 100) ? 56 + 16 : 56))),
-  //   padding: MaterialStatePropertyAll(
+  //   padding: WidgetStatePropertyAll(
   //       EdgeInsets.fromLTRB(0, 20, 0, (paddingBottom > 0 && viewInsetBottom < 100) ? 16 + 16 : 16)),
   // );
 
@@ -685,15 +682,15 @@ extension BuildContextButtonStyleExtension on BuildContext {
   );
 
   ButtonStyle get buttonStyle64P10Square => buttonStyle64P10.copyWith(
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 20)),
-    shape: const MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))),
-    textStyle: MaterialStatePropertyAll(textStyleH16m),
+    padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20)),
+    shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero))),
+    textStyle: WidgetStatePropertyAll(textStyleH16m),
   );
   //
   // ButtonStyle get buttonStyle64P10SquareSafeArea => buttonStyle64P10Square.copyWith(
-  //   minimumSize: MaterialStatePropertyAll(
+  //   minimumSize: WidgetStatePropertyAll(
   //       Size(double.infinity, ((paddingBottom > 0 && viewInsetBottom < 100) ? 64 + 16 : 64))),
-  //   padding: MaterialStatePropertyAll(
+  //   padding: WidgetStatePropertyAll(
   //       EdgeInsets.fromLTRB(0, 20, 0, (paddingBottom > 0 && viewInsetBottom < 100) ? 20 + 16 : 20)),
   //   foregroundColor: buttonP10StickyForegroundColor,
   //   backgroundColor: buttonP10StickyBackgroundColor,
@@ -702,13 +699,13 @@ extension BuildContextButtonStyleExtension on BuildContext {
   // ButtonStyle get buttonStyle64N100Square => buttonStyle64P10Square.copyWith(
   //   backgroundColor: _buttonN100BackgroundColor,
   //   foregroundColor: _buttonN100P10ForegroundColor,
-  //   textStyle: MaterialStatePropertyAll(textStyleH16m),
+  //   textStyle: WidgetStatePropertyAll(textStyleH16m),
   // );
   //
   // ButtonStyle get buttonStyle64N100SquareSafeArea => buttonStyle64N100Square.copyWith(
-  //   minimumSize: MaterialStatePropertyAll(
+  //   minimumSize: WidgetStatePropertyAll(
   //       Size(double.infinity, ((paddingBottom > 0 && viewInsetBottom < 100) ? 64 + 16 : 64))),
-  //   padding: MaterialStatePropertyAll(
+  //   padding: WidgetStatePropertyAll(
   //       EdgeInsets.fromLTRB(0, 20, 0, (paddingBottom > 0 && viewInsetBottom < 100) ? 20 + 16 : 20)),
   // );
 }

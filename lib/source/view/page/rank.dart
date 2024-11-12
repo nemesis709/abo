@@ -13,17 +13,33 @@ import 'package:abo/ui/theme/text_theme.dart';
 import 'package:abo/ui/widget/default_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class RankPage extends HookWidget {
+class RankPage extends ConsumerStatefulWidget {
   const RankPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = useTabController(initialLength: 2);
+  ConsumerState<RankPage> createState() => _RankPageState();
+}
 
+class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderStateMixin{
+  late TabController controller;
+
+  @override
+  void initState() {
+    controller = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -60,7 +76,7 @@ class RankPage extends HookWidget {
   }
 }
 
-class _ManagerRank extends HookConsumerWidget {
+class _ManagerRank extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LoadableContent(
@@ -85,7 +101,7 @@ class _ManagerRank extends HookConsumerWidget {
   }
 }
 
-class _PlayerRank extends HookConsumerWidget {
+class _PlayerRank extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LoadableContent(
@@ -135,7 +151,7 @@ class _PlayerRank extends HookConsumerWidget {
   }
 }
 
-class _DisplayRank extends HookConsumerWidget {
+class _DisplayRank extends ConsumerWidget {
   const _DisplayRank({required this.list});
 
   final List<String> list;
@@ -169,7 +185,7 @@ class _DisplayRank extends HookConsumerWidget {
   }
 }
 
-class _PlayerItem extends HookWidget {
+class _PlayerItem extends StatelessWidget {
   const _PlayerItem({required this.playerInfo, required this.isPitcher});
 
   final PlayerModel playerInfo;

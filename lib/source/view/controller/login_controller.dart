@@ -1,7 +1,7 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/logger/logger.dart';
-import 'package:abo/source/service/auth_service.dart';
+import 'package:abo/source/repository/auth_repository.dart';
 import 'package:abo/ui/route/app_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,7 +12,7 @@ part 'login_controller.g.dart';
 class LoginController extends _$LoginController {
   @override
   FutureOr<User?> build() async {
-    AuthService.instance.userState().listen((user) {
+    AuthRepository.instance.userState().listen((user) {
       if (user != null) {
         ref.route.replace(const HomeRoute());
       }
@@ -22,7 +22,7 @@ class LoginController extends _$LoginController {
   }
 
   Future<User?> initAuth() async {
-    final user = await AuthService.instance.currentUser();
+    final user = await AuthRepository.instance.currentUser();
 
     // if (user != null) {
     //   ref.route.replace(const HomeRoute());
@@ -33,7 +33,7 @@ class LoginController extends _$LoginController {
 
   Future<bool> signIn(String email, String pw, bool persistent) async {
     final credential = await ref.runInProgress(() async {
-      return AuthService.instance.signIn(email, pw, persistent);
+      return AuthRepository.instance.signIn(email, pw, persistent);
     });
 
     return credential.when(success: (data) {
@@ -52,7 +52,7 @@ class LoginController extends _$LoginController {
 
   signUp(String email, String pw, String name) async {
     final credential = await ref.runInProgress(() async {
-      return AuthService.instance.signUp(email, pw, name);
+      return AuthRepository.instance.signUp(email, pw, name);
     });
 
     return credential.when(success: (data) {

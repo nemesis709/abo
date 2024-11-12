@@ -8,9 +8,11 @@ class AboToast {
   AboToast._privateConstructor();
 
   static final AboToast _instance = AboToast._privateConstructor();
+
   static AboToast get instance => _instance;
 
-  void showToast(BuildContext? context, dynamic message, {ToastBuilder? toastBuilder}) {
+  void showToast(BuildContext? context, dynamic message,
+      {ToastBuilder? toastBuilder}) {
     if (context == null || !context.mounted) {
       return;
     }
@@ -24,20 +26,19 @@ class AboToast {
     }
 
     FToast().init(context).showToast(
-      child: toastBuilder != null
-          ? toastBuilder(context, message.toString())
-          : _HansToastWidget(message: message.toString()),
-      gravity: ToastGravity.BOTTOM,
-      toastDuration: const Duration(seconds: 5),
-    );
+          child: toastBuilder != null
+              ? toastBuilder(context, message.toString())
+              : _HansToastWidget(message: message.toString()),
+          gravity: ToastGravity.BOTTOM,
+          toastDuration: const Duration(seconds: 5),
+        );
   }
 }
 
 class _HansToastWidget extends StatelessWidget {
   const _HansToastWidget({
-    Key? key,
     required this.message,
-  }) : super(key: key);
+  });
 
   final String message;
 
@@ -51,10 +52,12 @@ class _HansToastWidget extends StatelessWidget {
       ),
       child: Text(
         message.toString(),
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+        style: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: Theme.of(context).colorScheme.onPrimary),
       ),
     );
-    ;
   }
 }
 
@@ -74,7 +77,9 @@ TransitionBuilder AboToastBuilder() {
 /// which returns the Directionality widget with [TextDirection.ltr]
 /// and [Overlay] widget
 class _AboToastHolder extends StatelessWidget {
-  const _AboToastHolder({Key? key, required this.child}) : super(key: key);
+  const _AboToastHolder({
+    required this.child,
+  });
 
   final Widget child;
 

@@ -1,5 +1,5 @@
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/service/player_service.dart';
+import 'package:abo/source/repository/player_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'player_controller.g.dart';
@@ -18,17 +18,17 @@ class PlayerController extends _$PlayerController {
   }
 
   Future<List<PlayerModel>> getPitcherList() async {
-    final result = await PlayerService.instance.getPitcherList();
+    final result = await PlayerRepository.instance.getPitcherList();
     return result.valueOrNull ?? [];
   }
 
   Future<List<PlayerModel>> getBatterList() async {
-    final result = await PlayerService.instance.getBatterList();
+    final result = await PlayerRepository.instance.getBatterList();
     return result.valueOrNull ?? [];
   }
 
   Future<List<PlayerModel>> getAllPlayerList() async {
-    final result = await PlayerService.instance.getAllPlayerList();
+    final result = await PlayerRepository.instance.getAllPlayerList();
     return result.valueOrNull ?? [];
   }
 }

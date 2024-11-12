@@ -2,39 +2,63 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/view/controller/login_controller.dart';
-import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class SignUpPage extends HookConsumerWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final emailController = useTextEditingController();
-    final nameController = useTextEditingController();
-    final passwordController = useTextEditingController();
+  ConsumerState<SignUpPage> createState() => _SignUpPageState();
+}
 
-    final emailFocusNode = useFocusNode();
-    final nameFocusNode = useFocusNode();
-    final passwordFocusNode = useFocusNode();
+class _SignUpPageState extends ConsumerState<SignUpPage> {
+  late final TextEditingController emailController;
+  late final TextEditingController nameController;
+  late final TextEditingController passwordController;
 
-    useEffect(() {
-      nameFocusNode.requestFocus();
-      return;
-    }, []);
+  late final FocusNode emailFocusNode;
+  late final FocusNode nameFocusNode;
+  late final FocusNode passwordFocusNode;
 
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    nameController = TextEditingController();
+    passwordController = TextEditingController();
+
+    emailFocusNode = FocusNode();
+    nameFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+
+    emailFocusNode.dispose();
+    nameFocusNode.dispose();
+    passwordFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final asyncValue = ref.watch(loginControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: ()=> context.popRoute(),
+          onTap: () => context.router.back(),
           child: Icon(
             Icons.close,
             color: context.colorP10,
@@ -72,6 +96,7 @@ class SignUpPage extends HookConsumerWidget {
                         width: context.sizeWidth,
                         height: 40,
                         child: TextFormField(
+                          autofocus: true,
                           controller: emailController,
                           focusNode: emailFocusNode,
                           keyboardType: TextInputType.visiblePassword,

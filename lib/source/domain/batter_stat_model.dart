@@ -1,17 +1,17 @@
 class BatterStatModel {
   final String id;
   final double avg;
-  final int game;
-  final int hit;
-  final int hr;
-  final int bb;
+  final double game;
+  final double hit;
+  final double hr;
+  final double bb;
   final double obp;
   final double ops;
-  final int pa;
-  final int rbi;
-  final int sb;
+  final double pa;
+  final double rbi;
+  final double sb;
   final double slg;
-  final int so;
+  final double so;
   final double war;
 
   BatterStatModel({
@@ -52,17 +52,17 @@ class BatterStatModel {
     return BatterStatModel(
       id: json['id'],
       avg: double.parse(json['avg']),
-      game: int.parse(json['game']),
-      hit: int.parse(json['hit']),
-      hr: int.parse(json['hr']),
-      bb: int.parse(json['bb']),
+      game: double.parse(json['game']),
+      hit: double.parse(json['hit']),
+      hr: double.parse(json['hr']),
+      bb: double.parse(json['bb']),
       obp: double.parse(json['obp']),
       ops: double.parse(json['ops']),
-      pa: int.parse(json['pa']),
-      rbi: int.parse(json['rbi']),
-      sb: int.parse(json['sb']),
+      pa: double.parse(json['pa']),
+      rbi: double.parse(json['rbi']),
+      sb: double.parse(json['sb']),
       slg: double.parse(json['slg']),
-      so: int.parse(json['so']),
+      so: double.parse(json['so']),
       war: double.parse(json['war']),
     );
   }

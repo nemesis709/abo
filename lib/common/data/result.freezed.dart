@@ -12,7 +12,7 @@ part of 'result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Result<T> {
@@ -71,6 +71,9 @@ class _$ResultCopyWithImpl<T, $Res, $Val extends Result<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -90,6 +93,8 @@ class __$$ResultSuccessImplCopyWithImpl<T, $Res>
       $Res Function(_$ResultSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,7 +123,7 @@ class _$ResultSuccessImpl<T> extends ResultSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResultSuccessImpl<T> &&
@@ -129,7 +134,9 @@ class _$ResultSuccessImpl<T> extends ResultSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResultSuccessImplCopyWith<T, _$ResultSuccessImpl<T>> get copyWith =>
@@ -204,7 +211,10 @@ abstract class ResultSuccess<T> extends Result<T> {
   const ResultSuccess._() : super._();
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResultSuccessImplCopyWith<T, _$ResultSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -226,6 +236,8 @@ class __$$ResultFailureImplCopyWithImpl<T, $Res>
       $Res Function(_$ResultFailureImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -258,7 +270,7 @@ class _$ResultFailureImpl<T> extends ResultFailure<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResultFailureImpl<T> &&
@@ -271,7 +283,9 @@ class _$ResultFailureImpl<T> extends ResultFailure<T> {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(error), stackTrace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResultFailureImplCopyWith<T, _$ResultFailureImpl<T>> get copyWith =>
@@ -349,7 +363,10 @@ abstract class ResultFailure<T> extends Result<T> {
 
   Object get error;
   StackTrace? get stackTrace;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResultFailureImplCopyWith<T, _$ResultFailureImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

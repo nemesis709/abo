@@ -1,6 +1,6 @@
 import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/data/result.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// AsyncValue 에 대한 확장 메서드를 제공한다.
 extension AsyncValueExtensions<T> on AsyncValue<T> {

@@ -13,11 +13,10 @@ import 'package:abo/ui/theme/text_theme.dart';
 import 'package:abo/ui/widget/default_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class MainPage extends HookWidget {
+class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
@@ -46,7 +45,7 @@ class MainPage extends HookWidget {
   }
 }
 
-class _RankBoard extends HookWidget {
+class _RankBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -103,7 +102,7 @@ class _RankBoard extends HookWidget {
   }
 }
 
-class _ManagerRank extends HookConsumerWidget {
+class _ManagerRank extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LoadableContent(
@@ -139,7 +138,7 @@ class _ManagerRank extends HookConsumerWidget {
   }
 }
 
-class _PlayerRank extends HookConsumerWidget {
+class _PlayerRank extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LoadableContent(
@@ -175,7 +174,7 @@ class _PlayerRank extends HookConsumerWidget {
   }
 }
 
-class _PlayerItem extends HookWidget {
+class _PlayerItem extends StatelessWidget {
   const _PlayerItem({required this.playerInfo, required this.isPitcher});
 
   final PlayerModel playerInfo;
@@ -224,13 +223,31 @@ class _PlayerItem extends HookWidget {
   }
 }
 
-class _ScoreBoard extends HookWidget {
+class _ScoreBoard extends StatefulWidget {
+  @override
+  State<_ScoreBoard> createState() => _ScoreBoardState();
+}
+
+class _ScoreBoardState extends State<_ScoreBoard> with SingleTickerProviderStateMixin{
+  late AnimationController controller;
+  bool tap = false;
+
+
+@override
+  void initState() {
+    controller = AnimationController(vsync: this, value: 1);
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final tap = useState(false);
-
-    final controller = useAnimationController(initialValue: 1);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
@@ -241,7 +258,7 @@ class _ScoreBoard extends HookWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: AnimatedSwitcher(
-            duration: Durations.ms300,
+            duration: DurationConst.ms300,
             transitionBuilder: (Widget child, Animation<double> animation) {
               return SizeTransition(
                 sizeFactor: CurvedAnimation(
@@ -252,7 +269,7 @@ class _ScoreBoard extends HookWidget {
                 child: child,
               );
             },
-            child: tap.value == true
+            child: tap == true
                 ? Column(
                     children: [
                       Row(
@@ -262,7 +279,9 @@ class _ScoreBoard extends HookWidget {
                               style: context.textStyleT12b
                                   .copyWith(color: context.colorP10)),
                           IconButton(
-                              onPressed: () => tap.value = !tap.value,
+                              onPressed: () => setState(() {
+                                tap = !tap;
+                              }),
                               icon: Icon(Icons.keyboard_arrow_down)),
                         ],
                       ),
@@ -285,7 +304,9 @@ class _ScoreBoard extends HookWidget {
                               style: context.textStyleT12b
                                   .copyWith(color: context.colorP10)),
                           IconButton(
-                              onPressed: () => tap.value = !tap.value,
+                              onPressed: () => setState(() {
+                                tap = !tap;
+                              }),
                               icon: Icon(Icons.keyboard_arrow_up)),
                         ],
                       ),
@@ -333,7 +354,7 @@ class _ScoreBoard extends HookWidget {
   }
 }
 
-class _ScoreView extends HookWidget {
+class _ScoreView extends StatelessWidget {
   const _ScoreView({
     required this.home,
     required this.away,
@@ -362,9 +383,9 @@ class _ScoreView extends HookWidget {
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: Center(child: Text('와이드너'))),
+            Expanded(child: Center(child: Text('소크라테스'))),
             Spacer(flex: 3),
-            Expanded(child: Center(child: Text('와이드너'))),
+            Expanded(child: Center(child: Text('소크라테스'))),
           ],
         )
       ],
@@ -372,7 +393,7 @@ class _ScoreView extends HookWidget {
   }
 }
 
-class _TradeBoard extends HookWidget {
+class _TradeBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -4,7 +4,7 @@ import 'package:abo/common/data/server_error.dart';
 import 'package:abo/common/logger/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 enum AppErrorType {
   network,
@@ -93,7 +93,7 @@ class ApiError {
           type = AppErrorType.unknown;
       }
 
-      if (error.type != DioErrorType.badResponse) {
+      if (error.type != DioExceptionType.badResponse) {
         serverError = null;
       }
     } else {

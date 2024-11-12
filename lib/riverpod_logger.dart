@@ -1,5 +1,5 @@
 import 'package:abo/common/logger/logger.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 class RiverpodLogger extends ProviderObserver {
   @override

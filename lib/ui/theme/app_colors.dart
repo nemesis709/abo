@@ -61,6 +61,16 @@ class AppColors {
     required this.green,
     required this.grass,
     required this.g30,
+    required this.tcKiwoom,
+    required this.tcDoosan,
+    required this.tcLG,
+    required this.tcKia,
+    required this.tcLotte,
+    required this.tcSSG,
+    required this.tcSamsung,
+    required this.tcKT,
+    required this.tcHanhwa,
+    required this.tcNC,
   });
 
   factory AppColors.light() {
@@ -120,6 +130,16 @@ class AppColors {
       green: Color(0xff45BE75),
       grass: Color(0xffB8DC53),
       g30: Color(0xff7b8aff),
+      tcKiwoom: Color(0xff570514),
+      tcDoosan: Color(0xff131230),
+      tcLG: Color(0xffC30452),
+      tcKia: Color(0xffEA0029),
+      tcLotte: Color(0xff041E42),
+      tcSSG: Color(0xffCE0E2D),
+      tcSamsung: Color(0xff074CA1),
+      tcKT: Color(0xff000000),
+      tcHanhwa: Color(0xffFF6600),
+      tcNC: Color(0xff315288),
     );
   }
 
@@ -182,6 +202,17 @@ class AppColors {
   final Color green;
   final Color grass;
   final Color g30;
+
+  final Color tcKiwoom;
+  final Color tcDoosan;
+  final Color tcLG;
+  final Color tcKia;
+  final Color tcLotte;
+  final Color tcSSG;
+  final Color tcSamsung;
+  final Color tcKT;
+  final Color tcHanhwa;
+  final Color tcNC;
 }
 
 /// Custom color theme를 정의한 클래스
@@ -224,7 +255,8 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
       verticalDividerColor: verticalDividerColor ?? this.verticalDividerColor,
       headerColor: headerColor ?? this.headerColor,
       shimmerBaseColor: shimmerBaseColor ?? this.shimmerBaseColor,
-      shimmerHighlightColor: shimmerHighlightColor ?? this.shimmerHighlightColor,
+      shimmerHighlightColor:
+          shimmerHighlightColor ?? this.shimmerHighlightColor,
       holidayColor: holidayColor ?? this.holidayColor,
       saturdayColor: saturdayColor ?? this.saturdayColor,
       shadowColor: shadowColor ?? this.shadowColor,
@@ -232,16 +264,19 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
   }
 
   @override
-  ThemeExtension<CustomColorTheme> lerp(ThemeExtension<CustomColorTheme>? other, double t) {
+  ThemeExtension<CustomColorTheme> lerp(
+      ThemeExtension<CustomColorTheme>? other, double t) {
     if (other is! CustomColorTheme) {
       return this;
     }
     return CustomColorTheme(
       appColors: appColors,
-      verticalDividerColor: Color.lerp(verticalDividerColor, other.verticalDividerColor, t),
+      verticalDividerColor:
+          Color.lerp(verticalDividerColor, other.verticalDividerColor, t),
       headerColor: Color.lerp(headerColor, other.headerColor, t),
       shimmerBaseColor: Color.lerp(shimmerBaseColor, other.shimmerBaseColor, t),
-      shimmerHighlightColor: Color.lerp(shimmerHighlightColor, other.shimmerHighlightColor, t),
+      shimmerHighlightColor:
+          Color.lerp(shimmerHighlightColor, other.shimmerHighlightColor, t),
       holidayColor: Color.lerp(holidayColor, other.holidayColor, t),
       saturdayColor: Color.lerp(saturdayColor, other.saturdayColor, t),
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t),
@@ -261,7 +296,8 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
 }
 
 extension BuildContextCustomColorExtension on BuildContext {
-  CustomColorTheme get customColorTheme => Theme.of(this).extension<CustomColorTheme>() ?? CustomColorTheme.light;
+  CustomColorTheme get customColorTheme =>
+      Theme.of(this).extension<CustomColorTheme>() ?? CustomColorTheme.light;
 
   Color get verticalDividerColor => customColorTheme.verticalDividerColor!;
 
@@ -388,6 +424,26 @@ extension BuildContextCustomColorExtension on BuildContext {
   Color get colorGrass => customColorTheme.appColors.grass;
 
   Color get colorG30 => customColorTheme.appColors.g30;
+
+  Color get colorTCKiwoom => customColorTheme.appColors.tcKiwoom;
+
+  Color get colorTCDoosan => customColorTheme.appColors.tcDoosan;
+
+  Color get colorTCHanhwa => customColorTheme.appColors.tcHanhwa;
+
+  Color get colorTCKia => customColorTheme.appColors.tcKia;
+
+  Color get colorTCKT => customColorTheme.appColors.tcKT;
+
+  Color get colorTCLG => customColorTheme.appColors.tcLG;
+
+  Color get colorTCLotte => customColorTheme.appColors.tcLotte;
+
+  Color get colorTCNC => customColorTheme.appColors.tcNC;
+
+  Color get colorTCSamsung => customColorTheme.appColors.tcSamsung;
+
+  Color get colorTCSSG => customColorTheme.appColors.tcSSG;
 }
 
 extension ColorWithHSL on Color {
@@ -404,14 +460,16 @@ extension ColorWithHSL on Color {
   Color darken(double amount) {
     assert(amount >= 0 && amount <= 1);
 
-    final hslLight = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    final hslLight =
+        hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
     return hslLight.toColor();
   }
 
   Color lighten(double amount) {
     assert(amount >= 0 && amount <= 1);
 
-    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final hslLight =
+        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
     return hslLight.toColor();
   }
 

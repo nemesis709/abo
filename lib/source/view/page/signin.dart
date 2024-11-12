@@ -1,6 +1,5 @@
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
-import 'package:abo/common/listenable_listener_hook.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/view/controller/login_controller.dart';
 import 'package:abo/ui/route/app_router.dart';
@@ -8,31 +7,56 @@ import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class SignInPage extends HookConsumerWidget {
+class SignInPage extends ConsumerStatefulWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final persistent = useState(false);
+  ConsumerState<SignInPage> createState() => _SignInPageState();
+}
 
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+class _SignInPageState extends ConsumerState<SignInPage> {
+  bool persistent = false;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  late final FocusNode emailFocusNode;
+  late final FocusNode passwordFocusNode;
 
-    final emailFocusNode = useFocusNode();
-    final passwordFocusNode = useFocusNode();
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
 
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
     final asyncValue = ref.watch(loginControllerProvider);
+    if (asyncValue.valueOrNull != null) {
+      emailFocusNode.requestFocus();
+    }
 
-    useEffectAddPostFrameCallback(() {
-      if (asyncValue.valueOrNull != null) {
-        emailFocusNode.requestFocus();
-      }
-      return;
-    }, [asyncValue]);
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final asyncValue = ref.watch(loginControllerProvider);
 
     return Scaffold(
       appBar: AppBar(),
@@ -88,13 +112,17 @@ class SignInPage extends HookConsumerWidget {
                       ),
                       Gap.h16,
                       InkWell(
-                        onTap: () => persistent.value = !persistent.value,
+                        onTap: () => setState(() {
+                          persistent = !persistent;
+                        }),
                         child: Row(
                           children: [
                             Checkbox(
-                                value: persistent.value,
-                                onChanged: (_) =>
-                                    persistent.value = !persistent.value),
+                              value: persistent,
+                              onChanged: (_) => setState(() {
+                                persistent = !persistent;
+                              }),
+                            ),
                             Gap.w8,
                             Text('자동 로그인'),
                           ],
@@ -109,7 +137,7 @@ class SignInPage extends HookConsumerWidget {
                                 .signIn(
                                   emailController.value.text,
                                   passwordController.value.text,
-                                  persistent.value,
+                                  persistent,
                                 );
 
                             if (auth == true && context.mounted) {

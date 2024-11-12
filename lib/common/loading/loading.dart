@@ -1,7 +1,7 @@
 import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/loading/loading_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @immutable
 class Loading {

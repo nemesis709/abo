@@ -6,7 +6,7 @@ part of 'settings_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsHash() => r'ac26fdce9e4ab2cd43465e870b3748a3cdf487b1';
+String _$settingsHash() => r'b4d087d70635c8bad4dc46563fe34771199fc0eb';
 
 /// See also [Settings].
 @ProviderFor(Settings)
@@ -22,4 +22,4 @@ final settingsProvider =
 
 typedef _$Settings = AutoDisposeAsyncNotifier<User?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

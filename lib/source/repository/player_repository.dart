@@ -6,16 +6,18 @@ import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PlayerService implements IService {
-  PlayerService._privateConstructor() {
+class PlayerRepository implements IService {
+  PlayerRepository._privateConstructor() {
     _allPlayerList = SimpleCache<List<PlayerModel>>();
     _pitcherList = SimpleCache<List<PlayerModel>>();
     _batterList = SimpleCache<List<PlayerModel>>();
+    _pitcherStatList = SimpleCache<List<PitcherStatModel>>();
+    _batterStatList = SimpleCache<List<BatterStatModel>>();
   }
 
-  static final PlayerService _instance = PlayerService._privateConstructor();
+  static final PlayerRepository _instance = PlayerRepository._privateConstructor();
 
-  static PlayerService get instance => _instance;
+  static PlayerRepository get instance => _instance;
 
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
@@ -155,5 +157,7 @@ class PlayerService implements IService {
     _allPlayerList.clear();
     _pitcherList.clear();
     _batterList.clear();
+    _pitcherStatList.clear();
+    _batterStatList.clear();
   }
 }

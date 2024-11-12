@@ -70,7 +70,7 @@ class Edge {
   static const EdgeInsets edge32_8 = EdgeInsets.fromLTRB(32, 8, 32, 8);
 }
 
-class Durations {
+class DurationConst {
   static const Duration ms100 = Duration(milliseconds: 100);
   static const Duration ms200 = Duration(milliseconds: 200);
   static const Duration ms300 = Duration(milliseconds: 300);

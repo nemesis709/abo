@@ -7,11 +7,10 @@ import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class BatterStatPage extends HookConsumerWidget {
+class BatterStatPage extends ConsumerWidget {
   const BatterStatPage({
     super.key,
     required this.playerInfo,
@@ -21,6 +20,20 @@ class BatterStatPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final playerColor = switch (playerInfo.team) {
+      '키움' => context.colorTCKiwoom,
+      '한화' => context.colorTCHanhwa,
+      '롯데' => context.colorTCLotte,
+      '두산' => context.colorTCDoosan,
+      '삼성' => context.colorTCSamsung,
+      'LG' => context.colorTCLG,
+      'KIA' => context.colorTCKia,
+      'KT' => context.colorTCKT,
+      'SSG' => context.colorTCSSG,
+      'NC' => context.colorTCNC,
+      String() => context.colorN10,
+    };
+
     return LoadableContent(
         asyncValue: ref.watch(batterStatControllerProvider(playerInfo)),
         content: (asyncValue) {
@@ -61,22 +74,46 @@ class BatterStatPage extends HookConsumerWidget {
                   style:
                       context.textStyleT14r.copyWith(color: context.colorP10)),
               Container(
-                color: context.colorN80,
+                color: playerColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('G'))),
+                        child: Center(
+                            child: Text(
+                          'G',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('AVG'))),
+                        child: Center(
+                            child: Text(
+                          'AVG',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('H'))),
+                        child: Center(
+                            child: Text(
+                          'H',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('HR'))),
+                        child: Center(
+                            child: Text(
+                          'HR',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                   ],
                 ),
               ),
@@ -100,22 +137,46 @@ class BatterStatPage extends HookConsumerWidget {
                 ],
               ),
               Container(
-                color: context.colorN80,
+                color: playerColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('RBI'))),
+                        child: Center(
+                            child: Text(
+                          'RBI',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('SO'))),
+                        child: Center(
+                            child: Text(
+                          'SO',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('BB'))),
+                        child: Center(
+                            child: Text(
+                          'BB',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('SB'))),
+                        child: Center(
+                            child: Text(
+                          'SB',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                   ],
                 ),
               ),
@@ -137,22 +198,46 @@ class BatterStatPage extends HookConsumerWidget {
                 ],
               ),
               Container(
-                color: context.colorN80,
+                color: playerColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('OBP'))),
+                        child: Center(
+                            child: Text(
+                          'OBP',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('SLG'))),
+                        child: Center(
+                            child: Text(
+                          'SLG',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('OPS'))),
+                        child: Center(
+                            child: Text(
+                          'OPS',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                     SizedBox(
                         width: (context.sizeWidth - 64) / 4,
-                        child: const Center(child: Text('WAR'))),
+                        child: Center(
+                            child: Text(
+                          'WAR',
+                          style: context.textStyleB14r.copyWith(
+                            color: context.colorN100,
+                          ),
+                        ))),
                   ],
                 ),
               ),

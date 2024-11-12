@@ -1,20 +1,17 @@
 import 'package:abo/common/data/result.dart';
-import 'package:abo/common/event/event_bus.dart';
-import 'package:abo/common/event/profile_event.dart';
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthService implements IService {
-  AuthService._privateConstructor() {
+class AuthRepository implements IService {
+  AuthRepository._privateConstructor() {
     MainService.instance.registerService(this);
   }
 
-  static final AuthService _instance = AuthService._privateConstructor();
+  static final AuthRepository _instance = AuthRepository._privateConstructor();
 
-  static AuthService get instance => _instance;
+  static AuthRepository get instance => _instance;
 
   static FirebaseAuth auth = FirebaseAuth.instance;
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -65,7 +62,7 @@ class AuthService implements IService {
       await fireStore.collection('user').add(
           {'email': email, 'name': name, 'uid': credential.user?.uid ?? ''});
 
-      eventBus.fire(ProfileEvent());
+      /// TODO alert global
       return credential;
     });
   }

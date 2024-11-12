@@ -5,7 +5,7 @@ import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 final appRouterProvider = Provider<AppRouter>((ref) {
   return AppRouter();
@@ -29,7 +29,7 @@ extension RefEx on Ref {
   }) async {
     try {
       return await future();
-    } catch (error, stack) {
+    } catch (error, _) {
       if (showErrorToast) {
         showToast(error);
       }
@@ -134,9 +134,8 @@ extension RefEx on Ref {
 
 class _PaToastWidget extends StatelessWidget {
   const _PaToastWidget({
-    Key? key,
     required this.message,
-  }) : super(key: key);
+  });
 
   final String message;
 
@@ -153,6 +152,5 @@ class _PaToastWidget extends StatelessWidget {
         style: context.textStyleT14r.copyWith(color: context.colorN100),
       ),
     );
-    ;
   }
 }

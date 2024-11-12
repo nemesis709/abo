@@ -1,23 +1,17 @@
 import 'package:abo/common/cache/simple_cache.dart';
 import 'package:abo/common/data/result.dart';
-import 'package:abo/common/event/event_bus.dart';
-import 'package:abo/common/event/profile_event.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserService implements IService {
-  UserService._privateConstructor() {
-    eventBus.on<ProfileEvent>().listen((event) {
-      _playerList.clear();
-    });
-
+class UserRepository implements IService {
+  UserRepository._privateConstructor() {
     _playerList = SimpleCache<List<UserModel>>();
   }
 
-  static final UserService _instance = UserService._privateConstructor();
+  static final UserRepository _instance = UserRepository._privateConstructor();
 
-  static UserService get instance => _instance;
+  static UserRepository get instance => _instance;
 
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
 

@@ -1,28 +1,44 @@
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
-import 'package:abo/common/listenable_listener_hook.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/controller/player_controller.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
-import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:abo/ui/widget/default_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class PlayerListPage extends HookConsumerWidget {
+class PlayerListPage extends ConsumerStatefulWidget {
   const PlayerListPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useTabController(initialLength: 2);
+  ConsumerState<ConsumerStatefulWidget> createState() => _PlayerListPageState();
 
+}
+
+class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTickerProviderStateMixin {
+
+  late TabController controller;
+
+  @override
+  void initState() {
+    controller = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final pitcher = ref.watch(playerControllerProvider(true));
     final batter = ref.watch(playerControllerProvider(false));
 
@@ -88,7 +104,7 @@ class PlayerListPage extends HookConsumerWidget {
   }
 }
 
-class _PlayerItem extends HookWidget {
+class _PlayerItem extends StatelessWidget {
   const _PlayerItem({required this.playerInfo, required this.isPitcher});
 
   final PlayerModel playerInfo;

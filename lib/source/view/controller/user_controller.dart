@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:abo/common/event/event_bus.dart';
-import 'package:abo/common/event/profile_event.dart';
-import 'package:abo/common/extension/cancel_token_extensions.dart';
 import 'package:abo/source/domain/user_model.dart';
-import 'package:abo/source/service/user_service.dart';
+import 'package:abo/source/repository/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_controller.g.dart';
@@ -22,19 +19,20 @@ class UserController extends _$UserController {
 
   /// 변경 이벤트를 구독한다.
   void _subscribeChangedEvent() {
-    if (_changeEvent == null) {
-      _changeEvent = ref.eventSubscribe<ProfileEvent>(eventBus, (event) async {
-        ref.invalidateSelf();
-      });
-      ref.onDispose(() {
-        _changeEvent = null;
-      });
-    }
+    /// TODO login 이벤트 처리
+    // if (_changeEvent == null) {
+    //   _changeEvent = ref.eventSubscribe<ProfileEvent>(eventBus, (event) async {
+    //     ref.invalidateSelf();
+    //   });
+    //   ref.onDispose(() {
+    //     _changeEvent = null;
+    //   });
+    // }
   }
 
 
   Future<List<UserModel>> getUserList() async {
-    final result = await UserService.instance.getUserList();
+    final result = await UserRepository.instance.getUserList();
     return result.valueOrNull ?? [];
   }
 

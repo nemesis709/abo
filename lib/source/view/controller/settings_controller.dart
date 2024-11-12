@@ -1,7 +1,7 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/logger/logger.dart';
-import 'package:abo/source/service/auth_service.dart';
+import 'package:abo/source/repository/auth_repository.dart';
 import 'package:abo/ui/route/app_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,7 +16,7 @@ class Settings extends _$Settings {
   }
 
   Future<User?> getUser() async {
-    final user = await AuthService.instance.currentUser();
+    final user = await AuthRepository.instance.currentUser();
 
     if (user != null) {
       ref.route.replace(const HomeRoute());
@@ -27,7 +27,7 @@ class Settings extends _$Settings {
 
   Future<bool> signOut() async {
     final credential = await ref.runInProgress(() async {
-      final result = AuthService.instance.signOut();
+      final result = AuthRepository.instance.signOut();
       ref.route.replace(const SignInRoute());
 
       return result;
