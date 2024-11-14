@@ -1,6 +1,9 @@
 import 'package:abo/common/data/result.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
+import 'package:abo/source/domain/user_model.dart';
+import 'package:abo/source/repository/player_repository.dart';
+import 'package:abo/source/repository/user_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -31,8 +34,7 @@ class AuthRepository implements IService {
     });
   }
 
-  Future<Result<UserCredential>> signIn(
-      String email, String pw, bool persistence) async {
+  Future<Result<UserCredential>> signIn(String email, String pw, bool persistence) async {
     return Result.guardFuture(() async {
       final result = await auth.signInWithEmailAndPassword(
         email: email,
@@ -45,12 +47,13 @@ class AuthRepository implements IService {
         auth.setPersistence(Persistence.NONE);
       }
 
+      clearCache();
+
       return result;
     });
   }
 
-  Future<Result<UserCredential>> signUp(
-      String email, String pw, String name) async {
+  Future<Result<UserCredential>> signUp(String email, String pw, String name) async {
     return Result.guardFuture(() async {
       final credential = await auth.createUserWithEmailAndPassword(
         email: email,
@@ -59,14 +62,21 @@ class AuthRepository implements IService {
 
       await auth.currentUser?.updateDisplayName(name);
 
-      await fireStore.collection('user').add(
-          {'email': email, 'name': name, 'uid': credential.user?.uid ?? ''});
+      final userStatModel = UserStatModel.init(credential.user?.uid ?? '');
+      final userModel = UserModel(uid: credential.user?.uid ?? '', email: email, name: name);
 
-      /// TODO alert global
+      await fireStore.collection('user').doc('info').collection('info').add(userModel.toJson());
+      await fireStore.collection('user').doc('info').collection('stat').add(userStatModel.toJson());
+
+      clearCache();
+
       return credential;
     });
   }
 
   @override
-  void clearCache() {}
+  void clearCache() {
+    PlayerRepository.instance.clearCache();
+    UserRepository.instance.clearCache();
+  }
 }

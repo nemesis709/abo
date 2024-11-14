@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'batter_stat_controller.dart';
+part of 'pitcher_stat_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$batterStatControllerHash() =>
-    r'ba9af8998eb42c2cd2203d6eee3e2262cbca62a6';
+String _$pitcherStatControllerHash() =>
+    r'019affbf3ab0a3ecd3f853f6223891cd953474b2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,36 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$BatterStatController
-    extends BuildlessAutoDisposeAsyncNotifier<BatterStatModel> {
+abstract class _$PitcherStatController
+    extends BuildlessAutoDisposeAsyncNotifier<PitcherStatModel> {
   late final PlayerModel playerModel;
 
-  FutureOr<BatterStatModel> build(
+  FutureOr<PitcherStatModel> build(
     PlayerModel playerModel,
   );
 }
 
-/// See also [BatterStatController].
-@ProviderFor(BatterStatController)
-const batterStatControllerProvider = BatterStatControllerFamily();
+/// See also [PitcherStatController].
+@ProviderFor(PitcherStatController)
+const pitcherStatControllerProvider = PitcherStatControllerFamily();
 
-/// See also [BatterStatController].
-class BatterStatControllerFamily extends Family<AsyncValue<BatterStatModel>> {
-  /// See also [BatterStatController].
-  const BatterStatControllerFamily();
+/// See also [PitcherStatController].
+class PitcherStatControllerFamily extends Family<AsyncValue<PitcherStatModel>> {
+  /// See also [PitcherStatController].
+  const PitcherStatControllerFamily();
 
-  /// See also [BatterStatController].
-  BatterStatControllerProvider call(
+  /// See also [PitcherStatController].
+  PitcherStatControllerProvider call(
     PlayerModel playerModel,
   ) {
-    return BatterStatControllerProvider(
+    return PitcherStatControllerProvider(
       playerModel,
     );
   }
 
   @override
-  BatterStatControllerProvider getProviderOverride(
-    covariant BatterStatControllerProvider provider,
+  PitcherStatControllerProvider getProviderOverride(
+    covariant PitcherStatControllerProvider provider,
   ) {
     return call(
       provider.playerModel,
@@ -78,30 +78,31 @@ class BatterStatControllerFamily extends Family<AsyncValue<BatterStatModel>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'batterStatControllerProvider';
+  String? get name => r'pitcherStatControllerProvider';
 }
 
-/// See also [BatterStatController].
-class BatterStatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    BatterStatController, BatterStatModel> {
-  /// See also [BatterStatController].
-  BatterStatControllerProvider(
+/// See also [PitcherStatController].
+class PitcherStatControllerProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<PitcherStatController,
+        PitcherStatModel> {
+  /// See also [PitcherStatController].
+  PitcherStatControllerProvider(
     PlayerModel playerModel,
   ) : this._internal(
-          () => BatterStatController()..playerModel = playerModel,
-          from: batterStatControllerProvider,
-          name: r'batterStatControllerProvider',
+          () => PitcherStatController()..playerModel = playerModel,
+          from: pitcherStatControllerProvider,
+          name: r'pitcherStatControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$batterStatControllerHash,
-          dependencies: BatterStatControllerFamily._dependencies,
+                  : _$pitcherStatControllerHash,
+          dependencies: PitcherStatControllerFamily._dependencies,
           allTransitiveDependencies:
-              BatterStatControllerFamily._allTransitiveDependencies,
+              PitcherStatControllerFamily._allTransitiveDependencies,
           playerModel: playerModel,
         );
 
-  BatterStatControllerProvider._internal(
+  PitcherStatControllerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -114,8 +115,8 @@ class BatterStatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final PlayerModel playerModel;
 
   @override
-  FutureOr<BatterStatModel> runNotifierBuild(
-    covariant BatterStatController notifier,
+  FutureOr<PitcherStatModel> runNotifierBuild(
+    covariant PitcherStatController notifier,
   ) {
     return notifier.build(
       playerModel,
@@ -123,10 +124,10 @@ class BatterStatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(BatterStatController Function() create) {
+  Override overrideWith(PitcherStatController Function() create) {
     return ProviderOverride(
       origin: this,
-      override: BatterStatControllerProvider._internal(
+      override: PitcherStatControllerProvider._internal(
         () => create()..playerModel = playerModel,
         from: from,
         name: null,
@@ -139,14 +140,14 @@ class BatterStatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<BatterStatController, BatterStatModel>
-      createElement() {
-    return _BatterStatControllerProviderElement(this);
+  AutoDisposeAsyncNotifierProviderElement<PitcherStatController,
+      PitcherStatModel> createElement() {
+    return _PitcherStatControllerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is BatterStatControllerProvider &&
+    return other is PitcherStatControllerProvider &&
         other.playerModel == playerModel;
   }
 
@@ -161,20 +162,20 @@ class BatterStatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin BatterStatControllerRef
-    on AutoDisposeAsyncNotifierProviderRef<BatterStatModel> {
+mixin PitcherStatControllerRef
+    on AutoDisposeAsyncNotifierProviderRef<PitcherStatModel> {
   /// The parameter `playerModel` of this provider.
   PlayerModel get playerModel;
 }
 
-class _BatterStatControllerProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<BatterStatController,
-        BatterStatModel> with BatterStatControllerRef {
-  _BatterStatControllerProviderElement(super.provider);
+class _PitcherStatControllerProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<PitcherStatController,
+        PitcherStatModel> with PitcherStatControllerRef {
+  _PitcherStatControllerProviderElement(super.provider);
 
   @override
   PlayerModel get playerModel =>
-      (origin as BatterStatControllerProvider).playerModel;
+      (origin as PitcherStatControllerProvider).playerModel;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

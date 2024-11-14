@@ -1,8 +1,9 @@
+import 'package:abo/app_common.dart';
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/controller/pitcher_stat_controller.dart';
+import 'package:abo/source/controller/pitcher_stat_controller.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -20,20 +21,6 @@ class PitcherStatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playerColor = switch (playerInfo.team) {
-      '키움' => context.colorTCKiwoom,
-      '한화' => context.colorTCHanhwa,
-      '롯데' => context.colorTCLotte,
-      '두산' => context.colorTCDoosan,
-      '삼성' => context.colorTCSamsung,
-      'LG' => context.colorTCLG,
-      'KIA' => context.colorTCKia,
-      'KT' => context.colorTCKT,
-      'SSG' => context.colorTCSSG,
-      'NC' => context.colorTCNC,
-      String() => context.colorN10,
-    };
-
     return LoadableContent(
         asyncValue: ref.watch(pitcherStatControllerProvider(playerInfo)),
         content: (asyncValue) {
@@ -42,16 +29,16 @@ class PitcherStatPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(playerInfo.name,
-                      style: context.textStyleH20b
-                          .copyWith(color: context.colorP10)),
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: playerInfo.team.logo,
+                  ),
                   Gap.w4,
-                  Text(playerInfo.team),
-                  const Spacer(),
-                  const Icon(Icons.star_border, size: 24),
+                  Text(playerInfo.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
+                  Gap.w4,
                 ],
               ),
               Text('No.${playerInfo.backNumber}'),
@@ -70,14 +57,12 @@ class PitcherStatPage extends ConsumerWidget {
                 ],
               ),
               Gap.h32,
-              Text('2023 시즌',
-                  style:
-                      context.textStyleT14r.copyWith(color: context.colorP10)),
+              Text('2023 시즌', style: context.textStyleT14r.copyWith(color: context.colorP10)),
               const Row(
                 children: [],
               ),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -123,16 +108,12 @@ class PitcherStatPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.game.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.game.toString()))),
                   SizedBox(
                     width: (context.sizeWidth - 64) / 4,
                     child: Center(child: Text(asyncValue.inning.toString())),
                   ),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.era.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.era.toString()))),
                   SizedBox(
                     width: (context.sizeWidth - 64) / 4,
                     child: Center(child: Text(asyncValue.fip.toString())),
@@ -140,7 +121,7 @@ class PitcherStatPage extends ConsumerWidget {
                 ],
               ),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -186,22 +167,14 @@ class PitcherStatPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.win.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.lost.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.save.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.hold.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.win.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.lost.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.save.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.hold.toString()))),
                 ],
               ),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

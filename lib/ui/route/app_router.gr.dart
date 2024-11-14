@@ -159,6 +159,25 @@ class PlayerListRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [PlayerRoasterPage]
+class PlayerRoasterRoute extends PageRouteInfo<void> {
+  const PlayerRoasterRoute({List<PageRouteInfo>? children})
+      : super(
+          PlayerRoasterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PlayerRoasterRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PlayerRoasterPage();
+    },
+  );
+}
+
+/// generated route for
 /// [RankPage]
 class RankRoute extends PageRouteInfo<void> {
   const RankRoute({List<PageRouteInfo>? children})

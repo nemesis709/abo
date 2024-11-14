@@ -1,7 +1,8 @@
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/home.dart';
+import 'package:abo/source/view/page/home.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
+import 'package:abo/source/view/page/player_roaster.dart';
 import 'package:abo/source/view/page/settings.dart';
 import 'package:abo/source/view/page/signin.dart';
 import 'package:abo/source/view/page/main.dart';
@@ -25,12 +26,13 @@ class AppRouter extends RootStackRouter {
     AutoRoute(path: '/', page: HomeRoute.page, children: [
       AutoRoute(page: MainRoute.page),
       AutoRoute(page: RankRoute.page),
-      AutoRoute(page: PlayerListRoute.page),
+      AutoRoute(page: PlayerRoasterRoute.page),
       AutoRoute(page: SettingsRoute.page),
     ]),
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: SearchRoute.page),
     AutoRoute(page: BatterStatRoute.page),
     AutoRoute(page: PitcherStatRoute.page),
+    AutoRoute(page: PlayerListRoute.page),
   ];
 }

@@ -1,10 +1,13 @@
 import 'package:abo/common/data/result.dart';
 import 'package:abo/common/loading/loading_provider.dart';
 import 'package:abo/common/toast/toast.dart';
+import 'package:abo/gen/assets.gen.dart';
+import 'package:abo/source/domain/team_model.dart';
 import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod/riverpod.dart';
 
 final appRouterProvider = Provider<AppRouter>((ref) {
@@ -12,10 +15,10 @@ final appRouterProvider = Provider<AppRouter>((ref) {
 });
 
 extension RefEx on Ref {
-  AppRouter get route => read(appRouterProvider);
+  AppRouter get _route => read(appRouterProvider);
 
   void showToast(dynamic message) {
-    AboToast.instance.showToast(route.navigatorKey.currentContext, message,
+    AboToast.instance.showToast(_route.navigatorKey.currentContext, message,
         toastBuilder: (BuildContext context, String message) {
       return _PaToastWidget(message: message);
     });
@@ -153,4 +156,32 @@ class _PaToastWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+extension TeamExtension on Team {
+  Color get color => switch (this) {
+        Team.Kiwoom => AppColors.light().tcKiwoom,
+        Team.Hanwha => AppColors.light().tcHanwha,
+        Team.Lotte => AppColors.light().tcLotte,
+        Team.Doosan => AppColors.light().tcDoosan,
+        Team.Samsung => AppColors.light().tcSamsung,
+        Team.LG => AppColors.light().tcLG,
+        Team.Kia => AppColors.light().tcKia,
+        Team.KT => AppColors.light().tcKT,
+        Team.SSG => AppColors.light().tcSSG,
+        Team.NC => AppColors.light().tcNC,
+      };
+
+  SvgPicture get logo => switch (this) {
+        Team.Kiwoom => Assets.images.kiwoom.svg(),
+        Team.Hanwha => Assets.images.hanwha.svg(),
+        Team.Lotte => Assets.images.lotte.svg(),
+        Team.Doosan => Assets.images.doosan.svg(),
+        Team.Samsung => Assets.images.samsung.svg(),
+        Team.LG => Assets.images.lg.svg(),
+        Team.Kia => Assets.images.kia.svg(),
+        Team.KT => Assets.images.kt.svg(),
+        Team.SSG => Assets.images.ssg.svg(),
+        Team.NC => Assets.images.nc.svg(),
+      };
 }

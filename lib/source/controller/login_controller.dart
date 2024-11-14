@@ -12,23 +12,7 @@ part 'login_controller.g.dart';
 class LoginController extends _$LoginController {
   @override
   FutureOr<User?> build() async {
-    AuthRepository.instance.userState().listen((user) {
-      if (user != null) {
-        ref.route.replace(const HomeRoute());
-      }
-    });
-
-    return await initAuth();
-  }
-
-  Future<User?> initAuth() async {
-    final user = await AuthRepository.instance.currentUser();
-
-    // if (user != null) {
-    //   ref.route.replace(const HomeRoute());
-    // }
-
-    return user;
+    return await AuthRepository.instance.currentUser();
   }
 
   Future<bool> signIn(String email, String pw, bool persistent) async {

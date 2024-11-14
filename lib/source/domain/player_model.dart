@@ -1,3 +1,5 @@
+import 'package:abo/source/domain/team_model.dart';
+
 class PlayerModel {
   final String id;
   final String name;
@@ -7,8 +9,9 @@ class PlayerModel {
   final String batHand;
   final String spec;
   final String position;
-  final String team;
+  final Team team;
   final String owner;
+  final int point;
   final bool isPitcher;
 
   PlayerModel({
@@ -22,6 +25,7 @@ class PlayerModel {
     required this.position,
     required this.team,
     required this.owner,
+    required this.point,
     required this.isPitcher,
   });
 
@@ -34,8 +38,9 @@ class PlayerModel {
         'batHand': batHand,
         'spec': spec,
         'position': position,
-        'team': team,
+        'team': team.serverName,
         'owner': owner,
+        'point': point,
       };
 
   static PlayerModel fromJson(Map json, bool isPitcher) {
@@ -48,8 +53,9 @@ class PlayerModel {
       batHand: json['batHand'],
       spec: json['spec'],
       position: json['position'],
-      team: json['team'] == 'Hero' ? '키움' : json['team'],
+      team: Team.values.firstWhere((e) => e.serverName == json['team']),
       owner: json['owner'],
+      point: json['point'] ?? 0,
       isPitcher: isPitcher,
     );
   }

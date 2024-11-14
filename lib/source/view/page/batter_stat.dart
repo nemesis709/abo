@@ -1,8 +1,10 @@
+import 'package:abo/app.dart';
+import 'package:abo/app_common.dart';
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/controller/batter_stat_controller.dart';
+import 'package:abo/source/controller/batter_stat_controller.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -20,20 +22,6 @@ class BatterStatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playerColor = switch (playerInfo.team) {
-      '키움' => context.colorTCKiwoom,
-      '한화' => context.colorTCHanhwa,
-      '롯데' => context.colorTCLotte,
-      '두산' => context.colorTCDoosan,
-      '삼성' => context.colorTCSamsung,
-      'LG' => context.colorTCLG,
-      'KIA' => context.colorTCKia,
-      'KT' => context.colorTCKT,
-      'SSG' => context.colorTCSSG,
-      'NC' => context.colorTCNC,
-      String() => context.colorN10,
-    };
-
     return LoadableContent(
         asyncValue: ref.watch(batterStatControllerProvider(playerInfo)),
         content: (asyncValue) {
@@ -42,16 +30,16 @@ class BatterStatPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(playerInfo.name,
-                      style: context.textStyleH20b
-                          .copyWith(color: context.colorP10)),
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: playerInfo.team.logo,
+                  ),
                   Gap.w4,
-                  Text(playerInfo.team),
-                  const Spacer(),
-                  const Icon(Icons.star_border, size: 24),
+                  Text(playerInfo.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
+                  Gap.w4,
                 ],
               ),
               Text('No.${playerInfo.backNumber}'),
@@ -70,11 +58,9 @@ class BatterStatPage extends ConsumerWidget {
                 ],
               ),
               Gap.h32,
-              Text('2023 시즌',
-                  style:
-                      context.textStyleT14r.copyWith(color: context.colorP10)),
+              Text('2023 시즌', style: context.textStyleT14r.copyWith(color: context.colorP10)),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -120,16 +106,12 @@ class BatterStatPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.game.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.game.toString()))),
                   SizedBox(
                     width: (context.sizeWidth - 64) / 4,
                     child: Center(child: Text(asyncValue.avg.toString())),
                   ),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.hit.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.hit.toString()))),
                   SizedBox(
                     width: (context.sizeWidth - 64) / 4,
                     child: Center(child: Text(asyncValue.hr.toString())),
@@ -137,7 +119,7 @@ class BatterStatPage extends ConsumerWidget {
                 ],
               ),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -183,22 +165,14 @@ class BatterStatPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.rbi.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.so.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.bb.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.sb.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.rbi.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.so.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.bb.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.sb.toString()))),
                 ],
               ),
               Container(
-                color: playerColor,
+                color: playerInfo.team.color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -244,18 +218,10 @@ class BatterStatPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.obp.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.slg.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.ops.toString()))),
-                  SizedBox(
-                      width: (context.sizeWidth - 64) / 4,
-                      child: Center(child: Text(asyncValue.war.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.obp.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.slg.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.ops.toString()))),
+                  SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.war.toString()))),
                 ],
               ),
             ],

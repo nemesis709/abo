@@ -69,23 +69,23 @@ class AppColors {
     required this.tcSSG,
     required this.tcSamsung,
     required this.tcKT,
-    required this.tcHanhwa,
+    required this.tcHanwha,
     required this.tcNC,
   });
 
   factory AppColors.light() {
     return const AppColors(
       p10: Color(0xFF0B0B3B),
-      p20: Color(0xFF0B0B61),
-      p30: Color(0xFF08088A),
-      p40: Color(0xFF0404B4),
-      p50: Color(0xFF0101DF),
-      p60: Color(0xFF0000FF),
-      p70: Color(0xFF2E2EFE),
-      p80: Color(0xFF5858FA),
-      p90: Color(0xFF8181F7),
-      p95: Color(0xFFA9A9F5),
-      p99: Color(0xFFCECEF6),
+      p20: Color(0xFF131557),
+      p30: Color(0xFF1B1B73),
+      p40: Color(0xFF25218F),
+      p50: Color(0xFF2F2BAB),
+      p60: Color(0xFF4945C1),
+      p70: Color(0xFF6360D7),
+      p80: Color(0xFF8582E5),
+      p90: Color(0xFFB2B3F0),
+      p95: Color(0xFFD8D9F8),
+      p99: Color(0xFFF3F4FC),
       s10: Color(0xFF271576),
       s20: Color(0xFF311B92),
       s30: Color(0xFF4527A0),
@@ -138,7 +138,7 @@ class AppColors {
       tcSSG: Color(0xffCE0E2D),
       tcSamsung: Color(0xff074CA1),
       tcKT: Color(0xff000000),
-      tcHanhwa: Color(0xffFF6600),
+      tcHanwha: Color(0xffFF6600),
       tcNC: Color(0xff315288),
     );
   }
@@ -211,7 +211,7 @@ class AppColors {
   final Color tcSSG;
   final Color tcSamsung;
   final Color tcKT;
-  final Color tcHanhwa;
+  final Color tcHanwha;
   final Color tcNC;
 }
 
@@ -255,8 +255,7 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
       verticalDividerColor: verticalDividerColor ?? this.verticalDividerColor,
       headerColor: headerColor ?? this.headerColor,
       shimmerBaseColor: shimmerBaseColor ?? this.shimmerBaseColor,
-      shimmerHighlightColor:
-          shimmerHighlightColor ?? this.shimmerHighlightColor,
+      shimmerHighlightColor: shimmerHighlightColor ?? this.shimmerHighlightColor,
       holidayColor: holidayColor ?? this.holidayColor,
       saturdayColor: saturdayColor ?? this.saturdayColor,
       shadowColor: shadowColor ?? this.shadowColor,
@@ -264,19 +263,16 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
   }
 
   @override
-  ThemeExtension<CustomColorTheme> lerp(
-      ThemeExtension<CustomColorTheme>? other, double t) {
+  ThemeExtension<CustomColorTheme> lerp(ThemeExtension<CustomColorTheme>? other, double t) {
     if (other is! CustomColorTheme) {
       return this;
     }
     return CustomColorTheme(
       appColors: appColors,
-      verticalDividerColor:
-          Color.lerp(verticalDividerColor, other.verticalDividerColor, t),
+      verticalDividerColor: Color.lerp(verticalDividerColor, other.verticalDividerColor, t),
       headerColor: Color.lerp(headerColor, other.headerColor, t),
       shimmerBaseColor: Color.lerp(shimmerBaseColor, other.shimmerBaseColor, t),
-      shimmerHighlightColor:
-          Color.lerp(shimmerHighlightColor, other.shimmerHighlightColor, t),
+      shimmerHighlightColor: Color.lerp(shimmerHighlightColor, other.shimmerHighlightColor, t),
       holidayColor: Color.lerp(holidayColor, other.holidayColor, t),
       saturdayColor: Color.lerp(saturdayColor, other.saturdayColor, t),
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t),
@@ -296,8 +292,7 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
 }
 
 extension BuildContextCustomColorExtension on BuildContext {
-  CustomColorTheme get customColorTheme =>
-      Theme.of(this).extension<CustomColorTheme>() ?? CustomColorTheme.light;
+  CustomColorTheme get customColorTheme => Theme.of(this).extension<CustomColorTheme>() ?? CustomColorTheme.light;
 
   Color get verticalDividerColor => customColorTheme.verticalDividerColor!;
 
@@ -429,7 +424,7 @@ extension BuildContextCustomColorExtension on BuildContext {
 
   Color get colorTCDoosan => customColorTheme.appColors.tcDoosan;
 
-  Color get colorTCHanhwa => customColorTheme.appColors.tcHanhwa;
+  Color get colorTCHanwha => customColorTheme.appColors.tcHanwha;
 
   Color get colorTCKia => customColorTheme.appColors.tcKia;
 
@@ -460,16 +455,14 @@ extension ColorWithHSL on Color {
   Color darken(double amount) {
     assert(amount >= 0 && amount <= 1);
 
-    final hslLight =
-        hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    final hslLight = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
     return hslLight.toColor();
   }
 
   Color lighten(double amount) {
     assert(amount >= 0 && amount <= 1);
 
-    final hslLight =
-        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
     return hslLight.toColor();
   }
 

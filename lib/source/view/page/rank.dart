@@ -4,13 +4,14 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/controller/player_controller.dart';
-import 'package:abo/source/view/controller/user_controller.dart';
+import 'package:abo/source/controller/player_controller.dart';
+import 'package:abo/source/controller/user_controller.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
+import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
-import 'package:abo/ui/widget/default_bottom_sheet.dart';
+import 'package:abo/source/view/widget/default_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class RankPage extends ConsumerStatefulWidget {
   ConsumerState<RankPage> createState() => _RankPageState();
 }
 
-class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderStateMixin{
+class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderStateMixin {
   late TabController controller;
 
   @override
@@ -42,10 +43,13 @@ class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            '랭킹 보기',
-            style: context.textStyleH20b.copyWith(color: context.colorP10),
-          ),
+          actions: [
+            InkWell(
+              onTap: () => context.pushRoute(PlayerListRoute()),
+              child: Icon(Icons.search),
+            ),
+            Gap.w16,
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -53,12 +57,8 @@ class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderSt
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TabBar(controller: controller, tabs: [
-                Text('감독 랭킹',
-                    style: context.textStyleT14b
-                        .copyWith(color: context.colorP10)),
-                Text('선수 랭킹',
-                    style: context.textStyleT14b
-                        .copyWith(color: context.colorP10)),
+                Text('감독 랭킹', style: context.textStyleT14b.copyWith(color: context.colorP10)),
+                Text('선수 랭킹', style: context.textStyleT14b.copyWith(color: context.colorP10)),
               ]),
               Gap.h16,
               Expanded(
@@ -87,9 +87,7 @@ class _ManagerRank extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                      width: context.textStyleT14r.fontSize! * 2,
-                      child: Text('순위', style: context.textStyleT14r)),
+                  SizedBox(width: context.textStyleT14r.fontSize! * 2, child: Text('순위', style: context.textStyleT14r)),
                   Gap.w8,
                   Text('감독명', style: context.textStyleT14r),
                 ],
@@ -112,9 +110,7 @@ class _PlayerRank extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                      width: context.textStyleT14r.fontSize! * 2,
-                      child: Text('순위', style: context.textStyleT14r)),
+                  SizedBox(width: context.textStyleT14r.fontSize! * 2, child: Text('순위', style: context.textStyleT14r)),
                   Gap.w8,
                   Text('선수명', style: context.textStyleT14r),
                 ],
@@ -133,12 +129,9 @@ class _PlayerRank extends ConsumerWidget {
                             children: [
                               SizedBox(
                                   width: context.textStyleT14r.fontSize! * 2,
-                                  child: Text('${index + 1}',
-                                      style: context.textStyleT14r)),
+                                  child: Text('${index + 1}', style: context.textStyleT14r)),
                               Gap.w8,
-                              _PlayerItem(
-                                  playerInfo: asyncValue[index],
-                                  isPitcher: asyncValue[index].isPitcher),
+                              _PlayerItem(playerInfo: asyncValue[index], isPitcher: asyncValue[index].isPitcher),
                             ],
                           ),
                         ],
@@ -172,8 +165,7 @@ class _DisplayRank extends ConsumerWidget {
                   children: [
                     SizedBox(
                         width: context.textStyleT14r.fontSize! * 2,
-                        child:
-                            Text('${index + 1}', style: context.textStyleT14r)),
+                        child: Text('${index + 1}', style: context.textStyleT14r)),
                     Gap.w8,
                     Text(list[index], style: context.textStyleT14r),
                   ],
@@ -221,11 +213,9 @@ class _PlayerItem extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Text(playerInfo.name,
-                style: context.textStyleT16b.copyWith(color: context.colorN20)),
+            Text(playerInfo.name, style: context.textStyleT16b.copyWith(color: context.colorN20)),
             Gap.w4,
-            Text(playerInfo.team,
-                style: context.textStyleB12r.copyWith(color: context.colorN20)),
+            Text(playerInfo.team.name, style: context.textStyleB12r.copyWith(color: context.colorN20)),
             // Text(playerInfo.owner)
           ],
         ),

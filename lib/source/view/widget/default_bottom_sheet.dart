@@ -7,20 +7,19 @@ import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class DefaultBottomSheet extends StatelessWidget {
-  const DefaultBottomSheet({
-    Key? key,
-    required this.child,
-    this.padding = const EdgeInsets.fromLTRB(16, 32, 16, 48),
-    this.title,
-    this.minHeight,
-    this.maxHeight,
-    this.showHandle = true,
-    this.footer,
-    this.footerHeight = 48,
-    this.scrollController,
-    this.scrollPhysics
-  })  : assert(minHeight == null || maxHeight != null),
-        super(key: key);
+  const DefaultBottomSheet(
+      {super.key,
+      required this.child,
+      this.padding = const EdgeInsets.fromLTRB(16, 32, 16, 48),
+      this.title,
+      this.minHeight,
+      this.maxHeight,
+      this.showHandle = true,
+      this.footer,
+      this.footerHeight = 48,
+      this.scrollController,
+      this.scrollPhysics})
+      : assert(minHeight == null || maxHeight != null);
 
   final Widget child;
   final EdgeInsets padding;
@@ -107,7 +106,7 @@ class DefaultBottomSheet extends StatelessWidget {
 }
 
 class BottomSheetHandel extends StatelessWidget {
-  const BottomSheetHandel({Key? key}) : super(key: key);
+  const BottomSheetHandel({super.key});
 
   @override
   Widget build(BuildContext context) {

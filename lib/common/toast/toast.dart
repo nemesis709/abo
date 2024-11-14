@@ -11,8 +11,7 @@ class AboToast {
 
   static AboToast get instance => _instance;
 
-  void showToast(BuildContext? context, dynamic message,
-      {ToastBuilder? toastBuilder}) {
+  void showToast(BuildContext? context, dynamic message, {ToastBuilder? toastBuilder}) {
     if (context == null || !context.mounted) {
       return;
     }
@@ -30,7 +29,7 @@ class AboToast {
               ? toastBuilder(context, message.toString())
               : _HansToastWidget(message: message.toString()),
           gravity: ToastGravity.BOTTOM,
-          toastDuration: const Duration(seconds: 5),
+          toastDuration: const Duration(seconds: 2),
         );
   }
 }
@@ -52,10 +51,7 @@ class _HansToastWidget extends StatelessWidget {
       ),
       child: Text(
         message.toString(),
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).colorScheme.onPrimary),
       ),
     );
   }
