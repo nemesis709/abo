@@ -3,7 +3,6 @@ import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/roaster_controller.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
@@ -25,16 +24,39 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(
+            '선수 현황',
+            style: context.textStyleB18b.copyWith(color: context.colorP10),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: LoadableContent(
               asyncValue: ref.watch(roasterControllerProvider),
-              content: (content) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: content.map((e) => _PlayerItem(playerInfo: e)).toList(),
-                  ),
+              content: (players) {
+                Map<String, int> countMap = {};
+
+                for (var player in players) {
+                  countMap[player.position] = (countMap[player.position] ?? 0) + 1;
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...countMap.keys.map((e) => Text(
+                          "$e : ${countMap[e]}명",
+                          style: context.textStyleT16m.copyWith(color: context.colorN20),
+                        )),
+                    Gap.h16,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: players.map((e) => _PlayerItem(playerInfo: e)).toList(),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }),
         ));

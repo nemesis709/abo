@@ -118,7 +118,7 @@ class _PlayerRank extends ConsumerWidget {
               ListView.builder(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
-                  itemCount: min(asyncValue.length, 5),
+                  itemCount: min(asyncValue.length, 10),
                   itemBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       height: 50,
@@ -154,7 +154,7 @@ class _DisplayRank extends ConsumerWidget {
     return ListView.builder(
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
-        itemCount: min(list.length, 5),
+        itemCount: min(list.length, 10),
         itemBuilder: (BuildContext context, int index) {
           return SizedBox(
             height: 50,

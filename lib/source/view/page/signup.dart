@@ -72,6 +72,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
             asyncValue: asyncValue,
             content: (asyncValue) {
               if (asyncValue != null) {
+                context.maybePop();
                 context.replaceRoute(const HomeRoute());
               }
 

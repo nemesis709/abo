@@ -56,6 +56,25 @@ class BatterStatRouteArgs {
 }
 
 /// generated route for
+/// [CalendarPage]
+class CalendarRoute extends PageRouteInfo<void> {
+  const CalendarRoute({List<PageRouteInfo>? children})
+      : super(
+          CalendarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CalendarRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CalendarPage();
+    },
+  );
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

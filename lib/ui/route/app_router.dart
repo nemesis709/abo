@@ -1,4 +1,5 @@
 import 'package:abo/source/domain/player_model.dart';
+import 'package:abo/source/view/page/calendar.dart';
 import 'package:abo/source/view/page/home.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
@@ -26,6 +27,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(path: '/', page: HomeRoute.page, children: [
       AutoRoute(page: MainRoute.page),
       AutoRoute(page: RankRoute.page),
+      AutoRoute(page: CalendarRoute.page),
       AutoRoute(page: PlayerRoasterRoute.page),
       AutoRoute(page: SettingsRoute.page),
     ]),

@@ -1,5 +1,6 @@
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
+import 'package:abo/common/extension/formatter_extensions.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/settings_controller.dart';
 import 'package:abo/ui/route/app_router.dart';
@@ -84,7 +85,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${user?.stat?.point ?? 0}P',
+                              '${(user?.stat?.point ?? 0).formatCurrency()}P',
                               style: context.textStyleH16b.copyWith(color: context.colorN20),
                             ),
                             Gap.h12,
@@ -130,7 +131,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         scheme: 'sms', // sms:: 기능 내포
                         path: '01088498539',
                         queryParameters: <String, String>{
-                          'body': '[ABO]트레이드' // 송신하려는 문자 메세지 내용
+                          'body': '[ABO][트레이드]' // 송신하려는 문자 메세지 내용
                         },
                       );
 
@@ -149,7 +150,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         scheme: 'sms', // sms:: 기능 내포
                         path: '01088498539',
                         queryParameters: <String, String>{
-                          'body': '[ABO]건의사항' // 송신하려는 문자 메세지 내용
+                          'body': '[ABO][건의사항]' // 송신하려는 문자 메세지 내용
                         },
                       );
 
