@@ -6,6 +6,7 @@ import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
+import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -29,6 +30,13 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
             '선수 현황',
             style: context.textStyleB18b.copyWith(color: context.colorP10),
           ),
+          actions: [
+            InkWell(
+              onTap: () => context.pushRoute(PlayerListRoute()),
+              child: Icon(Icons.search),
+            ),
+            Gap.w16,
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),

@@ -44,7 +44,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
     final notifier = ref.read(settingsControllerProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(),
       body: LoadableContent(
           asyncValue: asyncValue,
           content: (user) {
@@ -59,6 +58,9 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: context.paddingTop + 16,
+                  ),
                   Row(
                     children: [
                       Icon(Icons.account_circle, size: 24, color: context.colorN60),
@@ -69,11 +71,10 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                       ),
                     ],
                   ),
-                  Gap.h16,
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: InkWell(
-                      onTap: () => context.navigateTo(RankRoute()),
+                      onTap: () => context.pushRoute(RankRoute()),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),

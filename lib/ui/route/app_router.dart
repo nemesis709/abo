@@ -26,11 +26,11 @@ class AppRouter extends RootStackRouter {
     AutoRoute(initial: true, page: SignInRoute.page),
     AutoRoute(path: '/', page: HomeRoute.page, children: [
       AutoRoute(page: MainRoute.page),
-      AutoRoute(page: RankRoute.page),
       AutoRoute(page: CalendarRoute.page),
       AutoRoute(page: PlayerRoasterRoute.page),
       AutoRoute(page: SettingsRoute.page),
     ]),
+    AutoRoute(page: RankRoute.page),
     AutoRoute(page: SignUpRoute.page),
     AutoRoute(page: SearchRoute.page),
     AutoRoute(page: BatterStatRoute.page),

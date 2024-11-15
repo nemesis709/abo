@@ -1,3 +1,4 @@
+import 'package:abo/source/view/widget/score_view.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -22,7 +23,13 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
           style: context.textStyleB18b.copyWith(color: context.colorP10),
         ),
       ),
-      body: Text('calendar'),
+      body: Column(
+        children: [
+          Text('calendar'),
+          Text('일정 전체 보기'),
+          ScoreView(),
+        ],
+      ),
     );
   }
 }

@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
               MainRoute(),
               PlayerRoasterRoute(),
               CalendarRoute(),
-              RankRoute(),
+              // RankRoute(),
               SettingsRoute(),
             ],
             bottomNavigationBuilder: (_, tabsRouter) {
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                     BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: '홈'),
                     BottomNavigationBarItem(icon: Icon(Icons.person), label: '로스터'),
                     BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: '일정'),
-                    BottomNavigationBarItem(icon: Icon(Icons.bar_chart_outlined), label: '랭크'),
+                    // BottomNavigationBarItem(icon: Icon(Icons.bar_chart_outlined), label: '랭크'),
                     BottomNavigationBarItem(icon: Icon(Icons.settings), label: '설정'),
                   ]);
             },
