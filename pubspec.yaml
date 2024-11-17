@@ -88,6 +88,7 @@ dependencies:
   path_provider: ^2.1.1
   fluttertoast: ^8.2.2
   cloud_firestore: ^5.4.5
+  table_calendar: ^3.1.2
 
 # for test
 #  device_preview: ^1.1.0
@@ -139,6 +140,11 @@ flutter:
   assets:
     - assets/images/
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  remove_alpha_ios: true
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

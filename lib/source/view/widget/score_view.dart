@@ -12,10 +12,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ScoreView extends ConsumerStatefulWidget {
   const ScoreView({
     super.key,
+    required this.dateTime,
     this.isMain,
+    this.onPrev,
+    this.onNext,
   });
 
+  final DateTime dateTime;
   final bool? isMain;
+  final VoidCallback? onPrev;
+  final VoidCallback? onNext;
 
   @override
   ConsumerState<ScoreView> createState() => _ScoreViewState();
@@ -25,39 +31,56 @@ class _ScoreViewState extends ConsumerState<ScoreView> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return LoadableContent(
-        asyncValue: ref.watch(calendarControllerProvider(
-            dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0))),
+        asyncValue: ref.watch(calendarControllerProvider(dateTime: widget.dateTime)),
+        loading: SizedBox(),
         content: (asyncValue) {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      '경기 결과  ',
-                      style: context.textStyleT16b.copyWith(color: context.colorP10),
-                    ),
-                    Text(
-                      DateTime.now().displayDateDay(),
-                      style: context.textStyleT14m.copyWith(color: context.colorN40),
-                    ),
-                    if (widget.isMain == true) ...[
-                      Spacer(),
-                      InkWell(
-                        onTap: () => context.navigateTo(CalendarRoute()),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                        ),
+                (widget.isMain == true)
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '경기 결과  ',
+                            style: context.textStyleT16b.copyWith(color: context.colorP10),
+                          ),
+                          Text(
+                            widget.dateTime.displayDateDay(),
+                            style: context.textStyleT14m.copyWith(color: context.colorN40),
+                          ),
+                          Spacer(),
+                          InkWell(
+                            onTap: () => context.navigateTo(CalendarRoute()),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 14,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          InkWell(
+                            onTap: () => widget.onPrev?.call(),
+                            child: Icon(Icons.keyboard_arrow_left, size: 24),
+                          ),
+                          Text(
+                            widget.dateTime.displayDateDay(),
+                            style: context.textStyleT16b.copyWith(color: context.colorP10),
+                          ),
+                          InkWell(
+                            onTap: () => widget.onNext?.call(),
+                            child: Icon(Icons.keyboard_arrow_right, size: 24),
+                          ),
+                        ],
                       ),
-                    ],
-                  ],
-                ),
-                Gap.h8,
+                Gap.h24,
                 _ScoreView(
                   home: asyncValue[0][0].name,
                   homeScore: asyncValue[0][0].stat?.point ?? 0,

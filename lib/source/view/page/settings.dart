@@ -142,7 +142,12 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                       }
                     },
                   ),
-                  _SettingTitle(text: '기타'),
+                  _SettingTitle(text: '일반'),
+                  _SettingItem(
+                    text: '도움말',
+                    iconData: Icons.help_outline,
+                    onTap: () => context.pushRoute(InfoRoute()),
+                  ),
                   _SettingItem(
                     text: '개발자에게 건의하기',
                     iconData: Icons.mail_outline,

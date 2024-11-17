@@ -31,8 +31,9 @@ class MainPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Gap.h16,
-            ScoreView(isMain: true),
+            ScoreView(
+                dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
+                isMain: true),
             Container(height: 12, color: context.colorN95),
             _RankBoard(),
             Container(height: 12, color: context.colorN95),
