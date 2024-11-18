@@ -3,10 +3,6 @@ import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/logger/logger.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/auth_repository.dart';
-import 'package:abo/source/repository/user_repository.dart';
-import 'package:collection/collection.dart';
-import 'package:encrypt/encrypt.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'settings_controller.g.dart';
@@ -19,24 +15,7 @@ class SettingsController extends _$SettingsController {
   }
 
   Future<UserModel?> getUser() async {
-    final user = await AuthRepository.instance.currentUser();
-
-    final userList = await UserRepository.instance.getUserList();
-
-    return userList.when(success: (data) {
-      return data.firstWhereOrNull((e) => e.uid == user?.uid) ??
-          UserModel(
-            uid: user?.uid ?? '',
-            email: user?.email ?? '',
-            name: user?.displayName ?? '',
-          );
-    }, failure: (e, __) {
-      return UserModel(
-        uid: user?.uid ?? '',
-        email: user?.email ?? '',
-        name: user?.displayName ?? '',
-      );
-    });
+    return await AuthRepository.instance.currentUser();
   }
 
   Future<void> signOut() async {

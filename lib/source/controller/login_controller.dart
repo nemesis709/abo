@@ -1,9 +1,8 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/logger/logger.dart';
+import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/auth_repository.dart';
-import 'package:abo/ui/route/app_router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_controller.g.dart';
@@ -11,7 +10,7 @@ part 'login_controller.g.dart';
 @riverpod
 class LoginController extends _$LoginController {
   @override
-  FutureOr<User?> build() async {
+  FutureOr<UserModel?> build() async {
     return await AuthRepository.instance.currentUser();
   }
 
@@ -39,7 +38,7 @@ class LoginController extends _$LoginController {
       return AuthRepository.instance.signUp(email, pw, name);
     });
 
-    return credential.when(success: (data) {
+    return credential.when(success: (data) async {
       logger.d(credential);
       ref.showToast('회원가입이 완료되었습니다');
       return true;

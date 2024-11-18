@@ -77,10 +77,9 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         width: context.sizeWidth * 0.5,
                         height: context.sizeWidth * 0.5,
-                        color: context.colorP10,
                         child: Assets.images.logo.svg(),
                       ),
                       Gap.h24,
@@ -111,23 +110,23 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                         onTapOutside: (_) => passwordFocusNode.unfocus(),
                       ),
                       Gap.h16,
-                      InkWell(
-                        onTap: () => setState(() {
-                          persistent = !persistent;
-                        }),
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: persistent,
-                              onChanged: (_) => setState(() {
-                                persistent = !persistent;
-                              }),
-                            ),
-                            Gap.w8,
-                            Text('자동 로그인'),
-                          ],
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () => setState(() {
+                      //     persistent = !persistent;
+                      //   }),
+                      //   child: Row(
+                      //     children: [
+                      //       Checkbox(
+                      //         value: persistent,
+                      //         onChanged: (_) => setState(() {
+                      //           persistent = !persistent;
+                      //         }),
+                      //       ),
+                      //       Gap.w8,
+                      //       Text('자동 로그인'),
+                      //     ],
+                      //   ),
+                      // ),
                       Spacer(),
                       FilledButton(
                           style: context.buttonStyle48P10,
@@ -146,7 +145,13 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                       Gap.h8,
                       FilledButton(
                           style: context.buttonStyle48P10Outlined,
-                          onPressed: () => context.pushRoute(const SignUpRoute()),
+                          onPressed: () async {
+                            final bool? result = await context.pushRoute<bool?>(const SignUpRoute());
+
+                            if (result == true && context.mounted) {
+                              context.replaceRoute(HomeRoute());
+                            }
+                          },
                           child: const Text('회원가입')),
                       Gap.h48,
                     ]),

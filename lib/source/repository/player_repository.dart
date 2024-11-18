@@ -1,12 +1,10 @@
 import 'package:abo/common/cache/simple_cache.dart';
 import 'package:abo/common/data/result.dart';
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class PlayerRepository implements IService {
   PlayerRepository._privateConstructor() {
@@ -23,8 +21,6 @@ class PlayerRepository implements IService {
   static PlayerRepository get instance => _instance;
 
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
-
-  static FirebaseAuth auth = FirebaseAuth.instance;
 
   late final SimpleCache<List<PlayerModel>> _allPlayerList;
 
@@ -140,24 +136,14 @@ class PlayerRepository implements IService {
       return await _allPlayerList.getAsync(create: () async {
         final list = <PlayerModel>[];
 
-        final pitcher = await fireStore
-            .collection('player')
-            .doc('info')
-            .collection('pitcher')
-            .where('owner', isEqualTo: auth.currentUser?.uid ?? '')
-            .get();
+        final pitcher = await fireStore.collection('player').doc('info').collection('pitcher').get();
         final pitcherData = pitcher.docs;
 
         for (var element in pitcherData) {
           list.add(PlayerModel.fromJson(element.data(), true));
         }
 
-        final batter = await fireStore
-            .collection('player')
-            .doc('info')
-            .collection('batter')
-            .where('owner', isEqualTo: auth.currentUser?.uid ?? '')
-            .get();
+        final batter = await fireStore.collection('player').doc('info').collection('batter').get();
         final batterData = batter.docs;
 
         for (var element in batterData) {

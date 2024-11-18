@@ -122,7 +122,7 @@ class _ManagerItem extends StatelessWidget {
             width: 30,
             child: Center(
               child: Text(
-                (userModel.stat?.game ?? 0).toString(),
+                userModel.game.toString(),
                 style: context.textStyleT14r,
               ),
             ),
@@ -131,7 +131,7 @@ class _ManagerItem extends StatelessWidget {
             width: 30,
             child: Center(
               child: Text(
-                (userModel.stat?.win ?? 0).toString(),
+                userModel.win.toString(),
                 style: context.textStyleT14r,
               ),
             ),
@@ -140,7 +140,7 @@ class _ManagerItem extends StatelessWidget {
             width: 30,
             child: Center(
               child: Text(
-                (userModel.stat?.draw ?? 0).toString(),
+                userModel.draw.toString(),
                 style: context.textStyleT14r,
               ),
             ),
@@ -149,7 +149,7 @@ class _ManagerItem extends StatelessWidget {
             width: 30,
             child: Center(
               child: Text(
-                (userModel.stat?.lose ?? 0).toString(),
+                userModel.lose.toString(),
                 style: context.textStyleT14r,
               ),
             ),
@@ -158,7 +158,7 @@ class _ManagerItem extends StatelessWidget {
             width: 40,
             child: Center(
               child: Text(
-                (userModel.stat?.rate ?? 0.0).toString(),
+                userModel.rate.toString(),
                 style: context.textStyleT14r,
               ),
             ),
@@ -167,7 +167,7 @@ class _ManagerItem extends StatelessWidget {
             width: 60,
             child: Center(
               child: Text(
-                '${(userModel.stat?.point ?? 0).formatCurrency()} P',
+                '${(userModel.point).formatCurrency()} P',
                 style: context.textStyleT14r,
               ),
             ),

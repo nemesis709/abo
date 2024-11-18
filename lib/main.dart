@@ -12,7 +12,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -55,17 +55,23 @@ class ApplicationInit {
     Intl.defaultLocale = 'ko';
     await initializeDateFormatting('ko');
 
-    // 앱 처음 실행시 필요한 로직을 추가한다.
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    return null;  }
+
+    await Supabase.initialize(
+      url: 'https://wqnjjmhpdgbjoxhnqgmm.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbmpqbWhwZGdiam94aG5xZ21tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE4OTIzMzcsImV4cCI6MjA0NzQ2ODMzN30.axL8qBC3xJ_7sOlsK8npXOjjqytuzpYsKbs_WCZ_HyY',
+    );
+
+    return null;
+  }
 
   void registerErrorHandlers() {
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      logger.e('[FlutterError]',
-          error: details.exception, stackTrace: details.stack);
+      logger.e('[FlutterError]', error: details.exception, stackTrace: details.stack);
     };
 
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {

@@ -1,47 +1,7 @@
 class UserModel {
   final String uid;
-  final String email;
+  final int teamKey; // 일정에서 팀에 매칭할 키
   final String name;
-  final UserStatModel? stat;
-
-  const UserModel({
-    required this.uid,
-    required this.email,
-    required this.name,
-    this.stat,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'uid': uid,
-        'email': email,
-        'name': name,
-      };
-
-  static UserModel fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      uid: json['uid'],
-      email: json['email'],
-      name: json['name'],
-    );
-  }
-
-  UserModel copyWith({
-    final String? uid,
-    final String? email,
-    final String? name,
-    final UserStatModel? stat,
-  }) {
-    return UserModel(
-      uid: uid ?? this.uid,
-      email: email ?? this.email,
-      name: name ?? this.name,
-      stat: stat ?? this.stat,
-    );
-  }
-}
-
-class UserStatModel {
-  final String uid;
   final int game;
   final int win;
   final int draw;
@@ -49,8 +9,10 @@ class UserStatModel {
   final int point;
   final double rate;
 
-  const UserStatModel({
+  const UserModel({
     required this.uid,
+    required this.teamKey,
+    required this.name,
     required this.game,
     required this.win,
     required this.draw,
@@ -59,35 +21,53 @@ class UserStatModel {
     required this.rate,
   });
 
-  factory UserStatModel.init(String uid) => UserStatModel(
-        uid: uid,
-        game: 0,
-        win: 0,
-        draw: 0,
-        lose: 0,
-        point: 0,
-        rate: 0,
-      );
-
   Map<String, dynamic> toJson() => {
         'uid': uid,
-        'game': game,
-        'win': win,
-        'draw': draw,
-        'lose': lose,
-        'point': point,
-        'rate': rate,
+        'name': name,
+        'team_key': teamKey,
+        'games_played': game,
+        'wins': win,
+        'draws': draw,
+        'losses': lose,
+        'points': point,
+        'win_rate': rate,
       };
 
-  static UserStatModel fromJson(Map<String, dynamic> json) {
-    return UserStatModel(
+  static UserModel fromJson(Map<String, dynamic> json) {
+    return UserModel(
       uid: json['uid'],
-      game: (json['game'] as num).toInt(),
-      win: (json['win'] as num).toInt(),
-      draw: (json['draw'] as num).toInt(),
-      lose: (json['lose'] as num).toInt(),
-      point: (json['point'] as num).toInt(),
-      rate: (json['rate'] as num).toDouble(),
+      teamKey: json['team_key'],
+      name: json['name'],
+      game: json['games_played'],
+      win: json['wins'],
+      draw: json['draws'],
+      lose: json['losses'],
+      point: json['points'],
+      rate: (json['win_rate'] as num).toDouble(),
+    );
+  }
+
+  UserModel copyWith({
+    final String? uid,
+    final int? teamKey,
+    final String? name,
+    final int? game,
+    final int? win,
+    final int? draw,
+    final int? lose,
+    final int? point,
+    final double? rate,
+  }) {
+    return UserModel(
+      uid: uid ?? this.uid,
+      teamKey: teamKey ?? this.teamKey,
+      name: name ?? this.name,
+      game: game ?? this.game,
+      win: win ?? this.win,
+      draw: draw ?? this.draw,
+      lose: lose ?? this.lose,
+      point: point ?? this.point,
+      rate: rate ?? this.rate,
     );
   }
 }

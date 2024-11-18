@@ -7,7 +7,7 @@ part of 'calendar_controller.dart';
 // **************************************************************************
 
 String _$calendarControllerHash() =>
-    r'9f8614734d25214b2339236e2b95ecf3ac4a25a1';
+    r'7c2591f6e44638ff95c4cc8867bee0a297c7c8d6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$CalendarController
-    extends BuildlessAutoDisposeAsyncNotifier<List<List<UserModel>>> {
+    extends BuildlessAutoDisposeAsyncNotifier<List<GameModel>> {
   late final DateTime dateTime;
 
-  FutureOr<List<List<UserModel>>> build({
+  FutureOr<List<GameModel>> build({
     required DateTime dateTime,
   });
 }
@@ -44,8 +44,7 @@ abstract class _$CalendarController
 const calendarControllerProvider = CalendarControllerFamily();
 
 /// See also [CalendarController].
-class CalendarControllerFamily
-    extends Family<AsyncValue<List<List<UserModel>>>> {
+class CalendarControllerFamily extends Family<AsyncValue<List<GameModel>>> {
   /// See also [CalendarController].
   const CalendarControllerFamily();
 
@@ -84,7 +83,7 @@ class CalendarControllerFamily
 
 /// See also [CalendarController].
 class CalendarControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    CalendarController, List<List<UserModel>>> {
+    CalendarController, List<GameModel>> {
   /// See also [CalendarController].
   CalendarControllerProvider({
     required DateTime dateTime,
@@ -115,7 +114,7 @@ class CalendarControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final DateTime dateTime;
 
   @override
-  FutureOr<List<List<UserModel>>> runNotifierBuild(
+  FutureOr<List<GameModel>> runNotifierBuild(
     covariant CalendarController notifier,
   ) {
     return notifier.build(
@@ -140,8 +139,8 @@ class CalendarControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<CalendarController,
-      List<List<UserModel>>> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<CalendarController, List<GameModel>>
+      createElement() {
     return _CalendarControllerProviderElement(this);
   }
 
@@ -162,14 +161,14 @@ class CalendarControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin CalendarControllerRef
-    on AutoDisposeAsyncNotifierProviderRef<List<List<UserModel>>> {
+    on AutoDisposeAsyncNotifierProviderRef<List<GameModel>> {
   /// The parameter `dateTime` of this provider.
   DateTime get dateTime;
 }
 
 class _CalendarControllerProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<CalendarController,
-        List<List<UserModel>>> with CalendarControllerRef {
+        List<GameModel>> with CalendarControllerRef {
   _CalendarControllerProviderElement(super.provider);
 
   @override

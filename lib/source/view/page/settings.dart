@@ -51,8 +51,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               context.replaceRoute(const SignInRoute());
             }
 
-            final stat = user?.stat;
-
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -86,33 +84,31 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${(user?.stat?.point ?? 0).formatCurrency()}P',
+                              '${(user?.point ?? 0).formatCurrency()}P',
                               style: context.textStyleH16b.copyWith(color: context.colorN20),
                             ),
                             Gap.h12,
-                            if (stat != null) ...[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'G ${stat.game}',
-                                    style: context.textStyleH16m,
-                                  ),
-                                  Text(
-                                    'W ${stat.win}',
-                                    style: context.textStyleH16m,
-                                  ),
-                                  Text(
-                                    'D ${stat.draw}',
-                                    style: context.textStyleH16m,
-                                  ),
-                                  Text(
-                                    'L ${stat.lose}',
-                                    style: context.textStyleH16m,
-                                  ),
-                                ],
-                              ),
-                            ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'G ${user?.game}',
+                                  style: context.textStyleH16m,
+                                ),
+                                Text(
+                                  'W ${user?.win}',
+                                  style: context.textStyleH16m,
+                                ),
+                                Text(
+                                  'D ${user?.draw}',
+                                  style: context.textStyleH16m,
+                                ),
+                                Text(
+                                  'L ${user?.lose}',
+                                  style: context.textStyleH16m,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

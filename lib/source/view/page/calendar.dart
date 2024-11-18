@@ -1,5 +1,4 @@
 import 'package:abo/common/common_constants.dart';
-import 'package:abo/common/converter/datetime_converter.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
@@ -38,9 +37,11 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
                   context: context,
                   builder: (context) {
                     return DefaultBottomSheet(
-                      maxHeight: context.sizeHeight * 0.8,
+                      maxHeight: context.sizeHeight * 0.9,
                       child: TableCalendar(
                         calendarFormat: CalendarFormat.month,
+                        rowHeight: 40,
+                        daysOfWeekHeight: 40,
                         firstDay: DateTime.utc(2023, 01, 01),
                         lastDay: DateTime.utc(2025, 12, 31),
                         headerStyle: HeaderStyle(
@@ -76,19 +77,34 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
       ),
       body: Column(
         children: [
-          ScoreView(
-            dateTime: focusedDay,
-            onPrev: () {
-              setState(() {
-                focusedDay = focusedDay.addDay(-1);
-              });
-            },
-            onNext: () {
-              setState(() {
-                focusedDay = focusedDay.addDay(1);
-              });
-            },
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    focusedDay = focusedDay.addDay(-1);
+                  });
+                },
+                child: Icon(Icons.keyboard_arrow_left, size: 24),
+              ),
+              Text(
+                focusedDay.displayDateDay(),
+                style: context.textStyleT16b.copyWith(color: context.colorP10),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    focusedDay = focusedDay.addDay(1);
+                  });
+                },
+                child: Icon(Icons.keyboard_arrow_right, size: 24),
+              ),
+            ],
           ),
+          Gap.h16,
+          ScoreView(dateTime: focusedDay),
         ],
       ),
     );

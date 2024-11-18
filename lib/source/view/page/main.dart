@@ -1,4 +1,5 @@
 import 'package:abo/common/common_constants.dart';
+import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/gen/assets.gen.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/controller/user_controller.dart';
@@ -31,9 +32,38 @@ class MainPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    '경기 결과',
+                    style: context.textStyleT16b.copyWith(color: context.colorP10),
+                  ),
+                  Gap.w8,
+                  Text(
+                    DateTime.now()
+                        .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
+                        .displayDateDay(),
+                    style: context.textStyleT14m.copyWith(color: context.colorN40),
+                  ),
+                  Gap.h24,
+                  Spacer(),
+                  InkWell(
+                    onTap: () => context.navigateTo(CalendarRoute()),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             ScoreView(
-                dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
-                isMain: true),
+              dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
+            ),
             Container(height: 12, color: context.colorN95),
             _RankBoard(),
             Container(height: 12, color: context.colorN95),
