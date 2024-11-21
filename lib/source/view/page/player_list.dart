@@ -234,12 +234,10 @@ class _PlayerItem extends StatelessWidget {
             SizedBox(
               width: 60,
               child: Center(
-                child: playerInfo.owner.isNotEmptySpace
-                    ? Text(
-                        userList.firstWhereOrNull((e) => e.uid == playerInfo.owner)?.name ?? '',
-                        style: context.textStyleT14r,
-                      )
-                    : SizedBox(),
+                child: Text(
+                  userList.firstWhereOrNull((e) => e.uid == playerInfo.owner)?.name ?? '',
+                  style: context.textStyleT14r,
+                ),
               ),
             ),
             const Spacer(),

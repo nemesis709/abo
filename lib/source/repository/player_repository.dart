@@ -4,14 +4,16 @@ import 'package:abo/common/service/iservice.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:abo/source/domain/user_model.dart';
+import 'package:abo/source/repository/auth_repository.dart';
+import 'package:abo/source/repository/user_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PlayerRepository implements IService {
   PlayerRepository._privateConstructor() {
     _allPlayerList = SimpleCache<List<PlayerModel>>();
     _pitcherList = SimpleCache<List<PlayerModel>>();
     _batterList = SimpleCache<List<PlayerModel>>();
-    _roasterList = SimpleCache<List<PlayerModel>>();
     _pitcherStatList = SimpleCache<List<PitcherStatModel>>();
     _batterStatList = SimpleCache<List<BatterStatModel>>();
   }
@@ -20,14 +22,12 @@ class PlayerRepository implements IService {
 
   static PlayerRepository get instance => _instance;
 
-  static FirebaseFirestore fireStore = FirebaseFirestore.instance;
+  static SupabaseClient supabase = Supabase.instance.client;
 
   late final SimpleCache<List<PlayerModel>> _allPlayerList;
 
   late final SimpleCache<List<PlayerModel>> _pitcherList;
   late final SimpleCache<List<PlayerModel>> _batterList;
-
-  late final SimpleCache<List<PlayerModel>> _roasterList;
 
   late final SimpleCache<List<PitcherStatModel>> _pitcherStatList;
   late final SimpleCache<List<BatterStatModel>> _batterStatList;
@@ -35,23 +35,10 @@ class PlayerRepository implements IService {
   Future<Result<List<PlayerModel>>> getAllPlayerList() async {
     return Result.guardFuture(() async {
       return await _allPlayerList.getAsync(create: () async {
-        final list = <PlayerModel>[];
-
-        final pitcher = await fireStore.collection('player').doc('info').collection('pitcher').get();
-        final pitcherData = pitcher.docs;
-
-        for (var element in pitcherData) {
-          list.add(PlayerModel.fromJson(element.data(), true));
-        }
-
-        final batter = await fireStore.collection('player').doc('info').collection('batter').get();
-        final batterData = batter.docs;
-
-        for (var element in batterData) {
-          list.add(PlayerModel.fromJson(element.data(), false));
-        }
-
-        return list;
+        final players = await supabase.from('players').select();
+        final users = await UserRepository.instance.getUserList();
+        final userList = users.valueOrNull ?? <UserModel>[];
+        return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
       });
     });
   }
@@ -59,16 +46,12 @@ class PlayerRepository implements IService {
   Future<Result<List<PlayerModel>>> getPitcherList() async {
     return Result.guardFuture(() async {
       return await _pitcherList.getAsync(create: () async {
-        final list = <PlayerModel>[];
-
-        final result = await fireStore.collection('player').doc('info').collection('pitcher').get();
-        final data = result.docs;
-
-        for (var element in data) {
-          list.add(PlayerModel.fromJson(element.data(), true));
-        }
-
-        return list;
+        return await _allPlayerList.getAsync(create: () async {
+          final players = await supabase.from('players').select().eq('is_pitcher', true);
+          final users = await UserRepository.instance.getUserList();
+          final userList = users.valueOrNull ?? <UserModel>[];
+          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+        });
       });
     });
   }
@@ -77,14 +60,14 @@ class PlayerRepository implements IService {
     return Result.guardFuture(() async {
       final result = await _pitcherStatList.getAsync(create: () async {
         final list = <PitcherStatModel>[];
-
-        final result = await fireStore.collection('player').doc('info').collection('pitcher_stat').get();
-
-        final data = result.docs;
-
-        for (var element in data) {
-          list.add(PitcherStatModel.fromJson(element.data()));
-        }
+        //
+        // final result = await fireStore.collection('player').doc('info').collection('pitcher_stat').get();
+        //
+        // final data = result.docs;
+        //
+        // for (var element in data) {
+        //   list.add(PitcherStatModel.fromJson(element.data()));
+        // }
 
         return list;
       });
@@ -95,18 +78,10 @@ class PlayerRepository implements IService {
 
   Future<Result<List<PlayerModel>>> getBatterList() async {
     return Result.guardFuture(() async {
-      return await _batterList.getAsync(create: () async {
-        final list = <PlayerModel>[];
-
-        final result = await fireStore.collection('player').doc('info').collection('batter').get();
-        final data = result.docs;
-
-        for (var element in data) {
-          list.add(PlayerModel.fromJson(element.data(), false));
-        }
-
-        return list;
-      });
+      final players = await supabase.from('players').select().eq('is_pitcher', false);
+      final users = await UserRepository.instance.getUserList();
+      final userList = users.valueOrNull ?? <UserModel>[];
+      return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
     });
   }
 
@@ -114,14 +89,14 @@ class PlayerRepository implements IService {
     return Result.guardFuture(() async {
       final result = await _batterStatList.getAsync(create: () async {
         final list = <BatterStatModel>[];
-
-        final result = await fireStore.collection('player').doc('info').collection('batter_stat').get();
-
-        final data = result.docs;
-
-        for (var element in data) {
-          list.add(BatterStatModel.fromJson(element.data()));
-        }
+        //
+        // final result = await fireStore.collection('player').doc('info').collection('batter_stat').get();
+        //
+        // final data = result.docs;
+        //
+        // for (var element in data) {
+        //   list.add(BatterStatModel.fromJson(element.data()));
+        // }
 
         return list;
       });
@@ -132,25 +107,12 @@ class PlayerRepository implements IService {
 
   Future<Result<List<PlayerModel>>> getRoaster() async {
     return Result.guardFuture(() async {
-      _allPlayerList.clear();
       return await _allPlayerList.getAsync(create: () async {
-        final list = <PlayerModel>[];
-
-        final pitcher = await fireStore.collection('player').doc('info').collection('pitcher').get();
-        final pitcherData = pitcher.docs;
-
-        for (var element in pitcherData) {
-          list.add(PlayerModel.fromJson(element.data(), true));
-        }
-
-        final batter = await fireStore.collection('player').doc('info').collection('batter').get();
-        final batterData = batter.docs;
-
-        for (var element in batterData) {
-          list.add(PlayerModel.fromJson(element.data(), false));
-        }
-
-        return list;
+        final user = await AuthRepository.instance.currentUser();
+        final players = await supabase.from('players').select().eq('user_id', user?.uid ?? '');
+        final users = await UserRepository.instance.getUserList();
+        final userList = users.valueOrNull ?? <UserModel>[];
+        return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
       });
     });
   }
@@ -160,7 +122,6 @@ class PlayerRepository implements IService {
     _allPlayerList.clear();
     _pitcherList.clear();
     _batterList.clear();
-    _roasterList.clear();
     _pitcherStatList.clear();
     _batterStatList.clear();
   }

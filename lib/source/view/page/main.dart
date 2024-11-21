@@ -1,5 +1,6 @@
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/datetime_extension.dart';
+import 'package:abo/common/loadable_content.dart';
 import 'package:abo/gen/assets.gen.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/controller/user_controller.dart';
@@ -10,6 +11,7 @@ import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,10 +23,12 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             SizedBox(width: 48, child: Assets.images.logo.svg()),
             Text('ABO', style: context.textStyleT16b.copyWith(color: context.colorP10)),
+            Text(' beta', style: context.textStyleT12r.copyWith(color: context.colorP10)),
           ],
         ),
       ),
@@ -144,33 +148,31 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
   }
 }
 
-class _TradeBoard extends StatelessWidget {
+class _TradeBoard extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10)),
-          Gap.h16,
-          const Row(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return LoadableContent(
+      asyncValue: ref.watch(playerControllerProvider(null)),
+      content: (players) {
+        final list = players.where((e) => e.onTrade == true);
+
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('박찬호'),
+              Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10)),
+              Gap.h16,
+              if (list.isEmpty)
+                Text(
+                  '트레이드 목록이 없습니다.',
+                  style: context.textStyleT14b,
+                ),
+              if (list.isNotEmpty) ...list.mapIndexed((index, e) => PlayerItem(index + 1, e)),
             ],
           ),
-          const Row(
-            children: [
-              Text('고영표'),
-            ],
-          ),
-          const Row(
-            children: [
-              Text('노시환'),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

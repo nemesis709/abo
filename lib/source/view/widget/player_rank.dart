@@ -66,16 +66,19 @@ class PlayerRank extends ConsumerWidget {
                   ),
                 ],
               ),
-              ...(asyncValue.sublist(0, min(10, asyncValue.length)))
-                  .mapIndexed((index, e) => _PlayerItem(index + 1, e)),
+              ...(asyncValue.sublist(0, min(10, asyncValue.length))).mapIndexed((index, e) => PlayerItem(index + 1, e)),
             ],
           );
         });
   }
 }
 
-class _PlayerItem extends StatelessWidget {
-  const _PlayerItem(this.rank, this.playerInfo);
+class PlayerItem extends StatelessWidget {
+  const PlayerItem(
+    this.rank,
+    this.playerInfo, {
+    super.key,
+  });
 
   final int rank;
   final PlayerModel playerInfo;

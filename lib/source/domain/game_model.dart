@@ -25,9 +25,7 @@ class GameModel {
   static GameModel fromJson(Map<String, dynamic> json, List<UserModel> userList) {
     return GameModel(
       gameId: json['id'].toString(),
-      // gameId: '',
       gameDate: DateJsonConverter().fromJson(json['game_date'] as String),
-      // gameDate: DateTime.now(),
       homeUser: userList.firstWhereOrNull((e) => json['home_team_id'] == e.teamKey),
       awayUser: userList.firstWhereOrNull((e) => json['away_team_id'] == e.teamKey),
     );

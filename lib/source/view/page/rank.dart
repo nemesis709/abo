@@ -39,6 +39,7 @@ class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderSt
 
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           leading: InkWell(
             onTap: () => context.maybePop(),
             child: Icon(Icons.arrow_back_ios, size: 18),

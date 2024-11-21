@@ -1,6 +1,7 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
+import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/controller/pitcher_stat_controller.dart';
@@ -41,19 +42,13 @@ class PitcherStatPage extends ConsumerWidget {
                   Gap.w4,
                 ],
               ),
-              Text('No.${playerInfo.backNumber}'),
-              // Text(playerInfo.birthDate),
-              Text(playerInfo.spec),
+              Text(playerInfo.birthDate.displayDate()),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(playerInfo.position),
-                  const Text('('),
-                  Text(playerInfo.throwHand),
-                  const Text(','),
-                  Text(playerInfo.batHand),
-                  const Text(')'),
+                  Text(playerInfo.hand),
                 ],
               ),
               Gap.h32,

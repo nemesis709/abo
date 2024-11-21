@@ -26,6 +26,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             '선수 현황',
             style: context.textStyleB18b.copyWith(color: context.colorP10),
@@ -43,19 +44,11 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
           child: LoadableContent(
               asyncValue: ref.watch(roasterControllerProvider),
               content: (players) {
-                Map<String, int> countMap = {};
-
-                for (var player in players) {
-                  countMap[player.position] = (countMap[player.position] ?? 0) + 1;
-                }
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ...countMap.keys.map((e) => Text(
-                          "$e : ${countMap[e]}명",
-                          style: context.textStyleT16m.copyWith(color: context.colorN20),
-                        )),
+                    Text('투수: ${players.where((e) => e.isPitcher).length}명'),
+                    Text('타자: ${players.where((e) => !e.isPitcher).length}명'),
                     Gap.h16,
                     Expanded(
                       child: SingleChildScrollView(
