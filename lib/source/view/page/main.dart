@@ -1,4 +1,5 @@
 import 'package:abo/common/common_constants.dart';
+import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/gen/assets.gen.dart';
@@ -161,7 +162,9 @@ class _TradeBoard extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10)),
+              SizedBox(
+                  width: context.sizeWidth,
+                  child: Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10))),
               Gap.h16,
               if (list.isEmpty)
                 Text(

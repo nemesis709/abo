@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:abo/source/domain/game_model.dart';
-import 'package:abo/source/repository/user_repository.dart';
+import 'package:abo/source/repository/game_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'calendar_controller.g.dart';
@@ -16,7 +16,7 @@ class CalendarController extends _$CalendarController {
   }
 
   Future<List<GameModel>> getSchedule(dateTime) async {
-    final result = await UserRepository.instance.getSchedule(dateTime);
+    final result = await GameRepository.instance.getSchedule(dateTime);
     return result.valueOrNull ?? [];
   }
 }

@@ -15,7 +15,7 @@ class SettingsController extends _$SettingsController {
   }
 
   Future<UserModel?> getUser() async {
-    return await AuthRepository.instance.currentUser();
+    return await AuthRepository.instance.getCurrentUser();
   }
 
   Future<void> signOut() async {

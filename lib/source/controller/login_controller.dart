@@ -11,7 +11,7 @@ part 'login_controller.g.dart';
 class LoginController extends _$LoginController {
   @override
   FutureOr<UserModel?> build() async {
-    return await AuthRepository.instance.currentUser();
+    return await AuthRepository.instance.getCurrentUser();
   }
 
   Future<bool> signIn(String email, String pw, bool persistent) async {

@@ -1,10 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:abo/app.dart';
 import 'package:abo/common/logger/logger.dart';
-import 'package:abo/firebase_options.dart';
 import 'package:abo/riverpod_logger.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,17 +54,23 @@ class ApplicationInit {
     Intl.defaultLocale = 'ko';
     await initializeDateFormatting('ko');
 
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    final config = await loadSupabaseConfig();
 
     await Supabase.initialize(
-      url: 'https://wqnjjmhpdgbjoxhnqgmm.supabase.co',
-      anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbmpqbWhwZGdiam94aG5xZ21tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE4OTIzMzcsImV4cCI6MjA0NzQ2ODMzN30.axL8qBC3xJ_7sOlsK8npXOjjqytuzpYsKbs_WCZ_HyY',
+      url: config['supabaseUrl'] ?? '',
+      anonKey: config['supbaseKey'] ?? '',
     );
 
     return null;
+  }
+
+  Future<Map<String, String>> loadSupabaseConfig() async {
+    // JSON 파일 읽기
+    final String jsonString = await rootBundle.loadString('supabase_config.json');
+    // JSON 파싱
+    final Map<String, dynamic> config = json.decode(jsonString);
+    // String 타입으로 변환
+    return config.map((key, value) => MapEntry(key, value.toString()));
   }
 
   void registerErrorHandlers() {

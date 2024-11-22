@@ -2,16 +2,14 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/extension/string_extensions.dart';
 import 'package:abo/common/loadable_content.dart';
-import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/controller/player_controller.dart';
-import 'package:abo/source/domain/user_model.dart';
+import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/page/batter_stat.dart';
 import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -126,7 +124,6 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                                   .where((e) => e.name.contains(query))
                                   .map((e) => _PlayerItem(
                                         playerInfo: e,
-                                        userList: notifier.userList,
                                         query: query,
                                       ))
                                   .toList(),
@@ -156,7 +153,6 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                                       .where((e) => e.isPitcher)
                                       .map((e) => _PlayerItem(
                                             playerInfo: e,
-                                            userList: notifier.userList,
                                             query: '',
                                           ))
                                       .toList(),
@@ -172,7 +168,6 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                                       .where((e) => !e.isPitcher)
                                       .map((e) => _PlayerItem(
                                             playerInfo: e,
-                                            userList: notifier.userList,
                                             query: '',
                                           ))
                                       .toList(),
@@ -191,12 +186,10 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
 class _PlayerItem extends StatelessWidget {
   const _PlayerItem({
     required this.playerInfo,
-    required this.userList,
     required this.query,
   });
 
   final PlayerModel playerInfo;
-  final List<UserModel> userList;
   final String query;
 
   @override
@@ -235,7 +228,7 @@ class _PlayerItem extends StatelessWidget {
               width: 60,
               child: Center(
                 child: Text(
-                  userList.firstWhereOrNull((e) => e.uid == playerInfo.owner)?.name ?? '',
+                  playerInfo.owner.name,
                   style: context.textStyleT14r,
                 ),
               ),

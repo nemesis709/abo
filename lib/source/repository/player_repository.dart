@@ -1,17 +1,17 @@
 import 'package:abo/common/cache/simple_cache.dart';
 import 'package:abo/common/data/result.dart';
 import 'package:abo/common/service/iservice.dart';
+import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/auth_repository.dart';
-import 'package:abo/source/repository/user_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PlayerRepository implements IService {
   PlayerRepository._privateConstructor() {
-    _allPlayerList = SimpleCache<List<PlayerModel>>();
+    MainService.instance.registerService(this);
+    _playerList = SimpleCache<List<PlayerModel>>();
     _pitcherList = SimpleCache<List<PlayerModel>>();
     _batterList = SimpleCache<List<PlayerModel>>();
     _pitcherStatList = SimpleCache<List<PitcherStatModel>>();
@@ -24,7 +24,7 @@ class PlayerRepository implements IService {
 
   static SupabaseClient supabase = Supabase.instance.client;
 
-  late final SimpleCache<List<PlayerModel>> _allPlayerList;
+  late final SimpleCache<List<PlayerModel>> _playerList;
 
   late final SimpleCache<List<PlayerModel>> _pitcherList;
   late final SimpleCache<List<PlayerModel>> _batterList;
@@ -32,27 +32,27 @@ class PlayerRepository implements IService {
   late final SimpleCache<List<PitcherStatModel>> _pitcherStatList;
   late final SimpleCache<List<BatterStatModel>> _batterStatList;
 
-  Future<Result<List<PlayerModel>>> getAllPlayerList() async {
-    return Result.guardFuture(() async {
-      return await _allPlayerList.getAsync(create: () async {
-        final players = await supabase.from('players').select();
-        final users = await UserRepository.instance.getUserList();
-        final userList = users.valueOrNull ?? <UserModel>[];
-        return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
-      });
-    });
-  }
+  Future<Result<List<PlayerModel>>> getPlayerList([bool? isPitcher]) async {
+    final userList = await AuthRepository.instance.getUserList();
 
-  Future<Result<List<PlayerModel>>> getPitcherList() async {
     return Result.guardFuture(() async {
-      return await _pitcherList.getAsync(create: () async {
-        return await _allPlayerList.getAsync(create: () async {
+      if (isPitcher == true) {
+        return await _pitcherList.getAsync(create: () async {
           final players = await supabase.from('players').select().eq('is_pitcher', true);
-          final users = await UserRepository.instance.getUserList();
-          final userList = users.valueOrNull ?? <UserModel>[];
           return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
         });
-      });
+      } else if (isPitcher == false) {
+        return await _batterList.getAsync(create: () async {
+          final players = await supabase.from('players').select().eq('is_pitcher', false);
+
+          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+        });
+      } else {
+        return await _playerList.getAsync(create: () async {
+          final players = await supabase.from('players').select();
+          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+        });
+      }
     });
   }
 
@@ -73,15 +73,6 @@ class PlayerRepository implements IService {
       });
 
       return result.firstWhere((element) => element.id == playerModel.id);
-    });
-  }
-
-  Future<Result<List<PlayerModel>>> getBatterList() async {
-    return Result.guardFuture(() async {
-      final players = await supabase.from('players').select().eq('is_pitcher', false);
-      final users = await UserRepository.instance.getUserList();
-      final userList = users.valueOrNull ?? <UserModel>[];
-      return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
     });
   }
 
@@ -107,11 +98,10 @@ class PlayerRepository implements IService {
 
   Future<Result<List<PlayerModel>>> getRoaster() async {
     return Result.guardFuture(() async {
-      return await _allPlayerList.getAsync(create: () async {
-        final user = await AuthRepository.instance.currentUser();
-        final players = await supabase.from('players').select().eq('user_id', user?.uid ?? '');
-        final users = await UserRepository.instance.getUserList();
-        final userList = users.valueOrNull ?? <UserModel>[];
+      return await _playerList.getAsync(create: () async {
+        final currentUser = await AuthRepository.instance.getCurrentUser();
+        final players = await supabase.from('players').select().eq('user_id', currentUser?.uid ?? '');
+        final userList = await AuthRepository.instance.getUserList();
         return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
       });
     });
@@ -119,7 +109,7 @@ class PlayerRepository implements IService {
 
   @override
   void clearCache() {
-    _allPlayerList.clear();
+    _playerList.clear();
     _pitcherList.clear();
     _batterList.clear();
     _pitcherStatList.clear();
