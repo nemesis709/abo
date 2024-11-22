@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:abo/app.dart';
 import 'package:abo/common/logger/logger.dart';
@@ -7,6 +6,7 @@ import 'package:abo/riverpod_logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -53,24 +53,13 @@ class ApplicationInit {
 
     Intl.defaultLocale = 'ko';
     await initializeDateFormatting('ko');
-
-    final config = await loadSupabaseConfig();
-
+    await dotenv.load(fileName: ".env");
     await Supabase.initialize(
-      url: config['supabaseUrl'] ?? '',
-      anonKey: config['supbaseKey'] ?? '',
+      url: dotenv.env['supabaseUrl'] ?? '',
+      anonKey: dotenv.env['supbaseKey'] ?? '',
     );
 
     return null;
-  }
-
-  Future<Map<String, String>> loadSupabaseConfig() async {
-    // JSON 파일 읽기
-    final String jsonString = await rootBundle.loadString('supabase_config.json');
-    // JSON 파싱
-    final Map<String, dynamic> config = json.decode(jsonString);
-    // String 타입으로 변환
-    return config.map((key, value) => MapEntry(key, value.toString()));
   }
 
   void registerErrorHandlers() {
