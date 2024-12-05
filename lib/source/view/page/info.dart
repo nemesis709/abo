@@ -48,6 +48,7 @@ class InfoPage extends StatelessWidget {
               _Content('선수의 데이터는 KBO 리그 경기 결과에 따라 매일 업데이트됩니다.'),
               _SubTitle('ABO로 야구의 새로운 재미를 경험하세요!'),
               _Content('선수들의 성적을 예측하고, 전략적으로 팀을 구성하여 리그를 제패하세요.'),
+              Gap.h64,
             ],
           ),
         ),

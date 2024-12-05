@@ -6,12 +6,10 @@ import 'package:abo/riverpod_logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -53,12 +51,6 @@ class ApplicationInit {
 
     Intl.defaultLocale = 'ko';
     await initializeDateFormatting('ko');
-    await dotenv.load(fileName: ".env");
-    await Supabase.initialize(
-      url: dotenv.env['supabaseUrl'] ?? '',
-      anonKey: dotenv.env['supbaseKey'] ?? '',
-    );
-
     return null;
   }
 

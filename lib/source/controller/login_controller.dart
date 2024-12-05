@@ -20,15 +20,12 @@ class LoginController extends _$LoginController {
     });
 
     return credential.when(success: (data) {
-      logger.d(credential);
-
-      // data.user?.displayName
       ref.showToast('로그인이 완료되었습니다');
       return true;
     }, failure: (e, __) {
       e as ApiError;
 
-      ref.showToast(e.message);
+      ref.showToast(e.getMessage());
       return false;
     });
   }

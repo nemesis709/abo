@@ -3,9 +3,11 @@ import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/data/result.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
+import 'package:abo/source/domain/auth_model.dart';
+import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/domain/user_model.dart';
-import 'package:abo/source/repository/player_repository.dart';
 import 'package:abo/source/repository/game_repository.dart';
+import 'package:abo/source/repository/player_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -29,7 +31,7 @@ class AuthRepository implements IService {
   Future<UserModel?> getCurrentUser() async {
     final result = await Result.guardFuture(() async {
       return _currentUser.getAsync(create: () async {
-        final currentUser = supabase.auth.currentUser;
+        final currentUser = await apis.authApi.getCurrentUser();
 
         if (currentUser == null) {
           return null;
@@ -56,12 +58,9 @@ class AuthRepository implements IService {
     });
   }
 
-  Future<Result<void>> signIn(String email, String pw, bool persistence) async {
+  Future<Result<void>> signIn(String email, String password, bool persistence) async {
     return Result.guardFuture(() async {
-      final result = await supabase.auth.signInWithPassword(
-        email: email,
-        password: pw,
-      );
+      final result = await apis.authApi.signIn(auth: AuthModel(username: email, password: password));
 
       if (result.user == null) {
         return Future.error(ApiError(AppErrorType.serverUnknown));

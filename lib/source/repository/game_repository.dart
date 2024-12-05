@@ -39,10 +39,10 @@ class GameRepository implements IService {
   Future<void> getGameData(DateTime date) async {
     final userList = await AuthRepository.instance.getUserList();
     final playersResponse = await supabase.from('players').select().eq('user_id', userList[0].uid);
-    logger.d(playersResponse);
+    // logger.d(playersResponse);
     final players = playersResponse.map((e) => PlayerModel.fromJson(e, userList)).toList();
 
-    logger.d(players);
+    // logger.d(players);
 
     // Step 2: `daily_stats_batter`에서 game_date와 player_id 조건으로 데이터 가져오기
     final batterStat = await supabase
