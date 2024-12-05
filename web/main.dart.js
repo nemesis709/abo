@@ -45995,8 +45995,6 @@ if($.B0() instanceof A.qv){$.b_Y=A.bjp()
 $.Nc=$.N7=null}if($.NH() instanceof A.qv)$.b0T=A.bjo()
 s=3
 return A.A(A.cY(null,t.H),$async$fK)
-case 3:s=4
-return A.A($.aPH().CT(0,".env"),$async$fK)
 case 4:o=$.aPH().gZl().i(0,"supabaseUrl")
 if(o==null)o=""
 n=$.aPH().gZl().i(0,"supbaseKey")
