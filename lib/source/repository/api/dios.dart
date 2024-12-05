@@ -19,7 +19,7 @@ class Dios {
 
   Dio _initBaseDio() {
     var baseOptions = BaseOptions(
-        baseUrl: 'http://3.39.238.67:5000',
+        baseUrl: 'https://3.39.238.67:5000',
         contentType: 'application/json',
         connectTimeout: const Duration(seconds: 3),
         receiveTimeout: const Duration(seconds: 10),
