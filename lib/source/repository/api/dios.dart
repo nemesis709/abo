@@ -22,15 +22,12 @@ class Dios {
 
   Dio _initBaseDio() {
     var baseOptions = BaseOptions(
-        baseUrl: 'https://3.39.238.67:5000',
-        connectTimeout: const Duration(seconds: 3),
-        receiveTimeout: const Duration(seconds: 10),
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*', // 모든 도메인 허용
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
-        });
+      baseUrl: 'https://3.39.238.67',
+      // baseUrl: 'https://127.0.0.1:443',
+      contentType: 'application/json',
+      connectTimeout: const Duration(seconds: 3),
+      receiveTimeout: const Duration(seconds: 10),
+    );
     var dio = Dio(baseOptions);
     // dio.interceptors.add(_AuthInterceptor(dio));
     // trustBadCertificate(dio);

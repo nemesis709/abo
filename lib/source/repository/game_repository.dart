@@ -21,8 +21,6 @@ class GameRepository implements IService {
 
   Future<Result<List<GameModel>>> getSchedule(DateTime date) async {
     return Result.guardFuture(() async {
-      final userList = await AuthRepository.instance.getUserList();
-
       final schedule = await supabase.from('schedule').select('''
     id,
     game_date,
@@ -32,7 +30,7 @@ class GameRepository implements IService {
   ''').eq('game_date', date.toServerDate());
 
       await getGameData(date);
-      return (schedule).map((e) => GameModel.fromJson(e, userList)).toList();
+      return (schedule).map((e) => GameModel.fromJson(e)).toList();
     });
   }
 
@@ -40,7 +38,7 @@ class GameRepository implements IService {
     final userList = await AuthRepository.instance.getUserList();
     final playersResponse = await supabase.from('players').select().eq('user_id', userList[0].uid);
     // logger.d(playersResponse);
-    final players = playersResponse.map((e) => PlayerModel.fromJson(e, userList)).toList();
+    final players = playersResponse.map((e) => PlayerModel.fromJson(e)).toList();
 
     // logger.d(players);
 

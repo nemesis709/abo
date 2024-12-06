@@ -1,15 +1,13 @@
 import 'package:abo/common/cache/simple_cache.dart';
-import 'package:abo/common/data/api_error.dart';
 import 'package:abo/common/data/result.dart';
+import 'package:abo/common/logger/logger.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/auth_model.dart';
-import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/domain/user_model.dart';
+import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/repository/game_repository.dart';
 import 'package:abo/source/repository/player_repository.dart';
-import 'package:collection/collection.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// this repository only can be called from other repositories
 class AuthRepository implements IService {
@@ -23,36 +21,16 @@ class AuthRepository implements IService {
 
   static AuthRepository get instance => _instance;
 
-  static SupabaseClient supabase = Supabase.instance.client;
-
   late final SimpleCache<List<UserModel>> _userList;
   late final SimpleCache<UserModel?> _currentUser;
 
   Future<UserModel?> getCurrentUser() async {
-    final result = await Result.guardFuture(() async {
-      return _currentUser.getAsync(create: () async {
-        final currentUser = await apis.authApi.getCurrentUser();
-
-        if (currentUser == null) {
-          return null;
-        }
-
-        final userList = await supabase.from('users').select();
-        final user = userList.firstWhereOrNull((e) => e['uid'] == currentUser.id);
-        if (user == null) {
-          return null;
-        } else {
-          return UserModel.fromJson(user);
-        }
-      });
-    });
-
-    return result.valueOrNull;
+    return _currentUser.value;
   }
 
   Future<Result<void>> signOut() async {
     return Result.guardFuture(() async {
-      await supabase.auth.signOut();
+      await apis.authApi.signOut();
       clearCache();
       return;
     });
@@ -60,45 +38,27 @@ class AuthRepository implements IService {
 
   Future<Result<void>> signIn(String email, String password, bool persistence) async {
     return Result.guardFuture(() async {
-      final result = await apis.authApi.signIn(auth: AuthModel(username: email, password: password));
+      final result = await apis.authApi.signIn(auth: AuthModel(email: email, password: password));
+      _currentUser.value = result;
 
-      if (result.user == null) {
-        return Future.error(ApiError(AppErrorType.serverUnknown));
-      } else {
-        clearCache();
-
-        return;
-      }
+      return;
     });
   }
 
-  Future<Result<UserModel>> signUp(String email, String password, String name) async {
+  Future<Result<void>> signUp(String email, String password, String name) async {
     return Result.guardFuture(() async {
-      final response = await supabase.auth.signUp(
-        email: email,
-        password: password,
-        data: {
-          'display_name': name, // 유저의 이름
-        },
-      );
-
-      final user = response.user;
-
-      if (user == null) {
-        throw Exception('Failed to sign up: $response');
-      }
-      clearCache();
-      final userList = await supabase.from('users').select();
-      return UserModel.fromJson(userList.firstWhere((e) => e['uid'] == user.id));
+      final result = await apis.authApi.signUp(auth: AuthModel(username: name, email: email, password: password));
+      _currentUser.value = result;
+      return;
     });
   }
 
   Future<List<UserModel>> getUserList() async {
     final result = await Result.guardFuture(() async {
       return _userList.getAsync(create: () async {
-        final userList = await supabase.from('users').select();
-
-        return userList.map((e) => UserModel.fromJson(e)).toList();
+        final result = await apis.authApi.getUserList();
+        logger.d(result);
+        return result.data;
       });
     });
     return result.valueOrNull ?? [];

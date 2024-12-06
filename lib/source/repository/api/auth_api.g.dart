@@ -22,19 +22,19 @@ class _AuthApi implements AuthApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AuthResponse> signIn({required AuthModel auth}) async {
+  Future<UserModel> signUp({required AuthModel auth}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = auth;
-    final _options = _setStreamType<AuthResponse>(Options(
+    final _options = _setStreamType<UserModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/auth/login',
+          '/auth/signup',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -44,9 +44,9 @@ class _AuthApi implements AuthApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AuthResponse _value;
+    late UserModel _value;
     try {
-      _value = await compute(deserializeAuthResponse, _result.data!);
+      _value = await compute(deserializeUserModel, _result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -55,19 +55,19 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<User?> getCurrentUser() async {
+  Future<UserModel> signIn({required AuthModel auth}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<User>(Options(
-      method: 'GET',
+    final _data = auth;
+    final _options = _setStreamType<UserModel>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/auth/current',
+          '/auth/signin',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -76,12 +76,69 @@ class _AuthApi implements AuthApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late User? _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserModel _value;
     try {
-      _value = _result.data == null
-          ? null
-          : await compute(deserializeUser, _result.data!);
+      _value = await compute(deserializeUserModel, _result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> signOut() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/auth/signout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<CollectionModel<UserModel>> getUserList() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<CollectionModel<UserModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/auth/users',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CollectionModel<UserModel> _value;
+    try {
+      _value =
+          await compute(deserializeCollectionModelUserModel, _result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

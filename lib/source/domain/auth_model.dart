@@ -6,7 +6,8 @@ part 'auth_model.g.dart';
 @Freezed()
 class AuthModel with _$AuthModel {
   const factory AuthModel({
-    required String username,
+    String? username,
+    required String email,
     required String password,
   }) = _AuthModel;
 

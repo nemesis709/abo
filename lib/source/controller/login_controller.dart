@@ -11,7 +11,8 @@ part 'login_controller.g.dart';
 class LoginController extends _$LoginController {
   @override
   FutureOr<UserModel?> build() async {
-    return await AuthRepository.instance.getCurrentUser();
+    // return await AuthRepository.instance.getCurrentUser();
+    return null;
   }
 
   Future<bool> signIn(String email, String pw, bool persistent) async {
@@ -36,7 +37,6 @@ class LoginController extends _$LoginController {
     });
 
     return credential.when(success: (data) async {
-      logger.d(credential);
       ref.showToast('회원가입이 완료되었습니다');
       return true;
     }, failure: (e, __) {

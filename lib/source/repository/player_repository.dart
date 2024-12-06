@@ -36,18 +36,18 @@ class PlayerRepository implements IService {
       if (isPitcher == true) {
         return await _pitcherList.getAsync(create: () async {
           final players = await supabase.from('players').select().eq('is_pitcher', true);
-          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+          return players.map((e) => PlayerModel.fromJson(e)).toList();
         });
       } else if (isPitcher == false) {
         return await _batterList.getAsync(create: () async {
           final players = await supabase.from('players').select().eq('is_pitcher', false);
 
-          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+          return players.map((e) => PlayerModel.fromJson(e)).toList();
         });
       } else {
         return await _playerList.getAsync(create: () async {
           final players = await supabase.from('players').select();
-          return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+          return players.map((e) => PlayerModel.fromJson(e)).toList();
         });
       }
     });
@@ -68,7 +68,7 @@ class PlayerRepository implements IService {
 
         final players = await supabase.from('players').select().eq('user_id', currentUser!.uid);
         final userList = await AuthRepository.instance.getUserList();
-        return players.map((e) => PlayerModel.fromJson(e, userList)).toList();
+        return players.map((e) => PlayerModel.fromJson(e)).toList();
       });
     });
   }
