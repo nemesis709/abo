@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:abo/common/logger/logger.dart';
 import 'package:dio/dio.dart';
 
 class Dios {
@@ -31,6 +34,26 @@ class Dios {
     var dio = Dio(baseOptions);
     // dio.interceptors.add(_AuthInterceptor(dio));
     // trustBadCertificate(dio);
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          logger.d('Request URL: ${options.uri}');
+          logger.d('Request Method: ${options.method}');
+          logger.d('Request Headers: ${options.headers}');
+          logger.d('Request Data: ${options.data}');
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          logger.d('Response: ${response.data}');
+          return handler.next(response);
+        },
+        onError: (DioError e, handler) {
+          logger.d('Error: ${e.response?.data}');
+          return handler.next(e);
+        },
+      ),
+    );
+
     return dio;
   }
   //
