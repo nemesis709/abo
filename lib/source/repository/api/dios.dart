@@ -22,8 +22,7 @@ class Dios {
 
   Dio _initBaseDio() {
     var baseOptions = BaseOptions(
-      baseUrl: 'https://3.39.238.67',
-      // baseUrl: 'https://127.0.0.1:443',
+      baseUrl: 'https://api.adonis06.site',
       contentType: 'application/json',
       connectTimeout: const Duration(seconds: 3),
       receiveTimeout: const Duration(seconds: 10),
