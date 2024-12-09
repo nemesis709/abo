@@ -22,14 +22,20 @@ PlayerModel _$PlayerModelFromJson(Map<String, dynamic> json) {
 mixin _$PlayerModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  UserModel get owner => throw _privateConstructorUsedError;
-  Team get team => throw _privateConstructorUsedError;
+  UserModel? get owner => throw _privateConstructorUsedError;
+  int get teamId => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
   DateTime get birthDate => throw _privateConstructorUsedError;
   String get hand => throw _privateConstructorUsedError;
   bool get isPitcher => throw _privateConstructorUsedError;
   bool? get onTrade => throw _privateConstructorUsedError;
   int? get point => throw _privateConstructorUsedError;
+  BatterStatModel? get batterStatModel => throw _privateConstructorUsedError;
+  BatterDailyStatModel? get batterDailyStatModel =>
+      throw _privateConstructorUsedError;
+  PitcherStatModel? get pitcherStatModel => throw _privateConstructorUsedError;
+  PitcherDailyStatModel? get pitcherDailyStatModel =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this PlayerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,16 +56,24 @@ abstract class $PlayerModelCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
-      UserModel owner,
-      Team team,
+      UserModel? owner,
+      int teamId,
       String position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
       bool? onTrade,
-      int? point});
+      int? point,
+      BatterStatModel? batterStatModel,
+      BatterDailyStatModel? batterDailyStatModel,
+      PitcherStatModel? pitcherStatModel,
+      PitcherDailyStatModel? pitcherDailyStatModel});
 
-  $UserModelCopyWith<$Res> get owner;
+  $UserModelCopyWith<$Res>? get owner;
+  $BatterStatModelCopyWith<$Res>? get batterStatModel;
+  $BatterDailyStatModelCopyWith<$Res>? get batterDailyStatModel;
+  $PitcherStatModelCopyWith<$Res>? get pitcherStatModel;
+  $PitcherDailyStatModelCopyWith<$Res>? get pitcherDailyStatModel;
 }
 
 /// @nodoc
@@ -79,14 +93,18 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? owner = null,
-    Object? team = null,
+    Object? owner = freezed,
+    Object? teamId = null,
     Object? position = null,
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
     Object? onTrade = freezed,
     Object? point = freezed,
+    Object? batterStatModel = freezed,
+    Object? batterDailyStatModel = freezed,
+    Object? pitcherStatModel = freezed,
+    Object? pitcherDailyStatModel = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,14 +115,14 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      owner: null == owner
+      owner: freezed == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+              as UserModel?,
+      teamId: null == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -129,6 +147,22 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int?,
+      batterStatModel: freezed == batterStatModel
+          ? _value.batterStatModel
+          : batterStatModel // ignore: cast_nullable_to_non_nullable
+              as BatterStatModel?,
+      batterDailyStatModel: freezed == batterDailyStatModel
+          ? _value.batterDailyStatModel
+          : batterDailyStatModel // ignore: cast_nullable_to_non_nullable
+              as BatterDailyStatModel?,
+      pitcherStatModel: freezed == pitcherStatModel
+          ? _value.pitcherStatModel
+          : pitcherStatModel // ignore: cast_nullable_to_non_nullable
+              as PitcherStatModel?,
+      pitcherDailyStatModel: freezed == pitcherDailyStatModel
+          ? _value.pitcherDailyStatModel
+          : pitcherDailyStatModel // ignore: cast_nullable_to_non_nullable
+              as PitcherDailyStatModel?,
     ) as $Val);
   }
 
@@ -136,9 +170,71 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get owner {
-    return $UserModelCopyWith<$Res>(_value.owner, (value) {
+  $UserModelCopyWith<$Res>? get owner {
+    if (_value.owner == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.owner!, (value) {
       return _then(_value.copyWith(owner: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BatterStatModelCopyWith<$Res>? get batterStatModel {
+    if (_value.batterStatModel == null) {
+      return null;
+    }
+
+    return $BatterStatModelCopyWith<$Res>(_value.batterStatModel!, (value) {
+      return _then(_value.copyWith(batterStatModel: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BatterDailyStatModelCopyWith<$Res>? get batterDailyStatModel {
+    if (_value.batterDailyStatModel == null) {
+      return null;
+    }
+
+    return $BatterDailyStatModelCopyWith<$Res>(_value.batterDailyStatModel!,
+        (value) {
+      return _then(_value.copyWith(batterDailyStatModel: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PitcherStatModelCopyWith<$Res>? get pitcherStatModel {
+    if (_value.pitcherStatModel == null) {
+      return null;
+    }
+
+    return $PitcherStatModelCopyWith<$Res>(_value.pitcherStatModel!, (value) {
+      return _then(_value.copyWith(pitcherStatModel: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PitcherDailyStatModelCopyWith<$Res>? get pitcherDailyStatModel {
+    if (_value.pitcherDailyStatModel == null) {
+      return null;
+    }
+
+    return $PitcherDailyStatModelCopyWith<$Res>(_value.pitcherDailyStatModel!,
+        (value) {
+      return _then(_value.copyWith(pitcherDailyStatModel: value) as $Val);
     });
   }
 }
@@ -154,17 +250,29 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String name,
-      UserModel owner,
-      Team team,
+      UserModel? owner,
+      int teamId,
       String position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
       bool? onTrade,
-      int? point});
+      int? point,
+      BatterStatModel? batterStatModel,
+      BatterDailyStatModel? batterDailyStatModel,
+      PitcherStatModel? pitcherStatModel,
+      PitcherDailyStatModel? pitcherDailyStatModel});
 
   @override
-  $UserModelCopyWith<$Res> get owner;
+  $UserModelCopyWith<$Res>? get owner;
+  @override
+  $BatterStatModelCopyWith<$Res>? get batterStatModel;
+  @override
+  $BatterDailyStatModelCopyWith<$Res>? get batterDailyStatModel;
+  @override
+  $PitcherStatModelCopyWith<$Res>? get pitcherStatModel;
+  @override
+  $PitcherDailyStatModelCopyWith<$Res>? get pitcherDailyStatModel;
 }
 
 /// @nodoc
@@ -182,14 +290,18 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? owner = null,
-    Object? team = null,
+    Object? owner = freezed,
+    Object? teamId = null,
     Object? position = null,
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
     Object? onTrade = freezed,
     Object? point = freezed,
+    Object? batterStatModel = freezed,
+    Object? batterDailyStatModel = freezed,
+    Object? pitcherStatModel = freezed,
+    Object? pitcherDailyStatModel = freezed,
   }) {
     return _then(_$PlayerModelImpl(
       id: null == id
@@ -200,14 +312,14 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      owner: null == owner
+      owner: freezed == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+              as UserModel?,
+      teamId: null == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as int,
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -232,6 +344,22 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int?,
+      batterStatModel: freezed == batterStatModel
+          ? _value.batterStatModel
+          : batterStatModel // ignore: cast_nullable_to_non_nullable
+              as BatterStatModel?,
+      batterDailyStatModel: freezed == batterDailyStatModel
+          ? _value.batterDailyStatModel
+          : batterDailyStatModel // ignore: cast_nullable_to_non_nullable
+              as BatterDailyStatModel?,
+      pitcherStatModel: freezed == pitcherStatModel
+          ? _value.pitcherStatModel
+          : pitcherStatModel // ignore: cast_nullable_to_non_nullable
+              as PitcherStatModel?,
+      pitcherDailyStatModel: freezed == pitcherDailyStatModel
+          ? _value.pitcherDailyStatModel
+          : pitcherDailyStatModel // ignore: cast_nullable_to_non_nullable
+              as PitcherDailyStatModel?,
     ));
   }
 }
@@ -242,14 +370,18 @@ class _$PlayerModelImpl implements _PlayerModel {
   _$PlayerModelImpl(
       {required this.id,
       required this.name,
-      required this.owner,
-      required this.team,
+      this.owner,
+      required this.teamId,
       required this.position,
       required this.birthDate,
       required this.hand,
       required this.isPitcher,
       this.onTrade,
-      this.point});
+      this.point,
+      this.batterStatModel,
+      this.batterDailyStatModel,
+      this.pitcherStatModel,
+      this.pitcherDailyStatModel});
 
   factory _$PlayerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlayerModelImplFromJson(json);
@@ -259,9 +391,9 @@ class _$PlayerModelImpl implements _PlayerModel {
   @override
   final String name;
   @override
-  final UserModel owner;
+  final UserModel? owner;
   @override
-  final Team team;
+  final int teamId;
   @override
   final String position;
   @override
@@ -274,10 +406,18 @@ class _$PlayerModelImpl implements _PlayerModel {
   final bool? onTrade;
   @override
   final int? point;
+  @override
+  final BatterStatModel? batterStatModel;
+  @override
+  final BatterDailyStatModel? batterDailyStatModel;
+  @override
+  final PitcherStatModel? pitcherStatModel;
+  @override
+  final PitcherDailyStatModel? pitcherDailyStatModel;
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, name: $name, owner: $owner, team: $team, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onTrade: $onTrade, point: $point)';
+    return 'PlayerModel(id: $id, name: $name, owner: $owner, teamId: $teamId, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onTrade: $onTrade, point: $point, batterStatModel: $batterStatModel, batterDailyStatModel: $batterDailyStatModel, pitcherStatModel: $pitcherStatModel, pitcherDailyStatModel: $pitcherDailyStatModel)';
   }
 
   @override
@@ -288,7 +428,7 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.owner, owner) || other.owner == owner) &&
-            (identical(other.team, team) || other.team == team) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
             (identical(other.position, position) ||
                 other.position == position) &&
             (identical(other.birthDate, birthDate) ||
@@ -297,13 +437,35 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.isPitcher, isPitcher) ||
                 other.isPitcher == isPitcher) &&
             (identical(other.onTrade, onTrade) || other.onTrade == onTrade) &&
-            (identical(other.point, point) || other.point == point));
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.batterStatModel, batterStatModel) ||
+                other.batterStatModel == batterStatModel) &&
+            (identical(other.batterDailyStatModel, batterDailyStatModel) ||
+                other.batterDailyStatModel == batterDailyStatModel) &&
+            (identical(other.pitcherStatModel, pitcherStatModel) ||
+                other.pitcherStatModel == pitcherStatModel) &&
+            (identical(other.pitcherDailyStatModel, pitcherDailyStatModel) ||
+                other.pitcherDailyStatModel == pitcherDailyStatModel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, owner, team, position,
-      birthDate, hand, isPitcher, onTrade, point);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      owner,
+      teamId,
+      position,
+      birthDate,
+      hand,
+      isPitcher,
+      onTrade,
+      point,
+      batterStatModel,
+      batterDailyStatModel,
+      pitcherStatModel,
+      pitcherDailyStatModel);
 
   /// Create a copy of PlayerModel
   /// with the given fields replaced by the non-null parameter values.
@@ -325,14 +487,18 @@ abstract class _PlayerModel implements PlayerModel {
   factory _PlayerModel(
       {required final int id,
       required final String name,
-      required final UserModel owner,
-      required final Team team,
+      final UserModel? owner,
+      required final int teamId,
       required final String position,
       required final DateTime birthDate,
       required final String hand,
       required final bool isPitcher,
       final bool? onTrade,
-      final int? point}) = _$PlayerModelImpl;
+      final int? point,
+      final BatterStatModel? batterStatModel,
+      final BatterDailyStatModel? batterDailyStatModel,
+      final PitcherStatModel? pitcherStatModel,
+      final PitcherDailyStatModel? pitcherDailyStatModel}) = _$PlayerModelImpl;
 
   factory _PlayerModel.fromJson(Map<String, dynamic> json) =
       _$PlayerModelImpl.fromJson;
@@ -342,9 +508,9 @@ abstract class _PlayerModel implements PlayerModel {
   @override
   String get name;
   @override
-  UserModel get owner;
+  UserModel? get owner;
   @override
-  Team get team;
+  int get teamId;
   @override
   String get position;
   @override
@@ -357,6 +523,14 @@ abstract class _PlayerModel implements PlayerModel {
   bool? get onTrade;
   @override
   int? get point;
+  @override
+  BatterStatModel? get batterStatModel;
+  @override
+  BatterDailyStatModel? get batterDailyStatModel;
+  @override
+  PitcherStatModel? get pitcherStatModel;
+  @override
+  PitcherDailyStatModel? get pitcherDailyStatModel;
 
   /// Create a copy of PlayerModel
   /// with the given fields replaced by the non-null parameter values.

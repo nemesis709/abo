@@ -1,5 +1,5 @@
-import 'package:abo/common/converter/datetime_converter.dart';
-import 'package:abo/source/domain/team_model.dart';
+import 'package:abo/source/domain/batter_stat_model.dart';
+import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,14 +11,18 @@ class PlayerModel with _$PlayerModel {
   factory PlayerModel({
     required int id,
     required String name,
-    required UserModel owner,
-    required Team team,
+    UserModel? owner,
+    required int teamId,
     required String position,
     required DateTime birthDate,
     required String hand,
     required bool isPitcher,
     bool? onTrade,
     int? point,
+    BatterStatModel? batterStatModel,
+    BatterDailyStatModel? batterDailyStatModel,
+    PitcherStatModel? pitcherStatModel,
+    PitcherDailyStatModel? pitcherDailyStatModel,
   }) = _PlayerModel;
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) => _$PlayerModelFromJson(json);

@@ -4,9 +4,7 @@ import 'package:abo/common/extension/string_extensions.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/page/batter_stat.dart';
-import 'package:abo/source/view/page/pitcher_stat.dart';
-import 'package:abo/source/view/widget/default_bottom_sheet.dart';
+import 'package:abo/source/domain/team_model.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -138,7 +136,7 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                     Text('투수', style: context.textStyleT14b.copyWith(color: context.colorP10)),
                     Text('타자', style: context.textStyleT14b.copyWith(color: context.colorP10)),
                   ]),
-                  Gap.h4,
+                  Gap.h16,
                   _Header(),
                   Expanded(
                     child: TabBarView(
@@ -195,46 +193,50 @@ class _PlayerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (playerInfo.isPitcher) {
-          showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) {
-                return DefaultBottomSheet(
-                    maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
-                    child: PitcherStatPage(playerInfo: playerInfo));
-              });
-        } else {
-          showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) {
-                return DefaultBottomSheet(
-                    maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
-                    child: BatterStatPage(playerInfo: playerInfo));
-              });
-        }
-      },
+      // onTap: () {
+      //   if (playerInfo.isPitcher) {
+      //     showModalBottomSheet(
+      //         isScrollControlled: true,
+      //         context: context,
+      //         builder: (context) {
+      //           return DefaultBottomSheet(
+      //               maxHeight: context.sizeHeight * 0.8,
+      //               minHeight: context.sizeHeight * 0.5,
+      //               child: PitcherStatPage(playerInfo: playerInfo));
+      //         });
+      //   } else {
+      //     showModalBottomSheet(
+      //         isScrollControlled: true,
+      //         context: context,
+      //         builder: (context) {
+      //           return DefaultBottomSheet(
+      //               maxHeight: context.sizeHeight * 0.8,
+      //               minHeight: context.sizeHeight * 0.5,
+      //               child: BatterStatPage(playerInfo: playerInfo));
+      //         });
+      //   }
+      // },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
             SizedBox(width: 80, child: Center(child: HighlightedText(text: playerInfo.name, highlightWord: query))),
-            SizedBox(width: 40, child: Center(child: Text(playerInfo.team.name, style: context.textStyleT14r))),
+            SizedBox(
+                width: 40,
+                child: Center(child: Text(Team.fromID(playerInfo.teamId).name, style: context.textStyleT14r))),
             SizedBox(
               width: 60,
               child: Center(
                 child: Text(
-                  playerInfo.owner.name,
+                  playerInfo.owner?.name ?? '',
                   style: context.textStyleT14r,
                 ),
               ),
             ),
             const Spacer(),
-            SizedBox(width: 80, child: Center(child: Text('1240 P', style: context.textStyleT14r))),
+            SizedBox(
+                width: 80,
+                child: Center(child: Text(playerInfo.point?.toString() ?? '', style: context.textStyleT14r))),
           ],
         ),
       ),

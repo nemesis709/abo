@@ -9,7 +9,7 @@ part of 'pitcher_stat_model.dart';
 _$PitcherStatModelImpl _$$PitcherStatModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PitcherStatModelImpl(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       bb9: (json['bb9'] as num).toDouble(),
       era: (json['era'] as num).toDouble(),
       fip: (json['fip'] as num).toDouble(),
@@ -38,4 +38,38 @@ Map<String, dynamic> _$$PitcherStatModelImplToJson(
       'save': instance.save,
       'war': instance.war,
       'win': instance.win,
+    };
+
+_$PitcherDailyStatModelImpl _$$PitcherDailyStatModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PitcherDailyStatModelImpl(
+      id: (json['id'] as num).toInt(),
+      playerId: (json['playerId'] as num).toInt(),
+      gameDate: const DateJsonConverter().fromJson(json['gameDate'] as String),
+      innings: (json['innings'] as num).toDouble(),
+      hit: (json['hit'] as num).toInt(),
+      homeRun: (json['homeRun'] as num).toInt(),
+      earnedRus: (json['earnedRus'] as num).toInt(),
+      strikeout: (json['strikeout'] as num).toInt(),
+      walk: (json['walk'] as num).toInt(),
+      whip: (json['whip'] as num).toDouble(),
+      era: (json['era'] as num).toDouble(),
+      re24: (json['re24'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$PitcherDailyStatModelImplToJson(
+        _$PitcherDailyStatModelImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'playerId': instance.playerId,
+      'gameDate': const DateJsonConverter().toJson(instance.gameDate),
+      'innings': instance.innings,
+      'hit': instance.hit,
+      'homeRun': instance.homeRun,
+      'earnedRus': instance.earnedRus,
+      'strikeout': instance.strikeout,
+      'walk': instance.walk,
+      'whip': instance.whip,
+      'era': instance.era,
+      're24': instance.re24,
     };

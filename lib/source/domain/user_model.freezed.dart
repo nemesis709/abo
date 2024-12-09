@@ -21,7 +21,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserModel {
   String get uid => throw _privateConstructorUsedError;
-  int get teamKey => throw _privateConstructorUsedError; // 일정에서 팀에 매칭할 키
+  int? get teamKey => throw _privateConstructorUsedError; // 일정에서 팀에 매칭할 키
   String get name => throw _privateConstructorUsedError;
   int get game => throw _privateConstructorUsedError;
   int get win => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
-      int teamKey,
+      int? teamKey,
       String name,
       int game,
       int win,
@@ -73,7 +73,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @override
   $Res call({
     Object? uid = null,
-    Object? teamKey = null,
+    Object? teamKey = freezed,
     Object? name = null,
     Object? game = null,
     Object? win = null,
@@ -87,10 +87,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      teamKey: null == teamKey
+      teamKey: freezed == teamKey
           ? _value.teamKey
           : teamKey // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -133,7 +133,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String uid,
-      int teamKey,
+      int? teamKey,
       String name,
       int game,
       int win,
@@ -157,7 +157,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = null,
-    Object? teamKey = null,
+    Object? teamKey = freezed,
     Object? name = null,
     Object? game = null,
     Object? win = null,
@@ -171,10 +171,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      teamKey: null == teamKey
+      teamKey: freezed == teamKey
           ? _value.teamKey
           : teamKey // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -212,7 +212,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
       {required this.uid,
-      required this.teamKey,
+      this.teamKey,
       required this.name,
       required this.game,
       required this.win,
@@ -227,7 +227,7 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String uid;
   @override
-  final int teamKey;
+  final int? teamKey;
 // 일정에서 팀에 매칭할 키
   @override
   final String name;
@@ -289,7 +289,7 @@ class _$UserModelImpl implements _UserModel {
 abstract class _UserModel implements UserModel {
   factory _UserModel(
       {required final String uid,
-      required final int teamKey,
+      final int? teamKey,
       required final String name,
       required final int game,
       required final int win,
@@ -304,7 +304,7 @@ abstract class _UserModel implements UserModel {
   @override
   String get uid;
   @override
-  int get teamKey; // 일정에서 팀에 매칭할 키
+  int? get teamKey; // 일정에서 팀에 매칭할 키
   @override
   String get name;
   @override

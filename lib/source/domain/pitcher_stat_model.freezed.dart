@@ -20,7 +20,7 @@ PitcherStatModel _$PitcherStatModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PitcherStatModel {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   double get bb9 => throw _privateConstructorUsedError;
   double get era => throw _privateConstructorUsedError;
   double get fip => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $PitcherStatModelCopyWith<$Res> {
       _$PitcherStatModelCopyWithImpl<$Res, PitcherStatModel>;
   @useResult
   $Res call(
-      {String id,
+      {int id,
       double bb9,
       double era,
       double fip,
@@ -96,7 +96,7 @@ class _$PitcherStatModelCopyWithImpl<$Res, $Val extends PitcherStatModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       bb9: null == bb9
           ? _value.bb9
           : bb9 // ignore: cast_nullable_to_non_nullable
@@ -154,7 +154,7 @@ abstract class _$$PitcherStatModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {int id,
       double bb9,
       double era,
       double fip,
@@ -198,7 +198,7 @@ class __$$PitcherStatModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       bb9: null == bb9
           ? _value.bb9
           : bb9 // ignore: cast_nullable_to_non_nullable
@@ -268,7 +268,7 @@ class _$PitcherStatModelImpl implements _PitcherStatModel {
       _$$PitcherStatModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final double bb9;
   @override
@@ -340,7 +340,7 @@ class _$PitcherStatModelImpl implements _PitcherStatModel {
 
 abstract class _PitcherStatModel implements PitcherStatModel {
   factory _PitcherStatModel(
-      {required final String id,
+      {required final int id,
       required final double bb9,
       required final double era,
       required final double fip,
@@ -357,7 +357,7 @@ abstract class _PitcherStatModel implements PitcherStatModel {
       _$PitcherStatModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   double get bb9;
   @override
@@ -387,4 +387,390 @@ abstract class _PitcherStatModel implements PitcherStatModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PitcherStatModelImplCopyWith<_$PitcherStatModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+PitcherDailyStatModel _$PitcherDailyStatModelFromJson(
+    Map<String, dynamic> json) {
+  return _PitcherDailyStatModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PitcherDailyStatModel {
+  int get id => throw _privateConstructorUsedError;
+  int get playerId => throw _privateConstructorUsedError;
+  @DateJsonConverter()
+  DateTime get gameDate => throw _privateConstructorUsedError;
+  double get innings => throw _privateConstructorUsedError;
+  int get hit => throw _privateConstructorUsedError;
+  int get homeRun => throw _privateConstructorUsedError;
+  int get earnedRus => throw _privateConstructorUsedError;
+  int get strikeout => throw _privateConstructorUsedError;
+  int get walk => throw _privateConstructorUsedError;
+  double get whip => throw _privateConstructorUsedError;
+  double get era => throw _privateConstructorUsedError;
+  int get re24 => throw _privateConstructorUsedError;
+
+  /// Serializes this PitcherDailyStatModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of PitcherDailyStatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PitcherDailyStatModelCopyWith<PitcherDailyStatModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PitcherDailyStatModelCopyWith<$Res> {
+  factory $PitcherDailyStatModelCopyWith(PitcherDailyStatModel value,
+          $Res Function(PitcherDailyStatModel) then) =
+      _$PitcherDailyStatModelCopyWithImpl<$Res, PitcherDailyStatModel>;
+  @useResult
+  $Res call(
+      {int id,
+      int playerId,
+      @DateJsonConverter() DateTime gameDate,
+      double innings,
+      int hit,
+      int homeRun,
+      int earnedRus,
+      int strikeout,
+      int walk,
+      double whip,
+      double era,
+      int re24});
+}
+
+/// @nodoc
+class _$PitcherDailyStatModelCopyWithImpl<$Res,
+        $Val extends PitcherDailyStatModel>
+    implements $PitcherDailyStatModelCopyWith<$Res> {
+  _$PitcherDailyStatModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PitcherDailyStatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? playerId = null,
+    Object? gameDate = null,
+    Object? innings = null,
+    Object? hit = null,
+    Object? homeRun = null,
+    Object? earnedRus = null,
+    Object? strikeout = null,
+    Object? walk = null,
+    Object? whip = null,
+    Object? era = null,
+    Object? re24 = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      gameDate: null == gameDate
+          ? _value.gameDate
+          : gameDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      innings: null == innings
+          ? _value.innings
+          : innings // ignore: cast_nullable_to_non_nullable
+              as double,
+      hit: null == hit
+          ? _value.hit
+          : hit // ignore: cast_nullable_to_non_nullable
+              as int,
+      homeRun: null == homeRun
+          ? _value.homeRun
+          : homeRun // ignore: cast_nullable_to_non_nullable
+              as int,
+      earnedRus: null == earnedRus
+          ? _value.earnedRus
+          : earnedRus // ignore: cast_nullable_to_non_nullable
+              as int,
+      strikeout: null == strikeout
+          ? _value.strikeout
+          : strikeout // ignore: cast_nullable_to_non_nullable
+              as int,
+      walk: null == walk
+          ? _value.walk
+          : walk // ignore: cast_nullable_to_non_nullable
+              as int,
+      whip: null == whip
+          ? _value.whip
+          : whip // ignore: cast_nullable_to_non_nullable
+              as double,
+      era: null == era
+          ? _value.era
+          : era // ignore: cast_nullable_to_non_nullable
+              as double,
+      re24: null == re24
+          ? _value.re24
+          : re24 // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PitcherDailyStatModelImplCopyWith<$Res>
+    implements $PitcherDailyStatModelCopyWith<$Res> {
+  factory _$$PitcherDailyStatModelImplCopyWith(
+          _$PitcherDailyStatModelImpl value,
+          $Res Function(_$PitcherDailyStatModelImpl) then) =
+      __$$PitcherDailyStatModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      int playerId,
+      @DateJsonConverter() DateTime gameDate,
+      double innings,
+      int hit,
+      int homeRun,
+      int earnedRus,
+      int strikeout,
+      int walk,
+      double whip,
+      double era,
+      int re24});
+}
+
+/// @nodoc
+class __$$PitcherDailyStatModelImplCopyWithImpl<$Res>
+    extends _$PitcherDailyStatModelCopyWithImpl<$Res,
+        _$PitcherDailyStatModelImpl>
+    implements _$$PitcherDailyStatModelImplCopyWith<$Res> {
+  __$$PitcherDailyStatModelImplCopyWithImpl(_$PitcherDailyStatModelImpl _value,
+      $Res Function(_$PitcherDailyStatModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PitcherDailyStatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? playerId = null,
+    Object? gameDate = null,
+    Object? innings = null,
+    Object? hit = null,
+    Object? homeRun = null,
+    Object? earnedRus = null,
+    Object? strikeout = null,
+    Object? walk = null,
+    Object? whip = null,
+    Object? era = null,
+    Object? re24 = null,
+  }) {
+    return _then(_$PitcherDailyStatModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      gameDate: null == gameDate
+          ? _value.gameDate
+          : gameDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      innings: null == innings
+          ? _value.innings
+          : innings // ignore: cast_nullable_to_non_nullable
+              as double,
+      hit: null == hit
+          ? _value.hit
+          : hit // ignore: cast_nullable_to_non_nullable
+              as int,
+      homeRun: null == homeRun
+          ? _value.homeRun
+          : homeRun // ignore: cast_nullable_to_non_nullable
+              as int,
+      earnedRus: null == earnedRus
+          ? _value.earnedRus
+          : earnedRus // ignore: cast_nullable_to_non_nullable
+              as int,
+      strikeout: null == strikeout
+          ? _value.strikeout
+          : strikeout // ignore: cast_nullable_to_non_nullable
+              as int,
+      walk: null == walk
+          ? _value.walk
+          : walk // ignore: cast_nullable_to_non_nullable
+              as int,
+      whip: null == whip
+          ? _value.whip
+          : whip // ignore: cast_nullable_to_non_nullable
+              as double,
+      era: null == era
+          ? _value.era
+          : era // ignore: cast_nullable_to_non_nullable
+              as double,
+      re24: null == re24
+          ? _value.re24
+          : re24 // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
+  _$PitcherDailyStatModelImpl(
+      {required this.id,
+      required this.playerId,
+      @DateJsonConverter() required this.gameDate,
+      required this.innings,
+      required this.hit,
+      required this.homeRun,
+      required this.earnedRus,
+      required this.strikeout,
+      required this.walk,
+      required this.whip,
+      required this.era,
+      required this.re24});
+
+  factory _$PitcherDailyStatModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PitcherDailyStatModelImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final int playerId;
+  @override
+  @DateJsonConverter()
+  final DateTime gameDate;
+  @override
+  final double innings;
+  @override
+  final int hit;
+  @override
+  final int homeRun;
+  @override
+  final int earnedRus;
+  @override
+  final int strikeout;
+  @override
+  final int walk;
+  @override
+  final double whip;
+  @override
+  final double era;
+  @override
+  final int re24;
+
+  @override
+  String toString() {
+    return 'PitcherDailyStatModel(id: $id, playerId: $playerId, gameDate: $gameDate, innings: $innings, hit: $hit, homeRun: $homeRun, earnedRus: $earnedRus, strikeout: $strikeout, walk: $walk, whip: $whip, era: $era, re24: $re24)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PitcherDailyStatModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId) &&
+            (identical(other.gameDate, gameDate) ||
+                other.gameDate == gameDate) &&
+            (identical(other.innings, innings) || other.innings == innings) &&
+            (identical(other.hit, hit) || other.hit == hit) &&
+            (identical(other.homeRun, homeRun) || other.homeRun == homeRun) &&
+            (identical(other.earnedRus, earnedRus) ||
+                other.earnedRus == earnedRus) &&
+            (identical(other.strikeout, strikeout) ||
+                other.strikeout == strikeout) &&
+            (identical(other.walk, walk) || other.walk == walk) &&
+            (identical(other.whip, whip) || other.whip == whip) &&
+            (identical(other.era, era) || other.era == era) &&
+            (identical(other.re24, re24) || other.re24 == re24));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, playerId, gameDate, innings,
+      hit, homeRun, earnedRus, strikeout, walk, whip, era, re24);
+
+  /// Create a copy of PitcherDailyStatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PitcherDailyStatModelImplCopyWith<_$PitcherDailyStatModelImpl>
+      get copyWith => __$$PitcherDailyStatModelImplCopyWithImpl<
+          _$PitcherDailyStatModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PitcherDailyStatModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PitcherDailyStatModel implements PitcherDailyStatModel {
+  factory _PitcherDailyStatModel(
+      {required final int id,
+      required final int playerId,
+      @DateJsonConverter() required final DateTime gameDate,
+      required final double innings,
+      required final int hit,
+      required final int homeRun,
+      required final int earnedRus,
+      required final int strikeout,
+      required final int walk,
+      required final double whip,
+      required final double era,
+      required final int re24}) = _$PitcherDailyStatModelImpl;
+
+  factory _PitcherDailyStatModel.fromJson(Map<String, dynamic> json) =
+      _$PitcherDailyStatModelImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  int get playerId;
+  @override
+  @DateJsonConverter()
+  DateTime get gameDate;
+  @override
+  double get innings;
+  @override
+  int get hit;
+  @override
+  int get homeRun;
+  @override
+  int get earnedRus;
+  @override
+  int get strikeout;
+  @override
+  int get walk;
+  @override
+  double get whip;
+  @override
+  double get era;
+  @override
+  int get re24;
+
+  /// Create a copy of PitcherDailyStatModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PitcherDailyStatModelImplCopyWith<_$PitcherDailyStatModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

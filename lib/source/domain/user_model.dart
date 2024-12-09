@@ -7,7 +7,7 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   factory UserModel({
     required String uid,
-    required int teamKey, // 일정에서 팀에 매칭할 키
+    int? teamKey, // 일정에서 팀에 매칭할 키
     required String name,
     required int game,
     required int win,

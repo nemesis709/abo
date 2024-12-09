@@ -14,4 +14,6 @@ enum Team {
   final int id;
 
   const Team(this.name, this.id);
+
+  factory Team.fromID(int id) => Team.values.firstWhere((e) => e.id == id);
 }

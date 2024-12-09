@@ -32,7 +32,7 @@ class SettingsController extends _$SettingsController {
     }, failure: (e, __) {
       e as ApiError;
 
-      ref.showToast(e.message);
+      ref.showToast(e.getMessage());
       return false;
     });
   }

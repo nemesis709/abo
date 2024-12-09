@@ -12,11 +12,10 @@ class ServerError with _$ServerError {
   factory ServerError({
     required int status,
     String? message,
-    required String error,
     @DateTimeJsonConverter() required DateTime datetime,
   }) = _ServerError;
 
-  String get errorCode => error;
+  String get errorCode => message ?? status.toString();
 
   factory ServerError.fromJson(Map<String, dynamic> json) => _$ServerErrorFromJson(json);
 }

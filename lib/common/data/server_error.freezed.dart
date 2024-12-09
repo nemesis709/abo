@@ -22,7 +22,6 @@ ServerError _$ServerErrorFromJson(Map<String, dynamic> json) {
 mixin _$ServerError {
   int get status => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
-  String get error => throw _privateConstructorUsedError;
   @DateTimeJsonConverter()
   DateTime get datetime => throw _privateConstructorUsedError;
 
@@ -45,7 +44,6 @@ abstract class $ServerErrorCopyWith<$Res> {
   $Res call(
       {int status,
       String? message,
-      String error,
       @DateTimeJsonConverter() DateTime datetime});
 }
 
@@ -66,7 +64,6 @@ class _$ServerErrorCopyWithImpl<$Res, $Val extends ServerError>
   $Res call({
     Object? status = null,
     Object? message = freezed,
-    Object? error = null,
     Object? datetime = null,
   }) {
     return _then(_value.copyWith(
@@ -78,10 +75,6 @@ class _$ServerErrorCopyWithImpl<$Res, $Val extends ServerError>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
       datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
@@ -101,7 +94,6 @@ abstract class _$$ServerErrorImplCopyWith<$Res>
   $Res call(
       {int status,
       String? message,
-      String error,
       @DateTimeJsonConverter() DateTime datetime});
 }
 
@@ -120,7 +112,6 @@ class __$$ServerErrorImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = freezed,
-    Object? error = null,
     Object? datetime = null,
   }) {
     return _then(_$ServerErrorImpl(
@@ -132,10 +123,6 @@ class __$$ServerErrorImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
       datetime: null == datetime
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
@@ -150,7 +137,6 @@ class _$ServerErrorImpl extends _ServerError {
   _$ServerErrorImpl(
       {required this.status,
       this.message,
-      required this.error,
       @DateTimeJsonConverter() required this.datetime})
       : super._();
 
@@ -162,14 +148,12 @@ class _$ServerErrorImpl extends _ServerError {
   @override
   final String? message;
   @override
-  final String error;
-  @override
   @DateTimeJsonConverter()
   final DateTime datetime;
 
   @override
   String toString() {
-    return 'ServerError(status: $status, message: $message, error: $error, datetime: $datetime)';
+    return 'ServerError(status: $status, message: $message, datetime: $datetime)';
   }
 
   @override
@@ -179,15 +163,13 @@ class _$ServerErrorImpl extends _ServerError {
             other is _$ServerErrorImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.error, error) || other.error == error) &&
             (identical(other.datetime, datetime) ||
                 other.datetime == datetime));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, message, error, datetime);
+  int get hashCode => Object.hash(runtimeType, status, message, datetime);
 
   /// Create a copy of ServerError
   /// with the given fields replaced by the non-null parameter values.
@@ -209,7 +191,6 @@ abstract class _ServerError extends ServerError {
   factory _ServerError(
           {required final int status,
           final String? message,
-          required final String error,
           @DateTimeJsonConverter() required final DateTime datetime}) =
       _$ServerErrorImpl;
   _ServerError._() : super._();
@@ -221,8 +202,6 @@ abstract class _ServerError extends ServerError {
   int get status;
   @override
   String? get message;
-  @override
-  String get error;
   @override
   @DateTimeJsonConverter()
   DateTime get datetime;

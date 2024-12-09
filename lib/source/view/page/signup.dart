@@ -2,6 +2,7 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/login_controller.dart';
+import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -70,6 +71,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         child: LoadableContent(
             asyncValue: asyncValue,
             content: (asyncValue) {
+              if (asyncValue != null) {
+                context.replaceRoute(const HomeRoute());
+              }
+
               return SingleChildScrollView(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

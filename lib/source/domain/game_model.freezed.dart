@@ -20,10 +20,11 @@ GameModel _$GameModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GameModel {
-  String get gameId => throw _privateConstructorUsedError;
-  DateTime get gameDate => throw _privateConstructorUsedError;
-  UserModel get homeUser => throw _privateConstructorUsedError;
-  UserModel get awayUser => throw _privateConstructorUsedError;
+  int get gameId => throw _privateConstructorUsedError;
+  @DateJsonConverter()
+  DateTime get datetime => throw _privateConstructorUsedError;
+  GameInfoModel get home => throw _privateConstructorUsedError;
+  GameInfoModel get away => throw _privateConstructorUsedError;
 
   /// Serializes this GameModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,13 +42,13 @@ abstract class $GameModelCopyWith<$Res> {
       _$GameModelCopyWithImpl<$Res, GameModel>;
   @useResult
   $Res call(
-      {String gameId,
-      DateTime gameDate,
-      UserModel homeUser,
-      UserModel awayUser});
+      {int gameId,
+      @DateJsonConverter() DateTime datetime,
+      GameInfoModel home,
+      GameInfoModel away});
 
-  $UserModelCopyWith<$Res> get homeUser;
-  $UserModelCopyWith<$Res> get awayUser;
+  $GameInfoModelCopyWith<$Res> get home;
+  $GameInfoModelCopyWith<$Res> get away;
 }
 
 /// @nodoc
@@ -66,27 +67,27 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel>
   @override
   $Res call({
     Object? gameId = null,
-    Object? gameDate = null,
-    Object? homeUser = null,
-    Object? awayUser = null,
+    Object? datetime = null,
+    Object? home = null,
+    Object? away = null,
   }) {
     return _then(_value.copyWith(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameDate: null == gameDate
-          ? _value.gameDate
-          : gameDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      datetime: null == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      homeUser: null == homeUser
-          ? _value.homeUser
-          : homeUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      awayUser: null == awayUser
-          ? _value.awayUser
-          : awayUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      home: null == home
+          ? _value.home
+          : home // ignore: cast_nullable_to_non_nullable
+              as GameInfoModel,
+      away: null == away
+          ? _value.away
+          : away // ignore: cast_nullable_to_non_nullable
+              as GameInfoModel,
     ) as $Val);
   }
 
@@ -94,9 +95,9 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get homeUser {
-    return $UserModelCopyWith<$Res>(_value.homeUser, (value) {
-      return _then(_value.copyWith(homeUser: value) as $Val);
+  $GameInfoModelCopyWith<$Res> get home {
+    return $GameInfoModelCopyWith<$Res>(_value.home, (value) {
+      return _then(_value.copyWith(home: value) as $Val);
     });
   }
 
@@ -104,9 +105,9 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get awayUser {
-    return $UserModelCopyWith<$Res>(_value.awayUser, (value) {
-      return _then(_value.copyWith(awayUser: value) as $Val);
+  $GameInfoModelCopyWith<$Res> get away {
+    return $GameInfoModelCopyWith<$Res>(_value.away, (value) {
+      return _then(_value.copyWith(away: value) as $Val);
     });
   }
 }
@@ -120,15 +121,15 @@ abstract class _$$GameModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String gameId,
-      DateTime gameDate,
-      UserModel homeUser,
-      UserModel awayUser});
+      {int gameId,
+      @DateJsonConverter() DateTime datetime,
+      GameInfoModel home,
+      GameInfoModel away});
 
   @override
-  $UserModelCopyWith<$Res> get homeUser;
+  $GameInfoModelCopyWith<$Res> get home;
   @override
-  $UserModelCopyWith<$Res> get awayUser;
+  $GameInfoModelCopyWith<$Res> get away;
 }
 
 /// @nodoc
@@ -145,27 +146,27 @@ class __$$GameModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gameId = null,
-    Object? gameDate = null,
-    Object? homeUser = null,
-    Object? awayUser = null,
+    Object? datetime = null,
+    Object? home = null,
+    Object? away = null,
   }) {
     return _then(_$GameModelImpl(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameDate: null == gameDate
-          ? _value.gameDate
-          : gameDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      datetime: null == datetime
+          ? _value.datetime
+          : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      homeUser: null == homeUser
-          ? _value.homeUser
-          : homeUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      awayUser: null == awayUser
-          ? _value.awayUser
-          : awayUser // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      home: null == home
+          ? _value.home
+          : home // ignore: cast_nullable_to_non_nullable
+              as GameInfoModel,
+      away: null == away
+          ? _value.away
+          : away // ignore: cast_nullable_to_non_nullable
+              as GameInfoModel,
     ));
   }
 }
@@ -175,25 +176,26 @@ class __$$GameModelImplCopyWithImpl<$Res>
 class _$GameModelImpl implements _GameModel {
   _$GameModelImpl(
       {required this.gameId,
-      required this.gameDate,
-      required this.homeUser,
-      required this.awayUser});
+      @DateJsonConverter() required this.datetime,
+      required this.home,
+      required this.away});
 
   factory _$GameModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameModelImplFromJson(json);
 
   @override
-  final String gameId;
+  final int gameId;
   @override
-  final DateTime gameDate;
+  @DateJsonConverter()
+  final DateTime datetime;
   @override
-  final UserModel homeUser;
+  final GameInfoModel home;
   @override
-  final UserModel awayUser;
+  final GameInfoModel away;
 
   @override
   String toString() {
-    return 'GameModel(gameId: $gameId, gameDate: $gameDate, homeUser: $homeUser, awayUser: $awayUser)';
+    return 'GameModel(gameId: $gameId, datetime: $datetime, home: $home, away: $away)';
   }
 
   @override
@@ -202,18 +204,15 @@ class _$GameModelImpl implements _GameModel {
         (other.runtimeType == runtimeType &&
             other is _$GameModelImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId) &&
-            (identical(other.gameDate, gameDate) ||
-                other.gameDate == gameDate) &&
-            (identical(other.homeUser, homeUser) ||
-                other.homeUser == homeUser) &&
-            (identical(other.awayUser, awayUser) ||
-                other.awayUser == awayUser));
+            (identical(other.datetime, datetime) ||
+                other.datetime == datetime) &&
+            (identical(other.home, home) || other.home == home) &&
+            (identical(other.away, away) || other.away == away));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, gameId, gameDate, homeUser, awayUser);
+  int get hashCode => Object.hash(runtimeType, gameId, datetime, home, away);
 
   /// Create a copy of GameModel
   /// with the given fields replaced by the non-null parameter values.
@@ -233,27 +232,237 @@ class _$GameModelImpl implements _GameModel {
 
 abstract class _GameModel implements GameModel {
   factory _GameModel(
-      {required final String gameId,
-      required final DateTime gameDate,
-      required final UserModel homeUser,
-      required final UserModel awayUser}) = _$GameModelImpl;
+      {required final int gameId,
+      @DateJsonConverter() required final DateTime datetime,
+      required final GameInfoModel home,
+      required final GameInfoModel away}) = _$GameModelImpl;
 
   factory _GameModel.fromJson(Map<String, dynamic> json) =
       _$GameModelImpl.fromJson;
 
   @override
-  String get gameId;
+  int get gameId;
   @override
-  DateTime get gameDate;
+  @DateJsonConverter()
+  DateTime get datetime;
   @override
-  UserModel get homeUser;
+  GameInfoModel get home;
   @override
-  UserModel get awayUser;
+  GameInfoModel get away;
 
   /// Create a copy of GameModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GameModelImplCopyWith<_$GameModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GameInfoModel _$GameInfoModelFromJson(Map<String, dynamic> json) {
+  return _GameInfoModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GameInfoModel {
+  UserModel get user => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
+  List<PlayerModel> get players => throw _privateConstructorUsedError;
+
+  /// Serializes this GameInfoModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $GameInfoModelCopyWith<GameInfoModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GameInfoModelCopyWith<$Res> {
+  factory $GameInfoModelCopyWith(
+          GameInfoModel value, $Res Function(GameInfoModel) then) =
+      _$GameInfoModelCopyWithImpl<$Res, GameInfoModel>;
+  @useResult
+  $Res call({UserModel user, int score, List<PlayerModel> players});
+
+  $UserModelCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class _$GameInfoModelCopyWithImpl<$Res, $Val extends GameInfoModel>
+    implements $GameInfoModelCopyWith<$Res> {
+  _$GameInfoModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? score = null,
+    Object? players = null,
+  }) {
+    return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      players: null == players
+          ? _value.players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
+    ) as $Val);
+  }
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$GameInfoModelImplCopyWith<$Res>
+    implements $GameInfoModelCopyWith<$Res> {
+  factory _$$GameInfoModelImplCopyWith(
+          _$GameInfoModelImpl value, $Res Function(_$GameInfoModelImpl) then) =
+      __$$GameInfoModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({UserModel user, int score, List<PlayerModel> players});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$GameInfoModelImplCopyWithImpl<$Res>
+    extends _$GameInfoModelCopyWithImpl<$Res, _$GameInfoModelImpl>
+    implements _$$GameInfoModelImplCopyWith<$Res> {
+  __$$GameInfoModelImplCopyWithImpl(
+      _$GameInfoModelImpl _value, $Res Function(_$GameInfoModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? score = null,
+    Object? players = null,
+  }) {
+    return _then(_$GameInfoModelImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      players: null == players
+          ? _value._players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$GameInfoModelImpl implements _GameInfoModel {
+  _$GameInfoModelImpl(
+      {required this.user,
+      required this.score,
+      required final List<PlayerModel> players})
+      : _players = players;
+
+  factory _$GameInfoModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GameInfoModelImplFromJson(json);
+
+  @override
+  final UserModel user;
+  @override
+  final int score;
+  final List<PlayerModel> _players;
+  @override
+  List<PlayerModel> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_players);
+  }
+
+  @override
+  String toString() {
+    return 'GameInfoModel(user: $user, score: $score, players: $players)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GameInfoModelImpl &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.score, score) || other.score == score) &&
+            const DeepCollectionEquality().equals(other._players, _players));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, user, score, const DeepCollectionEquality().hash(_players));
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GameInfoModelImplCopyWith<_$GameInfoModelImpl> get copyWith =>
+      __$$GameInfoModelImplCopyWithImpl<_$GameInfoModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GameInfoModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GameInfoModel implements GameInfoModel {
+  factory _GameInfoModel(
+      {required final UserModel user,
+      required final int score,
+      required final List<PlayerModel> players}) = _$GameInfoModelImpl;
+
+  factory _GameInfoModel.fromJson(Map<String, dynamic> json) =
+      _$GameInfoModelImpl.fromJson;
+
+  @override
+  UserModel get user;
+  @override
+  int get score;
+  @override
+  List<PlayerModel> get players;
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GameInfoModelImplCopyWith<_$GameInfoModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

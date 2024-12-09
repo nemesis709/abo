@@ -67,7 +67,9 @@ class MainPage extends StatelessWidget {
               ),
             ),
             ScoreView(
-              dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
+              // dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
+              dateTime: DateTime(2024, 06, 11),
+              isMain: true,
             ),
             Container(height: 12, color: context.colorN95),
             _RankBoard(),

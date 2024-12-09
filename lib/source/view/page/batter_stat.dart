@@ -5,6 +5,7 @@ import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/batter_stat_controller.dart';
 import 'package:abo/source/domain/player_model.dart';
+import 'package:abo/source/domain/team_model.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:auto_route/auto_route.dart';
@@ -35,7 +36,7 @@ class BatterStatPage extends ConsumerWidget {
                   SizedBox(
                     width: 24,
                     height: 24,
-                    child: playerInfo.team.logo,
+                    child: Team.fromID(playerInfo.teamId).logo,
                   ),
                   Gap.w4,
                   Text(playerInfo.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
@@ -54,7 +55,7 @@ class BatterStatPage extends ConsumerWidget {
               Gap.h32,
               Text('2023 시즌', style: context.textStyleT14r.copyWith(color: context.colorP10)),
               Container(
-                color: playerInfo.team.color,
+                color: Team.fromID(playerInfo.teamId).color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -113,7 +114,7 @@ class BatterStatPage extends ConsumerWidget {
                 ],
               ),
               Container(
-                color: playerInfo.team.color,
+                color: Team.fromID(playerInfo.teamId).color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -166,7 +167,7 @@ class BatterStatPage extends ConsumerWidget {
                 ],
               ),
               Container(
-                color: playerInfo.team.color,
+                color: Team.fromID(playerInfo.teamId).color,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

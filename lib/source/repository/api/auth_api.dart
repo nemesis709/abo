@@ -1,11 +1,9 @@
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/source/domain/auth_model.dart';
 import 'package:abo/source/domain/collection_model.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'auth_api.g.dart';
 
@@ -28,19 +26,6 @@ abstract class AuthApi {
 
   @GET('/auth/users')
   Future<CollectionModel<UserModel>> getUserList();
-}
-
-AuthResponse deserializeAuthResponse(Map<String, dynamic> json) {
-  return AuthResponse(
-    session: Session.fromJson(json['session']),
-    user: User.fromJson(json['user']),
-  );
-}
-
-User? deserializeUser(Map<String, dynamic> json) {
-  logger.d(json);
-
-  return User.fromJson(json);
 }
 
 UserModel deserializeUserModel(Map<String, dynamic> json) => UserModel.fromJson(json);

@@ -5,8 +5,8 @@ import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
+import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/repository/auth_repository.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PlayerRepository implements IService {
   PlayerRepository._privateConstructor() {
@@ -21,8 +21,6 @@ class PlayerRepository implements IService {
 
   static PlayerRepository get instance => _instance;
 
-  static SupabaseClient supabase = Supabase.instance.client;
-
   late final SimpleCache<List<PlayerModel>> _playerList;
   late final SimpleCache<List<PlayerModel>> _roasterList;
 
@@ -30,26 +28,10 @@ class PlayerRepository implements IService {
   late final SimpleCache<List<PlayerModel>> _batterList;
 
   Future<Result<List<PlayerModel>>> getPlayerList([bool? isPitcher]) async {
-    final userList = await AuthRepository.instance.getUserList();
-
     return Result.guardFuture(() async {
-      if (isPitcher == true) {
-        return await _pitcherList.getAsync(create: () async {
-          final players = await supabase.from('players').select().eq('is_pitcher', true);
-          return players.map((e) => PlayerModel.fromJson(e)).toList();
-        });
-      } else if (isPitcher == false) {
-        return await _batterList.getAsync(create: () async {
-          final players = await supabase.from('players').select().eq('is_pitcher', false);
+      final result = await apis.playerApi.getPlayerList(isPitcher: isPitcher);
 
-          return players.map((e) => PlayerModel.fromJson(e)).toList();
-        });
-      } else {
-        return await _playerList.getAsync(create: () async {
-          final players = await supabase.from('players').select();
-          return players.map((e) => PlayerModel.fromJson(e)).toList();
-        });
-      }
+      return result.data;
     });
   }
 
@@ -66,9 +48,12 @@ class PlayerRepository implements IService {
       return await _roasterList.getAsync(create: () async {
         final currentUser = await AuthRepository.instance.getCurrentUser();
 
-        final players = await supabase.from('players').select().eq('user_id', currentUser!.uid);
-        final userList = await AuthRepository.instance.getUserList();
-        return players.map((e) => PlayerModel.fromJson(e)).toList();
+        if (currentUser == null) {
+          throw Error();
+        } else {
+          final players = await apis.playerApi.getRoaster(user: currentUser);
+          return players.data;
+        }
       });
     });
   }
