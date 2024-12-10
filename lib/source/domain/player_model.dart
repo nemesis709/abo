@@ -27,3 +27,7 @@ class PlayerModel with _$PlayerModel {
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) => _$PlayerModelFromJson(json);
 }
+
+extension PlayerModelExtension on PlayerModel {
+  get dailyPoint => batterDailyStatModel?.re24 ?? pitcherDailyStatModel?.re24 ?? 0;
+}

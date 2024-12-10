@@ -2,6 +2,7 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/calendar_controller.dart';
 import 'package:abo/source/domain/game_model.dart';
+import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -189,28 +190,52 @@ class _GameInfo extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Gap.h24,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...awayPlayers.map(
-                        (e) => Text('${e.name} ${e.batterDailyStatModel?.re24 ?? e.pitcherDailyStatModel?.re24} P'))
-                  ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [...awayPlayers.map((e) => _PlayerInfo(e))],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...homePlayers.map(
-                        (e) => Text('${e.name} ${e.batterDailyStatModel?.re24 ?? e.pitcherDailyStatModel?.re24} P'))
-                  ],
+                  children: [...homePlayers.map((e) => _PlayerInfo(e))],
                 ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PlayerInfo extends StatelessWidget {
+  const _PlayerInfo(
+    this.playerModel,
+  );
+
+  final PlayerModel playerModel;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 130,
+      child: Row(
+        children: [
+          SizedBox(width: 24, child: Text(playerModel.position)),
+          Text(
+            playerModel.name,
+            style: context.textStyleT14b,
+          ),
+          Spacer(),
+          Text(
+            '${playerModel.dailyPoint} P',
+            style: context.textStyleT14r,
+          ),
+        ],
       ),
     );
   }

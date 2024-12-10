@@ -26,7 +26,6 @@ dependencies:
   lottie:
 
   #Authentication
-  supabase_flutter: ^2.8.0
   local_auth: ^2.1.7
   pinput: ^5.0.0
 
@@ -63,12 +62,12 @@ dependencies:
   flutter_native_splash: ^2.3.2
   flutter_svg: ^2.0.7
   shimmer: ^3.0.0
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.3.1
 
   #Notification
   timezone: ^0.10.0
-  flutter_timezone: ^3.0.1
+  flutter_timezone: ^4.0.0
   flutter_local_notifications: ^18.0.1
 
   #Else
@@ -87,6 +86,7 @@ dependencies:
   fluttertoast: ^8.2.2
   cloud_firestore: ^5.4.5
   table_calendar: ^3.1.2
+  shared_preferences: ^2.3.3
 
 # for test
 #  device_preview: ^1.1.0

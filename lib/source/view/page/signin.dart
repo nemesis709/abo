@@ -110,23 +110,23 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                         onTapOutside: (_) => passwordFocusNode.unfocus(),
                       ),
                       Gap.h16,
-                      // InkWell(
-                      //   onTap: () => setState(() {
-                      //     persistent = !persistent;
-                      //   }),
-                      //   child: Row(
-                      //     children: [
-                      //       Checkbox(
-                      //         value: persistent,
-                      //         onChanged: (_) => setState(() {
-                      //           persistent = !persistent;
-                      //         }),
-                      //       ),
-                      //       Gap.w8,
-                      //       Text('자동 로그인'),
-                      //     ],
-                      //   ),
-                      // ),
+                      InkWell(
+                        onTap: () => setState(() {
+                          persistent = !persistent;
+                        }),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: persistent,
+                              onChanged: (_) => setState(() {
+                                persistent = !persistent;
+                              }),
+                            ),
+                            Gap.w8,
+                            Text('자동 로그인'),
+                          ],
+                        ),
+                      ),
                       Spacer(),
                       FilledButton(
                           style: context.buttonStyle48P10,
