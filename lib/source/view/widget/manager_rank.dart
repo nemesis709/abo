@@ -73,7 +73,7 @@ class ManagerRank extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 60,
+                    width: 90,
                     child: Center(
                       child: Text(
                         '포인트',
@@ -158,16 +158,16 @@ class _ManagerItem extends StatelessWidget {
             width: 40,
             child: Center(
               child: Text(
-                userModel.rate.toString(),
+                userModel.rate.toStringAsFixed(3),
                 style: context.textStyleT14r,
               ),
             ),
           ),
           SizedBox(
-            width: 60,
+            width: 90,
             child: Center(
               child: Text(
-                '${(userModel.point).formatCurrency()} P',
+                '${userModel.point.formatCurrency()} P',
                 style: context.textStyleT14r,
               ),
             ),

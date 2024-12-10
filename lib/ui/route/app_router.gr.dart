@@ -10,7 +10,7 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [BatterStatPage]
+/// [BatterStat]
 class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
   BatterStatRoute({
     Key? key,
@@ -31,7 +31,7 @@ class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<BatterStatRouteArgs>();
-      return BatterStatPage(
+      return BatterStat(
         key: args.key,
         playerInfo: args.playerInfo,
       );
@@ -132,7 +132,7 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PitcherStatPage]
+/// [PitcherStat]
 class PitcherStatRoute extends PageRouteInfo<PitcherStatRouteArgs> {
   PitcherStatRoute({
     Key? key,
@@ -153,7 +153,7 @@ class PitcherStatRoute extends PageRouteInfo<PitcherStatRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<PitcherStatRouteArgs>();
-      return PitcherStatPage(
+      return PitcherStat(
         key: args.key,
         playerInfo: args.playerInfo,
       );

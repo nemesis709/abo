@@ -3,9 +3,9 @@ import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/roaster_controller.dart';
 import 'package:abo/source/domain/player_model.dart';
-import 'package:abo/source/view/page/batter_stat.dart';
-import 'package:abo/source/view/page/pitcher_stat.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
+import 'package:abo/source/view/widget/stats/batter_stat.dart';
+import 'package:abo/source/view/widget/stats/pitcher_stat.dart';
 import 'package:abo/ui/route/app_router.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
@@ -72,29 +72,29 @@ class _PlayerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (playerInfo.isPitcher) {
-          showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) {
-                return DefaultBottomSheet(
-                    maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
-                    child: PitcherStatPage(playerInfo: playerInfo));
-              });
-        } else {
-          showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) {
-                return DefaultBottomSheet(
-                    maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
-                    child: BatterStatPage(playerInfo: playerInfo));
-              });
-        }
-      },
+      // onTap: () {
+      //   if (playerInfo.isPitcher) {
+      //     showModalBottomSheet(
+      //         isScrollControlled: true,
+      //         context: context,
+      //         builder: (context) {
+      //           return DefaultBottomSheet(
+      //               maxHeight: context.sizeHeight * 0.8,
+      //               minHeight: context.sizeHeight * 0.5,
+      //               child: PitcherStat(playerInfo: playerInfo));
+      //         });
+      //   } else {
+      //     showModalBottomSheet(
+      //         isScrollControlled: true,
+      //         context: context,
+      //         builder: (context) {
+      //           return DefaultBottomSheet(
+      //               maxHeight: context.sizeHeight * 0.8,
+      //               minHeight: context.sizeHeight * 0.5,
+      //               child: BatterStat(playerInfo: playerInfo));
+      //         });
+      //   }
+      // },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

@@ -1,9 +1,9 @@
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/page/calendar.dart';
 import 'package:abo/source/view/page/home.dart';
-import 'package:abo/source/view/page/batter_stat.dart';
+import 'package:abo/source/view/widget/stats/batter_stat.dart';
 import 'package:abo/source/view/page/info.dart';
-import 'package:abo/source/view/page/pitcher_stat.dart';
+import 'package:abo/source/view/widget/stats/pitcher_stat.dart';
 import 'package:abo/source/view/page/player_roaster.dart';
 import 'package:abo/source/view/page/settings.dart';
 import 'package:abo/source/view/page/signin.dart';

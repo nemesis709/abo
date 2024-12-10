@@ -1,8 +1,12 @@
 import 'package:abo/common/common_constants.dart';
+import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/calendar_controller.dart';
 import 'package:abo/source/domain/game_model.dart';
 import 'package:abo/source/domain/player_model.dart';
+import 'package:abo/source/view/widget/default_bottom_sheet.dart';
+import 'package:abo/source/view/widget/stats/batter_daily_stat.dart';
+import 'package:abo/source/view/widget/stats/pitcher_daily_stat.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -221,21 +225,46 @@ class _PlayerInfo extends StatelessWidget {
   final PlayerModel playerModel;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 130,
-      child: Row(
-        children: [
-          SizedBox(width: 24, child: Text(playerModel.position)),
-          Text(
-            playerModel.name,
-            style: context.textStyleT14b,
-          ),
-          Spacer(),
-          Text(
-            '${playerModel.dailyPoint} P',
-            style: context.textStyleT14r,
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        if (playerModel.pitcherDailyStatModel != null) {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.5,
+                    child: PitcherDailyStat(playerModel: playerModel));
+              });
+        } else if (playerModel.batterDailyStatModel != null) {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.5,
+                    child: BatterDailyStat(playerModel: playerModel));
+              });
+        }
+      },
+      child: SizedBox(
+        width: 130,
+        child: Row(
+          children: [
+            SizedBox(width: 24, child: Text(playerModel.position)),
+            Text(
+              playerModel.name,
+              style: context.textStyleT14b,
+            ),
+            Spacer(),
+            Text(
+              '${playerModel.dailyPoint} P',
+              style: context.textStyleT14r,
+            ),
+          ],
+        ),
       ),
     );
   }

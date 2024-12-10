@@ -19,7 +19,7 @@ class CalendarPage extends ConsumerStatefulWidget {
 }
 
 class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerProviderStateMixin {
-  DateTime focusedDay = DateTime(2024, 6, 11);
+  DateTime focusedDay = DateTime(2024, 04, 02);
   // DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0);
 
   DateTime? selectedDay;

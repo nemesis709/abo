@@ -49,9 +49,10 @@ class MainPage extends StatelessWidget {
                   ),
                   Gap.w8,
                   Text(
-                    DateTime.now()
-                        .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
-                        .displayDateDay(),
+                    // DateTime.now()
+                    //     .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
+                    //     .displayDateDay(),
+                    DateTime(2024, 04, 02).displayDate(),
                     style: context.textStyleT14m.copyWith(color: context.colorN40),
                   ),
                   Gap.h24,
@@ -68,7 +69,7 @@ class MainPage extends StatelessWidget {
             ),
             ScoreView(
               // dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
-              dateTime: DateTime(2024, 06, 11),
+              dateTime: DateTime(2024, 04, 02),
               isMain: true,
             ),
             Container(height: 12, color: context.colorN95),
@@ -110,29 +111,29 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
                 style: context.textStyleT16b.copyWith(color: context.colorP10),
               ),
               Gap.w16,
-              InkWell(
-                onTap: () => setState(() {
-                  isManager = true;
-                }),
-                child: Text(
-                  '감독',
-                  style: (isManager
-                      ? context.textStyleT14b.copyWith(color: context.colorP10)
-                      : context.textStyleT14r.copyWith(color: context.colorN40)),
-                ),
-              ),
-              Text(' | '),
-              InkWell(
-                onTap: () => setState(() {
-                  isManager = false;
-                }),
-                child: Text(
-                  '선수',
-                  style: (isManager
-                      ? context.textStyleT14r.copyWith(color: context.colorN40)
-                      : context.textStyleT14b.copyWith(color: context.colorP10)),
-                ),
-              ),
+              // InkWell(
+              //   onTap: () => setState(() {
+              //     isManager = true;
+              //   }),
+              //   child: Text(
+              //     '감독',
+              //     style: (isManager
+              //         ? context.textStyleT14b.copyWith(color: context.colorP10)
+              //         : context.textStyleT14r.copyWith(color: context.colorN40)),
+              //   ),
+              // ),
+              // Text(' | '),
+              // InkWell(
+              //   onTap: () => setState(() {
+              //     isManager = false;
+              //   }),
+              //   child: Text(
+              //     '선수',
+              //     style: (isManager
+              //         ? context.textStyleT14r.copyWith(color: context.colorN40)
+              //         : context.textStyleT14b.copyWith(color: context.colorP10)),
+              //   ),
+              // ),
               Spacer(),
               InkWell(
                 onTap: () => context.pushRoute(RankRoute()),
@@ -144,7 +145,8 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
             ],
           ),
           Gap.h16,
-          isManager ? ManagerRank(userController: userController) : PlayerRank(playerController: playerController),
+          // isManager ? ManagerRank(userController: userController) : PlayerRank(playerController: playerController),
+          ManagerRank(userController: userController),
         ],
       ),
     );

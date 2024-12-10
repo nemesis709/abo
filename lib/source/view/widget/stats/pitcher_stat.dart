@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class PitcherStatPage extends ConsumerWidget {
-  const PitcherStatPage({
+class PitcherStat extends ConsumerWidget {
+  const PitcherStat({
     super.key,
     required this.playerInfo,
   });
