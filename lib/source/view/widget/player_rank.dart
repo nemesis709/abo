@@ -76,18 +76,18 @@ class PlayerRank extends ConsumerWidget {
 class PlayerItem extends StatelessWidget {
   const PlayerItem(
     this.rank,
-    this.playerInfo, {
+    this.playerModel, {
     super.key,
   });
 
   final int rank;
-  final PlayerModel playerInfo;
+  final PlayerModel playerModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (playerInfo.isPitcher) {
+        if (playerModel.isPitcher) {
           showModalBottomSheet(
               isScrollControlled: true,
               context: context,
@@ -95,7 +95,7 @@ class PlayerItem extends StatelessWidget {
                 return DefaultBottomSheet(
                     maxHeight: context.sizeHeight * 0.8,
                     minHeight: context.sizeHeight * 0.5,
-                    child: PitcherStat(playerInfo: playerInfo));
+                    child: PitcherStat(playerModel: playerModel));
               });
         } else {
           showModalBottomSheet(
@@ -105,7 +105,7 @@ class PlayerItem extends StatelessWidget {
                 return DefaultBottomSheet(
                     maxHeight: context.sizeHeight * 0.8,
                     minHeight: context.sizeHeight * 0.5,
-                    child: BatterStat(playerInfo: playerInfo));
+                    child: BatterStat(playerModel: playerModel));
               });
         }
       },
@@ -125,7 +125,7 @@ class PlayerItem extends StatelessWidget {
             SizedBox(
               width: 60,
               child: Text(
-                playerInfo.name,
+                playerModel.name,
                 style: context.textStyleT14b,
               ),
             ),
@@ -133,7 +133,7 @@ class PlayerItem extends StatelessWidget {
               width: 30,
               child: Center(
                 child: Text(
-                  playerInfo.position,
+                  playerModel.position.displayString,
                   style: context.textStyleT14r,
                 ),
               ),

@@ -22,8 +22,6 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
   DateTime focusedDay = DateTime(2024, 04, 02);
   // DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0);
 
-  DateTime? selectedDay;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,13 +50,12 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
                         ),
                         focusedDay: focusedDay,
                         selectedDayPredicate: (day) {
-                          return isSameDay(selectedDay, day);
+                          return isSameDay(focusedDay, day);
                         },
                         onDaySelected: (selected, focused) {
-                          if (!isSameDay(selectedDay, selected)) {
+                          if (!isSameDay(focusedDay, selected)) {
                             // Call `setState()` when updating the selected day
                             setState(() {
-                              selectedDay = selected;
                               focusedDay = focused;
                             });
                             context.maybePop();

@@ -10,52 +10,6 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [BatterStat]
-class BatterStatRoute extends PageRouteInfo<BatterStatRouteArgs> {
-  BatterStatRoute({
-    Key? key,
-    required PlayerModel playerInfo,
-    List<PageRouteInfo>? children,
-  }) : super(
-          BatterStatRoute.name,
-          args: BatterStatRouteArgs(
-            key: key,
-            playerInfo: playerInfo,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'BatterStatRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<BatterStatRouteArgs>();
-      return BatterStat(
-        key: args.key,
-        playerInfo: args.playerInfo,
-      );
-    },
-  );
-}
-
-class BatterStatRouteArgs {
-  const BatterStatRouteArgs({
-    this.key,
-    required this.playerInfo,
-  });
-
-  final Key? key;
-
-  final PlayerModel playerInfo;
-
-  @override
-  String toString() {
-    return 'BatterStatRouteArgs{key: $key, playerInfo: $playerInfo}';
-  }
-}
-
-/// generated route for
 /// [CalendarPage]
 class CalendarRoute extends PageRouteInfo<void> {
   const CalendarRoute({List<PageRouteInfo>? children})
@@ -129,52 +83,6 @@ class MainRoute extends PageRouteInfo<void> {
       return const MainPage();
     },
   );
-}
-
-/// generated route for
-/// [PitcherStat]
-class PitcherStatRoute extends PageRouteInfo<PitcherStatRouteArgs> {
-  PitcherStatRoute({
-    Key? key,
-    required PlayerModel playerInfo,
-    List<PageRouteInfo>? children,
-  }) : super(
-          PitcherStatRoute.name,
-          args: PitcherStatRouteArgs(
-            key: key,
-            playerInfo: playerInfo,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'PitcherStatRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<PitcherStatRouteArgs>();
-      return PitcherStat(
-        key: args.key,
-        playerInfo: args.playerInfo,
-      );
-    },
-  );
-}
-
-class PitcherStatRouteArgs {
-  const PitcherStatRouteArgs({
-    this.key,
-    required this.playerInfo,
-  });
-
-  final Key? key;
-
-  final PlayerModel playerInfo;
-
-  @override
-  String toString() {
-    return 'PitcherStatRouteArgs{key: $key, playerInfo: $playerInfo}';
-  }
 }
 
 /// generated route for

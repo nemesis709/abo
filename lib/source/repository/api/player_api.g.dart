@@ -23,19 +23,19 @@ class _PlayerApi implements PlayerApi {
 
   @override
   Future<CollectionModel<PlayerModel>> getRoaster(
-      {required UserModel user}) async {
+      {required String userId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = user;
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CollectionModel<PlayerModel>>(Options(
-      method: 'POST',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/player/roaster',
+          '/player/${userId}/roaster',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -84,6 +84,75 @@ class _PlayerApi implements PlayerApi {
     try {
       _value =
           await compute(deserializeCollectionModelPlayerModel, _result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<LineupModel> getLineUp({required String userId}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<LineupModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/player/${userId}/lineup',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LineupModel _value;
+    try {
+      _value = await compute(deserializeLineupModel, _result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<LineupModel> setLineUp({
+    required String userId,
+    required LineupModel lineup,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = lineup;
+    final _options = _setStreamType<LineupModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/player/${userId}/lineup',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LineupModel _value;
+    try {
+      _value = await compute(deserializeLineupModel, _result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -123,7 +123,7 @@ class _ScoreView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+            textBaseline: TextBaseline.ideographic,
             children: [
               SizedBox(
                 width: 60,
@@ -168,9 +168,10 @@ class _ScoreView extends StatelessWidget {
                   ),
                 ),
               ),
+              Icon(Icons.search, size: 16, color: context.colorN60),
             ],
           ),
-          Gap.h8,
+          Gap.h12,
         ],
       ),
     );
@@ -202,11 +203,11 @@ class _GameInfo extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [...awayPlayers.map((e) => _PlayerInfo(e))],
+                  children: [...awayPlayers.map((e) => _PlayerModel(e))],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [...homePlayers.map((e) => _PlayerInfo(e))],
+                  children: [...homePlayers.map((e) => _PlayerModel(e))],
                 ),
               ],
             ),
@@ -217,8 +218,8 @@ class _GameInfo extends StatelessWidget {
   }
 }
 
-class _PlayerInfo extends StatelessWidget {
-  const _PlayerInfo(
+class _PlayerModel extends StatelessWidget {
+  const _PlayerModel(
     this.playerModel,
   );
 
@@ -234,7 +235,7 @@ class _PlayerInfo extends StatelessWidget {
               builder: (context) {
                 return DefaultBottomSheet(
                     maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
+                    minHeight: context.sizeHeight * 0.3,
                     child: PitcherDailyStat(playerModel: playerModel));
               });
         } else if (playerModel.batterDailyStatModel != null) {
@@ -244,23 +245,25 @@ class _PlayerInfo extends StatelessWidget {
               builder: (context) {
                 return DefaultBottomSheet(
                     maxHeight: context.sizeHeight * 0.8,
-                    minHeight: context.sizeHeight * 0.5,
+                    minHeight: context.sizeHeight * 0.3,
                     child: BatterDailyStat(playerModel: playerModel));
               });
         }
       },
       child: SizedBox(
-        width: 130,
+        width: 140,
+        height: 32,
         child: Row(
           children: [
-            SizedBox(width: 24, child: Text(playerModel.position)),
+            SizedBox(width: 24, child: Text(playerModel.position.displayString)),
             Text(
               playerModel.name,
-              style: context.textStyleT14b,
+              style: context.textStyleT14b.copyWith(decoration: TextDecoration.underline),
             ),
+            Gap.w4,
             Spacer(),
             Text(
-              '${playerModel.dailyPoint} P',
+              '${(playerModel.dailyPoint * (playerModel.onLineup == true ? (playerModel.dailyPoint > 0 ? 1.1 : 0.9) : 1)).toInt()} P',
               style: context.textStyleT14r,
             ),
           ],

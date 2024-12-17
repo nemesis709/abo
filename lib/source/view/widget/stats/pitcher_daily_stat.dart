@@ -6,10 +6,6 @@ import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/domain/team_model.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:flutter/material.dart';
 
 class PitcherDailyStat extends StatelessWidget {
@@ -42,19 +38,11 @@ class PitcherDailyStat extends StatelessWidget {
             Gap.w4,
             Text(playerModel.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
             Gap.w4,
+            Text(playerModel.position.displayString, style: context.textStyleT14b.copyWith(color: context.colorN40)),
           ],
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(playerModel.position),
-            Text(' | '),
-            Text(playerModel.birthDate.toServerDate()),
-            Text(' | '),
-            Text(playerModel.hand),
-          ],
-        ),
+        Text(playerModel.birthDate.displayYyyymmdd(), style: context.textStyleT14m),
+        Text(playerModel.hand, style: context.textStyleT14m),
         Gap.h32,
         Container(
           color: Team.fromID(playerModel.teamId).color,
@@ -65,7 +53,7 @@ class PitcherDailyStat extends StatelessWidget {
                   width: (context.sizeWidth - 64) / 3,
                   child: Center(
                       child: Text(
-                    '이닝',
+                    'Inn.',
                     style: context.textStyleB14r.copyWith(
                       color: context.colorN100,
                     ),
@@ -96,15 +84,27 @@ class PitcherDailyStat extends StatelessWidget {
           children: [
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(pitcherInfo.innings.toString())),
+              child: Center(
+                  child: Text(
+                pitcherInfo.innings.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(pitcherInfo.hit.toString())),
+              child: Center(
+                  child: Text(
+                pitcherInfo.hit.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(pitcherInfo.earnedRus.toString())),
+              child: Center(
+                  child: Text(
+                pitcherInfo.earnedRus.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
           ],
         ),
@@ -149,19 +149,28 @@ class PitcherDailyStat extends StatelessWidget {
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.strikeout.toString()),
+                child: Text(
+                  pitcherInfo.strikeout.toString(),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.walk.toString()),
+                child: Text(
+                  pitcherInfo.walk.toString(),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.homeRun.toString()),
+                child: Text(
+                  pitcherInfo.homeRun.toString(),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
           ],
@@ -207,19 +216,28 @@ class PitcherDailyStat extends StatelessWidget {
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.era.toStringAsFixed(2)),
+                child: Text(
+                  pitcherInfo.era.toStringAsFixed(2),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.whip.toStringAsFixed(2)),
+                child: Text(
+                  pitcherInfo.whip.toStringAsFixed(2),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
               child: Center(
-                child: Text(pitcherInfo.re24.toString()),
+                child: Text(
+                  pitcherInfo.re24.toString(),
+                  style: context.textStyleT14b,
+                ),
               ),
             ),
           ],

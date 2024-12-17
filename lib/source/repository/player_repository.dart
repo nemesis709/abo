@@ -3,6 +3,7 @@ import 'package:abo/common/data/result.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
+import 'package:abo/source/domain/lineup_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/repository/api/apis.dart';
@@ -47,14 +48,39 @@ class PlayerRepository implements IService {
     return Result.guardFuture(() async {
       return await _roasterList.getAsync(create: () async {
         final currentUser = await AuthRepository.instance.getCurrentUser();
-
         if (currentUser == null) {
           throw Error();
         } else {
-          final players = await apis.playerApi.getRoaster(user: currentUser);
+          final players = await apis.playerApi.getRoaster(userId: currentUser.uid);
           return players.data;
         }
       });
+    });
+  }
+
+  Future<Result<LineupModel>> getLineUp() async {
+    return Result.guardFuture(() async {
+      final currentUser = await AuthRepository.instance.getCurrentUser();
+      if (currentUser == null) {
+        throw Error();
+      } else {
+        final result = await apis.playerApi.getLineUp(userId: currentUser.uid);
+        return result;
+      }
+    });
+  }
+
+  Future<Result<LineupModel>> setLineUp({
+    required LineupModel lineupModel,
+  }) async {
+    return Result.guardFuture(() async {
+      final currentUser = await AuthRepository.instance.getCurrentUser();
+      if (currentUser == null) {
+        throw Error();
+      } else {
+        final result = await apis.playerApi.setLineUp(userId: currentUser.uid, lineup: lineupModel);
+        return result;
+      }
     });
   }
 

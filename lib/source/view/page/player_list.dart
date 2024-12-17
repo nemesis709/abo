@@ -46,7 +46,6 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
   @override
   Widget build(BuildContext context) {
     final players = ref.watch(playerControllerProvider(null));
-    final notifier = ref.read(playerControllerProvider(null).notifier);
 
     return Scaffold(
         appBar: AppBar(
@@ -121,7 +120,7 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                               children: content
                                   .where((e) => e.name.contains(query))
                                   .map((e) => _PlayerItem(
-                                        playerInfo: e,
+                                        playerModel: e,
                                         query: query,
                                       ))
                                   .toList(),
@@ -150,7 +149,7 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                                   children: content
                                       .where((e) => e.isPitcher)
                                       .map((e) => _PlayerItem(
-                                            playerInfo: e,
+                                            playerModel: e,
                                             query: '',
                                           ))
                                       .toList(),
@@ -165,7 +164,7 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                                   children: content
                                       .where((e) => !e.isPitcher)
                                       .map((e) => _PlayerItem(
-                                            playerInfo: e,
+                                            playerModel: e,
                                             query: '',
                                           ))
                                       .toList(),
@@ -183,18 +182,18 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
 
 class _PlayerItem extends StatelessWidget {
   const _PlayerItem({
-    required this.playerInfo,
+    required this.playerModel,
     required this.query,
   });
 
-  final PlayerModel playerInfo;
+  final PlayerModel playerModel;
   final String query;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       // onTap: () {
-      //   if (playerInfo.isPitcher) {
+      //   if (playerModel.isPitcher) {
       //     showModalBottomSheet(
       //         isScrollControlled: true,
       //         context: context,
@@ -202,7 +201,7 @@ class _PlayerItem extends StatelessWidget {
       //           return DefaultBottomSheet(
       //               maxHeight: context.sizeHeight * 0.8,
       //               minHeight: context.sizeHeight * 0.5,
-      //               child: PitcherStatPage(playerInfo: playerInfo));
+      //               child: PitcherStatPage(playerModel: playerModel));
       //         });
       //   } else {
       //     showModalBottomSheet(
@@ -212,7 +211,7 @@ class _PlayerItem extends StatelessWidget {
       //           return DefaultBottomSheet(
       //               maxHeight: context.sizeHeight * 0.8,
       //               minHeight: context.sizeHeight * 0.5,
-      //               child: BatterStatPage(playerInfo: playerInfo));
+      //               child: BatterStatPage(playerModel: playerModel));
       //         });
       //   }
       // },
@@ -220,15 +219,15 @@ class _PlayerItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            SizedBox(width: 80, child: Center(child: HighlightedText(text: playerInfo.name, highlightWord: query))),
+            SizedBox(width: 80, child: Center(child: HighlightedText(text: playerModel.name, highlightWord: query))),
             SizedBox(
                 width: 40,
-                child: Center(child: Text(Team.fromID(playerInfo.teamId).name, style: context.textStyleT14r))),
+                child: Center(child: Text(Team.fromID(playerModel.teamId).name, style: context.textStyleT14r))),
             SizedBox(
               width: 60,
               child: Center(
                 child: Text(
-                  playerInfo.owner?.name ?? '',
+                  playerModel.owner?.name ?? '',
                   style: context.textStyleT14r,
                 ),
               ),
@@ -236,7 +235,7 @@ class _PlayerItem extends StatelessWidget {
             const Spacer(),
             SizedBox(
                 width: 80,
-                child: Center(child: Text(playerInfo.point?.toString() ?? '', style: context.textStyleT14r))),
+                child: Center(child: Text(playerModel.point?.toString() ?? '', style: context.textStyleT14r))),
           ],
         ),
       ),

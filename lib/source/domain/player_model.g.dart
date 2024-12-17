@@ -14,10 +14,12 @@ _$PlayerModelImpl _$$PlayerModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : UserModel.fromJson(json['owner'] as Map<String, dynamic>),
       teamId: (json['teamId'] as num).toInt(),
-      position: json['position'] as String,
+      position: positionFromJson(json['position'] as String),
       birthDate: DateTime.parse(json['birthDate'] as String),
       hand: json['hand'] as String,
       isPitcher: json['isPitcher'] as bool,
+      onLineup: json['onLineup'] as bool?,
+      isForeigner: json['isForeigner'] as bool?,
       onTrade: json['onTrade'] as bool?,
       point: (json['point'] as num?)?.toInt(),
       batterStatModel: json['batterStatModel'] == null
@@ -44,10 +46,12 @@ Map<String, dynamic> _$$PlayerModelImplToJson(_$PlayerModelImpl instance) =>
       'name': instance.name,
       'owner': instance.owner,
       'teamId': instance.teamId,
-      'position': instance.position,
+      'position': _$PositionEnumMap[instance.position]!,
       'birthDate': instance.birthDate.toIso8601String(),
       'hand': instance.hand,
       'isPitcher': instance.isPitcher,
+      'onLineup': instance.onLineup,
+      'isForeigner': instance.isForeigner,
       'onTrade': instance.onTrade,
       'point': instance.point,
       'batterStatModel': instance.batterStatModel,
@@ -55,3 +59,16 @@ Map<String, dynamic> _$$PlayerModelImplToJson(_$PlayerModelImpl instance) =>
       'pitcherStatModel': instance.pitcherStatModel,
       'pitcherDailyStatModel': instance.pitcherDailyStatModel,
     };
+
+const _$PositionEnumMap = {
+  Position.pitcher: 'pitcher',
+  Position.catcher: 'catcher',
+  Position.firstBase: 'firstBase',
+  Position.secondBase: 'secondBase',
+  Position.thirdBase: 'thirdBase',
+  Position.shortStop: 'shortStop',
+  Position.leftField: 'leftField',
+  Position.centerField: 'centerField',
+  Position.rightField: 'rightField',
+  Position.designated: 'designated',
+};

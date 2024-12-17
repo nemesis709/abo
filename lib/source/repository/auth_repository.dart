@@ -52,15 +52,12 @@ class AuthRepository implements IService {
 
   Future<Result<void>> signIn(String email, String password, bool persistence) async {
     return Result.guardFuture(() async {
-      _currentUser.getAsync(create: () async {
-        final result = await apis.authApi.signIn(auth: AuthModel(email: email, password: password));
-        if (persistence) {
-          final SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString('user', jsonEncode(result.toJson()));
-        }
-
-        return result;
-      });
+      final result = await apis.authApi.signIn(auth: AuthModel(email: email, password: password));
+      if (persistence) {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('user', jsonEncode(result.toJson()));
+      }
+      _currentUser.value = result;
 
       await getCurrentUser();
     });
@@ -68,9 +65,8 @@ class AuthRepository implements IService {
 
   Future<Result<void>> signUp(String email, String password, String name) async {
     return Result.guardFuture(() async {
-      _currentUser.getAsync(create: () async {
-        return await apis.authApi.signUp(auth: AuthModel(username: name, email: email, password: password));
-      });
+      final result = await apis.authApi.signUp(auth: AuthModel(username: name, email: email, password: password));
+      _currentUser.value = result;
 
       await getCurrentUser();
     });

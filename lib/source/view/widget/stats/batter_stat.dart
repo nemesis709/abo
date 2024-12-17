@@ -1,22 +1,21 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/common_constants.dart';
+import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/domain/team_model.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-@RoutePage()
 class BatterStat extends ConsumerWidget {
   const BatterStat({
     super.key,
-    required this.playerInfo,
+    required this.playerModel,
   });
 
-  final PlayerModel playerInfo;
+  final PlayerModel playerModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,190 +29,183 @@ class BatterStat extends ConsumerWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Team.fromID(playerInfo.teamId).logo,
+              child: Team.fromID(playerModel.teamId).logo,
             ),
             Gap.w4,
-            Text(playerInfo.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
+            Text(playerModel.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
             Gap.w4,
+            Text(playerModel.position.displayString, style: context.textStyleT14b.copyWith(color: context.colorN40)),
           ],
         ),
-
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(playerInfo.birthDate.toServerDate()),
-            Gap.w4,
-            Text(playerInfo.position),
-            Gap.w4,
-            Text(playerInfo.hand),
-          ],
-        ),
+        Text(playerModel.birthDate.displayYyyymmdd(), style: context.textStyleT14m),
+        Text(playerModel.hand, style: context.textStyleT14m),
         Gap.h32,
-        // Text('2023 시즌', style: context.textStyleT14r.copyWith(color: context.colorP10)),
-        // Container(
-        //   color: Team.fromID(playerInfo.teamId).color,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'G',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'AVG',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'H',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'HR',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //     ],
-        //   ),
-        // ),
+        Container(
+          color: Team.fromID(playerModel.teamId).color,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'G',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'AVG',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'H',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'HR',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+            ],
+          ),
+        ),
+        Center(child: Text('준비중입니다', style: context.textStyleT14b)),
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceAround,
         //   children: [
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.game.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.point.toString()))),
         //     SizedBox(
         //       width: (context.sizeWidth - 64) / 4,
-        //       child: Center(child: Text(asyncValue.avg.toString())),
+        //       child: Center(child: Text(playerModel.pitcherDailyStatModel.toString())),
         //     ),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.hit.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.hit.toString()))),
         //     SizedBox(
         //       width: (context.sizeWidth - 64) / 4,
-        //       child: Center(child: Text(asyncValue.hr.toString())),
+        //       child: Center(child: Text(playerModel.hr.toString())),
         //     ),
         //   ],
         // ),
-        // Container(
-        //   color: Team.fromID(playerInfo.teamId).color,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'RBI',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'SO',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'BB',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'SB',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //     ],
-        //   ),
-        // ),
+        Container(
+          color: Team.fromID(playerModel.teamId).color,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'RBI',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'SO',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'BB',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'SB',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+            ],
+          ),
+        ),
+        Center(child: Text('준비중입니다', style: context.textStyleT14b)),
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceAround,
         //   children: [
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.rbi.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.so.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.bb.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.sb.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.rbi.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.so.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.bb.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.sb.toString()))),
         //   ],
         // ),
-        // Container(
-        //   color: Team.fromID(playerInfo.teamId).color,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'OBP',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'SLG',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'OPS',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //       SizedBox(
-        //           width: (context.sizeWidth - 64) / 4,
-        //           child: Center(
-        //               child: Text(
-        //                 'WAR',
-        //                 style: context.textStyleB14r.copyWith(
-        //                   color: context.colorN100,
-        //                 ),
-        //               ))),
-        //     ],
-        //   ),
-        // ),
+        Container(
+          color: Team.fromID(playerModel.teamId).color,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'OBP',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'SLG',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'OPS',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+              SizedBox(
+                  width: (context.sizeWidth - 64) / 4,
+                  child: Center(
+                      child: Text(
+                    'WAR',
+                    style: context.textStyleB14r.copyWith(
+                      color: context.colorN100,
+                    ),
+                  ))),
+            ],
+          ),
+        ),
+        Center(child: Text('준비중입니다', style: context.textStyleT14b)),
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceAround,
         //   children: [
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.obp.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.slg.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.ops.toString()))),
-        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(asyncValue.war.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.obp.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.slg.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.ops.toString()))),
+        //     SizedBox(width: (context.sizeWidth - 64) / 4, child: Center(child: Text(playerModel.war.toString()))),
         //   ],
         // ),
       ],

@@ -158,7 +158,7 @@ class _ManagerItem extends StatelessWidget {
             width: 40,
             child: Center(
               child: Text(
-                userModel.rate.toStringAsFixed(3),
+                userModel.rate.toStringAsFixed(3).replaceFirst(RegExp(r'^0'), ''),
                 style: context.textStyleT14r,
               ),
             ),

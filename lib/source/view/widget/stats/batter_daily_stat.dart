@@ -38,19 +38,11 @@ class BatterDailyStat extends StatelessWidget {
             Gap.w4,
             Text(playerModel.name, style: context.textStyleH20b.copyWith(color: context.colorP10)),
             Gap.w4,
+            Text(playerModel.position.displayString, style: context.textStyleT14b.copyWith(color: context.colorN40)),
           ],
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(playerModel.position),
-            Text(' | '),
-            Text(playerModel.birthDate.toServerDate()),
-            Text(' | '),
-            Text(playerModel.hand),
-          ],
-        ),
+        Text(playerModel.birthDate.displayYyyymmdd(), style: context.textStyleT14m),
+        Text(playerModel.hand, style: context.textStyleT14m),
         Gap.h32,
         Container(
           color: Team.fromID(playerModel.teamId).color,
@@ -92,15 +84,27 @@ class BatterDailyStat extends StatelessWidget {
           children: [
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(batterInfo.atBat.toString())),
+              child: Center(
+                  child: Text(
+                batterInfo.atBat.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(batterInfo.hit.toString())),
+              child: Center(
+                  child: Text(
+                batterInfo.hit.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
             SizedBox(
               width: (context.sizeWidth - 64) / 3,
-              child: Center(child: Text(batterInfo.homeRun.toString())),
+              child: Center(
+                  child: Text(
+                batterInfo.homeRun.toString(),
+                style: context.textStyleT14b,
+              )),
             ),
           ],
         ),
@@ -142,9 +146,27 @@ class BatterDailyStat extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.rbi.toString()))),
-            SizedBox(width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.strikeout.toString()))),
-            SizedBox(width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.walk.toString()))),
+            SizedBox(
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.rbi.toString(),
+                  style: context.textStyleT14b,
+                ))),
+            SizedBox(
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.strikeout.toString(),
+                  style: context.textStyleT14b,
+                ))),
+            SizedBox(
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.walk.toString(),
+                  style: context.textStyleT14b,
+                ))),
           ],
         ),
         Container(
@@ -186,10 +208,26 @@ class BatterDailyStat extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-                width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.average.toStringAsFixed(3)))),
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.average.toStringAsFixed(3),
+                  style: context.textStyleT14b,
+                ))),
             SizedBox(
-                width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.ops.toStringAsFixed(3)))),
-            SizedBox(width: (context.sizeWidth - 64) / 3, child: Center(child: Text(batterInfo.re24.toString()))),
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.ops.toStringAsFixed(3),
+                  style: context.textStyleT14b,
+                ))),
+            SizedBox(
+                width: (context.sizeWidth - 64) / 3,
+                child: Center(
+                    child: Text(
+                  batterInfo.re24.toString(),
+                  style: context.textStyleT14b,
+                ))),
           ],
         ),
       ],

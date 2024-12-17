@@ -1145,15 +1145,13 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240116.2)
-  - app_links (0.0.2):
-    - Flutter
   - BoringSSL-GRPC (0.0.36):
     - BoringSSL-GRPC/Implementation (= 0.0.36)
     - BoringSSL-GRPC/Interface (= 0.0.36)
   - BoringSSL-GRPC/Implementation (0.0.36):
     - BoringSSL-GRPC/Interface (= 0.0.36)
   - BoringSSL-GRPC/Interface (0.0.36)
-  - cloud_firestore (5.5.0):
+  - cloud_firestore (5.5.1):
     - Firebase/Firestore (= 11.4.0)
     - firebase_core
     - Flutter
@@ -1200,7 +1198,7 @@ PODS:
   - Firebase/Firestore (11.4.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 11.4.0)
-  - firebase_core (3.8.0):
+  - firebase_core (3.8.1):
     - Firebase/CoreOnly (= 11.4.0)
     - Flutter
   - FirebaseAppCheckInterop (11.5.0)
@@ -1380,7 +1378,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - app_links (from `.symlinks/plugins/app_links/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
@@ -1427,8 +1424,6 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
-  app_links:
-    :path: ".symlinks/plugins/app_links/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   device_info_plus:
@@ -1474,16 +1469,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
-  app_links: e7a6750a915a9e161c58d91bc610e8cd1d4d0ad0
   BoringSSL-GRPC: ca6a8e5d04812fce8ffd6437810c2d46f925eaeb
-  cloud_firestore: 8794ea2885e367f0a2096338964ddfd49739b2c7
+  cloud_firestore: 3fafe78d755b01fe1fd267a87bb52e80b7dacacc
   device_info_plus: bf2e3232933866d73fe290f2942f2156cdd10342
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
   file_picker: 09aa5ec1ab24135ccd7a1621c46c84134bfd6655
   file_selector_ios: f0670c1064a8c8450e38145d8043160105d0b97c
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
-  firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
+  firebase_core: 418aed674e9a0b8b6088aec16cde82a811f6261f
   FirebaseAppCheckInterop: d265d9f4484e7ec1c591086408840fdd383d1213
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
   FirebaseCoreExtension: f1bc67a4702931a7caa097d8e4ac0a1b0d16720e

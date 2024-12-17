@@ -1,19 +1,15 @@
-import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/page/calendar.dart';
 import 'package:abo/source/view/page/home.dart';
-import 'package:abo/source/view/widget/stats/batter_stat.dart';
 import 'package:abo/source/view/page/info.dart';
-import 'package:abo/source/view/widget/stats/pitcher_stat.dart';
-import 'package:abo/source/view/page/player_roaster.dart';
-import 'package:abo/source/view/page/settings.dart';
-import 'package:abo/source/view/page/signin.dart';
 import 'package:abo/source/view/page/main.dart';
 import 'package:abo/source/view/page/player_list.dart';
+import 'package:abo/source/view/page/player_roaster.dart';
 import 'package:abo/source/view/page/rank.dart';
+import 'package:abo/source/view/page/settings.dart';
+import 'package:abo/source/view/page/signin.dart';
 import 'package:abo/source/view/page/signup.dart';
 import 'package:abo/source/view/page/trade.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -32,8 +28,6 @@ class AppRouter extends RootStackRouter {
     ]),
     AutoRoute(page: RankRoute.page),
     AutoRoute(page: SignUpRoute.page),
-    AutoRoute(page: BatterStatRoute.page),
-    AutoRoute(page: PitcherStatRoute.page),
     AutoRoute(page: PlayerListRoute.page),
     AutoRoute(page: InfoRoute.page),
   ];

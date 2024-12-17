@@ -95,7 +95,6 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
   @override
   Widget build(BuildContext context) {
     final userController = ref.watch(userControllerProvider);
-    final playerController = ref.watch(playerControllerProvider(null));
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -171,9 +170,11 @@ class _TradeBoard extends ConsumerWidget {
                   child: Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10))),
               Gap.h16,
               if (list.isEmpty)
-                Text(
-                  '트레이드 목록이 없습니다.',
-                  style: context.textStyleT14b,
+                Center(
+                  child: Text(
+                    '트레이드 목록이 없습니다.',
+                    style: context.textStyleT14b,
+                  ),
                 ),
               if (list.isNotEmpty) ...list.mapIndexed((index, e) => PlayerItem(index + 1, e)),
             ],

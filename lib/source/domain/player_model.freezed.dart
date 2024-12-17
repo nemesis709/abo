@@ -24,10 +24,13 @@ mixin _$PlayerModel {
   String get name => throw _privateConstructorUsedError;
   UserModel? get owner => throw _privateConstructorUsedError;
   int get teamId => throw _privateConstructorUsedError;
-  String get position => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: positionFromJson)
+  Position get position => throw _privateConstructorUsedError;
   DateTime get birthDate => throw _privateConstructorUsedError;
   String get hand => throw _privateConstructorUsedError;
   bool get isPitcher => throw _privateConstructorUsedError;
+  bool? get onLineup => throw _privateConstructorUsedError;
+  bool? get isForeigner => throw _privateConstructorUsedError;
   bool? get onTrade => throw _privateConstructorUsedError;
   int? get point => throw _privateConstructorUsedError;
   BatterStatModel? get batterStatModel => throw _privateConstructorUsedError;
@@ -58,10 +61,12 @@ abstract class $PlayerModelCopyWith<$Res> {
       String name,
       UserModel? owner,
       int teamId,
-      String position,
+      @JsonKey(fromJson: positionFromJson) Position position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
+      bool? onLineup,
+      bool? isForeigner,
       bool? onTrade,
       int? point,
       BatterStatModel? batterStatModel,
@@ -99,6 +104,8 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
+    Object? onLineup = freezed,
+    Object? isForeigner = freezed,
     Object? onTrade = freezed,
     Object? point = freezed,
     Object? batterStatModel = freezed,
@@ -126,7 +133,7 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Position,
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -139,6 +146,14 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.isPitcher
           : isPitcher // ignore: cast_nullable_to_non_nullable
               as bool,
+      onLineup: freezed == onLineup
+          ? _value.onLineup
+          : onLineup // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isForeigner: freezed == isForeigner
+          ? _value.isForeigner
+          : isForeigner // ignore: cast_nullable_to_non_nullable
+              as bool?,
       onTrade: freezed == onTrade
           ? _value.onTrade
           : onTrade // ignore: cast_nullable_to_non_nullable
@@ -252,10 +267,12 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       String name,
       UserModel? owner,
       int teamId,
-      String position,
+      @JsonKey(fromJson: positionFromJson) Position position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
+      bool? onLineup,
+      bool? isForeigner,
       bool? onTrade,
       int? point,
       BatterStatModel? batterStatModel,
@@ -296,6 +313,8 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
+    Object? onLineup = freezed,
+    Object? isForeigner = freezed,
     Object? onTrade = freezed,
     Object? point = freezed,
     Object? batterStatModel = freezed,
@@ -323,7 +342,7 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
       position: null == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Position,
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
@@ -336,6 +355,14 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.isPitcher
           : isPitcher // ignore: cast_nullable_to_non_nullable
               as bool,
+      onLineup: freezed == onLineup
+          ? _value.onLineup
+          : onLineup // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isForeigner: freezed == isForeigner
+          ? _value.isForeigner
+          : isForeigner // ignore: cast_nullable_to_non_nullable
+              as bool?,
       onTrade: freezed == onTrade
           ? _value.onTrade
           : onTrade // ignore: cast_nullable_to_non_nullable
@@ -372,10 +399,12 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.name,
       this.owner,
       required this.teamId,
-      required this.position,
+      @JsonKey(fromJson: positionFromJson) required this.position,
       required this.birthDate,
       required this.hand,
       required this.isPitcher,
+      this.onLineup,
+      this.isForeigner,
       this.onTrade,
       this.point,
       this.batterStatModel,
@@ -395,13 +424,18 @@ class _$PlayerModelImpl implements _PlayerModel {
   @override
   final int teamId;
   @override
-  final String position;
+  @JsonKey(fromJson: positionFromJson)
+  final Position position;
   @override
   final DateTime birthDate;
   @override
   final String hand;
   @override
   final bool isPitcher;
+  @override
+  final bool? onLineup;
+  @override
+  final bool? isForeigner;
   @override
   final bool? onTrade;
   @override
@@ -417,7 +451,7 @@ class _$PlayerModelImpl implements _PlayerModel {
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, name: $name, owner: $owner, teamId: $teamId, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onTrade: $onTrade, point: $point, batterStatModel: $batterStatModel, batterDailyStatModel: $batterDailyStatModel, pitcherStatModel: $pitcherStatModel, pitcherDailyStatModel: $pitcherDailyStatModel)';
+    return 'PlayerModel(id: $id, name: $name, owner: $owner, teamId: $teamId, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onLineup: $onLineup, isForeigner: $isForeigner, onTrade: $onTrade, point: $point, batterStatModel: $batterStatModel, batterDailyStatModel: $batterDailyStatModel, pitcherStatModel: $pitcherStatModel, pitcherDailyStatModel: $pitcherDailyStatModel)';
   }
 
   @override
@@ -436,6 +470,10 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.hand, hand) || other.hand == hand) &&
             (identical(other.isPitcher, isPitcher) ||
                 other.isPitcher == isPitcher) &&
+            (identical(other.onLineup, onLineup) ||
+                other.onLineup == onLineup) &&
+            (identical(other.isForeigner, isForeigner) ||
+                other.isForeigner == isForeigner) &&
             (identical(other.onTrade, onTrade) || other.onTrade == onTrade) &&
             (identical(other.point, point) || other.point == point) &&
             (identical(other.batterStatModel, batterStatModel) ||
@@ -460,6 +498,8 @@ class _$PlayerModelImpl implements _PlayerModel {
       birthDate,
       hand,
       isPitcher,
+      onLineup,
+      isForeigner,
       onTrade,
       point,
       batterStatModel,
@@ -489,10 +529,12 @@ abstract class _PlayerModel implements PlayerModel {
       required final String name,
       final UserModel? owner,
       required final int teamId,
-      required final String position,
+      @JsonKey(fromJson: positionFromJson) required final Position position,
       required final DateTime birthDate,
       required final String hand,
       required final bool isPitcher,
+      final bool? onLineup,
+      final bool? isForeigner,
       final bool? onTrade,
       final int? point,
       final BatterStatModel? batterStatModel,
@@ -512,13 +554,18 @@ abstract class _PlayerModel implements PlayerModel {
   @override
   int get teamId;
   @override
-  String get position;
+  @JsonKey(fromJson: positionFromJson)
+  Position get position;
   @override
   DateTime get birthDate;
   @override
   String get hand;
   @override
   bool get isPitcher;
+  @override
+  bool? get onLineup;
+  @override
+  bool? get isForeigner;
   @override
   bool? get onTrade;
   @override
