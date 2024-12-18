@@ -14,7 +14,8 @@ _$PlayerModelImpl _$$PlayerModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : UserModel.fromJson(json['owner'] as Map<String, dynamic>),
       teamId: (json['teamId'] as num).toInt(),
-      position: positionFromJson(json['position'] as String),
+      position:
+          const PositionJsonConverter().fromJson(json['position'] as String),
       birthDate: DateTime.parse(json['birthDate'] as String),
       hand: json['hand'] as String,
       isPitcher: json['isPitcher'] as bool,
@@ -46,7 +47,7 @@ Map<String, dynamic> _$$PlayerModelImplToJson(_$PlayerModelImpl instance) =>
       'name': instance.name,
       'owner': instance.owner,
       'teamId': instance.teamId,
-      'position': _$PositionEnumMap[instance.position]!,
+      'position': const PositionJsonConverter().toJson(instance.position),
       'birthDate': instance.birthDate.toIso8601String(),
       'hand': instance.hand,
       'isPitcher': instance.isPitcher,
@@ -59,16 +60,3 @@ Map<String, dynamic> _$$PlayerModelImplToJson(_$PlayerModelImpl instance) =>
       'pitcherStatModel': instance.pitcherStatModel,
       'pitcherDailyStatModel': instance.pitcherDailyStatModel,
     };
-
-const _$PositionEnumMap = {
-  Position.pitcher: 'pitcher',
-  Position.catcher: 'catcher',
-  Position.firstBase: 'firstBase',
-  Position.secondBase: 'secondBase',
-  Position.thirdBase: 'thirdBase',
-  Position.shortStop: 'shortStop',
-  Position.leftField: 'leftField',
-  Position.centerField: 'centerField',
-  Position.rightField: 'rightField',
-  Position.designated: 'designated',
-};

@@ -1,3 +1,4 @@
+import 'package:abo/common/converter/position_converter.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/user_model.dart';
@@ -13,7 +14,7 @@ class PlayerModel with _$PlayerModel {
     required String name,
     UserModel? owner,
     required int teamId,
-    @JsonKey(fromJson: positionFromJson) required Position position,
+    @PositionJsonConverter() required Position position,
     required DateTime birthDate,
     required String hand,
     required bool isPitcher,
@@ -40,28 +41,8 @@ class PlayerModel with _$PlayerModel {
       );
 }
 
-Position positionFromJson(String json) {
-  if (json == 'P') {
-    return Position.pitcher;
-  } else if (json == 'C') {
-    return Position.catcher;
-  } else if (json == '1B') {
-    return Position.firstBase;
-  } else if (json == '2B') {
-    return Position.secondBase;
-  } else if (json == '3B') {
-    return Position.thirdBase;
-  } else if (json == 'SS') {
-    return Position.shortStop;
-  } else if (json == 'LF') {
-    return Position.leftField;
-  } else if (json == 'CF') {
-    return Position.centerField;
-  } else if (json == 'RF') {
-    return Position.rightField;
-  } else {
-    return Position.designated;
-  }
+extension PlayerModelExtension on PlayerModel {
+  int get dailyPoint => batterDailyStatModel?.re24 ?? pitcherDailyStatModel?.re24 ?? 0;
 }
 
 enum Position {
@@ -80,7 +61,10 @@ enum Position {
 
   final String displayString;
   final bool isOutfield;
+}
 
+// Extension to compare based on custom logic
+extension PositionEquality on Position {
   bool isEqual(Position other) {
     if (this == Position.designated) {
       return true;
@@ -92,9 +76,3 @@ enum Position {
   }
 }
 
-// Extension to compare based on custom logic
-extension PositionEquality on Position {}
-
-extension PlayerModelExtension on PlayerModel {
-  int get dailyPoint => batterDailyStatModel?.re24 ?? pitcherDailyStatModel?.re24 ?? 0;
-}

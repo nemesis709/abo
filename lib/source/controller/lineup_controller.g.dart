@@ -6,7 +6,7 @@ part of 'lineup_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$lineupControllerHash() => r'f233217f7027f2aa2580eba270c84fa1793fe553';
+String _$lineupControllerHash() => r'0c028426621c4bc119833fa2aeb10358d6a2abe2';
 
 /// See also [LineupController].
 @ProviderFor(LineupController)

@@ -24,7 +24,7 @@ mixin _$PlayerModel {
   String get name => throw _privateConstructorUsedError;
   UserModel? get owner => throw _privateConstructorUsedError;
   int get teamId => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: positionFromJson)
+  @PositionJsonConverter()
   Position get position => throw _privateConstructorUsedError;
   DateTime get birthDate => throw _privateConstructorUsedError;
   String get hand => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $PlayerModelCopyWith<$Res> {
       String name,
       UserModel? owner,
       int teamId,
-      @JsonKey(fromJson: positionFromJson) Position position,
+      @PositionJsonConverter() Position position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
@@ -267,7 +267,7 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       String name,
       UserModel? owner,
       int teamId,
-      @JsonKey(fromJson: positionFromJson) Position position,
+      @PositionJsonConverter() Position position,
       DateTime birthDate,
       String hand,
       bool isPitcher,
@@ -399,7 +399,7 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.name,
       this.owner,
       required this.teamId,
-      @JsonKey(fromJson: positionFromJson) required this.position,
+      @PositionJsonConverter() required this.position,
       required this.birthDate,
       required this.hand,
       required this.isPitcher,
@@ -424,7 +424,7 @@ class _$PlayerModelImpl implements _PlayerModel {
   @override
   final int teamId;
   @override
-  @JsonKey(fromJson: positionFromJson)
+  @PositionJsonConverter()
   final Position position;
   @override
   final DateTime birthDate;
@@ -529,7 +529,7 @@ abstract class _PlayerModel implements PlayerModel {
       required final String name,
       final UserModel? owner,
       required final int teamId,
-      @JsonKey(fromJson: positionFromJson) required final Position position,
+      @PositionJsonConverter() required final Position position,
       required final DateTime birthDate,
       required final String hand,
       required final bool isPitcher,
@@ -554,7 +554,7 @@ abstract class _PlayerModel implements PlayerModel {
   @override
   int get teamId;
   @override
-  @JsonKey(fromJson: positionFromJson)
+  @PositionJsonConverter()
   Position get position;
   @override
   DateTime get birthDate;
