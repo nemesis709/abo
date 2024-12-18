@@ -18,7 +18,7 @@ class PlayerModel with _$PlayerModel {
     required DateTime birthDate,
     required String hand,
     required bool isPitcher,
-    bool? onLineup,
+    bool? onPosition,
     bool? isForeigner,
     bool? onTrade,
     int? point,
@@ -29,20 +29,10 @@ class PlayerModel with _$PlayerModel {
   }) = _PlayerModel;
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) => _$PlayerModelFromJson(json);
-
-  factory PlayerModel.fromPosition(Position position) => PlayerModel(
-        id: 0,
-        name: '선수명',
-        teamId: 0,
-        position: position,
-        birthDate: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
-        hand: '땡투떙타',
-        isPitcher: position == Position.pitcher,
-      );
 }
 
 extension PlayerModelExtension on PlayerModel {
-  int get dailyPoint => batterDailyStatModel?.re24 ?? pitcherDailyStatModel?.re24 ?? 0;
+  int get dailyPoint => batterDailyStatModel?.point ?? pitcherDailyStatModel?.point ?? 0;
 }
 
 enum Position {
@@ -75,4 +65,3 @@ extension PositionEquality on Position {
     }
   }
 }
-

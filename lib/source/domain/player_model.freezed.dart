@@ -29,7 +29,7 @@ mixin _$PlayerModel {
   DateTime get birthDate => throw _privateConstructorUsedError;
   String get hand => throw _privateConstructorUsedError;
   bool get isPitcher => throw _privateConstructorUsedError;
-  bool? get onLineup => throw _privateConstructorUsedError;
+  bool? get onPosition => throw _privateConstructorUsedError;
   bool? get isForeigner => throw _privateConstructorUsedError;
   bool? get onTrade => throw _privateConstructorUsedError;
   int? get point => throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ abstract class $PlayerModelCopyWith<$Res> {
       DateTime birthDate,
       String hand,
       bool isPitcher,
-      bool? onLineup,
+      bool? onPosition,
       bool? isForeigner,
       bool? onTrade,
       int? point,
@@ -104,7 +104,7 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
-    Object? onLineup = freezed,
+    Object? onPosition = freezed,
     Object? isForeigner = freezed,
     Object? onTrade = freezed,
     Object? point = freezed,
@@ -146,9 +146,9 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
           ? _value.isPitcher
           : isPitcher // ignore: cast_nullable_to_non_nullable
               as bool,
-      onLineup: freezed == onLineup
-          ? _value.onLineup
-          : onLineup // ignore: cast_nullable_to_non_nullable
+      onPosition: freezed == onPosition
+          ? _value.onPosition
+          : onPosition // ignore: cast_nullable_to_non_nullable
               as bool?,
       isForeigner: freezed == isForeigner
           ? _value.isForeigner
@@ -271,7 +271,7 @@ abstract class _$$PlayerModelImplCopyWith<$Res>
       DateTime birthDate,
       String hand,
       bool isPitcher,
-      bool? onLineup,
+      bool? onPosition,
       bool? isForeigner,
       bool? onTrade,
       int? point,
@@ -313,7 +313,7 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
     Object? birthDate = null,
     Object? hand = null,
     Object? isPitcher = null,
-    Object? onLineup = freezed,
+    Object? onPosition = freezed,
     Object? isForeigner = freezed,
     Object? onTrade = freezed,
     Object? point = freezed,
@@ -355,9 +355,9 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
           ? _value.isPitcher
           : isPitcher // ignore: cast_nullable_to_non_nullable
               as bool,
-      onLineup: freezed == onLineup
-          ? _value.onLineup
-          : onLineup // ignore: cast_nullable_to_non_nullable
+      onPosition: freezed == onPosition
+          ? _value.onPosition
+          : onPosition // ignore: cast_nullable_to_non_nullable
               as bool?,
       isForeigner: freezed == isForeigner
           ? _value.isForeigner
@@ -403,7 +403,7 @@ class _$PlayerModelImpl implements _PlayerModel {
       required this.birthDate,
       required this.hand,
       required this.isPitcher,
-      this.onLineup,
+      this.onPosition,
       this.isForeigner,
       this.onTrade,
       this.point,
@@ -433,7 +433,7 @@ class _$PlayerModelImpl implements _PlayerModel {
   @override
   final bool isPitcher;
   @override
-  final bool? onLineup;
+  final bool? onPosition;
   @override
   final bool? isForeigner;
   @override
@@ -451,7 +451,7 @@ class _$PlayerModelImpl implements _PlayerModel {
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, name: $name, owner: $owner, teamId: $teamId, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onLineup: $onLineup, isForeigner: $isForeigner, onTrade: $onTrade, point: $point, batterStatModel: $batterStatModel, batterDailyStatModel: $batterDailyStatModel, pitcherStatModel: $pitcherStatModel, pitcherDailyStatModel: $pitcherDailyStatModel)';
+    return 'PlayerModel(id: $id, name: $name, owner: $owner, teamId: $teamId, position: $position, birthDate: $birthDate, hand: $hand, isPitcher: $isPitcher, onPosition: $onPosition, isForeigner: $isForeigner, onTrade: $onTrade, point: $point, batterStatModel: $batterStatModel, batterDailyStatModel: $batterDailyStatModel, pitcherStatModel: $pitcherStatModel, pitcherDailyStatModel: $pitcherDailyStatModel)';
   }
 
   @override
@@ -470,8 +470,8 @@ class _$PlayerModelImpl implements _PlayerModel {
             (identical(other.hand, hand) || other.hand == hand) &&
             (identical(other.isPitcher, isPitcher) ||
                 other.isPitcher == isPitcher) &&
-            (identical(other.onLineup, onLineup) ||
-                other.onLineup == onLineup) &&
+            (identical(other.onPosition, onPosition) ||
+                other.onPosition == onPosition) &&
             (identical(other.isForeigner, isForeigner) ||
                 other.isForeigner == isForeigner) &&
             (identical(other.onTrade, onTrade) || other.onTrade == onTrade) &&
@@ -498,7 +498,7 @@ class _$PlayerModelImpl implements _PlayerModel {
       birthDate,
       hand,
       isPitcher,
-      onLineup,
+      onPosition,
       isForeigner,
       onTrade,
       point,
@@ -533,7 +533,7 @@ abstract class _PlayerModel implements PlayerModel {
       required final DateTime birthDate,
       required final String hand,
       required final bool isPitcher,
-      final bool? onLineup,
+      final bool? onPosition,
       final bool? isForeigner,
       final bool? onTrade,
       final int? point,
@@ -563,7 +563,7 @@ abstract class _PlayerModel implements PlayerModel {
   @override
   bool get isPitcher;
   @override
-  bool? get onLineup;
+  bool? get onPosition;
   @override
   bool? get isForeigner;
   @override

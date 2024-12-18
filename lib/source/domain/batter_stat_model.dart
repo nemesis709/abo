@@ -32,6 +32,7 @@ class BatterDailyStatModel with _$BatterDailyStatModel {
     required int id,
     required int playerId,
     @DateJsonConverter() required DateTime gameDate,
+    required int point,
     required int atBat,
     required int hit,
     required int homeRun,

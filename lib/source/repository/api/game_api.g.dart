@@ -27,15 +27,15 @@ class _GameApi implements GameApi {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = dateTime;
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CollectionModel<GameModel>>(Options(
-      method: 'POST',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/game/schedule',
+          '/game/${dateTime}/schedule',
           queryParameters: queryParameters,
           data: _data,
         )

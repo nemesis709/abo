@@ -265,7 +265,7 @@ GameInfoModel _$GameInfoModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GameInfoModel {
   UserModel get user => throw _privateConstructorUsedError;
-  int get score => throw _privateConstructorUsedError;
+  int? get score => throw _privateConstructorUsedError;
   List<PlayerModel> get players => throw _privateConstructorUsedError;
 
   /// Serializes this GameInfoModel to a JSON map.
@@ -284,7 +284,7 @@ abstract class $GameInfoModelCopyWith<$Res> {
           GameInfoModel value, $Res Function(GameInfoModel) then) =
       _$GameInfoModelCopyWithImpl<$Res, GameInfoModel>;
   @useResult
-  $Res call({UserModel user, int score, List<PlayerModel> players});
+  $Res call({UserModel user, int? score, List<PlayerModel> players});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -305,7 +305,7 @@ class _$GameInfoModelCopyWithImpl<$Res, $Val extends GameInfoModel>
   @override
   $Res call({
     Object? user = null,
-    Object? score = null,
+    Object? score = freezed,
     Object? players = null,
   }) {
     return _then(_value.copyWith(
@@ -313,10 +313,10 @@ class _$GameInfoModelCopyWithImpl<$Res, $Val extends GameInfoModel>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      score: null == score
+      score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
@@ -343,7 +343,7 @@ abstract class _$$GameInfoModelImplCopyWith<$Res>
       __$$GameInfoModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserModel user, int score, List<PlayerModel> players});
+  $Res call({UserModel user, int? score, List<PlayerModel> players});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -363,7 +363,7 @@ class __$$GameInfoModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? score = null,
+    Object? score = freezed,
     Object? players = null,
   }) {
     return _then(_$GameInfoModelImpl(
@@ -371,10 +371,10 @@ class __$$GameInfoModelImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
-      score: null == score
+      score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -388,7 +388,7 @@ class __$$GameInfoModelImplCopyWithImpl<$Res>
 class _$GameInfoModelImpl implements _GameInfoModel {
   _$GameInfoModelImpl(
       {required this.user,
-      required this.score,
+      this.score,
       required final List<PlayerModel> players})
       : _players = players;
 
@@ -398,7 +398,7 @@ class _$GameInfoModelImpl implements _GameInfoModel {
   @override
   final UserModel user;
   @override
-  final int score;
+  final int? score;
   final List<PlayerModel> _players;
   @override
   List<PlayerModel> get players {
@@ -446,7 +446,7 @@ class _$GameInfoModelImpl implements _GameInfoModel {
 abstract class _GameInfoModel implements GameInfoModel {
   factory _GameInfoModel(
       {required final UserModel user,
-      required final int score,
+      final int? score,
       required final List<PlayerModel> players}) = _$GameInfoModelImpl;
 
   factory _GameInfoModel.fromJson(Map<String, dynamic> json) =
@@ -455,7 +455,7 @@ abstract class _GameInfoModel implements GameInfoModel {
   @override
   UserModel get user;
   @override
-  int get score;
+  int? get score;
   @override
   List<PlayerModel> get players;
 

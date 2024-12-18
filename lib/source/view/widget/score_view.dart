@@ -16,11 +16,11 @@ class ScoreView extends ConsumerStatefulWidget {
   const ScoreView({
     super.key,
     required this.dateTime,
-    this.isMain,
+    this.onMainTap,
   });
 
   final DateTime dateTime;
-  final bool? isMain;
+  final VoidCallback? onMainTap;
 
   @override
   ConsumerState<ScoreView> createState() => _ScoreViewState();
@@ -39,7 +39,7 @@ class _ScoreViewState extends ConsumerState<ScoreView> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isMain == true) {
+    if (widget.onMainTap != null) {
       return LoadableContent(
           asyncValue: ref.watch(calendarControllerProvider(dateTime: widget.dateTime)),
           content: (asyncValue) {
@@ -58,7 +58,7 @@ class _ScoreViewState extends ConsumerState<ScoreView> with SingleTickerProvider
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...asyncValue.map((e) {
-                    return _ScoreView(e, onTap: () {});
+                    return _ScoreView(e, onTap: () => widget.onMainTap?.call());
                   }),
                 ],
               ),
@@ -134,31 +134,41 @@ class _ScoreView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 20,
-                child: Center(
-                  child: (gameModel.home.score < gameModel.away.score)
-                      ? Text(
-                          'W',
-                          style: context.textStyleT12b.copyWith(color: context.colorVermillion),
-                        )
-                      : Text(''),
+              if (gameModel.home.score != null && gameModel.away.score != null) ...[
+                SizedBox(
+                  width: 20,
+                  child: Center(
+                    child: (gameModel.home.score! < gameModel.away.score!)
+                        ? Text(
+                            'W',
+                            style: context.textStyleT12b.copyWith(color: context.colorVermillion),
+                          )
+                        : Text(''),
+                  ),
                 ),
-              ),
-              SizedBox(width: 60, child: Center(child: Text('${gameModel.away.score} P'))),
+                SizedBox(width: 60, child: Center(child: Text('${gameModel.away.score} P'))),
+              ] else ...[
+                SizedBox(width: 20),
+                SizedBox(width: 60),
+              ],
               Center(child: Text('vs', style: context.textStyleT14r)),
-              SizedBox(width: 60, child: Center(child: Text('${gameModel.home.score} P'))),
-              SizedBox(
-                width: 20,
-                child: Center(
-                  child: (gameModel.home.score > gameModel.away.score)
-                      ? Text(
-                          'W',
-                          style: context.textStyleT12b.copyWith(color: context.colorVermillion),
-                        )
-                      : Text(''),
+              if (gameModel.home.score != null && gameModel.away.score != null) ...[
+                SizedBox(width: 60, child: Center(child: Text('${gameModel.home.score} P'))),
+                SizedBox(
+                  width: 20,
+                  child: Center(
+                    child: (gameModel.home.score! > gameModel.away.score!)
+                        ? Text(
+                            'W',
+                            style: context.textStyleT12b.copyWith(color: context.colorVermillion),
+                          )
+                        : Text(''),
+                  ),
                 ),
-              ),
+              ] else ...[
+                SizedBox(width: 20),
+                SizedBox(width: 60),
+              ],
               SizedBox(
                 width: 60,
                 child: Center(
@@ -263,7 +273,7 @@ class _PlayerModel extends StatelessWidget {
             Gap.w4,
             Spacer(),
             Text(
-              '${(playerModel.dailyPoint * (playerModel.onLineup == true ? (playerModel.dailyPoint > 0 ? 1.1 : 0.9) : 1)).toInt()} P',
+              '${playerModel.dailyPoint} P',
               style: context.textStyleT14r,
             ),
           ],

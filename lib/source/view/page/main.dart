@@ -70,7 +70,7 @@ class MainPage extends StatelessWidget {
             ScoreView(
               // dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
               dateTime: DateTime(2024, 04, 02),
-              isMain: true,
+              onMainTap: () => context.navigateTo(CalendarRoute()),
             ),
             Container(height: 12, color: context.colorN95),
             _RankBoard(),

@@ -22,7 +22,7 @@ class GameModel with _$GameModel {
 class GameInfoModel with _$GameInfoModel {
   factory GameInfoModel({
     required UserModel user,
-    required int score,
+    int? score,
     required List<PlayerModel> players,
   }) = _GameInfoModel;
 

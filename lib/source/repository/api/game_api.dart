@@ -10,9 +10,9 @@ part 'game_api.g.dart';
 abstract class GameApi {
   factory GameApi(Dio dio) => _GameApi(dio);
 
-  @POST('/game/schedule')
+  @GET('/game/{dateTime}/schedule')
   Future<CollectionModel<GameModel>> getSchedule({
-    @Body() required String dateTime,
+    @Path('dateTime') required String dateTime,
   });
 }
 

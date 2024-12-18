@@ -400,6 +400,7 @@ mixin _$PitcherDailyStatModel {
   int get playerId => throw _privateConstructorUsedError;
   @DateJsonConverter()
   DateTime get gameDate => throw _privateConstructorUsedError;
+  int get point => throw _privateConstructorUsedError;
   double get innings => throw _privateConstructorUsedError;
   int get hit => throw _privateConstructorUsedError;
   int get homeRun => throw _privateConstructorUsedError;
@@ -430,6 +431,7 @@ abstract class $PitcherDailyStatModelCopyWith<$Res> {
       {int id,
       int playerId,
       @DateJsonConverter() DateTime gameDate,
+      int point,
       double innings,
       int hit,
       int homeRun,
@@ -460,6 +462,7 @@ class _$PitcherDailyStatModelCopyWithImpl<$Res,
     Object? id = null,
     Object? playerId = null,
     Object? gameDate = null,
+    Object? point = null,
     Object? innings = null,
     Object? hit = null,
     Object? homeRun = null,
@@ -483,6 +486,10 @@ class _$PitcherDailyStatModelCopyWithImpl<$Res,
           ? _value.gameDate
           : gameDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      point: null == point
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
       innings: null == innings
           ? _value.innings
           : innings // ignore: cast_nullable_to_non_nullable
@@ -536,6 +543,7 @@ abstract class _$$PitcherDailyStatModelImplCopyWith<$Res>
       {int id,
       int playerId,
       @DateJsonConverter() DateTime gameDate,
+      int point,
       double innings,
       int hit,
       int homeRun,
@@ -564,6 +572,7 @@ class __$$PitcherDailyStatModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? playerId = null,
     Object? gameDate = null,
+    Object? point = null,
     Object? innings = null,
     Object? hit = null,
     Object? homeRun = null,
@@ -587,6 +596,10 @@ class __$$PitcherDailyStatModelImplCopyWithImpl<$Res>
           ? _value.gameDate
           : gameDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      point: null == point
+          ? _value.point
+          : point // ignore: cast_nullable_to_non_nullable
+              as int,
       innings: null == innings
           ? _value.innings
           : innings // ignore: cast_nullable_to_non_nullable
@@ -634,6 +647,7 @@ class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
       {required this.id,
       required this.playerId,
       @DateJsonConverter() required this.gameDate,
+      required this.point,
       required this.innings,
       required this.hit,
       required this.homeRun,
@@ -655,6 +669,8 @@ class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
   @DateJsonConverter()
   final DateTime gameDate;
   @override
+  final int point;
+  @override
   final double innings;
   @override
   final int hit;
@@ -675,7 +691,7 @@ class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
 
   @override
   String toString() {
-    return 'PitcherDailyStatModel(id: $id, playerId: $playerId, gameDate: $gameDate, innings: $innings, hit: $hit, homeRun: $homeRun, earnedRus: $earnedRus, strikeout: $strikeout, walk: $walk, whip: $whip, era: $era, re24: $re24)';
+    return 'PitcherDailyStatModel(id: $id, playerId: $playerId, gameDate: $gameDate, point: $point, innings: $innings, hit: $hit, homeRun: $homeRun, earnedRus: $earnedRus, strikeout: $strikeout, walk: $walk, whip: $whip, era: $era, re24: $re24)';
   }
 
   @override
@@ -688,6 +704,7 @@ class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
                 other.playerId == playerId) &&
             (identical(other.gameDate, gameDate) ||
                 other.gameDate == gameDate) &&
+            (identical(other.point, point) || other.point == point) &&
             (identical(other.innings, innings) || other.innings == innings) &&
             (identical(other.hit, hit) || other.hit == hit) &&
             (identical(other.homeRun, homeRun) || other.homeRun == homeRun) &&
@@ -703,8 +720,8 @@ class _$PitcherDailyStatModelImpl implements _PitcherDailyStatModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, playerId, gameDate, innings,
-      hit, homeRun, earnedRus, strikeout, walk, whip, era, re24);
+  int get hashCode => Object.hash(runtimeType, id, playerId, gameDate, point,
+      innings, hit, homeRun, earnedRus, strikeout, walk, whip, era, re24);
 
   /// Create a copy of PitcherDailyStatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -728,6 +745,7 @@ abstract class _PitcherDailyStatModel implements PitcherDailyStatModel {
       {required final int id,
       required final int playerId,
       @DateJsonConverter() required final DateTime gameDate,
+      required final int point,
       required final double innings,
       required final int hit,
       required final int homeRun,
@@ -748,6 +766,8 @@ abstract class _PitcherDailyStatModel implements PitcherDailyStatModel {
   @override
   @DateJsonConverter()
   DateTime get gameDate;
+  @override
+  int get point;
   @override
   double get innings;
   @override

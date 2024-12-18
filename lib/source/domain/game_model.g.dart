@@ -25,7 +25,7 @@ Map<String, dynamic> _$$GameModelImplToJson(_$GameModelImpl instance) =>
 _$GameInfoModelImpl _$$GameInfoModelImplFromJson(Map<String, dynamic> json) =>
     _$GameInfoModelImpl(
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-      score: (json['score'] as num).toInt(),
+      score: (json['score'] as num?)?.toInt(),
       players: (json['players'] as List<dynamic>)
           .map((e) => PlayerModel.fromJson(e as Map<String, dynamic>))
           .toList(),

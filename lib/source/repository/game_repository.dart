@@ -1,4 +1,5 @@
 import 'package:abo/common/data/result.dart';
+import 'package:abo/common/extension/datetime_extension.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/game_model.dart';
@@ -15,7 +16,7 @@ class GameRepository implements IService {
 
   Future<Result<List<GameModel>>> getSchedule(DateTime date) async {
     return Result.guardFuture(() async {
-      final schedule = await apis.gameApi.getSchedule(dateTime: date.toIso8601String());
+      final schedule = await apis.gameApi.getSchedule(dateTime: date.toServerDate());
 
       return schedule.data;
     });
