@@ -67,7 +67,9 @@ class LineupController extends _$LineupController {
               ? null
               : lineup.designated,
       startPitcher: lineup.startPitcher,
-      reliefPitcher: lineup.reliefPitcher,
+      reliefPitcher1: lineup.reliefPitcher1,
+      reliefPitcher2: lineup.reliefPitcher2,
+      setupPitcher: lineup.setupPitcher,
       closingPitcher: lineup.closingPitcher,
     );
 
@@ -90,14 +92,16 @@ class LineupController extends _$LineupController {
       rightField: lineup.rightField,
       designated: lineup.designated,
       startPitcher: player,
-      reliefPitcher: lineup.reliefPitcher == player ? null : lineup.reliefPitcher,
+      reliefPitcher1: lineup.reliefPitcher1 == player ? null : lineup.reliefPitcher1,
+      reliefPitcher2: lineup.reliefPitcher2 == player ? null : lineup.reliefPitcher2,
+      setupPitcher: lineup.setupPitcher == player ? null : lineup.setupPitcher,
       closingPitcher: lineup.closingPitcher == player ? null : lineup.closingPitcher,
     );
 
     state = AsyncData(newLineup);
   }
 
-  Future<void> updateReliefPitcher({
+  Future<void> updateReliefPitcher1({
     required PlayerModel? player,
   }) async {
     final lineup = state.requireValue;
@@ -113,7 +117,59 @@ class LineupController extends _$LineupController {
       rightField: lineup.rightField,
       designated: lineup.designated,
       startPitcher: lineup.startPitcher == player ? null : lineup.startPitcher,
-      reliefPitcher: player,
+      reliefPitcher1: player,
+      reliefPitcher2: lineup.reliefPitcher2 == player ? null : lineup.reliefPitcher2,
+      setupPitcher: lineup.setupPitcher == player ? null : lineup.setupPitcher,
+      closingPitcher: lineup.closingPitcher == player ? null : lineup.closingPitcher,
+    );
+
+    state = AsyncData(newLineup);
+  }
+
+  Future<void> updateReliefPitcher2({
+    required PlayerModel? player,
+  }) async {
+    final lineup = state.requireValue;
+
+    final newLineup = LineupModel(
+      catcher: lineup.catcher,
+      firstBase: lineup.firstBase,
+      secondBase: lineup.secondBase,
+      thirdBase: lineup.thirdBase,
+      shortStop: lineup.shortStop,
+      leftField: lineup.leftField,
+      centerField: lineup.centerField,
+      rightField: lineup.rightField,
+      designated: lineup.designated,
+      startPitcher: lineup.startPitcher == player ? null : lineup.startPitcher,
+      reliefPitcher1: lineup.reliefPitcher1 == player ? null : lineup.reliefPitcher1,
+      reliefPitcher2: player,
+      setupPitcher: lineup.setupPitcher == player ? null : lineup.setupPitcher,
+      closingPitcher: lineup.closingPitcher == player ? null : lineup.closingPitcher,
+    );
+
+    state = AsyncData(newLineup);
+  }
+
+  Future<void> updateSetupPitcher({
+    required PlayerModel? player,
+  }) async {
+    final lineup = state.requireValue;
+
+    final newLineup = LineupModel(
+      catcher: lineup.catcher,
+      firstBase: lineup.firstBase,
+      secondBase: lineup.secondBase,
+      thirdBase: lineup.thirdBase,
+      shortStop: lineup.shortStop,
+      leftField: lineup.leftField,
+      centerField: lineup.centerField,
+      rightField: lineup.rightField,
+      designated: lineup.designated,
+      startPitcher: lineup.startPitcher == player ? null : lineup.startPitcher,
+      reliefPitcher1: lineup.reliefPitcher1 == player ? null : lineup.reliefPitcher1,
+      reliefPitcher2: lineup.reliefPitcher2 == player ? null : lineup.reliefPitcher2,
+      setupPitcher: player,
       closingPitcher: lineup.closingPitcher == player ? null : lineup.closingPitcher,
     );
 
@@ -136,7 +192,9 @@ class LineupController extends _$LineupController {
       rightField: lineup.rightField,
       designated: lineup.designated,
       startPitcher: lineup.startPitcher == player ? null : lineup.startPitcher,
-      reliefPitcher: lineup.reliefPitcher == player ? null : lineup.reliefPitcher,
+      reliefPitcher1: lineup.reliefPitcher1 == player ? null : lineup.reliefPitcher1,
+      reliefPitcher2: lineup.reliefPitcher2 == player ? null : lineup.reliefPitcher2,
+      setupPitcher: lineup.setupPitcher == player ? null : lineup.setupPitcher,
       closingPitcher: player,
     );
 

@@ -28,7 +28,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -71,6 +71,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                       controller: tabController,
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: [
+                        Tab(text: '감독'),
                         Tab(text: '라인업'),
                         Tab(text: '선수 명단'),
                       ],
@@ -79,6 +80,11 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                       child: TabBarView(
                         controller: tabController,
                         children: [
+                          Column(
+                            children: [
+                              Text('감독'),
+                            ],
+                          ),
                           LoadableContent(
                               asyncValue: ref.watch(lineupControllerProvider),
                               content: (lineup) {
@@ -102,8 +108,12 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                             onChanged: (player, position) {
                                               if (position == 'SP') {
                                                 lineupNotifier.updateStartPitcher(player: player);
-                                              } else if (position == 'RP') {
-                                                lineupNotifier.updateReliefPitcher(player: player);
+                                              } else if (position == 'RP1') {
+                                                lineupNotifier.updateReliefPitcher1(player: player);
+                                              } else if (position == 'RP2') {
+                                                lineupNotifier.updateReliefPitcher2(player: player);
+                                              } else if (position == 'SU') {
+                                                lineupNotifier.updateSetupPitcher(player: player);
                                               } else if (position == 'CP') {
                                                 lineupNotifier.updateClosePitcher(player: player);
                                               }
@@ -120,7 +130,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                       child: Text('라인업 제출'),
                                     ),
                                     Gap.h16,
-                                    Text('라인업에 등록한 경우\n10%의 보너스 포인트를 얻을 수 있습니다', textAlign: TextAlign.center),
+                                    Text('권장 포지션대로 라인업에 등록한 경우\n50%의 보너스 포인트를 얻을 수 있습니다', textAlign: TextAlign.center),
                                     Gap.h16,
                                   ],
                                 );
@@ -441,10 +451,32 @@ class _Rotation extends StatelessWidget {
             final notMatch = <PlayerModel>[];
 
             final player = await showPlayerBottom(match: match, notMatch: notMatch);
-            onChanged.call(player, 'RP');
+            onChanged.call(player, 'RP1');
           },
           position: 'RP',
-          playerModel: lineup.reliefPitcher,
+          playerModel: lineup.reliefPitcher1,
+        ),
+        _Position(
+          onTap: () async {
+            final match = playerList.where((e) => e.position == Position.pitcher);
+            final notMatch = <PlayerModel>[];
+
+            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            onChanged.call(player, 'RP2');
+          },
+          position: 'RP',
+          playerModel: lineup.reliefPitcher2,
+        ),
+        _Position(
+          onTap: () async {
+            final match = playerList.where((e) => e.position == Position.pitcher);
+            final notMatch = <PlayerModel>[];
+
+            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            onChanged.call(player, 'SU');
+          },
+          position: 'SU',
+          playerModel: lineup.setupPitcher,
         ),
         _Position(
           onTap: () async {

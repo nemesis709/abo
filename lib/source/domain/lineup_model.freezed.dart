@@ -30,7 +30,9 @@ mixin _$LineupModel {
   PlayerModel? get rightField => throw _privateConstructorUsedError;
   PlayerModel? get designated => throw _privateConstructorUsedError;
   PlayerModel? get startPitcher => throw _privateConstructorUsedError;
-  PlayerModel? get reliefPitcher => throw _privateConstructorUsedError;
+  PlayerModel? get reliefPitcher1 => throw _privateConstructorUsedError;
+  PlayerModel? get reliefPitcher2 => throw _privateConstructorUsedError;
+  PlayerModel? get setupPitcher => throw _privateConstructorUsedError;
   PlayerModel? get closingPitcher => throw _privateConstructorUsedError;
 
   /// Serializes this LineupModel to a JSON map.
@@ -60,7 +62,9 @@ abstract class $LineupModelCopyWith<$Res> {
       PlayerModel? rightField,
       PlayerModel? designated,
       PlayerModel? startPitcher,
-      PlayerModel? reliefPitcher,
+      PlayerModel? reliefPitcher1,
+      PlayerModel? reliefPitcher2,
+      PlayerModel? setupPitcher,
       PlayerModel? closingPitcher});
 
   $PlayerModelCopyWith<$Res>? get catcher;
@@ -73,7 +77,9 @@ abstract class $LineupModelCopyWith<$Res> {
   $PlayerModelCopyWith<$Res>? get rightField;
   $PlayerModelCopyWith<$Res>? get designated;
   $PlayerModelCopyWith<$Res>? get startPitcher;
-  $PlayerModelCopyWith<$Res>? get reliefPitcher;
+  $PlayerModelCopyWith<$Res>? get reliefPitcher1;
+  $PlayerModelCopyWith<$Res>? get reliefPitcher2;
+  $PlayerModelCopyWith<$Res>? get setupPitcher;
   $PlayerModelCopyWith<$Res>? get closingPitcher;
 }
 
@@ -102,7 +108,9 @@ class _$LineupModelCopyWithImpl<$Res, $Val extends LineupModel>
     Object? rightField = freezed,
     Object? designated = freezed,
     Object? startPitcher = freezed,
-    Object? reliefPitcher = freezed,
+    Object? reliefPitcher1 = freezed,
+    Object? reliefPitcher2 = freezed,
+    Object? setupPitcher = freezed,
     Object? closingPitcher = freezed,
   }) {
     return _then(_value.copyWith(
@@ -146,9 +154,17 @@ class _$LineupModelCopyWithImpl<$Res, $Val extends LineupModel>
           ? _value.startPitcher
           : startPitcher // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
-      reliefPitcher: freezed == reliefPitcher
-          ? _value.reliefPitcher
-          : reliefPitcher // ignore: cast_nullable_to_non_nullable
+      reliefPitcher1: freezed == reliefPitcher1
+          ? _value.reliefPitcher1
+          : reliefPitcher1 // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
+      reliefPitcher2: freezed == reliefPitcher2
+          ? _value.reliefPitcher2
+          : reliefPitcher2 // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
+      setupPitcher: freezed == setupPitcher
+          ? _value.setupPitcher
+          : setupPitcher // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
       closingPitcher: freezed == closingPitcher
           ? _value.closingPitcher
@@ -301,13 +317,41 @@ class _$LineupModelCopyWithImpl<$Res, $Val extends LineupModel>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PlayerModelCopyWith<$Res>? get reliefPitcher {
-    if (_value.reliefPitcher == null) {
+  $PlayerModelCopyWith<$Res>? get reliefPitcher1 {
+    if (_value.reliefPitcher1 == null) {
       return null;
     }
 
-    return $PlayerModelCopyWith<$Res>(_value.reliefPitcher!, (value) {
-      return _then(_value.copyWith(reliefPitcher: value) as $Val);
+    return $PlayerModelCopyWith<$Res>(_value.reliefPitcher1!, (value) {
+      return _then(_value.copyWith(reliefPitcher1: value) as $Val);
+    });
+  }
+
+  /// Create a copy of LineupModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlayerModelCopyWith<$Res>? get reliefPitcher2 {
+    if (_value.reliefPitcher2 == null) {
+      return null;
+    }
+
+    return $PlayerModelCopyWith<$Res>(_value.reliefPitcher2!, (value) {
+      return _then(_value.copyWith(reliefPitcher2: value) as $Val);
+    });
+  }
+
+  /// Create a copy of LineupModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlayerModelCopyWith<$Res>? get setupPitcher {
+    if (_value.setupPitcher == null) {
+      return null;
+    }
+
+    return $PlayerModelCopyWith<$Res>(_value.setupPitcher!, (value) {
+      return _then(_value.copyWith(setupPitcher: value) as $Val);
     });
   }
 
@@ -345,7 +389,9 @@ abstract class _$$LineupModelImplCopyWith<$Res>
       PlayerModel? rightField,
       PlayerModel? designated,
       PlayerModel? startPitcher,
-      PlayerModel? reliefPitcher,
+      PlayerModel? reliefPitcher1,
+      PlayerModel? reliefPitcher2,
+      PlayerModel? setupPitcher,
       PlayerModel? closingPitcher});
 
   @override
@@ -369,7 +415,11 @@ abstract class _$$LineupModelImplCopyWith<$Res>
   @override
   $PlayerModelCopyWith<$Res>? get startPitcher;
   @override
-  $PlayerModelCopyWith<$Res>? get reliefPitcher;
+  $PlayerModelCopyWith<$Res>? get reliefPitcher1;
+  @override
+  $PlayerModelCopyWith<$Res>? get reliefPitcher2;
+  @override
+  $PlayerModelCopyWith<$Res>? get setupPitcher;
   @override
   $PlayerModelCopyWith<$Res>? get closingPitcher;
 }
@@ -397,7 +447,9 @@ class __$$LineupModelImplCopyWithImpl<$Res>
     Object? rightField = freezed,
     Object? designated = freezed,
     Object? startPitcher = freezed,
-    Object? reliefPitcher = freezed,
+    Object? reliefPitcher1 = freezed,
+    Object? reliefPitcher2 = freezed,
+    Object? setupPitcher = freezed,
     Object? closingPitcher = freezed,
   }) {
     return _then(_$LineupModelImpl(
@@ -441,9 +493,17 @@ class __$$LineupModelImplCopyWithImpl<$Res>
           ? _value.startPitcher
           : startPitcher // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
-      reliefPitcher: freezed == reliefPitcher
-          ? _value.reliefPitcher
-          : reliefPitcher // ignore: cast_nullable_to_non_nullable
+      reliefPitcher1: freezed == reliefPitcher1
+          ? _value.reliefPitcher1
+          : reliefPitcher1 // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
+      reliefPitcher2: freezed == reliefPitcher2
+          ? _value.reliefPitcher2
+          : reliefPitcher2 // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
+      setupPitcher: freezed == setupPitcher
+          ? _value.setupPitcher
+          : setupPitcher // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
       closingPitcher: freezed == closingPitcher
           ? _value.closingPitcher
@@ -467,7 +527,9 @@ class _$LineupModelImpl implements _LineupModel {
       this.rightField,
       this.designated,
       this.startPitcher,
-      this.reliefPitcher,
+      this.reliefPitcher1,
+      this.reliefPitcher2,
+      this.setupPitcher,
       this.closingPitcher});
 
   factory _$LineupModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -494,13 +556,17 @@ class _$LineupModelImpl implements _LineupModel {
   @override
   final PlayerModel? startPitcher;
   @override
-  final PlayerModel? reliefPitcher;
+  final PlayerModel? reliefPitcher1;
+  @override
+  final PlayerModel? reliefPitcher2;
+  @override
+  final PlayerModel? setupPitcher;
   @override
   final PlayerModel? closingPitcher;
 
   @override
   String toString() {
-    return 'LineupModel(catcher: $catcher, firstBase: $firstBase, secondBase: $secondBase, thirdBase: $thirdBase, shortStop: $shortStop, leftField: $leftField, centerField: $centerField, rightField: $rightField, designated: $designated, startPitcher: $startPitcher, reliefPitcher: $reliefPitcher, closingPitcher: $closingPitcher)';
+    return 'LineupModel(catcher: $catcher, firstBase: $firstBase, secondBase: $secondBase, thirdBase: $thirdBase, shortStop: $shortStop, leftField: $leftField, centerField: $centerField, rightField: $rightField, designated: $designated, startPitcher: $startPitcher, reliefPitcher1: $reliefPitcher1, reliefPitcher2: $reliefPitcher2, setupPitcher: $setupPitcher, closingPitcher: $closingPitcher)';
   }
 
   @override
@@ -527,8 +593,12 @@ class _$LineupModelImpl implements _LineupModel {
                 other.designated == designated) &&
             (identical(other.startPitcher, startPitcher) ||
                 other.startPitcher == startPitcher) &&
-            (identical(other.reliefPitcher, reliefPitcher) ||
-                other.reliefPitcher == reliefPitcher) &&
+            (identical(other.reliefPitcher1, reliefPitcher1) ||
+                other.reliefPitcher1 == reliefPitcher1) &&
+            (identical(other.reliefPitcher2, reliefPitcher2) ||
+                other.reliefPitcher2 == reliefPitcher2) &&
+            (identical(other.setupPitcher, setupPitcher) ||
+                other.setupPitcher == setupPitcher) &&
             (identical(other.closingPitcher, closingPitcher) ||
                 other.closingPitcher == closingPitcher));
   }
@@ -547,7 +617,9 @@ class _$LineupModelImpl implements _LineupModel {
       rightField,
       designated,
       startPitcher,
-      reliefPitcher,
+      reliefPitcher1,
+      reliefPitcher2,
+      setupPitcher,
       closingPitcher);
 
   /// Create a copy of LineupModel
@@ -578,7 +650,9 @@ abstract class _LineupModel implements LineupModel {
       final PlayerModel? rightField,
       final PlayerModel? designated,
       final PlayerModel? startPitcher,
-      final PlayerModel? reliefPitcher,
+      final PlayerModel? reliefPitcher1,
+      final PlayerModel? reliefPitcher2,
+      final PlayerModel? setupPitcher,
       final PlayerModel? closingPitcher}) = _$LineupModelImpl;
 
   factory _LineupModel.fromJson(Map<String, dynamic> json) =
@@ -605,7 +679,11 @@ abstract class _LineupModel implements LineupModel {
   @override
   PlayerModel? get startPitcher;
   @override
-  PlayerModel? get reliefPitcher;
+  PlayerModel? get reliefPitcher1;
+  @override
+  PlayerModel? get reliefPitcher2;
+  @override
+  PlayerModel? get setupPitcher;
   @override
   PlayerModel? get closingPitcher;
 

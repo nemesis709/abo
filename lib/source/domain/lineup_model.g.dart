@@ -38,9 +38,17 @@ _$LineupModelImpl _$$LineupModelImplFromJson(Map<String, dynamic> json) =>
       startPitcher: json['startPitcher'] == null
           ? null
           : PlayerModel.fromJson(json['startPitcher'] as Map<String, dynamic>),
-      reliefPitcher: json['reliefPitcher'] == null
+      reliefPitcher1: json['reliefPitcher1'] == null
           ? null
-          : PlayerModel.fromJson(json['reliefPitcher'] as Map<String, dynamic>),
+          : PlayerModel.fromJson(
+              json['reliefPitcher1'] as Map<String, dynamic>),
+      reliefPitcher2: json['reliefPitcher2'] == null
+          ? null
+          : PlayerModel.fromJson(
+              json['reliefPitcher2'] as Map<String, dynamic>),
+      setupPitcher: json['setupPitcher'] == null
+          ? null
+          : PlayerModel.fromJson(json['setupPitcher'] as Map<String, dynamic>),
       closingPitcher: json['closingPitcher'] == null
           ? null
           : PlayerModel.fromJson(
@@ -59,6 +67,8 @@ Map<String, dynamic> _$$LineupModelImplToJson(_$LineupModelImpl instance) =>
       'rightField': instance.rightField,
       'designated': instance.designated,
       'startPitcher': instance.startPitcher,
-      'reliefPitcher': instance.reliefPitcher,
+      'reliefPitcher1': instance.reliefPitcher1,
+      'reliefPitcher2': instance.reliefPitcher2,
+      'setupPitcher': instance.setupPitcher,
       'closingPitcher': instance.closingPitcher,
     };

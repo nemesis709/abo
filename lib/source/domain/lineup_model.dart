@@ -17,7 +17,9 @@ class LineupModel with _$LineupModel {
     PlayerModel? rightField,
     PlayerModel? designated,
     PlayerModel? startPitcher,
-    PlayerModel? reliefPitcher,
+    PlayerModel? reliefPitcher1,
+    PlayerModel? reliefPitcher2,
+    PlayerModel? setupPitcher,
     PlayerModel? closingPitcher,
   }) = _LineupModel;
 
