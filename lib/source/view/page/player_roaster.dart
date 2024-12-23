@@ -2,8 +2,10 @@ import 'package:abo/common/common_constants.dart';
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/lineup_controller.dart';
+import 'package:abo/source/controller/manager_controller.dart';
 import 'package:abo/source/controller/roaster_controller.dart';
 import 'package:abo/source/domain/lineup_model.dart';
+import 'package:abo/source/domain/manager_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
 import 'package:abo/source/view/widget/stats/batter_stat.dart';
@@ -34,6 +36,10 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
 
   @override
   Widget build(BuildContext context) {
+    final managerAsyncValue = ref.watch(managerControllerProvider);
+    final roasterAsyncValue = ref.watch(roasterControllerProvider);
+    final lineupAsyncValue = ref.watch(lineupControllerProvider);
+
     final lineupNotifier = ref.read(lineupControllerProvider.notifier);
 
     return Scaffold(
@@ -54,7 +60,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: LoadableContent(
-              asyncValue: ref.watch(roasterControllerProvider),
+              asyncValue: roasterAsyncValue,
               content: (playerList) {
                 if (playerList.isEmpty) {
                   return Center(
@@ -80,13 +86,9 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                       child: TabBarView(
                         controller: tabController,
                         children: [
-                          Column(
-                            children: [
-                              Text('감독'),
-                            ],
-                          ),
+                          _Manager(asyncValue: managerAsyncValue),
                           LoadableContent(
-                              asyncValue: ref.watch(lineupControllerProvider),
+                              asyncValue: lineupAsyncValue,
                               content: (lineup) {
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,68 +137,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                   ],
                                 );
                               }),
-                          SingleChildScrollView(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Gap.h16,
-                                    Text(
-                                      '투수 ${playerList.where((e) => e.isPitcher).length}명',
-                                      style: context.textStyleT16b.copyWith(color: context.colorN20),
-                                    ),
-                                    Gap.h16,
-                                    ...playerList.where((e) => e.isPitcher).map((e) => _PlayerItem(
-                                          playerModel: e,
-                                          showBaseline: true,
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                context: context,
-                                                builder: (context) {
-                                                  return DefaultBottomSheet(
-                                                      maxHeight: context.sizeHeight * 0.8,
-                                                      minHeight: context.sizeHeight * 0.2,
-                                                      child: PitcherStat(playerModel: e));
-                                                });
-                                          },
-                                        )),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Gap.h16,
-                                    Text(
-                                      '타자 ${playerList.where((e) => !e.isPitcher).length}명',
-                                      style: context.textStyleT16b.copyWith(color: context.colorN20),
-                                    ),
-                                    Gap.h16,
-                                    ...playerList.where((e) => !e.isPitcher).map((e) => _PlayerItem(
-                                          playerModel: e,
-                                          showBaseline: true,
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                context: context,
-                                                builder: (context) {
-                                                  return DefaultBottomSheet(
-                                                      maxHeight: context.sizeHeight * 0.8,
-                                                      minHeight: context.sizeHeight * 0.2,
-                                                      child: BatterStat(playerModel: e));
-                                                });
-                                          },
-                                        )),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                          _LineUp(playerList: playerList),
                         ],
                       ),
                     ),
@@ -204,6 +145,211 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                 );
               }),
         ));
+  }
+}
+
+class _Manager extends ConsumerStatefulWidget {
+  const _Manager({required this.asyncValue});
+
+  final AsyncValue<ManagerModel> asyncValue;
+
+  @override
+  ConsumerState<_Manager> createState() => _ManagerState();
+}
+
+class _ManagerState extends ConsumerState<_Manager> {
+  @override
+  Widget build(BuildContext context) {
+    final managerNotifier = ref.read(managerControllerProvider.notifier);
+
+    return LoadableContent(
+        asyncValue: widget.asyncValue,
+        content: (manager) {
+          return Column(
+            children: [
+              Gap.h24,
+              Image.network(
+                width: 128,
+                height: 128,
+                manager.imageUrl ?? '',
+                errorBuilder: (context, e, _) => SizedBox(),
+              ),
+              Gap.h16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    manager.name,
+                    style: context.textStyleT16b.copyWith(color: context.colorN20),
+                  ),
+                  Gap.w16,
+                  FilledButton(
+                    onPressed: () async {
+                      final managerList = await managerNotifier.getManagerList();
+                      if (!context.mounted) return;
+
+                      final result = await showModalBottomSheet<ManagerModel?>(
+                          context: context,
+                          builder: (context) {
+                            return DefaultBottomSheet(
+                                child: Column(
+                              children: managerList
+                                  .map(
+                                    (e) => InkWell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Gap.w8,
+                                            SizedBox(
+                                              width: 60,
+                                              child: Text(
+                                                e.name,
+                                                style: context.textStyleT16b.copyWith(color: context.colorN20),
+                                              ),
+                                            ),
+                                            Gap.w16,
+                                            Text(e.ability),
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: () => context.maybePop(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ));
+                          });
+
+                      if (result != null) {
+                        managerNotifier.updateManager(result);
+                      }
+                    },
+                    child: Text('변경'),
+                  ),
+                ],
+              ),
+              Text(manager.ability),
+              Text(manager.description),
+              Gap.h32,
+              _Name('안타', '2루타', '3루타'),
+              _Value(0, 0, 0),
+              _Name('홈런', '타석', '타점'),
+              _Value(0, 0, 0),
+              _Name('삼진', '타점', '3루타'),
+              _Value(0, 0, 0),
+              _Name('안타', '2루타', '3루타'),
+              _Value(0, 0, 0),
+              _Name('안타', '탈삼진', '피사사구'),
+              _Value(0, 0, 0),
+              Spacer(),
+              FilledButton(
+                onPressed: () async {
+                  managerNotifier.setManager();
+                },
+                child: Text('감독 선임'),
+              ),
+              Gap.h16,
+              Text('선택한 감독에 따라\n고유 능력을 사용할 수 있습니다', textAlign: TextAlign.center),
+              Gap.h16,
+            ],
+          );
+        });
+  }
+}
+
+class _Name extends StatelessWidget {
+  const _Name(
+    this.name1,
+    this.name2,
+    this.name3,
+  );
+
+  final String name1;
+  final String name2;
+  final String name3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: context.colorP10,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+              width: (context.sizeWidth - 64) / 3,
+              child: Center(
+                  child: Text(
+                name1,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+          SizedBox(
+              width: (context.sizeWidth - 64) / 3,
+              child: Center(
+                  child: Text(
+                name2,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+          SizedBox(
+              width: (context.sizeWidth - 64) / 3,
+              child: Center(
+                  child: Text(
+                name3,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+        ],
+      ),
+    );
+  }
+}
+
+class _Value extends StatelessWidget {
+  const _Value(
+    this.value1,
+    this.value2,
+    this.value3,
+  );
+
+  final dynamic value1;
+  final dynamic value2;
+  final dynamic value3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(
+          width: (context.sizeWidth - 64) / 3,
+          child: Center(
+              child: Text(
+            value1.toString(),
+            style: context.textStyleT14b,
+          )),
+        ),
+        SizedBox(
+          width: (context.sizeWidth - 64) / 3,
+          child: Center(
+              child: Text(
+            value2.toString(),
+            style: context.textStyleT14b,
+          )),
+        ),
+        SizedBox(
+          width: (context.sizeWidth - 64) / 3,
+          child: Center(
+              child: Text(
+            value3.toString(),
+            style: context.textStyleT14b,
+          )),
+        ),
+      ],
+    );
   }
 }
 
@@ -566,6 +712,93 @@ class _PlayerItem extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _LineUp extends ConsumerStatefulWidget {
+  const _LineUp({
+    required this.playerList,
+  });
+
+  final List<PlayerModel> playerList;
+
+  @override
+  ConsumerState<_LineUp> createState() => _LineUpState();
+}
+
+class _LineUpState extends ConsumerState<_LineUp> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.playerList.isEmpty) {
+      return Center(
+        child: Text(
+          '선수 명단이 없습니다.',
+          style: context.textStyleT14b,
+        ),
+      );
+    }
+    return SingleChildScrollView(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap.h16,
+              Text(
+                '투수 ${widget.playerList.where((e) => e.isPitcher).length}명',
+                style: context.textStyleT16b.copyWith(color: context.colorN20),
+              ),
+              Gap.h16,
+              ...widget.playerList.where((e) => e.isPitcher).map((e) => _PlayerItem(
+                    playerModel: e,
+                    showBaseline: true,
+                    onTap: () {
+                      showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) {
+                            return DefaultBottomSheet(
+                                maxHeight: context.sizeHeight * 0.8,
+                                minHeight: context.sizeHeight * 0.2,
+                                child: PitcherStat(playerModel: e));
+                          });
+                    },
+                  )),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap.h16,
+              Text(
+                '타자 ${widget.playerList.where((e) => !e.isPitcher).length}명',
+                style: context.textStyleT16b.copyWith(color: context.colorN20),
+              ),
+              Gap.h16,
+              ...widget.playerList.where((e) => !e.isPitcher).map((e) => _PlayerItem(
+                    playerModel: e,
+                    showBaseline: true,
+                    onTap: () {
+                      showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) {
+                            return DefaultBottomSheet(
+                                maxHeight: context.sizeHeight * 0.8,
+                                minHeight: context.sizeHeight * 0.2,
+                                child: BatterStat(playerModel: e));
+                          });
+                    },
+                  )),
+            ],
+          ),
+        ],
       ),
     );
   }

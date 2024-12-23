@@ -1,7 +1,7 @@
-import 'dart:io';
-
 import 'package:abo/common/logger/logger.dart';
 import 'package:dio/dio.dart';
+
+const kServerURL = 'https://api.adonis06.site';
 
 class Dios {
 //region singleton
@@ -22,7 +22,7 @@ class Dios {
 
   Dio _initBaseDio() {
     var baseOptions = BaseOptions(
-      baseUrl: 'https://api.adonis06.site',
+      baseUrl: kServerURL,
       contentType: 'application/json',
       connectTimeout: const Duration(seconds: 3),
       receiveTimeout: const Duration(seconds: 10),
@@ -43,7 +43,7 @@ class Dios {
           logger.d('Response: ${response.data}');
           return handler.next(response);
         },
-        onError: (DioError e, handler) {
+        onError: (DioException e, handler) {
           logger.d('Error: ${e.response?.data}');
           return handler.next(e);
         },

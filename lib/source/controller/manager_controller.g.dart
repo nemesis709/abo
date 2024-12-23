@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'lineup_controller.dart';
+part of 'manager_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$lineupControllerHash() => r'2f13f198b64c368bee534bd08dbfd5284497695f';
+String _$managerControllerHash() => r'e3bf51458b38a27a82b582de9b35af9e4f2dc08a';
 
-/// See also [LineupController].
-@ProviderFor(LineupController)
-final lineupControllerProvider =
-    AutoDisposeAsyncNotifierProvider<LineupController, LineupModel>.internal(
-  LineupController.new,
-  name: r'lineupControllerProvider',
+/// See also [ManagerController].
+@ProviderFor(ManagerController)
+final managerControllerProvider =
+    AutoDisposeAsyncNotifierProvider<ManagerController, ManagerModel>.internal(
+  ManagerController.new,
+  name: r'managerControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$lineupControllerHash,
+      : _$managerControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LineupController = AutoDisposeAsyncNotifier<LineupModel>;
+typedef _$ManagerController = AutoDisposeAsyncNotifier<ManagerModel>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

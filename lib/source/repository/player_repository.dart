@@ -4,6 +4,7 @@ import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/batter_stat_model.dart';
 import 'package:abo/source/domain/lineup_model.dart';
+import 'package:abo/source/domain/manager_model.dart';
 import 'package:abo/source/domain/pitcher_stat_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/repository/api/apis.dart';
@@ -16,6 +17,7 @@ class PlayerRepository implements IService {
     _roasterList = SimpleCache<List<PlayerModel>>();
     _pitcherList = SimpleCache<List<PlayerModel>>();
     _batterList = SimpleCache<List<PlayerModel>>();
+    _managerList = SimpleCache<List<ManagerModel>>();
   }
 
   static final PlayerRepository _instance = PlayerRepository._privateConstructor();
@@ -27,6 +29,8 @@ class PlayerRepository implements IService {
 
   late final SimpleCache<List<PlayerModel>> _pitcherList;
   late final SimpleCache<List<PlayerModel>> _batterList;
+
+  late final SimpleCache<List<ManagerModel>> _managerList;
 
   Future<Result<List<PlayerModel>>> getPlayerList([bool? isPitcher]) async {
     return Result.guardFuture(() async {
@@ -84,11 +88,46 @@ class PlayerRepository implements IService {
     });
   }
 
+  Future<Result<List<ManagerModel>>> getManagerList() async {
+    return Result.guardFuture(() async {
+      return await _managerList.getAsync(create: () async {
+        final result = await apis.playerApi.getManagerList();
+        return result.data;
+      });
+    });
+  }
+
+  Future<Result<ManagerModel>> getManager() async {
+    return Result.guardFuture(() async {
+      final currentUser = await AuthRepository.instance.getCurrentUser();
+      if (currentUser == null) {
+        throw Error();
+      } else {
+        final result = await apis.playerApi.getManager(userId: currentUser.uid);
+        return result;
+      }
+    });
+  }
+
+  Future<Result<void>> setManager({
+    required ManagerModel manager,
+  }) async {
+    return Result.guardFuture(() async {
+      final currentUser = await AuthRepository.instance.getCurrentUser();
+      if (currentUser == null) {
+        throw Error();
+      } else {
+        await apis.playerApi.setManager(userId: currentUser.uid, manager: manager);
+      }
+    });
+  }
+
   @override
   void clearCache() {
     _playerList.clear();
     _roasterList.clear();
     _pitcherList.clear();
     _batterList.clear();
+    _managerList.clear();
   }
 }
