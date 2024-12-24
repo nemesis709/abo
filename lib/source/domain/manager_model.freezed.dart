@@ -43,7 +43,6 @@ mixin _$ManagerModel {
   int get pEarnedRuns => throw _privateConstructorUsedError;
   int get pStrikeout => throw _privateConstructorUsedError;
   int get pWalk => throw _privateConstructorUsedError;
-  int get hitByPitch => throw _privateConstructorUsedError;
   bool get isSpecial => throw _privateConstructorUsedError;
 
   /// Serializes this ManagerModel to a JSON map.
@@ -86,7 +85,6 @@ abstract class $ManagerModelCopyWith<$Res> {
       int pEarnedRuns,
       int pStrikeout,
       int pWalk,
-      int hitByPitch,
       bool isSpecial});
 }
 
@@ -128,7 +126,6 @@ class _$ManagerModelCopyWithImpl<$Res, $Val extends ManagerModel>
     Object? pEarnedRuns = null,
     Object? pStrikeout = null,
     Object? pWalk = null,
-    Object? hitByPitch = null,
     Object? isSpecial = null,
   }) {
     return _then(_value.copyWith(
@@ -224,10 +221,6 @@ class _$ManagerModelCopyWithImpl<$Res, $Val extends ManagerModel>
           ? _value.pWalk
           : pWalk // ignore: cast_nullable_to_non_nullable
               as int,
-      hitByPitch: null == hitByPitch
-          ? _value.hitByPitch
-          : hitByPitch // ignore: cast_nullable_to_non_nullable
-              as int,
       isSpecial: null == isSpecial
           ? _value.isSpecial
           : isSpecial // ignore: cast_nullable_to_non_nullable
@@ -268,7 +261,6 @@ abstract class _$$ManagerModelImplCopyWith<$Res>
       int pEarnedRuns,
       int pStrikeout,
       int pWalk,
-      int hitByPitch,
       bool isSpecial});
 }
 
@@ -308,7 +300,6 @@ class __$$ManagerModelImplCopyWithImpl<$Res>
     Object? pEarnedRuns = null,
     Object? pStrikeout = null,
     Object? pWalk = null,
-    Object? hitByPitch = null,
     Object? isSpecial = null,
   }) {
     return _then(_$ManagerModelImpl(
@@ -404,10 +395,6 @@ class __$$ManagerModelImplCopyWithImpl<$Res>
           ? _value.pWalk
           : pWalk // ignore: cast_nullable_to_non_nullable
               as int,
-      hitByPitch: null == hitByPitch
-          ? _value.hitByPitch
-          : hitByPitch // ignore: cast_nullable_to_non_nullable
-              as int,
       isSpecial: null == isSpecial
           ? _value.isSpecial
           : isSpecial // ignore: cast_nullable_to_non_nullable
@@ -443,7 +430,6 @@ class _$ManagerModelImpl implements _ManagerModel {
       required this.pEarnedRuns,
       required this.pStrikeout,
       required this.pWalk,
-      required this.hitByPitch,
       required this.isSpecial});
 
   factory _$ManagerModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -498,13 +484,11 @@ class _$ManagerModelImpl implements _ManagerModel {
   @override
   final int pWalk;
   @override
-  final int hitByPitch;
-  @override
   final bool isSpecial;
 
   @override
   String toString() {
-    return 'ManagerModel(id: $id, name: $name, imageUrl: $imageUrl, description: $description, ability: $ability, hit: $hit, twoBase: $twoBase, threeBase: $threeBase, homeRun: $homeRun, runsBattedIn: $runsBattedIn, plateAppearance: $plateAppearance, runs: $runs, strikeout: $strikeout, walk: $walk, stealBase: $stealBase, stealFailed: $stealFailed, error: $error, innings: $innings, pHit: $pHit, pHomerun: $pHomerun, pEarnedRuns: $pEarnedRuns, pStrikeout: $pStrikeout, pWalk: $pWalk, hitByPitch: $hitByPitch, isSpecial: $isSpecial)';
+    return 'ManagerModel(id: $id, name: $name, imageUrl: $imageUrl, description: $description, ability: $ability, hit: $hit, twoBase: $twoBase, threeBase: $threeBase, homeRun: $homeRun, runsBattedIn: $runsBattedIn, plateAppearance: $plateAppearance, runs: $runs, strikeout: $strikeout, walk: $walk, stealBase: $stealBase, stealFailed: $stealFailed, error: $error, innings: $innings, pHit: $pHit, pHomerun: $pHomerun, pEarnedRuns: $pEarnedRuns, pStrikeout: $pStrikeout, pWalk: $pWalk, isSpecial: $isSpecial)';
   }
 
   @override
@@ -546,8 +530,6 @@ class _$ManagerModelImpl implements _ManagerModel {
             (identical(other.pStrikeout, pStrikeout) ||
                 other.pStrikeout == pStrikeout) &&
             (identical(other.pWalk, pWalk) || other.pWalk == pWalk) &&
-            (identical(other.hitByPitch, hitByPitch) ||
-                other.hitByPitch == hitByPitch) &&
             (identical(other.isSpecial, isSpecial) ||
                 other.isSpecial == isSpecial));
   }
@@ -579,7 +561,6 @@ class _$ManagerModelImpl implements _ManagerModel {
         pEarnedRuns,
         pStrikeout,
         pWalk,
-        hitByPitch,
         isSpecial
       ]);
 
@@ -624,7 +605,6 @@ abstract class _ManagerModel implements ManagerModel {
       required final int pEarnedRuns,
       required final int pStrikeout,
       required final int pWalk,
-      required final int hitByPitch,
       required final bool isSpecial}) = _$ManagerModelImpl;
 
   factory _ManagerModel.fromJson(Map<String, dynamic> json) =
@@ -676,8 +656,6 @@ abstract class _ManagerModel implements ManagerModel {
   int get pStrikeout;
   @override
   int get pWalk;
-  @override
-  int get hitByPitch;
   @override
   bool get isSpecial;
 

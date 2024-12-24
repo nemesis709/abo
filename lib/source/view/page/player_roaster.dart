@@ -22,10 +22,12 @@ class PlayerRoasterPage extends ConsumerStatefulWidget {
   const PlayerRoasterPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PlayerRoasterPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PlayerRoasterPageState();
 }
 
-class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with SingleTickerProviderStateMixin {
+class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -96,28 +98,41 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                     Gap.h16,
                                     Expanded(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           _Lineup(
                                             playerList: playerList,
                                             lineup: lineup,
                                             onChanged: (player, position) =>
-                                                lineupNotifier.updateLineup(player: player, position: position),
+                                                lineupNotifier.updateLineup(
+                                                    player: player,
+                                                    position: position),
                                           ),
                                           _Rotation(
                                             playerList: playerList,
                                             lineup: lineup,
                                             onChanged: (player, position) {
                                               if (position == 'SP') {
-                                                lineupNotifier.updateStartPitcher(player: player);
+                                                lineupNotifier
+                                                    .updateStartPitcher(
+                                                        player: player);
                                               } else if (position == 'RP1') {
-                                                lineupNotifier.updateReliefPitcher1(player: player);
+                                                lineupNotifier
+                                                    .updateReliefPitcher1(
+                                                        player: player);
                                               } else if (position == 'RP2') {
-                                                lineupNotifier.updateReliefPitcher2(player: player);
+                                                lineupNotifier
+                                                    .updateReliefPitcher2(
+                                                        player: player);
                                               } else if (position == 'SU') {
-                                                lineupNotifier.updateSetupPitcher(player: player);
+                                                lineupNotifier
+                                                    .updateSetupPitcher(
+                                                        player: player);
                                               } else if (position == 'CP') {
-                                                lineupNotifier.updateClosePitcher(player: player);
+                                                lineupNotifier
+                                                    .updateClosePitcher(
+                                                        player: player);
                                               }
                                             },
                                           ),
@@ -132,7 +147,9 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                       child: Text('라인업 제출'),
                                     ),
                                     Gap.h16,
-                                    Text('권장 포지션대로 라인업에 등록한 경우\n50%의 보너스 포인트를 얻을 수 있습니다', textAlign: TextAlign.center),
+                                    Text(
+                                        '권장 포지션대로 라인업에 등록한 경우\n50%의 보너스 포인트를 얻을 수 있습니다',
+                                        textAlign: TextAlign.center),
                                     Gap.h16,
                                   ],
                                 );
@@ -168,79 +185,114 @@ class _ManagerState extends ConsumerState<_Manager> {
           return Column(
             children: [
               Gap.h24,
-              Image.network(
-                width: 128,
-                height: 128,
-                manager.imageUrl ?? '',
-                errorBuilder: (context, e, _) => SizedBox(),
-              ),
-              Gap.h16,
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    manager.name,
-                    style: context.textStyleT16b.copyWith(color: context.colorN20),
+                  Image.network(
+                    width: 128,
+                    height: 128,
+                    manager.imageUrl ?? '',
+                    errorBuilder: (context, e, _) => SizedBox(),
                   ),
                   Gap.w16,
-                  FilledButton(
-                    onPressed: () async {
-                      final managerList = await managerNotifier.getManagerList();
-                      if (!context.mounted) return;
+                  SizedBox(
+                    height: 128,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              manager.name,
+                              style: context.textStyleH20b
+                                  .copyWith(color: context.colorN20),
+                            ),
+                            Gap.w16,
+                            FilledButton(
+                              onPressed: () async {
+                                final managerList =
+                                    await managerNotifier.getManagerList();
+                                if (!context.mounted) return;
 
-                      final result = await showModalBottomSheet<ManagerModel?>(
-                          context: context,
-                          builder: (context) {
-                            return DefaultBottomSheet(
-                                child: Column(
-                              children: managerList
-                                  .map(
-                                    (e) => InkWell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            Gap.w8,
-                                            SizedBox(
-                                              width: 60,
-                                              child: Text(
-                                                e.name,
-                                                style: context.textStyleT16b.copyWith(color: context.colorN20),
-                                              ),
-                                            ),
-                                            Gap.w16,
-                                            Text(e.ability),
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () => context.maybePop(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ));
-                          });
+                                final result =
+                                    await showModalBottomSheet<ManagerModel?>(
+                                        context: context,
+                                        builder: (context) {
+                                          return DefaultBottomSheet(
+                                              child: Column(
+                                            children: managerList
+                                                .map(
+                                                  (e) => InkWell(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Gap.w8,
+                                                          SizedBox(
+                                                            width: 60,
+                                                            child: Text(
+                                                              e.name,
+                                                              style: context
+                                                                  .textStyleT16b
+                                                                  .copyWith(
+                                                                      color: context
+                                                                          .colorN20),
+                                                            ),
+                                                          ),
+                                                          Gap.w16,
+                                                          Text(e.ability),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onTap: () =>
+                                                        context.maybePop(e),
+                                                  ),
+                                                )
+                                                .toList(),
+                                          ));
+                                        });
 
-                      if (result != null) {
-                        managerNotifier.updateManager(result);
-                      }
-                    },
-                    child: Text('변경'),
+                                if (result != null) {
+                                  managerNotifier.updateManager(result);
+                                }
+                              },
+                              child: Text('변경'),
+                            ),
+                          ],
+                        ),
+                        Gap.h8,
+                        Text(manager.ability, style: context.textStyleL14m),
+                        Text(manager.description),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              Text(manager.ability),
-              Text(manager.description),
+              Gap.h16,
               Gap.h32,
-              _Name('안타', '2루타', '3루타'),
-              _Value(0, 0, 0),
-              _Name('홈런', '타석', '타점'),
-              _Value(0, 0, 0),
-              _Name('삼진', '타점', '3루타'),
-              _Value(0, 0, 0),
-              _Name('안타', '2루타', '3루타'),
-              _Value(0, 0, 0),
-              _Name('안타', '탈삼진', '피사사구'),
-              _Value(0, 0, 0),
+              _Name('안타', '2루타', '3루타', '홈런', '타점', '득점'),
+              _Value(
+                  manager.hit,
+                  manager.hit + manager.twoBase,
+                  manager.hit + manager.threeBase,
+                  manager.hit + manager.homeRun,
+                  manager.runsBattedIn,
+                  manager.runs),
+              _Name('타석', '삼진', '사사구', '도루', '도루실패', '실책'),
+              _Value(manager.plateAppearance, manager.strikeout, manager.walk,
+                  manager.stealBase, manager.stealFailed, manager.error),
+              _Name('이닝', '탈삼진', '사사구', '피안타', '피홈런', '실점'),
+              _Value(
+                  manager.innings,
+                  manager.pStrikeout,
+                  manager.pWalk,
+                  manager.pHit,
+                  manager.pHit + manager.pHomerun,
+                  manager.pEarnedRuns),
               Spacer(),
               FilledButton(
                 onPressed: () async {
@@ -249,7 +301,8 @@ class _ManagerState extends ConsumerState<_Manager> {
                 child: Text('감독 선임'),
               ),
               Gap.h16,
-              Text('선택한 감독에 따라\n고유 능력을 사용할 수 있습니다', textAlign: TextAlign.center),
+              Text('선택한 감독에 따라\n고유 능력을 사용할 수 있습니다',
+                  textAlign: TextAlign.center),
               Gap.h16,
             ],
           );
@@ -262,11 +315,17 @@ class _Name extends StatelessWidget {
     this.name1,
     this.name2,
     this.name3,
+    this.name4,
+    this.name5,
+    this.name6,
   );
 
   final String name1;
   final String name2;
   final String name3;
+  final String name4;
+  final String name5;
+  final String name6;
 
   @override
   Widget build(BuildContext context) {
@@ -276,7 +335,7 @@ class _Name extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
-              width: (context.sizeWidth - 64) / 3,
+              width: (context.sizeWidth - 64) / 6,
               child: Center(
                   child: Text(
                 name1,
@@ -285,7 +344,7 @@ class _Name extends StatelessWidget {
                 ),
               ))),
           SizedBox(
-              width: (context.sizeWidth - 64) / 3,
+              width: (context.sizeWidth - 64) / 6,
               child: Center(
                   child: Text(
                 name2,
@@ -294,10 +353,37 @@ class _Name extends StatelessWidget {
                 ),
               ))),
           SizedBox(
-              width: (context.sizeWidth - 64) / 3,
+              width: (context.sizeWidth - 64) / 6,
               child: Center(
                   child: Text(
                 name3,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+          SizedBox(
+              width: (context.sizeWidth - 64) / 6,
+              child: Center(
+                  child: Text(
+                name4,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+          SizedBox(
+              width: (context.sizeWidth - 64) / 6,
+              child: Center(
+                  child: Text(
+                name5,
+                style: context.textStyleB14r.copyWith(
+                  color: context.colorN100,
+                ),
+              ))),
+          SizedBox(
+              width: (context.sizeWidth - 64) / 6,
+              child: Center(
+                  child: Text(
+                name6,
                 style: context.textStyleB14r.copyWith(
                   color: context.colorN100,
                 ),
@@ -313,11 +399,17 @@ class _Value extends StatelessWidget {
     this.value1,
     this.value2,
     this.value3,
+    this.value4,
+    this.value5,
+    this.value6,
   );
 
-  final dynamic value1;
-  final dynamic value2;
-  final dynamic value3;
+  final int value1;
+  final int value2;
+  final int value3;
+  final int value4;
+  final int value5;
+  final int value6;
 
   @override
   Widget build(BuildContext context) {
@@ -325,26 +417,74 @@ class _Value extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SizedBox(
-          width: (context.sizeWidth - 64) / 3,
+          width: (context.sizeWidth - 64) / 6,
           child: Center(
               child: Text(
-            value1.toString(),
+            (value1 == 0
+                ? value1.toStringAsFixed(0)
+                : value1 > 0
+                    ? '+ $value1'
+                    : '- ${value1.abs()}'),
             style: context.textStyleT14b,
           )),
         ),
         SizedBox(
-          width: (context.sizeWidth - 64) / 3,
+          width: (context.sizeWidth - 64) / 6,
           child: Center(
               child: Text(
-            value2.toString(),
+            (value2 == 0
+                ? value2.toStringAsFixed(0)
+                : value2 > 0
+                    ? '+ $value2'
+                    : '- ${value2.abs()}'),
             style: context.textStyleT14b,
           )),
         ),
         SizedBox(
-          width: (context.sizeWidth - 64) / 3,
+          width: (context.sizeWidth - 64) / 6,
           child: Center(
               child: Text(
-            value3.toString(),
+            (value3 == 0
+                ? value3.toStringAsFixed(0)
+                : value3 > 0
+                    ? '+ $value3'
+                    : '- ${value3.abs()}'),
+            style: context.textStyleT14b,
+          )),
+        ),
+        SizedBox(
+          width: (context.sizeWidth - 64) / 6,
+          child: Center(
+              child: Text(
+            (value4 == 0
+                ? value4.toStringAsFixed(0)
+                : value4 > 0
+                    ? '+ $value4'
+                    : '- ${value4.abs()}'),
+            style: context.textStyleT14b,
+          )),
+        ),
+        SizedBox(
+          width: (context.sizeWidth - 64) / 6,
+          child: Center(
+              child: Text(
+            (value5 == 0
+                ? value5.toStringAsFixed(0)
+                : value5 > 0
+                    ? '+ $value5'
+                    : '- ${value5.abs()}'),
+            style: context.textStyleT14b,
+          )),
+        ),
+        SizedBox(
+          width: (context.sizeWidth - 64) / 6,
+          child: Center(
+              child: Text(
+            (value6 == 0
+                ? value6.toStringAsFixed(0)
+                : value6 > 0
+                    ? '+ $value6'
+                    : '- ${value6.abs()}'),
             style: context.textStyleT14b,
           )),
         ),
@@ -389,13 +529,15 @@ class _LineupState extends State<_Lineup> {
                 if (match.isNotEmpty) ...[
                   Text('권장선수', style: context.textStyleT14m),
                   Divider(),
-                  ...match.map((e) => _PlayerItem(playerModel: e, onTap: () => context.maybePop(e))),
+                  ...match.map((e) => _PlayerItem(
+                      playerModel: e, onTap: () => context.maybePop(e))),
                 ],
                 if (match.isNotEmpty && notMatch.isNotEmpty) Gap.h16,
                 if (notMatch.isNotEmpty) ...[
                   Text('기타선수', style: context.textStyleT14m),
                   Divider(),
-                  ...notMatch.map((e) => _PlayerItem(playerModel: e, onTap: () => context.maybePop(e))),
+                  ...notMatch.map((e) => _PlayerItem(
+                      playerModel: e, onTap: () => context.maybePop(e))),
                 ],
               ],
             ),
@@ -416,12 +558,15 @@ class _LineupState extends State<_Lineup> {
       children: [
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position == Position.catcher);
+            final match =
+                widget.playerList.where((e) => e.position == Position.catcher);
 
-            final notMatch =
-                widget.playerList.where((e) => e.position != Position.catcher && e.position != Position.pitcher);
+            final notMatch = widget.playerList.where((e) =>
+                e.position != Position.catcher &&
+                e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.catcher);
           },
           position: Position.catcher.displayString,
@@ -429,11 +574,14 @@ class _LineupState extends State<_Lineup> {
         ),
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position == Position.firstBase);
-            final notMatch =
-                widget.playerList.where((e) => e.position != Position.firstBase && e.position != Position.pitcher);
+            final match = widget.playerList
+                .where((e) => e.position == Position.firstBase);
+            final notMatch = widget.playerList.where((e) =>
+                e.position != Position.firstBase &&
+                e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.firstBase);
           },
           position: Position.firstBase.displayString,
@@ -441,11 +589,14 @@ class _LineupState extends State<_Lineup> {
         ),
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position == Position.secondBase);
-            final notMatch =
-                widget.playerList.where((e) => e.position != Position.secondBase && e.position != Position.pitcher);
+            final match = widget.playerList
+                .where((e) => e.position == Position.secondBase);
+            final notMatch = widget.playerList.where((e) =>
+                e.position != Position.secondBase &&
+                e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.secondBase);
           },
           position: Position.secondBase.displayString,
@@ -453,11 +604,14 @@ class _LineupState extends State<_Lineup> {
         ),
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position == Position.thirdBase);
-            final notMatch =
-                widget.playerList.where((e) => e.position != Position.thirdBase && e.position != Position.pitcher);
+            final match = widget.playerList
+                .where((e) => e.position == Position.thirdBase);
+            final notMatch = widget.playerList.where((e) =>
+                e.position != Position.thirdBase &&
+                e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.thirdBase);
           },
           position: Position.thirdBase.displayString,
@@ -465,11 +619,14 @@ class _LineupState extends State<_Lineup> {
         ),
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position == Position.shortStop);
-            final notMatch =
-                widget.playerList.where((e) => e.position != Position.shortStop && e.position != Position.pitcher);
+            final match = widget.playerList
+                .where((e) => e.position == Position.shortStop);
+            final notMatch = widget.playerList.where((e) =>
+                e.position != Position.shortStop &&
+                e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.shortStop);
           },
           position: Position.shortStop.displayString,
@@ -478,9 +635,11 @@ class _LineupState extends State<_Lineup> {
         _Position(
           onTap: () async {
             final match = widget.playerList.where((e) => e.position.isOutfield);
-            final notMatch = widget.playerList.where((e) => !e.position.isOutfield && e.position != Position.pitcher);
+            final notMatch = widget.playerList.where((e) =>
+                !e.position.isOutfield && e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.leftField);
           },
           position: Position.leftField.displayString,
@@ -489,9 +648,11 @@ class _LineupState extends State<_Lineup> {
         _Position(
           onTap: () async {
             final match = widget.playerList.where((e) => e.position.isOutfield);
-            final notMatch = widget.playerList.where((e) => !e.position.isOutfield && e.position != Position.pitcher);
+            final notMatch = widget.playerList.where((e) =>
+                !e.position.isOutfield && e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.centerField);
           },
           position: Position.centerField.displayString,
@@ -500,9 +661,11 @@ class _LineupState extends State<_Lineup> {
         _Position(
           onTap: () async {
             final match = widget.playerList.where((e) => e.position.isOutfield);
-            final notMatch = widget.playerList.where((e) => !e.position.isOutfield && e.position != Position.pitcher);
+            final notMatch = widget.playerList.where((e) =>
+                !e.position.isOutfield && e.position != Position.pitcher);
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.rightField);
           },
           position: Position.rightField.displayString,
@@ -510,10 +673,12 @@ class _LineupState extends State<_Lineup> {
         ),
         _Position(
           onTap: () async {
-            final match = widget.playerList.where((e) => e.position != Position.pitcher);
+            final match =
+                widget.playerList.where((e) => e.position != Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             widget.onChanged.call(player, Position.designated);
           },
           position: Position.designated.displayString,
@@ -557,13 +722,15 @@ class _Rotation extends StatelessWidget {
                   if (match.isNotEmpty) ...[
                     Text('권장선수', style: context.textStyleT14m),
                     Divider(),
-                    ...match.map((e) => _PlayerItem(playerModel: e, onTap: () => context.maybePop(e))),
+                    ...match.map((e) => _PlayerItem(
+                        playerModel: e, onTap: () => context.maybePop(e))),
                   ],
                   if (match.isNotEmpty && notMatch.isNotEmpty) Gap.h16,
                   if (notMatch.isNotEmpty) ...[
                     Text('기타선수', style: context.textStyleT14m),
                     Divider(),
-                    ...notMatch.map((e) => _PlayerItem(playerModel: e, onTap: () => context.maybePop(e))),
+                    ...notMatch.map((e) => _PlayerItem(
+                        playerModel: e, onTap: () => context.maybePop(e))),
                   ],
                 ],
               ),
@@ -582,10 +749,12 @@ class _Rotation extends StatelessWidget {
       children: [
         _Position(
           onTap: () async {
-            final match = playerList.where((e) => e.position == Position.pitcher);
+            final match =
+                playerList.where((e) => e.position == Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             onChanged.call(player, 'SP');
           },
           position: 'SP',
@@ -593,10 +762,12 @@ class _Rotation extends StatelessWidget {
         ),
         _Position(
           onTap: () async {
-            final match = playerList.where((e) => e.position == Position.pitcher);
+            final match =
+                playerList.where((e) => e.position == Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             onChanged.call(player, 'RP1');
           },
           position: 'RP',
@@ -604,10 +775,12 @@ class _Rotation extends StatelessWidget {
         ),
         _Position(
           onTap: () async {
-            final match = playerList.where((e) => e.position == Position.pitcher);
+            final match =
+                playerList.where((e) => e.position == Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             onChanged.call(player, 'RP2');
           },
           position: 'RP',
@@ -615,10 +788,12 @@ class _Rotation extends StatelessWidget {
         ),
         _Position(
           onTap: () async {
-            final match = playerList.where((e) => e.position == Position.pitcher);
+            final match =
+                playerList.where((e) => e.position == Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             onChanged.call(player, 'SU');
           },
           position: 'SU',
@@ -626,10 +801,12 @@ class _Rotation extends StatelessWidget {
         ),
         _Position(
           onTap: () async {
-            final match = playerList.where((e) => e.position == Position.pitcher);
+            final match =
+                playerList.where((e) => e.position == Position.pitcher);
             final notMatch = <PlayerModel>[];
 
-            final player = await showPlayerBottom(match: match, notMatch: notMatch);
+            final player =
+                await showPlayerBottom(match: match, notMatch: notMatch);
             onChanged.call(player, 'CP');
           },
           position: 'CP',
@@ -666,9 +843,12 @@ class _Position extends StatelessWidget {
               child: playerModel == null
                   ? Text(
                       '선택해주세요',
-                      style: context.textStyleT16b.copyWith(color: context.colorN80),
+                      style: context.textStyleT16b
+                          .copyWith(color: context.colorN80),
                     )
-                  : Text(playerModel!.name, style: context.textStyleT16b.copyWith(color: context.colorN20)),
+                  : Text(playerModel!.name,
+                      style: context.textStyleT16b
+                          .copyWith(color: context.colorN20)),
             ),
           )
         ],
@@ -702,8 +882,12 @@ class _PlayerItem extends StatelessWidget {
             children: [
               Text(
                 playerModel.name,
-                style: context.textStyleT16b.copyWith(color: context.colorN20).copyWith(
-                      decoration: showBaseline == true ? TextDecoration.underline : null,
+                style: context.textStyleT16b
+                    .copyWith(color: context.colorN20)
+                    .copyWith(
+                      decoration: showBaseline == true
+                          ? TextDecoration.underline
+                          : null,
                     ),
               ),
               Gap.w4,
@@ -754,21 +938,23 @@ class _LineUpState extends ConsumerState<_LineUp> {
                 style: context.textStyleT16b.copyWith(color: context.colorN20),
               ),
               Gap.h16,
-              ...widget.playerList.where((e) => e.isPitcher).map((e) => _PlayerItem(
-                    playerModel: e,
-                    showBaseline: true,
-                    onTap: () {
-                      showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (context) {
-                            return DefaultBottomSheet(
-                                maxHeight: context.sizeHeight * 0.8,
-                                minHeight: context.sizeHeight * 0.2,
-                                child: PitcherStat(playerModel: e));
-                          });
-                    },
-                  )),
+              ...widget.playerList
+                  .where((e) => e.isPitcher)
+                  .map((e) => _PlayerItem(
+                        playerModel: e,
+                        showBaseline: true,
+                        onTap: () {
+                          showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (context) {
+                                return DefaultBottomSheet(
+                                    maxHeight: context.sizeHeight * 0.8,
+                                    minHeight: context.sizeHeight * 0.2,
+                                    child: PitcherStat(playerModel: e));
+                              });
+                        },
+                      )),
             ],
           ),
           Column(
@@ -781,21 +967,23 @@ class _LineUpState extends ConsumerState<_LineUp> {
                 style: context.textStyleT16b.copyWith(color: context.colorN20),
               ),
               Gap.h16,
-              ...widget.playerList.where((e) => !e.isPitcher).map((e) => _PlayerItem(
-                    playerModel: e,
-                    showBaseline: true,
-                    onTap: () {
-                      showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (context) {
-                            return DefaultBottomSheet(
-                                maxHeight: context.sizeHeight * 0.8,
-                                minHeight: context.sizeHeight * 0.2,
-                                child: BatterStat(playerModel: e));
-                          });
-                    },
-                  )),
+              ...widget.playerList
+                  .where((e) => !e.isPitcher)
+                  .map((e) => _PlayerItem(
+                        playerModel: e,
+                        showBaseline: true,
+                        onTap: () {
+                          showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (context) {
+                                return DefaultBottomSheet(
+                                    maxHeight: context.sizeHeight * 0.8,
+                                    minHeight: context.sizeHeight * 0.2,
+                                    child: BatterStat(playerModel: e));
+                              });
+                        },
+                      )),
             ],
           ),
         ],
