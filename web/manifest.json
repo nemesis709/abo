@@ -1,6 +1,6 @@
 {
-    "name": "abo",
-    "short_name": "abo",
+    "name": "tmp",
+    "short_name": "tmp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
