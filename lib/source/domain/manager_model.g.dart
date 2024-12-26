@@ -31,7 +31,6 @@ _$ManagerModelImpl _$$ManagerModelImplFromJson(Map<String, dynamic> json) =>
       pEarnedRuns: (json['pEarnedRuns'] as num).toInt(),
       pStrikeout: (json['pStrikeout'] as num).toInt(),
       pWalk: (json['pWalk'] as num).toInt(),
-      isSpecial: json['isSpecial'] as bool,
     );
 
 Map<String, dynamic> _$$ManagerModelImplToJson(_$ManagerModelImpl instance) =>
@@ -59,5 +58,4 @@ Map<String, dynamic> _$$ManagerModelImplToJson(_$ManagerModelImpl instance) =>
       'pEarnedRuns': instance.pEarnedRuns,
       'pStrikeout': instance.pStrikeout,
       'pWalk': instance.pWalk,
-      'isSpecial': instance.isSpecial,
     };

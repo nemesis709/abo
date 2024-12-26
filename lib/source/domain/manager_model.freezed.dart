@@ -43,7 +43,6 @@ mixin _$ManagerModel {
   int get pEarnedRuns => throw _privateConstructorUsedError;
   int get pStrikeout => throw _privateConstructorUsedError;
   int get pWalk => throw _privateConstructorUsedError;
-  bool get isSpecial => throw _privateConstructorUsedError;
 
   /// Serializes this ManagerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -84,8 +83,7 @@ abstract class $ManagerModelCopyWith<$Res> {
       int pHomerun,
       int pEarnedRuns,
       int pStrikeout,
-      int pWalk,
-      bool isSpecial});
+      int pWalk});
 }
 
 /// @nodoc
@@ -126,7 +124,6 @@ class _$ManagerModelCopyWithImpl<$Res, $Val extends ManagerModel>
     Object? pEarnedRuns = null,
     Object? pStrikeout = null,
     Object? pWalk = null,
-    Object? isSpecial = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -221,10 +218,6 @@ class _$ManagerModelCopyWithImpl<$Res, $Val extends ManagerModel>
           ? _value.pWalk
           : pWalk // ignore: cast_nullable_to_non_nullable
               as int,
-      isSpecial: null == isSpecial
-          ? _value.isSpecial
-          : isSpecial // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -260,8 +253,7 @@ abstract class _$$ManagerModelImplCopyWith<$Res>
       int pHomerun,
       int pEarnedRuns,
       int pStrikeout,
-      int pWalk,
-      bool isSpecial});
+      int pWalk});
 }
 
 /// @nodoc
@@ -300,7 +292,6 @@ class __$$ManagerModelImplCopyWithImpl<$Res>
     Object? pEarnedRuns = null,
     Object? pStrikeout = null,
     Object? pWalk = null,
-    Object? isSpecial = null,
   }) {
     return _then(_$ManagerModelImpl(
       id: null == id
@@ -395,10 +386,6 @@ class __$$ManagerModelImplCopyWithImpl<$Res>
           ? _value.pWalk
           : pWalk // ignore: cast_nullable_to_non_nullable
               as int,
-      isSpecial: null == isSpecial
-          ? _value.isSpecial
-          : isSpecial // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -429,8 +416,7 @@ class _$ManagerModelImpl implements _ManagerModel {
       required this.pHomerun,
       required this.pEarnedRuns,
       required this.pStrikeout,
-      required this.pWalk,
-      required this.isSpecial});
+      required this.pWalk});
 
   factory _$ManagerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ManagerModelImplFromJson(json);
@@ -483,12 +469,10 @@ class _$ManagerModelImpl implements _ManagerModel {
   final int pStrikeout;
   @override
   final int pWalk;
-  @override
-  final bool isSpecial;
 
   @override
   String toString() {
-    return 'ManagerModel(id: $id, name: $name, imageUrl: $imageUrl, description: $description, ability: $ability, hit: $hit, twoBase: $twoBase, threeBase: $threeBase, homeRun: $homeRun, runsBattedIn: $runsBattedIn, plateAppearance: $plateAppearance, runs: $runs, strikeout: $strikeout, walk: $walk, stealBase: $stealBase, stealFailed: $stealFailed, error: $error, innings: $innings, pHit: $pHit, pHomerun: $pHomerun, pEarnedRuns: $pEarnedRuns, pStrikeout: $pStrikeout, pWalk: $pWalk, isSpecial: $isSpecial)';
+    return 'ManagerModel(id: $id, name: $name, imageUrl: $imageUrl, description: $description, ability: $ability, hit: $hit, twoBase: $twoBase, threeBase: $threeBase, homeRun: $homeRun, runsBattedIn: $runsBattedIn, plateAppearance: $plateAppearance, runs: $runs, strikeout: $strikeout, walk: $walk, stealBase: $stealBase, stealFailed: $stealFailed, error: $error, innings: $innings, pHit: $pHit, pHomerun: $pHomerun, pEarnedRuns: $pEarnedRuns, pStrikeout: $pStrikeout, pWalk: $pWalk)';
   }
 
   @override
@@ -529,9 +513,7 @@ class _$ManagerModelImpl implements _ManagerModel {
                 other.pEarnedRuns == pEarnedRuns) &&
             (identical(other.pStrikeout, pStrikeout) ||
                 other.pStrikeout == pStrikeout) &&
-            (identical(other.pWalk, pWalk) || other.pWalk == pWalk) &&
-            (identical(other.isSpecial, isSpecial) ||
-                other.isSpecial == isSpecial));
+            (identical(other.pWalk, pWalk) || other.pWalk == pWalk));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -560,8 +542,7 @@ class _$ManagerModelImpl implements _ManagerModel {
         pHomerun,
         pEarnedRuns,
         pStrikeout,
-        pWalk,
-        isSpecial
+        pWalk
       ]);
 
   /// Create a copy of ManagerModel
@@ -604,8 +585,7 @@ abstract class _ManagerModel implements ManagerModel {
       required final int pHomerun,
       required final int pEarnedRuns,
       required final int pStrikeout,
-      required final int pWalk,
-      required final bool isSpecial}) = _$ManagerModelImpl;
+      required final int pWalk}) = _$ManagerModelImpl;
 
   factory _ManagerModel.fromJson(Map<String, dynamic> json) =
       _$ManagerModelImpl.fromJson;
@@ -656,8 +636,6 @@ abstract class _ManagerModel implements ManagerModel {
   int get pStrikeout;
   @override
   int get pWalk;
-  @override
-  bool get isSpecial;
 
   /// Create a copy of ManagerModel
   /// with the given fields replaced by the non-null parameter values.

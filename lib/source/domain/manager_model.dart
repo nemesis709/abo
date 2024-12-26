@@ -29,9 +29,7 @@ class ManagerModel with _$ManagerModel {
     required int pEarnedRuns,
     required int pStrikeout,
     required int pWalk,
-    required bool isSpecial,
   }) = _ManagerModel;
 
-  factory ManagerModel.fromJson(Map<String, dynamic> json) =>
-      _$ManagerModelFromJson(json);
+  factory ManagerModel.fromJson(Map<String, dynamic> json) => _$ManagerModelFromJson(json);
 }
