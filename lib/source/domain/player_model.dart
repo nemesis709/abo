@@ -19,6 +19,8 @@ class PlayerModel with _$PlayerModel {
     required String hand,
     required bool isPitcher,
     bool? onPosition,
+    int? positionNumber,
+    int? lineupNumber,
     bool? isForeigner,
     bool? onTrade,
     int? point,

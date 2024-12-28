@@ -440,13 +440,19 @@ mixin _$BatterDailyStatModel {
   @DateJsonConverter()
   DateTime get gameDate => throw _privateConstructorUsedError;
   int get point => throw _privateConstructorUsedError;
+  int get plateAppearance => throw _privateConstructorUsedError;
   int get atBat => throw _privateConstructorUsedError;
   int get hit => throw _privateConstructorUsedError;
+  int get twoBase => throw _privateConstructorUsedError;
+  int get threeBase => throw _privateConstructorUsedError;
   int get homeRun => throw _privateConstructorUsedError;
-  int get rbi => throw _privateConstructorUsedError;
+  int get runsBattedIn => throw _privateConstructorUsedError;
   int get runs => throw _privateConstructorUsedError;
   int get strikeout => throw _privateConstructorUsedError;
   int get walk => throw _privateConstructorUsedError;
+  int get stealBase => throw _privateConstructorUsedError;
+  int get stealFailed => throw _privateConstructorUsedError;
+  int get error => throw _privateConstructorUsedError;
   double get average => throw _privateConstructorUsedError;
   double get ops => throw _privateConstructorUsedError;
   int get re24 => throw _privateConstructorUsedError;
@@ -472,13 +478,19 @@ abstract class $BatterDailyStatModelCopyWith<$Res> {
       int playerId,
       @DateJsonConverter() DateTime gameDate,
       int point,
+      int plateAppearance,
       int atBat,
       int hit,
+      int twoBase,
+      int threeBase,
       int homeRun,
-      int rbi,
+      int runsBattedIn,
       int runs,
       int strikeout,
       int walk,
+      int stealBase,
+      int stealFailed,
+      int error,
       double average,
       double ops,
       int re24});
@@ -504,13 +516,19 @@ class _$BatterDailyStatModelCopyWithImpl<$Res,
     Object? playerId = null,
     Object? gameDate = null,
     Object? point = null,
+    Object? plateAppearance = null,
     Object? atBat = null,
     Object? hit = null,
+    Object? twoBase = null,
+    Object? threeBase = null,
     Object? homeRun = null,
-    Object? rbi = null,
+    Object? runsBattedIn = null,
     Object? runs = null,
     Object? strikeout = null,
     Object? walk = null,
+    Object? stealBase = null,
+    Object? stealFailed = null,
+    Object? error = null,
     Object? average = null,
     Object? ops = null,
     Object? re24 = null,
@@ -532,6 +550,10 @@ class _$BatterDailyStatModelCopyWithImpl<$Res,
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      plateAppearance: null == plateAppearance
+          ? _value.plateAppearance
+          : plateAppearance // ignore: cast_nullable_to_non_nullable
+              as int,
       atBat: null == atBat
           ? _value.atBat
           : atBat // ignore: cast_nullable_to_non_nullable
@@ -540,13 +562,21 @@ class _$BatterDailyStatModelCopyWithImpl<$Res,
           ? _value.hit
           : hit // ignore: cast_nullable_to_non_nullable
               as int,
+      twoBase: null == twoBase
+          ? _value.twoBase
+          : twoBase // ignore: cast_nullable_to_non_nullable
+              as int,
+      threeBase: null == threeBase
+          ? _value.threeBase
+          : threeBase // ignore: cast_nullable_to_non_nullable
+              as int,
       homeRun: null == homeRun
           ? _value.homeRun
           : homeRun // ignore: cast_nullable_to_non_nullable
               as int,
-      rbi: null == rbi
-          ? _value.rbi
-          : rbi // ignore: cast_nullable_to_non_nullable
+      runsBattedIn: null == runsBattedIn
+          ? _value.runsBattedIn
+          : runsBattedIn // ignore: cast_nullable_to_non_nullable
               as int,
       runs: null == runs
           ? _value.runs
@@ -559,6 +589,18 @@ class _$BatterDailyStatModelCopyWithImpl<$Res,
       walk: null == walk
           ? _value.walk
           : walk // ignore: cast_nullable_to_non_nullable
+              as int,
+      stealBase: null == stealBase
+          ? _value.stealBase
+          : stealBase // ignore: cast_nullable_to_non_nullable
+              as int,
+      stealFailed: null == stealFailed
+          ? _value.stealFailed
+          : stealFailed // ignore: cast_nullable_to_non_nullable
+              as int,
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as int,
       average: null == average
           ? _value.average
@@ -589,13 +631,19 @@ abstract class _$$BatterDailyStatModelImplCopyWith<$Res>
       int playerId,
       @DateJsonConverter() DateTime gameDate,
       int point,
+      int plateAppearance,
       int atBat,
       int hit,
+      int twoBase,
+      int threeBase,
       int homeRun,
-      int rbi,
+      int runsBattedIn,
       int runs,
       int strikeout,
       int walk,
+      int stealBase,
+      int stealFailed,
+      int error,
       double average,
       double ops,
       int re24});
@@ -618,13 +666,19 @@ class __$$BatterDailyStatModelImplCopyWithImpl<$Res>
     Object? playerId = null,
     Object? gameDate = null,
     Object? point = null,
+    Object? plateAppearance = null,
     Object? atBat = null,
     Object? hit = null,
+    Object? twoBase = null,
+    Object? threeBase = null,
     Object? homeRun = null,
-    Object? rbi = null,
+    Object? runsBattedIn = null,
     Object? runs = null,
     Object? strikeout = null,
     Object? walk = null,
+    Object? stealBase = null,
+    Object? stealFailed = null,
+    Object? error = null,
     Object? average = null,
     Object? ops = null,
     Object? re24 = null,
@@ -646,6 +700,10 @@ class __$$BatterDailyStatModelImplCopyWithImpl<$Res>
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
               as int,
+      plateAppearance: null == plateAppearance
+          ? _value.plateAppearance
+          : plateAppearance // ignore: cast_nullable_to_non_nullable
+              as int,
       atBat: null == atBat
           ? _value.atBat
           : atBat // ignore: cast_nullable_to_non_nullable
@@ -654,13 +712,21 @@ class __$$BatterDailyStatModelImplCopyWithImpl<$Res>
           ? _value.hit
           : hit // ignore: cast_nullable_to_non_nullable
               as int,
+      twoBase: null == twoBase
+          ? _value.twoBase
+          : twoBase // ignore: cast_nullable_to_non_nullable
+              as int,
+      threeBase: null == threeBase
+          ? _value.threeBase
+          : threeBase // ignore: cast_nullable_to_non_nullable
+              as int,
       homeRun: null == homeRun
           ? _value.homeRun
           : homeRun // ignore: cast_nullable_to_non_nullable
               as int,
-      rbi: null == rbi
-          ? _value.rbi
-          : rbi // ignore: cast_nullable_to_non_nullable
+      runsBattedIn: null == runsBattedIn
+          ? _value.runsBattedIn
+          : runsBattedIn // ignore: cast_nullable_to_non_nullable
               as int,
       runs: null == runs
           ? _value.runs
@@ -673,6 +739,18 @@ class __$$BatterDailyStatModelImplCopyWithImpl<$Res>
       walk: null == walk
           ? _value.walk
           : walk // ignore: cast_nullable_to_non_nullable
+              as int,
+      stealBase: null == stealBase
+          ? _value.stealBase
+          : stealBase // ignore: cast_nullable_to_non_nullable
+              as int,
+      stealFailed: null == stealFailed
+          ? _value.stealFailed
+          : stealFailed // ignore: cast_nullable_to_non_nullable
+              as int,
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as int,
       average: null == average
           ? _value.average
@@ -698,13 +776,19 @@ class _$BatterDailyStatModelImpl implements _BatterDailyStatModel {
       required this.playerId,
       @DateJsonConverter() required this.gameDate,
       required this.point,
+      required this.plateAppearance,
       required this.atBat,
       required this.hit,
+      required this.twoBase,
+      required this.threeBase,
       required this.homeRun,
-      required this.rbi,
+      required this.runsBattedIn,
       required this.runs,
       required this.strikeout,
       required this.walk,
+      required this.stealBase,
+      required this.stealFailed,
+      required this.error,
       required this.average,
       required this.ops,
       required this.re24});
@@ -722,19 +806,31 @@ class _$BatterDailyStatModelImpl implements _BatterDailyStatModel {
   @override
   final int point;
   @override
+  final int plateAppearance;
+  @override
   final int atBat;
   @override
   final int hit;
   @override
+  final int twoBase;
+  @override
+  final int threeBase;
+  @override
   final int homeRun;
   @override
-  final int rbi;
+  final int runsBattedIn;
   @override
   final int runs;
   @override
   final int strikeout;
   @override
   final int walk;
+  @override
+  final int stealBase;
+  @override
+  final int stealFailed;
+  @override
+  final int error;
   @override
   final double average;
   @override
@@ -744,7 +840,7 @@ class _$BatterDailyStatModelImpl implements _BatterDailyStatModel {
 
   @override
   String toString() {
-    return 'BatterDailyStatModel(id: $id, playerId: $playerId, gameDate: $gameDate, point: $point, atBat: $atBat, hit: $hit, homeRun: $homeRun, rbi: $rbi, runs: $runs, strikeout: $strikeout, walk: $walk, average: $average, ops: $ops, re24: $re24)';
+    return 'BatterDailyStatModel(id: $id, playerId: $playerId, gameDate: $gameDate, point: $point, plateAppearance: $plateAppearance, atBat: $atBat, hit: $hit, twoBase: $twoBase, threeBase: $threeBase, homeRun: $homeRun, runsBattedIn: $runsBattedIn, runs: $runs, strikeout: $strikeout, walk: $walk, stealBase: $stealBase, stealFailed: $stealFailed, error: $error, average: $average, ops: $ops, re24: $re24)';
   }
 
   @override
@@ -758,14 +854,25 @@ class _$BatterDailyStatModelImpl implements _BatterDailyStatModel {
             (identical(other.gameDate, gameDate) ||
                 other.gameDate == gameDate) &&
             (identical(other.point, point) || other.point == point) &&
+            (identical(other.plateAppearance, plateAppearance) ||
+                other.plateAppearance == plateAppearance) &&
             (identical(other.atBat, atBat) || other.atBat == atBat) &&
             (identical(other.hit, hit) || other.hit == hit) &&
+            (identical(other.twoBase, twoBase) || other.twoBase == twoBase) &&
+            (identical(other.threeBase, threeBase) ||
+                other.threeBase == threeBase) &&
             (identical(other.homeRun, homeRun) || other.homeRun == homeRun) &&
-            (identical(other.rbi, rbi) || other.rbi == rbi) &&
+            (identical(other.runsBattedIn, runsBattedIn) ||
+                other.runsBattedIn == runsBattedIn) &&
             (identical(other.runs, runs) || other.runs == runs) &&
             (identical(other.strikeout, strikeout) ||
                 other.strikeout == strikeout) &&
             (identical(other.walk, walk) || other.walk == walk) &&
+            (identical(other.stealBase, stealBase) ||
+                other.stealBase == stealBase) &&
+            (identical(other.stealFailed, stealFailed) ||
+                other.stealFailed == stealFailed) &&
+            (identical(other.error, error) || other.error == error) &&
             (identical(other.average, average) || other.average == average) &&
             (identical(other.ops, ops) || other.ops == ops) &&
             (identical(other.re24, re24) || other.re24 == re24));
@@ -773,8 +880,29 @@ class _$BatterDailyStatModelImpl implements _BatterDailyStatModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, playerId, gameDate, point,
-      atBat, hit, homeRun, rbi, runs, strikeout, walk, average, ops, re24);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        playerId,
+        gameDate,
+        point,
+        plateAppearance,
+        atBat,
+        hit,
+        twoBase,
+        threeBase,
+        homeRun,
+        runsBattedIn,
+        runs,
+        strikeout,
+        walk,
+        stealBase,
+        stealFailed,
+        error,
+        average,
+        ops,
+        re24
+      ]);
 
   /// Create a copy of BatterDailyStatModel
   /// with the given fields replaced by the non-null parameter values.
@@ -800,13 +928,19 @@ abstract class _BatterDailyStatModel implements BatterDailyStatModel {
       required final int playerId,
       @DateJsonConverter() required final DateTime gameDate,
       required final int point,
+      required final int plateAppearance,
       required final int atBat,
       required final int hit,
+      required final int twoBase,
+      required final int threeBase,
       required final int homeRun,
-      required final int rbi,
+      required final int runsBattedIn,
       required final int runs,
       required final int strikeout,
       required final int walk,
+      required final int stealBase,
+      required final int stealFailed,
+      required final int error,
       required final double average,
       required final double ops,
       required final int re24}) = _$BatterDailyStatModelImpl;
@@ -824,19 +958,31 @@ abstract class _BatterDailyStatModel implements BatterDailyStatModel {
   @override
   int get point;
   @override
+  int get plateAppearance;
+  @override
   int get atBat;
   @override
   int get hit;
   @override
+  int get twoBase;
+  @override
+  int get threeBase;
+  @override
   int get homeRun;
   @override
-  int get rbi;
+  int get runsBattedIn;
   @override
   int get runs;
   @override
   int get strikeout;
   @override
   int get walk;
+  @override
+  int get stealBase;
+  @override
+  int get stealFailed;
+  @override
+  int get error;
   @override
   double get average;
   @override

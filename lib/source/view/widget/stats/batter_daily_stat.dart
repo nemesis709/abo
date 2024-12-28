@@ -150,7 +150,7 @@ class BatterDailyStat extends StatelessWidget {
                 width: (context.sizeWidth - 64) / 3,
                 child: Center(
                     child: Text(
-                  batterInfo.rbi.toString(),
+                  batterInfo.runsBattedIn.toString(),
                   style: context.textStyleT14b,
                 ))),
             SizedBox(
