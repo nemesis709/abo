@@ -8,6 +8,9 @@ part 'manager_controller.g.dart';
 
 @riverpod
 class ManagerController extends _$ManagerController {
+  ManagerModel? _managerModel;
+  get manager => _managerModel;
+
   @override
   FutureOr<ManagerModel> build() async {
     return await getManager();
@@ -20,11 +23,18 @@ class ManagerController extends _$ManagerController {
 
   Future<ManagerModel> getManager() async {
     final result = await PlayerRepository.instance.getManager();
+    _managerModel ??= result.valueOrNull;
     return result.requireValue;
   }
 
   Future<void> updateManager(ManagerModel manager) async {
     state = AsyncData(manager);
+  }
+
+  Future<void> resetManager() async {
+    if (_managerModel != null) {
+      state = AsyncData(_managerModel!);
+    }
   }
 
   Future<void> setManager() async {
@@ -41,6 +51,7 @@ class ManagerController extends _$ManagerController {
       return;
     });
 
+    _managerModel = null;
     ref.invalidateSelf();
   }
 }

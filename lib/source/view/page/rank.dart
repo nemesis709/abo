@@ -1,7 +1,7 @@
 import 'package:abo/common/common_constants.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/controller/user_controller.dart';
-import 'package:abo/source/view/widget/manager_rank.dart';
+import 'package:abo/source/view/widget/user_rank.dart';
 import 'package:abo/source/view/widget/player_rank.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
@@ -59,7 +59,7 @@ class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderSt
                 child: TabBarView(
                   controller: controller,
                   children: [
-                    ManagerRank(userController: userController),
+                    UserRank(userController: userController),
                     PlayerRank(playerController: playerController),
                   ],
                 ),

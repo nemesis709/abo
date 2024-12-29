@@ -113,7 +113,8 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<CollectionModel<UserModel>> getUserList() async {
+  Future<CollectionModel<UserModel>> getUserList(
+      {required int serverKey}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -125,7 +126,7 @@ class _AuthApi implements AuthApi {
     )
         .compose(
           _dio.options,
-          '/auth/users',
+          '/auth/users/${serverKey}',
           queryParameters: queryParameters,
           data: _data,
         )

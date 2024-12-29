@@ -5,7 +5,7 @@ import 'package:abo/common/loadable_content.dart';
 import 'package:abo/gen/assets.gen.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/controller/user_controller.dart';
-import 'package:abo/source/view/widget/manager_rank.dart';
+import 'package:abo/source/view/widget/user_rank.dart';
 import 'package:abo/source/view/widget/player_rank.dart';
 import 'package:abo/source/view/widget/score_view.dart';
 import 'package:abo/ui/route/app_router.dart';
@@ -145,7 +145,7 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
           ),
           Gap.h16,
           // isManager ? ManagerRank(userController: userController) : PlayerRank(playerController: playerController),
-          ManagerRank(userController: userController),
+          UserRank(userController: userController),
         ],
       ),
     );

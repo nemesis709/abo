@@ -73,9 +73,10 @@ class AuthRepository implements IService {
   }
 
   Future<List<UserModel>> getUserList() async {
+    final user = await getCurrentUser();
     final result = await Result.guardFuture(() async {
       return _userList.getAsync(create: () async {
-        final result = await apis.authApi.getUserList();
+        final result = await apis.authApi.getUserList(serverKey: user?.serverKey ?? 0);
         return result.data;
       });
     });

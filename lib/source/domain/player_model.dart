@@ -31,10 +31,53 @@ class PlayerModel with _$PlayerModel {
   }) = _PlayerModel;
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) => _$PlayerModelFromJson(json);
+
+  static String getLineupPosition(int positionNumber) {
+    if (positionNumber == 2) {
+      return 'C';
+    } else if (positionNumber == 3) {
+      return '1B';
+    } else if (positionNumber == 4) {
+      return '2B';
+    } else if (positionNumber == 5) {
+      return '3B';
+    } else if (positionNumber == 6) {
+      return 'SS';
+    } else if (positionNumber == 7) {
+      return 'LF';
+    } else if (positionNumber == 8) {
+      return 'CF';
+    } else if (positionNumber == 9) {
+      return 'RF';
+    } else if (positionNumber == 10) {
+      return 'DH';
+    } else if (positionNumber == 11) {
+      return 'SP';
+    } else if (positionNumber == 12) {
+      return 'RP';
+    } else if (positionNumber == 13) {
+      return 'RP';
+    } else if (positionNumber == 14) {
+      return 'SU';
+    } else if (positionNumber == 15) {
+      return 'CP';
+    } else {
+      return '';
+    }
+  }
 }
 
 extension PlayerModelExtension on PlayerModel {
   int get dailyPoint => batterDailyStatModel?.point ?? pitcherDailyStatModel?.point ?? 0;
+  bool get hasDailyStat => batterDailyStatModel != null || pitcherDailyStatModel != null;
+
+  String? get lineupPosition {
+    if (positionNumber == null) {
+      return null;
+    } else {
+      return PlayerModel.getLineupPosition(positionNumber!);
+    }
+  }
 }
 
 enum Position {

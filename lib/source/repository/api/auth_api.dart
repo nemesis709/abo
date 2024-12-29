@@ -24,8 +24,10 @@ abstract class AuthApi {
   @GET('/auth/signout')
   Future<void> signOut();
 
-  @GET('/auth/users')
-  Future<CollectionModel<UserModel>> getUserList();
+  @GET('/auth/users/{serverKey}')
+  Future<CollectionModel<UserModel>> getUserList({
+    @Path('serverKey') required int serverKey,
+  });
 }
 
 UserModel deserializeUserModel(Map<String, dynamic> json) => UserModel.fromJson(json);

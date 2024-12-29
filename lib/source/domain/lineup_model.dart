@@ -27,3 +27,21 @@ class LineupModel with _$LineupModel {
 
   factory LineupModel.empty() => LineupModel();
 }
+
+extension LineupModelExtension on LineupModel {
+  bool get isEmpty =>
+      catcher == null ||
+      firstBase == null ||
+      secondBase == null ||
+      thirdBase == null ||
+      shortStop == null ||
+      leftField == null ||
+      centerField == null ||
+      rightField == null ||
+      designated == null ||
+      startPitcher == null ||
+      reliefPitcher1 == null ||
+      reliefPitcher2 == null ||
+      setupPitcher == null ||
+      closingPitcher == null;
+}

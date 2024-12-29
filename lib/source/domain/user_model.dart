@@ -7,7 +7,6 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   factory UserModel({
     required String uid,
-    int? teamKey, // 일정에서 팀에 매칭할 키
     required String name,
     required int game,
     required int win,
@@ -15,6 +14,9 @@ class UserModel with _$UserModel {
     required int lose,
     required int point,
     required double rate,
+    int? serverKey, // 서버 번호
+    int? teamKey, // 일정에서 팀에 매칭할 키
+    int? managerKey, // 사용중인 감독
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);

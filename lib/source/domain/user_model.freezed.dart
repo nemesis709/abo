@@ -21,7 +21,6 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserModel {
   String get uid => throw _privateConstructorUsedError;
-  int? get teamKey => throw _privateConstructorUsedError; // 일정에서 팀에 매칭할 키
   String get name => throw _privateConstructorUsedError;
   int get game => throw _privateConstructorUsedError;
   int get win => throw _privateConstructorUsedError;
@@ -29,6 +28,9 @@ mixin _$UserModel {
   int get lose => throw _privateConstructorUsedError;
   int get point => throw _privateConstructorUsedError;
   double get rate => throw _privateConstructorUsedError;
+  int? get serverKey => throw _privateConstructorUsedError; // 서버 번호
+  int? get teamKey => throw _privateConstructorUsedError; // 일정에서 팀에 매칭할 키
+  int? get managerKey => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,14 +49,16 @@ abstract class $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
-      int? teamKey,
       String name,
       int game,
       int win,
       int draw,
       int lose,
       int point,
-      double rate});
+      double rate,
+      int? serverKey,
+      int? teamKey,
+      int? managerKey});
 }
 
 /// @nodoc
@@ -73,7 +77,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @override
   $Res call({
     Object? uid = null,
-    Object? teamKey = freezed,
     Object? name = null,
     Object? game = null,
     Object? win = null,
@@ -81,16 +84,15 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? lose = null,
     Object? point = null,
     Object? rate = null,
+    Object? serverKey = freezed,
+    Object? teamKey = freezed,
+    Object? managerKey = freezed,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      teamKey: freezed == teamKey
-          ? _value.teamKey
-          : teamKey // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -119,6 +121,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
+      serverKey: freezed == serverKey
+          ? _value.serverKey
+          : serverKey // ignore: cast_nullable_to_non_nullable
+              as int?,
+      teamKey: freezed == teamKey
+          ? _value.teamKey
+          : teamKey // ignore: cast_nullable_to_non_nullable
+              as int?,
+      managerKey: freezed == managerKey
+          ? _value.managerKey
+          : managerKey // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -133,14 +147,16 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String uid,
-      int? teamKey,
       String name,
       int game,
       int win,
       int draw,
       int lose,
       int point,
-      double rate});
+      double rate,
+      int? serverKey,
+      int? teamKey,
+      int? managerKey});
 }
 
 /// @nodoc
@@ -157,7 +173,6 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = null,
-    Object? teamKey = freezed,
     Object? name = null,
     Object? game = null,
     Object? win = null,
@@ -165,16 +180,15 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? lose = null,
     Object? point = null,
     Object? rate = null,
+    Object? serverKey = freezed,
+    Object? teamKey = freezed,
+    Object? managerKey = freezed,
   }) {
     return _then(_$UserModelImpl(
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      teamKey: freezed == teamKey
-          ? _value.teamKey
-          : teamKey // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -203,6 +217,18 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
               as double,
+      serverKey: freezed == serverKey
+          ? _value.serverKey
+          : serverKey // ignore: cast_nullable_to_non_nullable
+              as int?,
+      teamKey: freezed == teamKey
+          ? _value.teamKey
+          : teamKey // ignore: cast_nullable_to_non_nullable
+              as int?,
+      managerKey: freezed == managerKey
+          ? _value.managerKey
+          : managerKey // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -212,23 +238,22 @@ class __$$UserModelImplCopyWithImpl<$Res>
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
       {required this.uid,
-      this.teamKey,
       required this.name,
       required this.game,
       required this.win,
       required this.draw,
       required this.lose,
       required this.point,
-      required this.rate});
+      required this.rate,
+      this.serverKey,
+      this.teamKey,
+      this.managerKey});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
 
   @override
   final String uid;
-  @override
-  final int? teamKey;
-// 일정에서 팀에 매칭할 키
   @override
   final String name;
   @override
@@ -243,10 +268,18 @@ class _$UserModelImpl implements _UserModel {
   final int point;
   @override
   final double rate;
+  @override
+  final int? serverKey;
+// 서버 번호
+  @override
+  final int? teamKey;
+// 일정에서 팀에 매칭할 키
+  @override
+  final int? managerKey;
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, teamKey: $teamKey, name: $name, game: $game, win: $win, draw: $draw, lose: $lose, point: $point, rate: $rate)';
+    return 'UserModel(uid: $uid, name: $name, game: $game, win: $win, draw: $draw, lose: $lose, point: $point, rate: $rate, serverKey: $serverKey, teamKey: $teamKey, managerKey: $managerKey)';
   }
 
   @override
@@ -255,20 +288,24 @@ class _$UserModelImpl implements _UserModel {
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.teamKey, teamKey) || other.teamKey == teamKey) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.game, game) || other.game == game) &&
             (identical(other.win, win) || other.win == win) &&
             (identical(other.draw, draw) || other.draw == draw) &&
             (identical(other.lose, lose) || other.lose == lose) &&
             (identical(other.point, point) || other.point == point) &&
-            (identical(other.rate, rate) || other.rate == rate));
+            (identical(other.rate, rate) || other.rate == rate) &&
+            (identical(other.serverKey, serverKey) ||
+                other.serverKey == serverKey) &&
+            (identical(other.teamKey, teamKey) || other.teamKey == teamKey) &&
+            (identical(other.managerKey, managerKey) ||
+                other.managerKey == managerKey));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, teamKey, name, game, win, draw, lose, point, rate);
+  int get hashCode => Object.hash(runtimeType, uid, name, game, win, draw, lose,
+      point, rate, serverKey, teamKey, managerKey);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -289,22 +326,22 @@ class _$UserModelImpl implements _UserModel {
 abstract class _UserModel implements UserModel {
   factory _UserModel(
       {required final String uid,
-      final int? teamKey,
       required final String name,
       required final int game,
       required final int win,
       required final int draw,
       required final int lose,
       required final int point,
-      required final double rate}) = _$UserModelImpl;
+      required final double rate,
+      final int? serverKey,
+      final int? teamKey,
+      final int? managerKey}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
   @override
   String get uid;
-  @override
-  int? get teamKey; // 일정에서 팀에 매칭할 키
   @override
   String get name;
   @override
@@ -319,6 +356,12 @@ abstract class _UserModel implements UserModel {
   int get point;
   @override
   double get rate;
+  @override
+  int? get serverKey; // 서버 번호
+  @override
+  int? get teamKey; // 일정에서 팀에 매칭할 키
+  @override
+  int? get managerKey;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.

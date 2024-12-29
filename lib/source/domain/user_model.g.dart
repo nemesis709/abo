@@ -9,7 +9,6 @@ part of 'user_model.dart';
 _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
     _$UserModelImpl(
       uid: json['uid'] as String,
-      teamKey: (json['teamKey'] as num?)?.toInt(),
       name: json['name'] as String,
       game: (json['game'] as num).toInt(),
       win: (json['win'] as num).toInt(),
@@ -17,12 +16,14 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       lose: (json['lose'] as num).toInt(),
       point: (json['point'] as num).toInt(),
       rate: (json['rate'] as num).toDouble(),
+      serverKey: (json['serverKey'] as num?)?.toInt(),
+      teamKey: (json['teamKey'] as num?)?.toInt(),
+      managerKey: (json['managerKey'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
     <String, dynamic>{
       'uid': instance.uid,
-      'teamKey': instance.teamKey,
       'name': instance.name,
       'game': instance.game,
       'win': instance.win,
@@ -30,4 +31,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'lose': instance.lose,
       'point': instance.point,
       'rate': instance.rate,
+      'serverKey': instance.serverKey,
+      'teamKey': instance.teamKey,
+      'managerKey': instance.managerKey,
     };

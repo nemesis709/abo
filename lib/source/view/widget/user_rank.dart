@@ -7,8 +7,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ManagerRank extends ConsumerWidget {
-  const ManagerRank({
+class UserRank extends ConsumerWidget {
+  const UserRank({
     super.key,
     required this.userController,
   });

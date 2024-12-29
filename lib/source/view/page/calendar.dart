@@ -102,7 +102,6 @@ class _CalendarPageState extends ConsumerState<CalendarPage> with SingleTickerPr
               ),
             ],
           ),
-          Gap.h16,
           ScoreView(dateTime: focusedDay),
         ],
       ),

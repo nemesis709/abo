@@ -9,9 +9,18 @@ part 'lineup_controller.g.dart';
 
 @riverpod
 class LineupController extends _$LineupController {
+  LineupModel? _lineupModel;
+  get lineupModel => _lineupModel;
+
   @override
   FutureOr<LineupModel> build() async {
     return await getLineUp();
+  }
+
+  Future<void> resetLineup() async {
+    if (_lineupModel != null) {
+      state = AsyncData(_lineupModel!);
+    }
   }
 
   Future<void> updateLineup({
@@ -203,6 +212,7 @@ class LineupController extends _$LineupController {
 
   Future<LineupModel> getLineUp() async {
     final result = await PlayerRepository.instance.getLineUp();
+    _lineupModel ??= result.valueOrNull;
     return result.valueOrNull ?? LineupModel.empty();
   }
 

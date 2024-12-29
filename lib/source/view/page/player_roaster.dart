@@ -125,11 +125,34 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                       ),
                                     ),
                                     Gap.h24,
-                                    FilledButton(
-                                      onPressed: () async {
-                                        lineupNotifier.setLineUp();
-                                      },
-                                      child: Text('라인업 제출'),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(width: 60),
+                                        FilledButton(
+                                          onPressed: lineupNotifier.lineupModel == lineup || lineup.isEmpty
+                                              ? null
+                                              : () async {
+                                                  lineupNotifier.setLineUp();
+                                                },
+                                          child: Text('라인업 제출'),
+                                        ),
+                                        SizedBox(
+                                          width: 60,
+                                          child: lineupNotifier.lineupModel == lineup
+                                              ? null
+                                              : Center(
+                                                  child: InkWell(
+                                                    onTap: () async => lineupNotifier.resetLineup(),
+                                                    child: Icon(
+                                                      Icons.refresh_rounded,
+                                                      size: 24,
+                                                      color: context.colorP10,
+                                                    ),
+                                                  ),
+                                                ),
+                                        ),
+                                      ],
                                     ),
                                     Gap.h16,
                                     Text('권장 포지션대로 라인업에 등록한 경우\n50%의 보너스 포인트를 얻을 수 있습니다', textAlign: TextAlign.center),
@@ -188,14 +211,12 @@ class _ManagerState extends ConsumerState<_Manager> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: 70,
-                                child: Text(
-                                  manager.name,
-                                  style: context.textStyleH20b.copyWith(color: context.colorN20),
-                                ),
+                              Text(
+                                manager.name,
+                                style: context.textStyleH20b.copyWith(color: context.colorN20),
                               ),
                               Gap.w16,
+                              Spacer(),
                               FilledButton(
                                 onPressed: () async {
                                   final managerList = await managerNotifier.getManagerList();
@@ -203,34 +224,37 @@ class _ManagerState extends ConsumerState<_Manager> {
 
                                   final result = await showModalBottomSheet<ManagerModel?>(
                                       context: context,
+                                      isScrollControlled: true,
                                       builder: (context) {
                                         return DefaultBottomSheet(
+                                            maxHeight: context.sizeHeight * 0.8,
+                                            minHeight: context.sizeHeight * 0.5,
                                             child: Column(
-                                          children: managerList
-                                              .map(
-                                                (e) => InkWell(
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Gap.w8,
-                                                        SizedBox(
-                                                          width: 60,
-                                                          child: Text(
-                                                            e.name,
-                                                            style:
-                                                                context.textStyleT16b.copyWith(color: context.colorN20),
-                                                          ),
+                                              children: managerList
+                                                  .map(
+                                                    (e) => InkWell(
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 80,
+                                                              child: Text(
+                                                                e.name,
+                                                                style: context.textStyleT16b
+                                                                    .copyWith(color: context.colorN20),
+                                                              ),
+                                                            ),
+                                                            Gap.w4,
+                                                            Text(e.ability),
+                                                          ],
                                                         ),
-                                                        Text(e.ability),
-                                                      ],
+                                                      ),
+                                                      onTap: () => context.maybePop(e),
                                                     ),
-                                                  ),
-                                                  onTap: () => context.maybePop(e),
-                                                ),
-                                              )
-                                              .toList(),
-                                        ));
+                                                  )
+                                                  .toList(),
+                                            ));
                                       });
 
                                   if (result != null) {
@@ -239,6 +263,7 @@ class _ManagerState extends ConsumerState<_Manager> {
                                 },
                                 child: Text('변경'),
                               ),
+                              Gap.w32,
                             ],
                           ),
                           Gap.h8,
@@ -266,11 +291,34 @@ class _ManagerState extends ConsumerState<_Manager> {
               _Value(manager.innings, manager.pStrikeout, manager.pWalk, manager.pHit, manager.pHit + manager.pHomerun,
                   manager.pEarnedRuns),
               Spacer(),
-              FilledButton(
-                onPressed: () async {
-                  managerNotifier.setManager();
-                },
-                child: Text('감독 선임'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 60),
+                  FilledButton(
+                    onPressed: managerNotifier.manager == manager
+                        ? null
+                        : () async {
+                            managerNotifier.setManager();
+                          },
+                    child: Text('감독 선임'),
+                  ),
+                  SizedBox(
+                    width: 60,
+                    child: managerNotifier.manager == manager
+                        ? null
+                        : Center(
+                            child: InkWell(
+                              onTap: () async => managerNotifier.resetManager(),
+                              child: Icon(
+                                Icons.refresh_rounded,
+                                size: 24,
+                                color: context.colorP10,
+                              ),
+                            ),
+                          ),
+                  ),
+                ],
               ),
               Gap.h16,
               Text('선택한 감독에 따라\n고유 능력을 사용할 수 있습니다', textAlign: TextAlign.center),
