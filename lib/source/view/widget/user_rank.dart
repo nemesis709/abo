@@ -83,15 +83,15 @@ class UserRank extends ConsumerWidget {
                   ),
                 ],
               ),
-              ...asyncValue.mapIndexed((index, e) => _ManagerItem(index + 1, e)),
+              ...asyncValue.mapIndexed((index, e) => _UserItem(index + 1, e)),
             ],
           );
         });
   }
 }
 
-class _ManagerItem extends StatelessWidget {
-  const _ManagerItem(this.rank, this.userModel);
+class _UserItem extends StatelessWidget {
+  const _UserItem(this.rank, this.userModel);
 
   final int rank;
   final UserModel userModel;

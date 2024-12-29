@@ -69,7 +69,9 @@ class MainPage extends StatelessWidget {
             ),
             ScoreView(
               // dateTime: DateTime.now().copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0),
-              dateTime: DateTime(2024, 04, 02),
+              dateTime: DateTime(2024, 04, 02, 01),
+
+              /// notifier 다르게 만들기 위해 일부러 한시간 추가
               onMainTap: () => context.navigateTo(CalendarRoute()),
             ),
             Container(height: 12, color: context.colorN95),

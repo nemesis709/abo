@@ -207,9 +207,29 @@ class _GameInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homePlayers = gameModel.home.players;
-    final homeBench = homePlayers.where((e) => e.positionNumber == null).toList();
+    final homeBench = homePlayers.where((e) => e.positionNumber == null).toList()
+      ..sort((a, b) {
+        if (a.pitcherDailyStatModel == null && b.pitcherDailyStatModel != null) return 1; // a가 null이면 뒤로
+        if (a.pitcherDailyStatModel != null && b.pitcherDailyStatModel == null) return -1; // b가 null이면 앞으로
+        return 0; // 둘 다 null이 아니면 그대로
+      })
+      ..sort((a, b) {
+        if (a.batterDailyStatModel == null && b.batterDailyStatModel != null) return 1; // a가 null이면 뒤로
+        if (a.batterDailyStatModel != null && b.batterDailyStatModel == null) return -1; // b가 null이면 앞으로
+        return 0; // 둘 다 null이 아니면 그대로
+      });
     final awayPlayers = gameModel.away.players;
-    final awayBench = awayPlayers.where((e) => e.positionNumber == null).toList();
+    final awayBench = awayPlayers.where((e) => e.positionNumber == null).toList()
+      ..sort((a, b) {
+        if (a.pitcherDailyStatModel == null && b.pitcherDailyStatModel != null) return 1; // a가 null이면 뒤로
+        if (a.pitcherDailyStatModel != null && b.pitcherDailyStatModel == null) return -1; // b가 null이면 앞으로
+        return 0; // 둘 다 null이 아니면 그대로
+      })
+      ..sort((a, b) {
+        if (a.batterDailyStatModel == null && b.batterDailyStatModel != null) return 1; // a가 null이면 뒤로
+        if (a.batterDailyStatModel != null && b.batterDailyStatModel == null) return -1; // b가 null이면 앞으로
+        return 0; // 둘 다 null이 아니면 그대로
+      });
 
     return Expanded(
       child: CustomScrollView(
