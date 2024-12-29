@@ -144,11 +144,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                               : Center(
                                                   child: InkWell(
                                                     onTap: () async => lineupNotifier.resetLineup(),
-                                                    child: Icon(
-                                                      Icons.refresh_rounded,
-                                                      size: 24,
-                                                      color: context.colorP10,
-                                                    ),
+                                                    child: Icon(Icons.refresh_rounded),
                                                   ),
                                                 ),
                                         ),
@@ -310,11 +306,7 @@ class _ManagerState extends ConsumerState<_Manager> {
                         : Center(
                             child: InkWell(
                               onTap: () async => managerNotifier.resetManager(),
-                              child: Icon(
-                                Icons.refresh_rounded,
-                                size: 24,
-                                color: context.colorP10,
-                              ),
+                              child: Icon(Icons.refresh_rounded),
                             ),
                           ),
                   ),
