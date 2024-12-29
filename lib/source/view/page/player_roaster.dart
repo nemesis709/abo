@@ -129,6 +129,7 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         SizedBox(width: 60),
+                                        Gap.w16,
                                         FilledButton(
                                           onPressed: lineupNotifier.lineupModel == lineup || lineup.isEmpty
                                               ? null
@@ -137,14 +138,16 @@ class _PlayerRoasterPageState extends ConsumerState<PlayerRoasterPage> with Sing
                                                 },
                                           child: Text('라인업 제출'),
                                         ),
+                                        Gap.w16,
                                         SizedBox(
                                           width: 60,
                                           child: lineupNotifier.lineupModel == lineup
                                               ? null
-                                              : Center(
-                                                  child: InkWell(
-                                                    onTap: () async => lineupNotifier.resetLineup(),
-                                                    child: Icon(Icons.refresh_rounded),
+                                              : InkWell(
+                                                  onTap: () async => lineupNotifier.resetLineup(),
+                                                  child: Text(
+                                                    '취소',
+                                                    style: context.textStyleB12r.copyWith(color: context.colorP10),
                                                   ),
                                                 ),
                                         ),
@@ -291,6 +294,7 @@ class _ManagerState extends ConsumerState<_Manager> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(width: 60),
+                  Gap.w16,
                   FilledButton(
                     onPressed: managerNotifier.manager == manager
                         ? null
@@ -299,14 +303,16 @@ class _ManagerState extends ConsumerState<_Manager> {
                           },
                     child: Text('감독 선임'),
                   ),
+                  Gap.w16,
                   SizedBox(
                     width: 60,
                     child: managerNotifier.manager == manager
                         ? null
-                        : Center(
-                            child: InkWell(
-                              onTap: () async => managerNotifier.resetManager(),
-                              child: Icon(Icons.refresh_rounded),
+                        : InkWell(
+                            onTap: () async => managerNotifier.resetManager(),
+                            child: Text(
+                              '취소',
+                              style: context.textStyleB12r.copyWith(color: context.colorP10),
                             ),
                           ),
                   ),
