@@ -230,6 +230,7 @@ class LineupController extends _$LineupController {
       return;
     });
 
+    _lineupModel = null;
     ref.invalidateSelf();
   }
 }
