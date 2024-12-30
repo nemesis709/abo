@@ -28,8 +28,10 @@ class MainPage extends StatelessWidget {
         title: Row(
           children: [
             SizedBox(width: 48, child: Assets.images.logo.svg()),
-            Text('ABO', style: context.textStyleT16b.copyWith(color: context.colorP10)),
-            Text(' beta', style: context.textStyleT12r.copyWith(color: context.colorP10)),
+            Text('ABO',
+                style: context.textStyleT16b.copyWith(color: context.colorP10)),
+            Text(' beta',
+                style: context.textStyleT12r.copyWith(color: context.colorP10)),
           ],
         ),
       ),
@@ -45,7 +47,8 @@ class MainPage extends StatelessWidget {
                 children: [
                   Text(
                     '경기 결과',
-                    style: context.textStyleT16b.copyWith(color: context.colorP10),
+                    style:
+                        context.textStyleT16b.copyWith(color: context.colorP10),
                   ),
                   Gap.w8,
                   Text(
@@ -53,7 +56,8 @@ class MainPage extends StatelessWidget {
                     //     .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
                     //     .displayDateDay(),
                     DateTime(2024, 04, 02).displayDate(),
-                    style: context.textStyleT14m.copyWith(color: context.colorN40),
+                    style:
+                        context.textStyleT14m.copyWith(color: context.colorN40),
                   ),
                   Gap.h24,
                   Spacer(),
@@ -92,7 +96,7 @@ class _RankBoard extends ConsumerStatefulWidget {
 }
 
 class _RankBoardState extends ConsumerState<_RankBoard> {
-  bool isManager = true;
+  bool isUser = true;
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +173,9 @@ class _TradeBoard extends ConsumerWidget {
             children: [
               SizedBox(
                   width: context.sizeWidth,
-                  child: Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10))),
+                  child: Text('트레이드',
+                      style: context.textStyleT16b
+                          .copyWith(color: context.colorP10))),
               Gap.h16,
               if (list.isEmpty)
                 Center(
@@ -178,7 +184,8 @@ class _TradeBoard extends ConsumerWidget {
                     style: context.textStyleT14b,
                   ),
                 ),
-              if (list.isNotEmpty) ...list.mapIndexed((index, e) => PlayerItem(index + 1, e)),
+              if (list.isNotEmpty)
+                ...list.mapIndexed((index, e) => PlayerItem(index + 1, e)),
             ],
           ),
         );

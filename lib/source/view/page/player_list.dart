@@ -19,7 +19,8 @@ class PlayerListPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _PlayerListPageState();
 }
 
-class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTickerProviderStateMixin {
+class _PlayerListPageState extends ConsumerState<PlayerListPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
   late TextEditingController textEditingController;
   late FocusNode focusNode;
@@ -74,13 +75,15 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
-                    hintText: '선수명을 입력해주세요',
-                    hintStyle: context.textStyleB14r.copyWith(color: context.colorN40),
+                    hintText: '선수명/팀명/구단주명을 입력해주세요',
+                    hintStyle:
+                        context.textStyleB14r.copyWith(color: context.colorN40),
                   ),
                 )
               : Text(
                   '선수 명단',
-                  style: context.textStyleH20b.copyWith(color: context.colorP10),
+                  style:
+                      context.textStyleH20b.copyWith(color: context.colorP10),
                 ),
           leading: InkWell(
             onTap: () => context.maybePop(),
@@ -118,7 +121,12 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                           return SingleChildScrollView(
                             child: Column(
                               children: content
-                                  .where((e) => e.name.contains(query))
+                                  .where((e) =>
+                                      e.name.contains(query) ||
+                                      Team.fromID(e.teamId)
+                                          .name
+                                          .contains(query) ||
+                                      e.owner?.name.contains(query) == true)
                                   .map((e) => _PlayerItem(
                                         playerModel: e,
                                         query: query,
@@ -132,8 +140,12 @@ class _PlayerListPageState extends ConsumerState<PlayerListPage> with SingleTick
                 ]
               : [
                   TabBar(controller: controller, tabs: [
-                    Text('투수', style: context.textStyleT14b.copyWith(color: context.colorP10)),
-                    Text('타자', style: context.textStyleT14b.copyWith(color: context.colorP10)),
+                    Text('투수',
+                        style: context.textStyleT14b
+                            .copyWith(color: context.colorP10)),
+                    Text('타자',
+                        style: context.textStyleT14b
+                            .copyWith(color: context.colorP10)),
                   ]),
                   Gap.h16,
                   _Header(),
@@ -219,23 +231,41 @@ class _PlayerItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            SizedBox(width: 80, child: Center(child: HighlightedText(text: playerModel.name, highlightWord: query))),
+            SizedBox(
+                width: 80,
+                child: Center(
+                    child: HighlightedText(
+                  text: playerModel.name,
+                  highlightWord: query,
+                  style: context.textStyleT14b,
+                ))),
             SizedBox(
                 width: 40,
-                child: Center(child: Text(Team.fromID(playerModel.teamId).name, style: context.textStyleT14r))),
-            SizedBox(
-              width: 60,
-              child: Center(
-                child: Text(
-                  playerModel.owner?.name ?? '',
+                child: Center(
+                    child: HighlightedText(
+                  text: Team.fromID(playerModel.teamId).name,
+                  highlightWord: query,
                   style: context.textStyleT14r,
-                ),
-              ),
-            ),
+                ))),
+            SizedBox(
+                width: 40,
+                child: Center(
+                    child: Text(playerModel.position.displayString,
+                        style: context.textStyleT14r))),
+            SizedBox(
+                width: 60,
+                child: Center(
+                    child: HighlightedText(
+                  text: playerModel.owner?.name ?? '',
+                  highlightWord: query,
+                  style: context.textStyleT14r,
+                ))),
             const Spacer(),
             SizedBox(
                 width: 80,
-                child: Center(child: Text(playerModel.point?.toString() ?? '', style: context.textStyleT14r))),
+                child: Center(
+                    child: Text(playerModel.point?.toString() ?? '',
+                        style: context.textStyleT14r))),
           ],
         ),
       ),
@@ -246,11 +276,13 @@ class _PlayerItem extends StatelessWidget {
 class HighlightedText extends StatelessWidget {
   final String text;
   final String highlightWord;
+  final TextStyle style;
 
   const HighlightedText({
     super.key,
     required this.text,
     required this.highlightWord,
+    required this.style,
   });
 
   @override
@@ -262,14 +294,14 @@ class HighlightedText extends StatelessWidget {
       onMatch: (match) {
         spans.add(TextSpan(
           text: match.group(0),
-          style: context.textStyleT14b.copyWith(color: context.colorBlueJeans),
+          style: style.copyWith(color: context.colorBlueJeans),
         ));
         return match.group(0)!;
       },
       onNonMatch: (nonMatch) {
         spans.add(TextSpan(
           text: nonMatch,
-          style: context.textStyleT14b,
+          style: style,
         ));
         return nonMatch;
       },
@@ -306,10 +338,19 @@ class _Header extends StatelessWidget {
           ),
         ),
         SizedBox(
+          width: 40,
+          child: Center(
+            child: Text(
+              '포지션',
+              style: context.textStyleL10b.copyWith(color: context.colorN60),
+            ),
+          ),
+        ),
+        SizedBox(
           width: 60,
           child: Center(
             child: Text(
-              '감독',
+              '구단주',
               style: context.textStyleL10b.copyWith(color: context.colorN60),
             ),
           ),

@@ -17,7 +17,8 @@ class RankPage extends ConsumerStatefulWidget {
   ConsumerState<RankPage> createState() => _RankPageState();
 }
 
-class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderStateMixin {
+class _RankPageState extends ConsumerState<RankPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
 
   @override
@@ -51,8 +52,12 @@ class _RankPageState extends ConsumerState<RankPage> with SingleTickerProviderSt
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TabBar(controller: controller, tabs: [
-                Text('감독 랭킹', style: context.textStyleT14b.copyWith(color: context.colorP10)),
-                Text('선수 랭킹', style: context.textStyleT14b.copyWith(color: context.colorP10)),
+                Text('구단주 랭킹',
+                    style: context.textStyleT14b
+                        .copyWith(color: context.colorP10)),
+                Text('선수 랭킹',
+                    style: context.textStyleT14b
+                        .copyWith(color: context.colorP10)),
               ]),
               Gap.h16,
               Expanded(
