@@ -28,8 +28,6 @@ class _UpdatePWPageState extends ConsumerState<UpdatePWPage> {
 
   @override
   void initState() {
-    extractTokenFromUrl();
-
     passwordController = TextEditingController();
     passwordValidateController = TextEditingController();
 
