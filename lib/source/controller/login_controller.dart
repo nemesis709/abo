@@ -1,5 +1,6 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/data/api_error.dart';
+import 'package:abo/common/logger/logger.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/auth_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -43,5 +44,12 @@ class LoginController extends _$LoginController {
       ref.showToast(e.getMessage());
       return false;
     });
+  }
+
+  Future<bool> updatePW(String token, String pw) async {
+    final result = await ref.runInProgress(() async {
+      return AuthRepository.instance.updatePW(token, pw);
+    });
+    return result.isSuccess;
   }
 }

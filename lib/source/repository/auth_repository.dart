@@ -72,6 +72,12 @@ class AuthRepository implements IService {
     });
   }
 
+  Future<Result<void>> updatePW(String token, String password) async {
+    return Result.guardFuture(() async {
+      await apis.authApi.updatePW(token: token, pw: password);
+    });
+  }
+
   Future<List<UserModel>> getUserList() async {
     final user = await getCurrentUser();
     final result = await Result.guardFuture(() async {

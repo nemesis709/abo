@@ -217,3 +217,22 @@ class TradeRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [UpdatePWPage]
+class UpdatePWRoute extends PageRouteInfo<void> {
+  const UpdatePWRoute({List<PageRouteInfo>? children})
+      : super(
+          UpdatePWRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdatePWRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UpdatePWPage();
+    },
+  );
+}

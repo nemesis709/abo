@@ -6,7 +6,7 @@ part of 'manager_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$managerControllerHash() => r'e3bf51458b38a27a82b582de9b35af9e4f2dc08a';
+String _$managerControllerHash() => r'453cf5864d377190e90ea11b1903329115902ba9';
 
 /// See also [ManagerController].
 @ProviderFor(ManagerController)

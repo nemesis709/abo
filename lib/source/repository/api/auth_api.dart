@@ -28,6 +28,12 @@ abstract class AuthApi {
   Future<CollectionModel<UserModel>> getUserList({
     @Path('serverKey') required int serverKey,
   });
+
+  @POST('/auth/update/')
+  Future<void> updatePW({
+    @Body() required String token,
+    @Body() required String pw,
+  });
 }
 
 UserModel deserializeUserModel(Map<String, dynamic> json) => UserModel.fromJson(json);
