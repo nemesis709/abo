@@ -1,4 +1,5 @@
 import 'package:abo/source/domain/auth_model.dart';
+import 'package:abo/source/domain/auth_update_model.dart';
 import 'package:abo/source/domain/collection_model.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:dio/dio.dart';
@@ -29,10 +30,9 @@ abstract class AuthApi {
     @Path('serverKey') required int serverKey,
   });
 
-  @POST('/auth/update/')
+  @POST('/auth/update')
   Future<void> updatePW({
-    @Body() required String token,
-    @Body() required String pw,
+    @Body() required AuthUpdateModel authUpdate,
   });
 }
 

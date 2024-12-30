@@ -5,6 +5,7 @@ import 'package:abo/common/data/result.dart';
 import 'package:abo/common/service/iservice.dart';
 import 'package:abo/common/service/main_service.dart';
 import 'package:abo/source/domain/auth_model.dart';
+import 'package:abo/source/domain/auth_update_model.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/repository/game_repository.dart';
@@ -74,7 +75,7 @@ class AuthRepository implements IService {
 
   Future<Result<void>> updatePW(String token, String password) async {
     return Result.guardFuture(() async {
-      await apis.authApi.updatePW(token: token, pw: password);
+      await apis.authApi.updatePW(authUpdate: AuthUpdateModel(token: token, password: password));
     });
   }
 

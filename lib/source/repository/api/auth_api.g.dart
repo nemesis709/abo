@@ -148,14 +148,11 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<void> updatePW({
-    required String token,
-    required String pw,
-  }) async {
+  Future<void> updatePW({required AuthUpdateModel authUpdate}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = token;
+    final _data = authUpdate;
     final _options = _setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -163,7 +160,7 @@ class _AuthApi implements AuthApi {
     )
         .compose(
           _dio.options,
-          '/auth/update/',
+          '/auth/update',
           queryParameters: queryParameters,
           data: _data,
         )
