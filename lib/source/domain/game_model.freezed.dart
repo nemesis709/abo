@@ -25,6 +25,7 @@ mixin _$GameModel {
   DateTime get datetime => throw _privateConstructorUsedError;
   GameInfoModel get home => throw _privateConstructorUsedError;
   GameInfoModel get away => throw _privateConstructorUsedError;
+  bool? get canceled => throw _privateConstructorUsedError;
 
   /// Serializes this GameModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $GameModelCopyWith<$Res> {
       {int gameId,
       @DateJsonConverter() DateTime datetime,
       GameInfoModel home,
-      GameInfoModel away});
+      GameInfoModel away,
+      bool? canceled});
 
   $GameInfoModelCopyWith<$Res> get home;
   $GameInfoModelCopyWith<$Res> get away;
@@ -70,6 +72,7 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel>
     Object? datetime = null,
     Object? home = null,
     Object? away = null,
+    Object? canceled = freezed,
   }) {
     return _then(_value.copyWith(
       gameId: null == gameId
@@ -88,6 +91,10 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel>
           ? _value.away
           : away // ignore: cast_nullable_to_non_nullable
               as GameInfoModel,
+      canceled: freezed == canceled
+          ? _value.canceled
+          : canceled // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -124,7 +131,8 @@ abstract class _$$GameModelImplCopyWith<$Res>
       {int gameId,
       @DateJsonConverter() DateTime datetime,
       GameInfoModel home,
-      GameInfoModel away});
+      GameInfoModel away,
+      bool? canceled});
 
   @override
   $GameInfoModelCopyWith<$Res> get home;
@@ -149,6 +157,7 @@ class __$$GameModelImplCopyWithImpl<$Res>
     Object? datetime = null,
     Object? home = null,
     Object? away = null,
+    Object? canceled = freezed,
   }) {
     return _then(_$GameModelImpl(
       gameId: null == gameId
@@ -167,6 +176,10 @@ class __$$GameModelImplCopyWithImpl<$Res>
           ? _value.away
           : away // ignore: cast_nullable_to_non_nullable
               as GameInfoModel,
+      canceled: freezed == canceled
+          ? _value.canceled
+          : canceled // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -178,7 +191,8 @@ class _$GameModelImpl implements _GameModel {
       {required this.gameId,
       @DateJsonConverter() required this.datetime,
       required this.home,
-      required this.away});
+      required this.away,
+      this.canceled});
 
   factory _$GameModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameModelImplFromJson(json);
@@ -192,10 +206,12 @@ class _$GameModelImpl implements _GameModel {
   final GameInfoModel home;
   @override
   final GameInfoModel away;
+  @override
+  final bool? canceled;
 
   @override
   String toString() {
-    return 'GameModel(gameId: $gameId, datetime: $datetime, home: $home, away: $away)';
+    return 'GameModel(gameId: $gameId, datetime: $datetime, home: $home, away: $away, canceled: $canceled)';
   }
 
   @override
@@ -207,12 +223,15 @@ class _$GameModelImpl implements _GameModel {
             (identical(other.datetime, datetime) ||
                 other.datetime == datetime) &&
             (identical(other.home, home) || other.home == home) &&
-            (identical(other.away, away) || other.away == away));
+            (identical(other.away, away) || other.away == away) &&
+            (identical(other.canceled, canceled) ||
+                other.canceled == canceled));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, gameId, datetime, home, away);
+  int get hashCode =>
+      Object.hash(runtimeType, gameId, datetime, home, away, canceled);
 
   /// Create a copy of GameModel
   /// with the given fields replaced by the non-null parameter values.
@@ -235,7 +254,8 @@ abstract class _GameModel implements GameModel {
       {required final int gameId,
       @DateJsonConverter() required final DateTime datetime,
       required final GameInfoModel home,
-      required final GameInfoModel away}) = _$GameModelImpl;
+      required final GameInfoModel away,
+      final bool? canceled}) = _$GameModelImpl;
 
   factory _GameModel.fromJson(Map<String, dynamic> json) =
       _$GameModelImpl.fromJson;
@@ -249,6 +269,8 @@ abstract class _GameModel implements GameModel {
   GameInfoModel get home;
   @override
   GameInfoModel get away;
+  @override
+  bool? get canceled;
 
   /// Create a copy of GameModel
   /// with the given fields replaced by the non-null parameter values.
@@ -265,8 +287,10 @@ GameInfoModel _$GameInfoModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GameInfoModel {
   UserModel get user => throw _privateConstructorUsedError;
+  ManagerModel get manager => throw _privateConstructorUsedError;
   int? get score => throw _privateConstructorUsedError;
-  List<PlayerModel> get players => throw _privateConstructorUsedError;
+  LineupModel get lineup => throw _privateConstructorUsedError;
+  List<PlayerModel> get bench => throw _privateConstructorUsedError;
 
   /// Serializes this GameInfoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -284,9 +308,16 @@ abstract class $GameInfoModelCopyWith<$Res> {
           GameInfoModel value, $Res Function(GameInfoModel) then) =
       _$GameInfoModelCopyWithImpl<$Res, GameInfoModel>;
   @useResult
-  $Res call({UserModel user, int? score, List<PlayerModel> players});
+  $Res call(
+      {UserModel user,
+      ManagerModel manager,
+      int? score,
+      LineupModel lineup,
+      List<PlayerModel> bench});
 
   $UserModelCopyWith<$Res> get user;
+  $ManagerModelCopyWith<$Res> get manager;
+  $LineupModelCopyWith<$Res> get lineup;
 }
 
 /// @nodoc
@@ -305,21 +336,31 @@ class _$GameInfoModelCopyWithImpl<$Res, $Val extends GameInfoModel>
   @override
   $Res call({
     Object? user = null,
+    Object? manager = null,
     Object? score = freezed,
-    Object? players = null,
+    Object? lineup = null,
+    Object? bench = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      manager: null == manager
+          ? _value.manager
+          : manager // ignore: cast_nullable_to_non_nullable
+              as ManagerModel,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int?,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
+      lineup: null == lineup
+          ? _value.lineup
+          : lineup // ignore: cast_nullable_to_non_nullable
+              as LineupModel,
+      bench: null == bench
+          ? _value.bench
+          : bench // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
     ) as $Val);
   }
@@ -333,6 +374,26 @@ class _$GameInfoModelCopyWithImpl<$Res, $Val extends GameInfoModel>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ManagerModelCopyWith<$Res> get manager {
+    return $ManagerModelCopyWith<$Res>(_value.manager, (value) {
+      return _then(_value.copyWith(manager: value) as $Val);
+    });
+  }
+
+  /// Create a copy of GameInfoModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LineupModelCopyWith<$Res> get lineup {
+    return $LineupModelCopyWith<$Res>(_value.lineup, (value) {
+      return _then(_value.copyWith(lineup: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -343,10 +404,19 @@ abstract class _$$GameInfoModelImplCopyWith<$Res>
       __$$GameInfoModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserModel user, int? score, List<PlayerModel> players});
+  $Res call(
+      {UserModel user,
+      ManagerModel manager,
+      int? score,
+      LineupModel lineup,
+      List<PlayerModel> bench});
 
   @override
   $UserModelCopyWith<$Res> get user;
+  @override
+  $ManagerModelCopyWith<$Res> get manager;
+  @override
+  $LineupModelCopyWith<$Res> get lineup;
 }
 
 /// @nodoc
@@ -363,21 +433,31 @@ class __$$GameInfoModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? manager = null,
     Object? score = freezed,
-    Object? players = null,
+    Object? lineup = null,
+    Object? bench = null,
   }) {
     return _then(_$GameInfoModelImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      manager: null == manager
+          ? _value.manager
+          : manager // ignore: cast_nullable_to_non_nullable
+              as ManagerModel,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int?,
-      players: null == players
-          ? _value._players
-          : players // ignore: cast_nullable_to_non_nullable
+      lineup: null == lineup
+          ? _value.lineup
+          : lineup // ignore: cast_nullable_to_non_nullable
+              as LineupModel,
+      bench: null == bench
+          ? _value._bench
+          : bench // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
     ));
   }
@@ -388,9 +468,11 @@ class __$$GameInfoModelImplCopyWithImpl<$Res>
 class _$GameInfoModelImpl implements _GameInfoModel {
   _$GameInfoModelImpl(
       {required this.user,
+      required this.manager,
       this.score,
-      required final List<PlayerModel> players})
-      : _players = players;
+      required this.lineup,
+      required final List<PlayerModel> bench})
+      : _bench = bench;
 
   factory _$GameInfoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameInfoModelImplFromJson(json);
@@ -398,18 +480,22 @@ class _$GameInfoModelImpl implements _GameInfoModel {
   @override
   final UserModel user;
   @override
-  final int? score;
-  final List<PlayerModel> _players;
+  final ManagerModel manager;
   @override
-  List<PlayerModel> get players {
-    if (_players is EqualUnmodifiableListView) return _players;
+  final int? score;
+  @override
+  final LineupModel lineup;
+  final List<PlayerModel> _bench;
+  @override
+  List<PlayerModel> get bench {
+    if (_bench is EqualUnmodifiableListView) return _bench;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_players);
+    return EqualUnmodifiableListView(_bench);
   }
 
   @override
   String toString() {
-    return 'GameInfoModel(user: $user, score: $score, players: $players)';
+    return 'GameInfoModel(user: $user, manager: $manager, score: $score, lineup: $lineup, bench: $bench)';
   }
 
   @override
@@ -418,14 +504,16 @@ class _$GameInfoModelImpl implements _GameInfoModel {
         (other.runtimeType == runtimeType &&
             other is _$GameInfoModelImpl &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.manager, manager) || other.manager == manager) &&
             (identical(other.score, score) || other.score == score) &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            (identical(other.lineup, lineup) || other.lineup == lineup) &&
+            const DeepCollectionEquality().equals(other._bench, _bench));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, score, const DeepCollectionEquality().hash(_players));
+  int get hashCode => Object.hash(runtimeType, user, manager, score, lineup,
+      const DeepCollectionEquality().hash(_bench));
 
   /// Create a copy of GameInfoModel
   /// with the given fields replaced by the non-null parameter values.
@@ -446,8 +534,10 @@ class _$GameInfoModelImpl implements _GameInfoModel {
 abstract class _GameInfoModel implements GameInfoModel {
   factory _GameInfoModel(
       {required final UserModel user,
+      required final ManagerModel manager,
       final int? score,
-      required final List<PlayerModel> players}) = _$GameInfoModelImpl;
+      required final LineupModel lineup,
+      required final List<PlayerModel> bench}) = _$GameInfoModelImpl;
 
   factory _GameInfoModel.fromJson(Map<String, dynamic> json) =
       _$GameInfoModelImpl.fromJson;
@@ -455,9 +545,13 @@ abstract class _GameInfoModel implements GameInfoModel {
   @override
   UserModel get user;
   @override
+  ManagerModel get manager;
+  @override
   int? get score;
   @override
-  List<PlayerModel> get players;
+  LineupModel get lineup;
+  @override
+  List<PlayerModel> get bench;
 
   /// Create a copy of GameInfoModel
   /// with the given fields replaced by the non-null parameter values.

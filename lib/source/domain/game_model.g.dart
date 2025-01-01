@@ -12,6 +12,7 @@ _$GameModelImpl _$$GameModelImplFromJson(Map<String, dynamic> json) =>
       datetime: const DateJsonConverter().fromJson(json['datetime'] as String),
       home: GameInfoModel.fromJson(json['home'] as Map<String, dynamic>),
       away: GameInfoModel.fromJson(json['away'] as Map<String, dynamic>),
+      canceled: json['canceled'] as bool?,
     );
 
 Map<String, dynamic> _$$GameModelImplToJson(_$GameModelImpl instance) =>
@@ -20,13 +21,16 @@ Map<String, dynamic> _$$GameModelImplToJson(_$GameModelImpl instance) =>
       'datetime': const DateJsonConverter().toJson(instance.datetime),
       'home': instance.home,
       'away': instance.away,
+      'canceled': instance.canceled,
     };
 
 _$GameInfoModelImpl _$$GameInfoModelImplFromJson(Map<String, dynamic> json) =>
     _$GameInfoModelImpl(
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      manager: ManagerModel.fromJson(json['manager'] as Map<String, dynamic>),
       score: (json['score'] as num?)?.toInt(),
-      players: (json['players'] as List<dynamic>)
+      lineup: LineupModel.fromJson(json['lineup'] as Map<String, dynamic>),
+      bench: (json['bench'] as List<dynamic>)
           .map((e) => PlayerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -34,6 +38,8 @@ _$GameInfoModelImpl _$$GameInfoModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$GameInfoModelImplToJson(_$GameInfoModelImpl instance) =>
     <String, dynamic>{
       'user': instance.user,
+      'manager': instance.manager,
       'score': instance.score,
-      'players': instance.players,
+      'lineup': instance.lineup,
+      'bench': instance.bench,
     };

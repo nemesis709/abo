@@ -3,6 +3,7 @@ import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
 import 'package:abo/source/controller/calendar_controller.dart';
 import 'package:abo/source/domain/game_model.dart';
+import 'package:abo/source/domain/lineup_model.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
 import 'package:abo/source/view/widget/stats/batter_daily_stat.dart';
@@ -10,7 +11,6 @@ import 'package:abo/source/view/widget/stats/empty_daily_stat.dart';
 import 'package:abo/source/view/widget/stats/pitcher_daily_stat.dart';
 import 'package:abo/ui/theme/app_colors.dart';
 import 'package:abo/ui/theme/text_theme.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -159,7 +159,7 @@ class _ScoreView extends StatelessWidget {
                   SizedBox(width: 20),
                   SizedBox(width: 60),
                 ],
-                Center(child: Text('vs', style: context.textStyleT14r)),
+                Center(child: Text(gameModel.canceled == true ? '우천취소' : 'vs', style: context.textStyleT14r)),
                 if (gameModel.home.score != null && gameModel.away.score != null) ...[
                   SizedBox(width: 60, child: Center(child: Text('${gameModel.home.score} P'))),
                   SizedBox(
@@ -206,8 +206,8 @@ class _GameInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homePlayers = gameModel.home.players;
-    final homeBench = homePlayers.where((e) => e.positionNumber == null).toList()
+    final homeLineup = gameModel.home.lineup;
+    final homeBench = List.from(gameModel.home.bench)
       ..sort((a, b) {
         if (a.pitcherDailyStatModel == null && b.pitcherDailyStatModel != null) return 1; // a가 null이면 뒤로
         if (a.pitcherDailyStatModel != null && b.pitcherDailyStatModel == null) return -1; // b가 null이면 앞으로
@@ -218,8 +218,8 @@ class _GameInfo extends StatelessWidget {
         if (a.batterDailyStatModel != null && b.batterDailyStatModel == null) return -1; // b가 null이면 앞으로
         return 0; // 둘 다 null이 아니면 그대로
       });
-    final awayPlayers = gameModel.away.players;
-    final awayBench = awayPlayers.where((e) => e.positionNumber == null).toList()
+    final awayLineup = gameModel.away.lineup;
+    final awayBench = List<PlayerModel>.from(gameModel.away.bench)
       ..sort((a, b) {
         if (a.pitcherDailyStatModel == null && b.pitcherDailyStatModel != null) return 1; // a가 null이면 뒤로
         if (a.pitcherDailyStatModel != null && b.pitcherDailyStatModel == null) return -1; // b가 null이면 앞으로
@@ -234,6 +234,43 @@ class _GameInfo extends StatelessWidget {
     return Expanded(
       child: CustomScrollView(
         slivers: [
+          SliverMainAxisGroup(slivers: [
+            _buildSectionHeader('감독', context),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 32,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: context.sizeWidth / 2 - 32,
+                          child: Center(
+                            child: Text(
+                              gameModel.away.manager.name,
+                              style: context.textStyleT14b,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.sizeWidth / 2 - 32,
+                          child: Center(
+                            child: Text(
+                              gameModel.home.manager.name,
+                              style: context.textStyleT14b,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(color: context.colorP10),
+                ],
+              ),
+            ),
+          ]),
           SliverMainAxisGroup(
             slivers: [
               _buildSectionHeader('선발 라인업', context),
@@ -246,23 +283,11 @@ class _GameInfo extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: context.sizeWidth / 2 - 32,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              for (int i = 2; i <= 15; i++) _PlayerModel(players: awayPlayers, positionNumber: i),
-                            ],
-                            // awayLineup.map((e) => _PlayerModel(e)).toList(),
-                          ),
+                          child: _Lineup(lineupModel: awayLineup),
                         ),
                         SizedBox(
                           width: context.sizeWidth / 2 - 32,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (int i = 2; i <= 15; i++) _PlayerModel(players: homePlayers, positionNumber: i),
-                            ],
-                          ),
+                          child: _Lineup(lineupModel: homeLineup),
                         ),
                       ],
                     ),
@@ -286,7 +311,7 @@ class _GameInfo extends StatelessWidget {
                           width: context.sizeWidth / 2 - 32,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: awayBench.map((e) => _PlayerModel(playerModel: e)).toList(),
+                            children: awayBench.map((e) => _Player(playerModel: e)).toList(),
                           ),
                         ),
                         SizedBox(
@@ -294,7 +319,7 @@ class _GameInfo extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: homeBench.map((e) => _PlayerModel(playerModel: e)).toList(),
+                            children: homeBench.map((e) => _Player(playerModel: e)).toList(),
                           ),
                         ),
                       ],
@@ -311,99 +336,99 @@ class _GameInfo extends StatelessWidget {
   }
 }
 
-class _PlayerModel extends StatelessWidget {
-  const _PlayerModel({
-    this.players = const [],
-    this.playerModel,
-    this.positionNumber,
+class _Lineup extends StatelessWidget {
+  const _Lineup({
+    required this.lineupModel,
   });
+  final LineupModel lineupModel;
 
-  final List<PlayerModel> players;
-  final PlayerModel? playerModel;
-  final int? positionNumber;
   @override
   Widget build(BuildContext context) {
-    final player = playerModel ?? players.firstWhereOrNull((e) => e.positionNumber == positionNumber);
-    if (player == null) {
-      return SizedBox(
+    return Column(
+      children: [
+        _Player(playerModel: lineupModel.catcher!),
+        _Player(playerModel: lineupModel.firstBase!),
+        _Player(playerModel: lineupModel.secondBase!),
+        _Player(playerModel: lineupModel.thirdBase!),
+        _Player(playerModel: lineupModel.shortStop!),
+        _Player(playerModel: lineupModel.leftField!),
+        _Player(playerModel: lineupModel.centerField!),
+        _Player(playerModel: lineupModel.rightField!),
+        _Player(playerModel: lineupModel.designated!),
+        _Player(playerModel: lineupModel.startPitcher!),
+        _Player(playerModel: lineupModel.reliefPitcher1!),
+        _Player(playerModel: lineupModel.reliefPitcher2!),
+        _Player(playerModel: lineupModel.setupPitcher!),
+        _Player(playerModel: lineupModel.closingPitcher!),
+      ],
+    );
+  }
+}
+
+class _Player extends StatelessWidget {
+  const _Player({
+    required this.playerModel,
+  });
+
+  final PlayerModel playerModel;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (playerModel.pitcherDailyStatModel != null) {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.3,
+                    child: PitcherDailyStat(playerModel: playerModel));
+              });
+        } else if (playerModel.batterDailyStatModel != null) {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.3,
+                    child: BatterDailyStat(playerModel: playerModel));
+              });
+        } else {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return DefaultBottomSheet(
+                    maxHeight: context.sizeHeight * 0.8,
+                    minHeight: context.sizeHeight * 0.3,
+                    child: EmptyDailyStat(playerModel: playerModel));
+              });
+        }
+      },
+      child: SizedBox(
         width: 140,
         height: 32,
         child: Row(
           children: [
-            if (positionNumber != null) ...[
-              SizedBox(width: 24, child: Text(PlayerModel.getLineupPosition(positionNumber!))),
-            ],
+            SizedBox(width: 24, child: Text(playerModel.lineupPosition ?? '')),
             Text(
-              '-',
-              style: context.textStyleT14b.copyWith(color: context.colorN60),
+              playerModel.name,
+              style: playerModel.hasDailyStat
+                  ? context.textStyleT14b.copyWith(color: context.colorN10, decoration: TextDecoration.underline)
+                  : context.textStyleT14b.copyWith(color: context.colorN60),
             ),
             Gap.w4,
             Spacer(),
             Text(
-              'P',
+              '${playerModel.dailyPoint} P',
               style: context.textStyleT14r,
             ),
           ],
         ),
-      );
-    } else {
-      return InkWell(
-        onTap: () {
-          if (player.pitcherDailyStatModel != null) {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return DefaultBottomSheet(
-                      maxHeight: context.sizeHeight * 0.8,
-                      minHeight: context.sizeHeight * 0.3,
-                      child: PitcherDailyStat(playerModel: player));
-                });
-          } else if (player.batterDailyStatModel != null) {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return DefaultBottomSheet(
-                      maxHeight: context.sizeHeight * 0.8,
-                      minHeight: context.sizeHeight * 0.3,
-                      child: BatterDailyStat(playerModel: player));
-                });
-          } else {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return DefaultBottomSheet(
-                      maxHeight: context.sizeHeight * 0.8,
-                      minHeight: context.sizeHeight * 0.3,
-                      child: EmptyDailyStat(playerModel: player));
-                });
-          }
-        },
-        child: SizedBox(
-          width: 140,
-          height: 32,
-          child: Row(
-            children: [
-              SizedBox(width: 24, child: Text(player.lineupPosition ?? '')),
-              Text(
-                player.name,
-                style: player.hasDailyStat
-                    ? context.textStyleT14b.copyWith(color: context.colorN10, decoration: TextDecoration.underline)
-                    : context.textStyleT14b.copyWith(color: context.colorN60),
-              ),
-              Gap.w4,
-              Spacer(),
-              Text(
-                '${player.dailyPoint} P',
-                style: context.textStyleT14r,
-              ),
-            ],
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }
 

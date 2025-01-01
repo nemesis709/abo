@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:abo/common/extension/build_context_extension.dart';
 import 'package:abo/common/loadable_content.dart';
+import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/domain/player_model.dart';
 import 'package:abo/source/view/widget/default_bottom_sheet.dart';
 import 'package:abo/source/view/widget/stats/batter_stat.dart';
@@ -66,7 +67,10 @@ class PlayerRank extends ConsumerWidget {
                   ),
                 ],
               ),
-              ...(asyncValue.sublist(0, min(10, asyncValue.length))).mapIndexed((index, e) => PlayerItem(index + 1, e)),
+              ...ref
+                  .read(playerControllerProvider(null).notifier)
+                  .getPlayerRank()
+                  .mapIndexed((index, e) => PlayerItem(index + 1, e)),
             ],
           );
         });
@@ -154,7 +158,7 @@ class PlayerItem extends StatelessWidget {
               width: 60,
               child: Center(
                 child: Text(
-                  '20 P',
+                  '${playerModel.point ?? 0} P',
                   style: context.textStyleT14r,
                 ),
               ),
