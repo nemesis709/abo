@@ -5,6 +5,7 @@ import 'package:abo/common/loadable_content.dart';
 import 'package:abo/gen/assets.gen.dart';
 import 'package:abo/source/controller/player_controller.dart';
 import 'package:abo/source/controller/user_controller.dart';
+import 'package:abo/source/view/widget/player_item.dart';
 import 'package:abo/source/view/widget/user_rank.dart';
 import 'package:abo/source/view/widget/player_rank.dart';
 import 'package:abo/source/view/widget/score_view.dart';
@@ -28,10 +29,8 @@ class MainPage extends StatelessWidget {
         title: Row(
           children: [
             SizedBox(width: 48, child: Assets.images.logo.svg()),
-            Text('ABO',
-                style: context.textStyleT16b.copyWith(color: context.colorP10)),
-            Text(' beta',
-                style: context.textStyleT12r.copyWith(color: context.colorP10)),
+            Text('ABO', style: context.textStyleT16b.copyWith(color: context.colorP10)),
+            Text(' beta', style: context.textStyleT12r.copyWith(color: context.colorP10)),
           ],
         ),
       ),
@@ -47,17 +46,16 @@ class MainPage extends StatelessWidget {
                 children: [
                   Text(
                     '경기 결과',
-                    style:
-                        context.textStyleT16b.copyWith(color: context.colorP10),
+                    style: context.textStyleT16b.copyWith(color: context.colorP10),
                   ),
                   Gap.w8,
                   Text(
-                    // DateTime.now()
-                    //     .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
-                    //     .displayDateDay(),
-                    DateTime(2024, 04, 02).displayDate(),
-                    style:
-                        context.textStyleT14m.copyWith(color: context.colorN40),
+                    DateTime.now()
+                        .addYear(-1)
+                        .addMonth(3)
+                        .copyWith(hour: 0, minute: 0, second: 0, microsecond: 0, millisecond: 0)
+                        .displayDate(),
+                    style: context.textStyleT14m.copyWith(color: context.colorN40),
                   ),
                   Gap.h24,
                   Spacer(),
@@ -96,11 +94,12 @@ class _RankBoard extends ConsumerStatefulWidget {
 }
 
 class _RankBoardState extends ConsumerState<_RankBoard> {
-  bool isUser = true;
+  bool isManager = true;
 
   @override
   Widget build(BuildContext context) {
     final userController = ref.watch(userControllerProvider);
+    final playerController = ref.watch(playerControllerProvider(null));
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -116,29 +115,29 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
                 style: context.textStyleT16b.copyWith(color: context.colorP10),
               ),
               Gap.w16,
-              // InkWell(
-              //   onTap: () => setState(() {
-              //     isManager = true;
-              //   }),
-              //   child: Text(
-              //     '감독',
-              //     style: (isManager
-              //         ? context.textStyleT14b.copyWith(color: context.colorP10)
-              //         : context.textStyleT14r.copyWith(color: context.colorN40)),
-              //   ),
-              // ),
-              // Text(' | '),
-              // InkWell(
-              //   onTap: () => setState(() {
-              //     isManager = false;
-              //   }),
-              //   child: Text(
-              //     '선수',
-              //     style: (isManager
-              //         ? context.textStyleT14r.copyWith(color: context.colorN40)
-              //         : context.textStyleT14b.copyWith(color: context.colorP10)),
-              //   ),
-              // ),
+              InkWell(
+                onTap: () => setState(() {
+                  isManager = true;
+                }),
+                child: Text(
+                  '감독',
+                  style: (isManager
+                      ? context.textStyleT14b.copyWith(color: context.colorP10)
+                      : context.textStyleT14r.copyWith(color: context.colorN40)),
+                ),
+              ),
+              Text(' | '),
+              InkWell(
+                onTap: () => setState(() {
+                  isManager = false;
+                }),
+                child: Text(
+                  '선수',
+                  style: (isManager
+                      ? context.textStyleT14r.copyWith(color: context.colorN40)
+                      : context.textStyleT14b.copyWith(color: context.colorP10)),
+                ),
+              ),
               Spacer(),
               InkWell(
                 onTap: () => context.pushRoute(RankRoute()),
@@ -150,8 +149,7 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
             ],
           ),
           Gap.h16,
-          // isManager ? ManagerRank(userController: userController) : PlayerRank(playerController: playerController),
-          UserRank(userController: userController),
+          isManager ? UserRank(userController: userController) : PlayerRank(playerController: playerController),
         ],
       ),
     );
@@ -173,9 +171,7 @@ class _TradeBoard extends ConsumerWidget {
             children: [
               SizedBox(
                   width: context.sizeWidth,
-                  child: Text('트레이드',
-                      style: context.textStyleT16b
-                          .copyWith(color: context.colorP10))),
+                  child: Text('트레이드', style: context.textStyleT16b.copyWith(color: context.colorP10))),
               Gap.h16,
               if (list.isEmpty)
                 Center(
@@ -184,8 +180,10 @@ class _TradeBoard extends ConsumerWidget {
                     style: context.textStyleT14b,
                   ),
                 ),
-              if (list.isNotEmpty)
-                ...list.mapIndexed((index, e) => PlayerItem(index + 1, e)),
+              if (list.isNotEmpty) ...[
+                PlayerHeader(),
+                ...list.mapIndexed((index, e) => PlayerItem(rank: index + 1, playerModel: e)),
+              ],
             ],
           ),
         );

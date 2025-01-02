@@ -10,6 +10,7 @@ import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/api/apis.dart';
 import 'package:abo/source/repository/game_repository.dart';
 import 'package:abo/source/repository/player_repository.dart';
+import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// this repository only can be called from other repositories
@@ -28,17 +29,17 @@ class AuthRepository implements IService {
   late final SimpleCache<UserModel?> _currentUser;
 
   Future<UserModel?> getCurrentUser() async {
-    UserModel? user;
+    UserModel? currentUser;
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final pref = prefs.getString('user');
     if (pref != null) {
-      user = UserModel.fromJson(jsonDecode(pref));
+      currentUser = UserModel.fromJson(jsonDecode(pref));
     } else {
-      user = _currentUser.value;
+      currentUser = _currentUser.value;
     }
 
-    return user;
+    return currentUser;
   }
 
   Future<Result<void>> signOut() async {
@@ -84,6 +85,13 @@ class AuthRepository implements IService {
     final result = await Result.guardFuture(() async {
       return _userList.getAsync(create: () async {
         final result = await apis.authApi.getUserList(serverKey: user?.serverKey ?? 0);
+        final userData = result.data.firstWhereOrNull((e) => e.uid == user?.uid);
+
+        if (userData != null) {
+          _currentUser.value = userData;
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('user', jsonEncode(userData.toJson()));
+        }
         return result.data;
       });
     });

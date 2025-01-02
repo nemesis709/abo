@@ -310,15 +310,12 @@ class _GameInfo extends StatelessWidget {
                         SizedBox(
                           width: context.sizeWidth / 2 - 32,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: awayBench.map((e) => _Player(playerModel: e)).toList(),
                           ),
                         ),
                         SizedBox(
                           width: context.sizeWidth / 2 - 32,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: homeBench.map((e) => _Player(playerModel: e)).toList(),
                           ),
                         ),
@@ -346,20 +343,20 @@ class _Lineup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _Player(playerModel: lineupModel.catcher!),
-        _Player(playerModel: lineupModel.firstBase!),
-        _Player(playerModel: lineupModel.secondBase!),
-        _Player(playerModel: lineupModel.thirdBase!),
-        _Player(playerModel: lineupModel.shortStop!),
-        _Player(playerModel: lineupModel.leftField!),
-        _Player(playerModel: lineupModel.centerField!),
-        _Player(playerModel: lineupModel.rightField!),
-        _Player(playerModel: lineupModel.designated!),
-        _Player(playerModel: lineupModel.startPitcher!),
-        _Player(playerModel: lineupModel.reliefPitcher1!),
-        _Player(playerModel: lineupModel.reliefPitcher2!),
-        _Player(playerModel: lineupModel.setupPitcher!),
-        _Player(playerModel: lineupModel.closingPitcher!),
+        _Player(playerModel: lineupModel.catcher!, positionNumber: 2),
+        _Player(playerModel: lineupModel.firstBase!, positionNumber: 3),
+        _Player(playerModel: lineupModel.secondBase!, positionNumber: 4),
+        _Player(playerModel: lineupModel.thirdBase!, positionNumber: 5),
+        _Player(playerModel: lineupModel.shortStop!, positionNumber: 6),
+        _Player(playerModel: lineupModel.leftField!, positionNumber: 7),
+        _Player(playerModel: lineupModel.centerField!, positionNumber: 8),
+        _Player(playerModel: lineupModel.rightField!, positionNumber: 9),
+        _Player(playerModel: lineupModel.designated!, positionNumber: 10),
+        _Player(playerModel: lineupModel.startPitcher!, positionNumber: 11),
+        _Player(playerModel: lineupModel.reliefPitcher1!, positionNumber: 12),
+        _Player(playerModel: lineupModel.reliefPitcher2!, positionNumber: 13),
+        _Player(playerModel: lineupModel.setupPitcher!, positionNumber: 14),
+        _Player(playerModel: lineupModel.closingPitcher!, positionNumber: 15),
       ],
     );
   }
@@ -368,9 +365,12 @@ class _Lineup extends StatelessWidget {
 class _Player extends StatelessWidget {
   const _Player({
     required this.playerModel,
+    this.positionNumber,
   });
 
   final PlayerModel playerModel;
+  final int? positionNumber;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -411,8 +411,10 @@ class _Player extends StatelessWidget {
         width: 140,
         height: 32,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 24, child: Text(playerModel.lineupPosition ?? '')),
+            SizedBox(
+                width: 24, child: Text(positionNumber == null ? '' : PlayerModel.getLineupPosition(positionNumber!))),
             Text(
               playerModel.name,
               style: playerModel.hasDailyStat
