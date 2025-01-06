@@ -6,7 +6,9 @@ part 'auth_update_model.g.dart';
 @Freezed()
 class AuthUpdateModel with _$AuthUpdateModel {
   const factory AuthUpdateModel({
-    required String token,
+    required String accessToken,
+    required String refreshToken,
+    required String email,
     required String password,
   }) = _AuthUpdateModel;
 

@@ -153,6 +153,17 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                             }
                           },
                           child: const Text('회원가입')),
+                      Gap.h8,
+                      FilledButton(
+                          style: context.buttonStyle48P10Outlined,
+                          onPressed: () async {
+                            final bool? result = await context.pushRoute<bool?>(const UpdatePWRoute());
+
+                            if (result == true && context.mounted) {
+                              context.replaceRoute(HomeRoute());
+                            }
+                          },
+                          child: const Text('비밀번호 변경')),
                       Gap.h48,
                     ]),
               );

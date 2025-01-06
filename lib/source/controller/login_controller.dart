@@ -1,6 +1,5 @@
 import 'package:abo/app_common.dart';
 import 'package:abo/common/data/api_error.dart';
-import 'package:abo/common/logger/logger.dart';
 import 'package:abo/source/domain/user_model.dart';
 import 'package:abo/source/repository/auth_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -46,9 +45,19 @@ class LoginController extends _$LoginController {
     });
   }
 
-  Future<bool> updatePW(String token, String pw) async {
+  Future<bool> updatePW({
+    required String refreshToken,
+    required String accessToken,
+    required String email,
+    required String password,
+  }) async {
     final result = await ref.runInProgress(() async {
-      return AuthRepository.instance.updatePW(token, pw);
+      return AuthRepository.instance.updatePW(
+        refreshToken: refreshToken,
+        accessToken: accessToken,
+        email: email,
+        password: password,
+      );
     });
     return result.isSuccess;
   }

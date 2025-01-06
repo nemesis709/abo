@@ -20,7 +20,9 @@ AuthUpdateModel _$AuthUpdateModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthUpdateModel {
-  String get token => throw _privateConstructorUsedError;
+  String get accessToken => throw _privateConstructorUsedError;
+  String get refreshToken => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   /// Serializes this AuthUpdateModel to a JSON map.
@@ -39,7 +41,8 @@ abstract class $AuthUpdateModelCopyWith<$Res> {
           AuthUpdateModel value, $Res Function(AuthUpdateModel) then) =
       _$AuthUpdateModelCopyWithImpl<$Res, AuthUpdateModel>;
   @useResult
-  $Res call({String token, String password});
+  $Res call(
+      {String accessToken, String refreshToken, String email, String password});
 }
 
 /// @nodoc
@@ -57,13 +60,23 @@ class _$AuthUpdateModelCopyWithImpl<$Res, $Val extends AuthUpdateModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? accessToken = null,
+    Object? refreshToken = null,
+    Object? email = null,
     Object? password = null,
   }) {
     return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -81,7 +94,8 @@ abstract class _$$AuthUpdateModelImplCopyWith<$Res>
       __$$AuthUpdateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, String password});
+  $Res call(
+      {String accessToken, String refreshToken, String email, String password});
 }
 
 /// @nodoc
@@ -97,13 +111,23 @@ class __$$AuthUpdateModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? accessToken = null,
+    Object? refreshToken = null,
+    Object? email = null,
     Object? password = null,
   }) {
     return _then(_$AuthUpdateModelImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -116,19 +140,27 @@ class __$$AuthUpdateModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthUpdateModelImpl implements _AuthUpdateModel {
-  const _$AuthUpdateModelImpl({required this.token, required this.password});
+  const _$AuthUpdateModelImpl(
+      {required this.accessToken,
+      required this.refreshToken,
+      required this.email,
+      required this.password});
 
   factory _$AuthUpdateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthUpdateModelImplFromJson(json);
 
   @override
-  final String token;
+  final String accessToken;
+  @override
+  final String refreshToken;
+  @override
+  final String email;
   @override
   final String password;
 
   @override
   String toString() {
-    return 'AuthUpdateModel(token: $token, password: $password)';
+    return 'AuthUpdateModel(accessToken: $accessToken, refreshToken: $refreshToken, email: $email, password: $password)';
   }
 
   @override
@@ -136,14 +168,19 @@ class _$AuthUpdateModelImpl implements _AuthUpdateModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthUpdateModelImpl &&
-            (identical(other.token, token) || other.token == token) &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token, password);
+  int get hashCode =>
+      Object.hash(runtimeType, accessToken, refreshToken, email, password);
 
   /// Create a copy of AuthUpdateModel
   /// with the given fields replaced by the non-null parameter values.
@@ -164,14 +201,20 @@ class _$AuthUpdateModelImpl implements _AuthUpdateModel {
 
 abstract class _AuthUpdateModel implements AuthUpdateModel {
   const factory _AuthUpdateModel(
-      {required final String token,
+      {required final String accessToken,
+      required final String refreshToken,
+      required final String email,
       required final String password}) = _$AuthUpdateModelImpl;
 
   factory _AuthUpdateModel.fromJson(Map<String, dynamic> json) =
       _$AuthUpdateModelImpl.fromJson;
 
   @override
-  String get token;
+  String get accessToken;
+  @override
+  String get refreshToken;
+  @override
+  String get email;
   @override
   String get password;
 

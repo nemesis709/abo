@@ -9,13 +9,17 @@ part of 'auth_update_model.dart';
 _$AuthUpdateModelImpl _$$AuthUpdateModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AuthUpdateModelImpl(
-      token: json['token'] as String,
+      accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
+      email: json['email'] as String,
       password: json['password'] as String,
     );
 
 Map<String, dynamic> _$$AuthUpdateModelImplToJson(
         _$AuthUpdateModelImpl instance) =>
     <String, dynamic>{
-      'token': instance.token,
+      'accessToken': instance.accessToken,
+      'refreshToken': instance.refreshToken,
+      'email': instance.email,
       'password': instance.password,
     };
