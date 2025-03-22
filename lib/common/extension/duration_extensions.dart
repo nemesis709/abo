@@ -50,6 +50,6 @@ extension DurationExtension on Duration {
 
     time = time.replaceFirst(' ', '');
 
-    return '$time';
+    return time;
   }
 }

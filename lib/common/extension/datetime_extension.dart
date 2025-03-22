@@ -46,7 +46,7 @@ extension DateTimeEx on DateTime {
 
   /// 해당 날짜의 년도가 현재 년도와 같을 때 MM.dd 아니면 yyyy.MM.dd
   String displayDateTimeByYear() {
-    if (this.year == DateTime.now().year) {
+    if (year == DateTime.now().year) {
       return DateFormat('MM.dd').format(this);
     } else {
       return DateFormat('yyyy.MM.dd').format(this);
@@ -54,7 +54,7 @@ extension DateTimeEx on DateTime {
   }
   /// 해당 날짜의 년도가 현재 년도와 같을 때 MM.dd(E) 아니면 yyyy.MM.dd(E)
   String displayDateYyyyMMDDEByYear() {
-    if (this.year == DateTime.now().year) {
+    if (year == DateTime.now().year) {
       return DateFormat('MM.dd(E)').format(this);
     } else {
       return DateFormat('yyyy.MM.dd(E)').format(this);
@@ -345,7 +345,7 @@ class DateTimeUtil {
     }
 
     if (endTime == null) {
-      var tempStartTime = currentTime.withHms(startTime!.hour, startTime.minute, startTime.second);
+      var tempStartTime = currentTime.withHms(startTime.hour, startTime.minute, startTime.second);
       return currentTime.isAfter(tempStartTime);
     }
 

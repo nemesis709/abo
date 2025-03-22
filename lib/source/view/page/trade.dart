@@ -47,7 +47,7 @@ class TradePage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
+          return SizedBox(
             height: 50,
             child: Center(child: Text(list[index])),
           );

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:abo/common/data/api_error.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

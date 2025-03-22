@@ -61,11 +61,11 @@ extension BuildContextExtension on BuildContext {
   Color get onErrorColor => colorScheme.onError;
   Color get errorContainerColor => colorScheme.errorContainer;
   Color get onErrorContainerColor => colorScheme.onErrorContainer;
-  Color get backgroundColor => colorScheme.background;
-  Color get onBackgroundColor => colorScheme.onBackground;
+  Color get backgroundColor => colorScheme.surface;
+  Color get onBackgroundColor => colorScheme.onSurface;
   Color get surfaceColor => colorScheme.surface;
   Color get onSurfaceColor => colorScheme.onSurface;
-  Color get surfaceVariantColor => colorScheme.surfaceVariant;
+  Color get surfaceVariantColor => colorScheme.surfaceContainerHighest;
   Color get onSurfaceVariantColor => colorScheme.onSurfaceVariant;
   Color get outlineColor => colorScheme.outline;
   Color get shadowColor => colorScheme.shadow;

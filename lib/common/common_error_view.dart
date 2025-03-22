@@ -3,7 +3,7 @@ import 'package:abo/ui/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class CommonErrorView extends StatelessWidget {
-  const CommonErrorView({Key? key, required this.err, this.onTap, this.textStyle}) : super(key: key);
+  const CommonErrorView({super.key, required this.err, this.onTap, this.textStyle});
 
   final Object err;
   final VoidCallback? onTap;
@@ -26,7 +26,7 @@ class CommonErrorView extends StatelessWidget {
           TextButton(
             style: ButtonStyle(
               splashFactory: NoSplash.splashFactory,
-              overlayColor: MaterialStateProperty.resolveWith((states) => Colors.transparent),
+              overlayColor: WidgetStateProperty.resolveWith((states) => Colors.transparent),
             ),
             onPressed: onTap,
             child: Text(

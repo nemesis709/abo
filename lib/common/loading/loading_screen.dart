@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:abo/common/loading/loading_screen_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreen {
@@ -29,9 +28,6 @@ class LoadingScreen {
     required String? text,
   }) {
     final state = Overlay.of(context);
-    if (state == null) {
-      return null;
-    }
 
     final textController = StreamController<String?>();
     textController.add(text);
@@ -76,7 +72,8 @@ class LoadingScreen {
                             StreamBuilder<String?>(
                                 stream: textController.stream,
                                 builder: (context, snapshot) {
-                                  if (snapshot.hasData && snapshot.requireData != null) {
+                                  if (snapshot.hasData &&
+                                      snapshot.requireData != null) {
                                     return Text(snapshot.requireData!);
                                   } else {
                                     return Container();
