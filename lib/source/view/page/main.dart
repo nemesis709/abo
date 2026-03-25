@@ -120,7 +120,7 @@ class _RankBoardState extends ConsumerState<_RankBoard> {
                   isManager = true;
                 }),
                 child: Text(
-                  '감독',
+                  '구단주',
                   style: (isManager
                       ? context.textStyleT14b.copyWith(color: context.colorP10)
                       : context.textStyleT14r.copyWith(color: context.colorN40)),
